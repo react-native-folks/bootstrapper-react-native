@@ -1,0 +1,33 @@
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import Reactotron from 'reactotron-react-native';
+import SplashScreen from 'react-native-splash-screen';
+import AppNavigator from '@components/AppNavigator';
+import { apiSetup } from '@config/api';
+<%_ if(features.pushnotifications) { _%>
+import { configPushNotifications } from '@config/pushNotifications';
+<%_ } _%>
+import { actionCreators as AuthActions } from '@redux/auth/actions';
+import './i18n';
+
+const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
+
+  useEffect(() => {
+    <%_ if(features.pushnotifications) { _%>
+    configPushNotifications();
+    <%_ } _%>
+    apiSetup(dispatch);
+    dispatch(AuthActions.init());
+  }, [dispatch]);
+
+  return <AppNavigator />;
+};
+
+const MyAppWithOverlay = __DEV__ ? Reactotron.overlay(App) : App;
+
+export default MyAppWithOverlay;

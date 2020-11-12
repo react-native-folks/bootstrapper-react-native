@@ -1,0 +1,67 @@
+{
+  "name": "generator-kamino-react-native",
+  "version": "1.5.0",
+  "description": "A project generator for react native applications with some boilerplates already configured and ready to use.",
+  "files": [
+    "generators"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "bitbucket-repo-here"
+  },
+  "keywords": [
+    "yeoman-generator",
+    "react-native"
+  ],
+  "author": "Ignacio Abadie",
+  "license": "MIT",
+  "bugs": {
+    "url": "http://bitbucket-repo-here/issues"
+  },
+  "homepage": "https://bitbucket-repo-here#readme",
+  "scripts": {
+    "lint": "eslint .",
+    "lint-diff": "git diff --staged --name-only --relative --diff-filter=ACM | grep -E \"\\.(ts|tsx|js|jsx)$\" | xargs eslint",
+    "lint-fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "acorn": "^7.1.1",
+    "apisauce": "^1.1.1",
+    "colors": "^1.1.2",
+    "deep-extend": "^0.5.1",
+    "diff": "^3.5.0",
+    "fs": "0.0.1-security",
+    "latest-semver": "^1.0.0",
+    "minimist": "^1.2.5",
+    "ora": "^1.1.0",
+    "semver-regex": "^1.0.0",
+    "yeoman-generator": "^1.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/runtime": "^7.9.2",
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-eslint-comments": "^3.1.2",
+    "eslint-plugin-flowtype": "^4.7.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jest": "^23.8.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.0",
+    "eslint-plugin-react-native": "^3.8.1",
+    "husky": "^4.2.5",
+    "prettier": "^2.0.4",
+    "prettier-eslint": "^9.0.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run lint-diff"
+    }
+  }
+}
