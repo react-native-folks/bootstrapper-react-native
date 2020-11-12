@@ -10,8 +10,8 @@ function Footer(props: FooterProps) {
   const { firstButton, secondButton } = getScreensButtonsInfo(props);
   return (
     <View style={styles.buttons}>
-      {firstButton && <CustomButton {...firstButton} style={styles.buttonContainer} activeOpacity={0.7} />}
-      {secondButton && <CustomButton {...secondButton} style={styles.buttonContainer} activeOpacity={0.7} />}
+      {firstButton && <CustomButton {...firstButton} white style={styles.buttonContainer} activeOpacity={0.7} />}
+      {secondButton && <CustomButton {...secondButton} white style={styles.buttonContainer} activeOpacity={0.7} />}
     </View>
   );
 }

@@ -43,12 +43,16 @@ module.exports.APP_NAVIGATOR_NAVIGATOR = `${module.exports.APP_NAVIGATOR_PATH}/n
 module.exports.NAVIGATION_HELPER = `${module.exports.APP_NAVIGATOR_PATH}/helper.ts`;
 // APP COMPONENTS - CUSTOM BUTTON
 module.exports.CUSTOM_BUTTON_PATH = `${module.exports.COMPONENTS_PATH}/CustomButton`;
+// APP COMPONENTS - CUSTOM SHADOW VIEW
+module.exports.CUSTOM_SHADOW_VIEW_PATH = `${module.exports.COMPONENTS_PATH}/CustomShadowView`;
+// APP COMPONENTS - LOADABLE IMAGE
+module.exports.LOADABLE_IMAGE_PATH = `${module.exports.COMPONENTS_PATH}/LoadableImage`;
 // APP COMPONENTS - CUSTOM STATUS BAR
 module.exports.CUSTOM_STATUS_BAR = `${module.exports.COMPONENTS_PATH}/CustomStatusBar`;
 // APP COMPONENTS - CUSTOM TEXT
 module.exports.CUSTOM_TEXT_PATH = `${module.exports.COMPONENTS_PATH}/CustomText`;
 // APP COMPONENTS - LOADABLE
-module.exports.LOADABLE_PATH = `${module.exports.COMPONENTS_PATH}/Loadable`;
+module.exports.LOADABLE_PATH = `${module.exports.COMPONENTS_PATH}/LoadableView`;
 
 // APP SCREENS - HOME
 module.exports.HOME_PATH = `${module.exports.SCREENS_PATH}/Home`;

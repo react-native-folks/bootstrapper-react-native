@@ -9,7 +9,7 @@ export default StyleSheet.create({
   },
   home: {
     backgroundColor: green,
-    padding: 10,
+    padding: 15,
     borderRadius: 3
   }
 });

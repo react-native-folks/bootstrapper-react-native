@@ -1,12 +1,12 @@
 import { StyleSheet } from 'react-native';
-import { blue } from '@constants/colors';
+import { gray } from '@constants/colors';
 
 export default StyleSheet.create({
   buttonContainer: {
     padding: 10,
-    borderWidth: 1,
-    borderRadius: 4,
-    borderColor: blue,
+    borderWidth: 0.5,
+    borderRadius: 5,
+    borderColor: gray,
     width: 100
   },
   buttons: {

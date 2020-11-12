@@ -1,19 +1,33 @@
 import { StyleSheet } from 'react-native';
 import fonts from '@config/fonts';
-import { blue, white, green, gray, transparent, red } from '@constants/colors';
+import {
+  black,
+  blue,
+  white,
+  green,
+  gray,
+  transparent,
+  red
+} from '@constants/colors';
 import { SIZES } from '@constants/fonts';
 import { moderateScale } from '@utils/scalingUtils';
 import { StringObject, NumberObject } from '@interfaces/globalInterfaces';
 
 const getColors = (colorsObj: StringObject) =>
   Object.keys(colorsObj).reduce(
-    (colors, color) => ({ ...colors, ...{ [color]: { color: colorsObj[color] } } }),
+    (colors, color) => ({
+      ...colors,
+      ...{ [color]: { color: colorsObj[color] } }
+    }),
     {}
   );
 
 const getSizes = (sizesObj: NumberObject) =>
   Object.keys(sizesObj).reduce(
-    (sizes, size) => ({ ...sizes, ...{ [size]: { fontSize: moderateScale(sizesObj[size]) } } }),
+    (sizes, size) => ({
+      ...sizes,
+      ...{ [size]: { fontSize: moderateScale(sizesObj[size]) } }
+    }),
     {}
   );
 
@@ -29,7 +43,7 @@ export default StyleSheet.create({
     textAlign: 'center'
   },
   justify: {
-    textAlign: 'justify'
+    textAlign: 'justify' // iOS only
   },
   right: {
     textAlign: 'right'
@@ -38,7 +52,7 @@ export default StyleSheet.create({
     color: red
   },
   // Colors
-  ...getColors({ blue, gray, green, white }),
+  ...getColors({ blue, gray, green, white, black }),
   // Sizes
   ...getSizes({
     xxsmall: SIZES.XXSMALL,
