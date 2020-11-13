@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { blue, black, green } from '@constants/colors';
+import { blue, black, white } from '@constants/colors';
 
 const DOT_SIZE = 12;
 const ACTIVE_DOT_SIZE = 15;
@@ -8,14 +8,14 @@ const BORDER_RADIUS = 10;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: green
+    backgroundColor: blue
   },
   pagination: {
     position: 'absolute',
     bottom: 34
   },
   activeDot: {
-    backgroundColor: blue,
+    backgroundColor: white,
     width: ACTIVE_DOT_SIZE,
     height: ACTIVE_DOT_SIZE,
     borderRadius: BORDER_RADIUS

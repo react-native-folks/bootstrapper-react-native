@@ -4,7 +4,8 @@ import {
   View,
   Image,
   ImageStyle,
-  ViewStyle
+  ViewStyle,
+  ImageProps
 } from 'react-native';
 import { blue } from '@constants/colors';
 
@@ -13,12 +14,22 @@ import styles from './styles';
 interface LoadableImageProps {
   size?: 'large' | 'small';
   style?: (ViewStyle & ImageStyle) | Array<ViewStyle & ImageStyle>;
+  loaderStyle?: (ViewStyle & ImageStyle) | Array<ViewStyle & ImageStyle>;
   url?: string;
+  imageProps?: ImageProps;
+  shouldLoad?: boolean;
 }
 
 // Loadable image component for adding loading spinner to images from remote locations (no local assets)
 
-const LoadableImage = ({ url, style, size = 'large' }: LoadableImageProps) => {
+const LoadableImage = ({
+  url,
+  style,
+  loaderStyle,
+  size = 'large',
+  imageProps,
+  shouldLoad = false
+}: LoadableImageProps) => {
   const [loading, setLoading] = useState(false);
   const startLoading = () => setLoading(true);
   const endLoading = () => setLoading(false);
@@ -30,17 +41,19 @@ const LoadableImage = ({ url, style, size = 'large' }: LoadableImageProps) => {
   return (
     <View>
       <Image
+        resizeMode="contain"
         onLoadStart={startLoading}
         onLoadEnd={endLoading}
         onError={errorLoading}
-        style={style}
+        style={[styles.defaultSize, style]}
         source={{ uri: url }}
+        {...imageProps}
       />
-      {loading && (
+      {(shouldLoad || loading) && (
         <ActivityIndicator
           animating
           size={size}
-          style={[style, styles.container]}
+          style={[styles.container, loaderStyle]}
           color={blue}
         />
       )}
