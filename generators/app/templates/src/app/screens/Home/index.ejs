@@ -15,15 +15,19 @@ function Home() {
   const dispatch = useDispatch();
   const handleLogout = useCallback(() => dispatch(AuthActions.logout()), [dispatch]);
   <%_ } _%>
+
   return (
     <View style={styles.container}>
-      <CustomShadowView strong>
-        <CustomText style={styles.home}>
-          Hi! Welcome to Kamino React Native
-        </CustomText>
+      <CustomShadowView strong style={styles.home}>
+        <CustomText blue>{'Hi! Welcome to Kamino React Native'}</CustomText>
         <CustomButton
-          onPress={() => Alert.alert('Hola!', 'Este es mi botón')}
-          title="press me"
+          onPress={() =>
+            Alert.alert(
+              'Custom Button',
+              'You pressed on custom Button. Thats awesome!'
+            )
+          }
+          title={"Let's go!"}
         />
     <%_ if(features.loginandsignup) { _%>
       <CustomButton onPress={handleLogout} green title="Logout!" style={styles.logout} />

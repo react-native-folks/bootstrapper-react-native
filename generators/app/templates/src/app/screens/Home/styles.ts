@@ -9,7 +9,7 @@ export default StyleSheet.create({
     backgroundColor: white
   },
   home: {
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     minHeight: 200,
     padding: 15,
     borderRadius: 10

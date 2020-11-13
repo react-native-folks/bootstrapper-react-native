@@ -1,7 +1,12 @@
 import { StyleSheet } from 'react-native';
-import { transparent, black, green, gray, white } from '@constants/colors';
-
-const iconSize = 20;
+import {
+  transparent,
+  blue,
+  black,
+  green,
+  gray,
+  white
+} from '@constants/colors';
 
 const borderlessStyle = {
   borderWidth: 0,
@@ -13,11 +18,9 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 8
-  },
-  icon: {
-    height: iconSize,
-    width: iconSize
+    padding: 8,
+    backgroundColor: blue,
+    borderColor: gray
   },
   borderless: borderlessStyle,
   radial: {
@@ -49,5 +52,17 @@ export default StyleSheet.create({
   },
   greenContent: {
     color: white
+  },
+  blue: {
+    backgroundColor: blue
+  },
+  blueContent: {
+    color: white
+  },
+  transparent: {
+    backgroundColor: transparent
+  },
+  transparentContent: {
+    color: black
   }
 });
