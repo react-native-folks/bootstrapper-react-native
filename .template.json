@@ -1,0 +1,4 @@
+{
+  "args": [],
+  "postCommand": "cd kamino-react-native & npm link & cd .. & yo kamino-react-native"
+}
