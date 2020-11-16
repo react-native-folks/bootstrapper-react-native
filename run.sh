@@ -35,8 +35,8 @@ elif ! system_has pod; then
   exit 1
 fi
 
-yarn global add yo generator-wolmo-bootstrap-rn > /dev/null 2>&1
-yo wolmo-bootstrap-rn
+yarn global add yo git@bitbucket.org:mahisoft/kamino-react-native.git > /dev/null 2>&1
+yo kamino-react-native
 
 wait $!
 

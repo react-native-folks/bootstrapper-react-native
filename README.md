@@ -13,7 +13,7 @@
 You don't need to clone this repository. Just run the following in your terminal:
 
 ```bash
-bash <(curl -s https://bitbucket-url/master/run.sh)
+bash <(curl -s git@bitbucket.org:mahisoft/kamino-react-native.git/run.sh)
 ```
 
 ## Description
@@ -22,13 +22,13 @@ This codebase is meant to be used to kickoff react native projects.
 The following optional features can be added out of the box to the new projects:
 
 - Drawer
+- OnBoarding
+- Tabs
+- Login and SignUp
 - Firebase Analytics
 - Firebase Crashlytics
 - Firebase Performance
 - Firebase Push Notifications
-- Login and SignUp
-- OnBoarding
-- Tabs
 
 ### Boilerplate
 
@@ -78,9 +78,9 @@ The boilerplate includes
 - [Reactotron](https://github.com/infinitered/reactotron)
 - [TypeScript](https://www.typescriptlang.org/)
 
-### Bootstrap Kick off
+### Kick off manually
 
-For bootstraping your own project using the template generator script you'll need to follow these steps:
+For kick off your own project using the template generator script you'll need to follow these steps:
 
 1. Run `yarn install`.
 2. run `yo rootPath/generators/app/index.js` you'll need [Yeoman](https://yeoman.io/learning/index.html) installed for this. Also, the argument `-v` can be used for logging.

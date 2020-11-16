@@ -1,4 +1,4 @@
 {
   "args": [],
-  "postCommand": "yarn & npm link & cd .. & ./kamino-react-native/run.sh & rm -rf kamino-react-native"
+  "postCommand": "cd .. ; ./kamino-react-native/run.sh ; rm -rf kamino-react-native"
 }
