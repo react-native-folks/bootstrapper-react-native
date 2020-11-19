@@ -43,4 +43,28 @@ module.exports = function splashScreenSetup() {
       'launch_screen.xml'
     )
   );
+
+  this.fs.copy(
+    this.templatePath('ios', 'LaunchScreen.storyboard'),
+    this.destinationPath(
+      this.projectName,
+      'ios',
+      this.projectName,
+      'LaunchScreen.storyboard'
+    )
+  );
+
+  const splashscreenfile = this.fs.read(
+    `${this.projectName}/ios/${this.projectName}/LaunchScreen.storyboard`
+  );
+  
+  let updatedsplashscreenfile = splashscreenfile.replace(
+    'text="APP-NAME"',
+    `text="${this.projectName}"`
+  );
+  
+  this.fs.write(
+    `${this.projectName}/ios/${this.projectName}/LaunchScreen.storyboard`,
+    updatedsplashscreenfile
+  );
 };

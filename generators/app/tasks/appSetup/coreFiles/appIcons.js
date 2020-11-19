@@ -1,5 +1,5 @@
 function iosAppIcons() {
-  const iosFiles = [
+  const appIconFiles = [
     'Contents.json',
     'Icon-29.png',
     'Icon-29@2x.png',
@@ -18,15 +18,34 @@ function iosAppIcons() {
     'iTunesArtwork@2x.png'
   ];
 
-  iosFiles.forEach(fileName => {
+  const splashFiles = [
+    'Contents.json',
+    'SplashIcon.png'
+  ];
+
+  appIconFiles.forEach(fileName => {
     this.fs.copy(
-      this.templatePath('icons/iosIcons', fileName),
+      this.templatePath('icons/iosIcons/AppIcon.appiconset', fileName),
       this.destinationPath(
         this.projectName,
         'ios',
         this.projectName,
         'Images.xcassets',
         'AppIcon.appiconset',
+        fileName
+      )
+    );
+  });
+
+  splashFiles.forEach(fileName => {
+    this.fs.copy(
+      this.templatePath('icons/iosIcons/SplashIcon.imageset', fileName),
+      this.destinationPath(
+        this.projectName,
+        'ios',
+        this.projectName,
+        'Images.xcassets',
+        'SplashIcon.imageset',
         fileName
       )
     );

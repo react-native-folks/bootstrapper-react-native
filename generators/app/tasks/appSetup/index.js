@@ -2,7 +2,7 @@ const ora = require('ora');
 
 // CORE FILES
 const androidProjectSetup = require('./coreFiles/androidProjectSetup');
-// const appIcons = require('./coreFiles/appIcons'); // TODO - add when added new assets
+const appIcons = require('./coreFiles/appIcons'); // TODO - add when added new assets
 const babelConfigSetup = require('./coreFiles/babelConfigSetup');
 const baseFilesTemplate = require('./coreFiles/baseFilesTemplate');
 const cleanTargetsFromPods = require('./coreFiles/cleanTargetsFromPods');
@@ -33,7 +33,7 @@ module.exports = function index() {
   createDotEnvFilesLocally.bind(this)();
   packageJsonScripts.bind(this)();
   baseFilesTemplate.bind(this)();
-  // appIcons.bind(this)();
+  appIcons.bind(this)();
   babelConfigSetup.bind(this)();
   prettierrcConfigSetup.bind(this)();
 

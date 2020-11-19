@@ -2,8 +2,8 @@ module.exports = function packgeJsonScripts() {
   const packageJson = this.fs.readJSON(this.destinationPath(this.projectName, 'package.json'));
   packageJson.scripts = packageJson.scripts || {};
   packageJson.scripts.start = 'npx react-native start';
-  packageJson.scripts.android = 'npx react-native run-android --variant=qaDebug';
-  packageJson.scripts.ios = 'npx react-native run-ios --scheme qa';
+  packageJson.scripts.android = 'npx react-native run-android --variant=developDebug';
+  packageJson.scripts.ios = 'npx react-native run-ios --scheme develop';
   packageJson.scripts.test = 'jest --passWithNoTests';
   packageJson.scripts.coverage = 'jest --coverage --passWithNoTests';
   packageJson.scripts.clean = 'rm -rf $TMPDIR/react-* && watchman watch-del-all && yarn cache clean';
@@ -11,9 +11,9 @@ module.exports = function packgeJsonScripts() {
     'yarn run android:clean && yarn run clean && rm -rf ios/build && rm -rf ios/Pods && rm -rf node_modules/ && yarn install && cd ios/ && pod install';
   packageJson.scripts['ios:clean'] = 'cd ios/ && rm -rf build && rm -rf Pods';
   packageJson.scripts['android:clean'] = 'cd android/ && ./gradlew clean';
-  packageJson.scripts['android:build.qa'] = 'cd android && ./gradlew clean && ./gradlew assembleQaRelease';
-  packageJson.scripts['android:build.stage'] =
-    'cd android && ./gradlew clean && ./gradlew assembleStageRelease';
+  packageJson.scripts['android:build.develop'] = 'cd android && ./gradlew clean && ./gradlew assembleDevelopRelease';
+  packageJson.scripts['android:build.staging'] =
+    'cd android && ./gradlew clean && ./gradlew assembleStagingRelease';
   packageJson.scripts['android:build.production'] =
     'cd android && ./gradlew clean && ./gradlew bundleProductionRelease';
   packageJson.scripts['test:watch'] = 'jest --watch';
