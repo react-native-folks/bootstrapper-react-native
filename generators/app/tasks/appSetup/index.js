@@ -18,7 +18,7 @@ const disableLandscapeOrientation = require('./featuresFiles/disableLandscapeOri
 const firebaseAnalyticsFeatureFiles = require('./featuresFiles/firebaseAnalyticsFeatureFiles');
 const firebaseCoreFeatureFiles = require('./featuresFiles/firebaseCoreFeatureFiles');
 const firebasePerformanceSetup = require('./featuresFiles/firebasePerformanceSetup');
-// const loginAndSignUpFeatureFiles = require('./featuresFiles/loginAndSignUpFeatureFiles');
+const loginAndSignUpFeatureFiles = require('./featuresFiles/loginAndSignUpFeatureFiles');
 const onBoardingFeatureFiles = require('./featuresFiles/onBoardingFeatureFiles');
 const pushNotificationsFeatureFiles = require('./featuresFiles/pushNotificationsFeatureFiles');
 const pushNotificationsSetup = require('./featuresFiles/pushNotificationsSetup');
@@ -54,7 +54,7 @@ module.exports = function index() {
 
   // ----------------    Features: Login and SignUp    ----------------
   if (this.features.loginandsignup) {
-    console.log('missing login and sign up');
+    loginAndSignUpFeatureFiles.bind(this)();
   }
 
   // ----------------    Features: Onboarding    ----------------

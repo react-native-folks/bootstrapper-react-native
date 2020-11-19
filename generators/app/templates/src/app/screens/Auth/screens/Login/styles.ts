@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import { green } from '@constants/colors';
 
 export default StyleSheet.create({
   container: {
@@ -9,12 +8,16 @@ export default StyleSheet.create({
     width: '100%'
   },
   form: {
-    width: 250
+    paddingHorizontal: 30,
+    alignSelf: 'stretch'
   },
   formButton: {
-    backgroundColor: green,
     padding: 10,
-    borderRadius: 3,
     marginTop: 15
+  },
+  logo: {
+    alignSelf: 'center',
+    width: 150,
+    height: 150
   }
 });

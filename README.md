@@ -71,12 +71,11 @@ The boilerplate includes
 
 - [Babel](https://babeljs.io/)
 - [Eslint](http://eslint.org/)
+- [Prettier](https://github.com/prettier/prettier)
+- [TypeScript](https://www.typescriptlang.org/)
 - [Flipper](https://fbflipper.com/)
 - [Jest](https://jestjs.io/)
-- [Prettier](https://github.com/prettier/prettier)
 - [React Native Testing Library](https://github.com/callstack/react-native-testing-library)
-- [Reactotron](https://github.com/infinitered/reactotron)
-- [TypeScript](https://www.typescriptlang.org/)
 
 ### Kick off manually
 

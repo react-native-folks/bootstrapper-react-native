@@ -20,6 +20,7 @@ const DEPENDENCIES = [
   'react-native-screens',
   'react-native-splash-screen',
   'react-redux',
+  'react-hook-form',
   'reactotron-apisauce',
   'reactotron-react-native',
   'reactotron-redux',

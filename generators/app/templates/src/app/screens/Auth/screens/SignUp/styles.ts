@@ -12,7 +12,7 @@ export default StyleSheet.create({
   },
   form: {
     paddingBottom: 20,
-    paddingHorizontal: 60
+    paddingHorizontal: 30
   },
   formButton: {
     backgroundColor: green,

@@ -1,127 +1,153 @@
-import React, { useCallback } from 'react';
-import { Keyboard, TouchableWithoutFeedback, ScrollView, View } from 'react-native';
+import React, { useState } from 'react';
+import {
+  Keyboard,
+  TouchableWithoutFeedback,
+  ScrollView,
+  View
+} from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
+import { useForm } from 'react-hook-form';
 import i18next from 'i18next';
-import { Formik } from 'formik';
 import CustomButton from '@components/CustomButton';
 import CustomText from '@components/CustomText';
-import { CustomTextInputFormikField } from '@components/CustomTextInput';
 import { isIos } from '@constants/platform';
-import { useAsyncRequest } from '@hooks/useRequest';
 import { Navigation } from '@interfaces/navigation';
 import { FIELDS, SIGNUP_INITIAL_VALUES } from '@screens/Auth/constants';
+import CustomTextInput from '@app/components/CustomTextInput';
 import * as AuthService from '@services/AuthService';
 import {
   validationsWrapper,
   validateRequired,
   validateEmail,
-  validateOnlyText,
-  validateMinLength
+  validateMinLength,
+  validateOnlyText
 } from '@utils/validations/validateUtils';
 
 import './i18n';
 import styles from './styles';
 
 function SignUp({ navigation }: Navigation) {
-  const [, , error, signUp] = useAsyncRequest({
-    request: AuthService.signup,
-    withPostSuccess: () => navigation.goBack()
-  });
-  const hasSignUpError = !!error;
-  const handleSignUp = useCallback(
-    values => {
-      Keyboard.dismiss();
-      signUp(values);
-    },
-    [signUp]
-  );
+  const [signupError, setSignupError] = useState('');
+  const { control, handleSubmit, errors } = useForm();
+  const onSubmit = async (data: any) => {
+    const response = await AuthService.signup(data);
+    if (response.ok) {
+      navigation.goBack();
+    } else {
+      setSignupError(response.problem);
+    }
+    Keyboard.dismiss();
+  };
+
+  const hasSignUpError = Object.keys(errors).length > 0 || !!signupError;
   return (
-    <Formik onSubmit={handleSignUp} initialValues={SIGNUP_INITIAL_VALUES}>
-      {({ handleSubmit, isValid }) => (
-        <>
-          <ScrollView
-            bounces={false}
-            keyboardShouldPersistTaps="handled"
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.container}
-            style={styles.stretchAndFlex}>
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-              <View style={[styles.stretchAndFlex, styles.form]}>
-                <CustomTextInputFormikField
-                  animated
-                  label={i18next.t('SIGNUP:NAME')}
-                  name={FIELDS.name}
-                  showError={hasSignUpError}
-                  validate={validationsWrapper([validateRequired, validateOnlyText])}
-                />
-                <CustomTextInputFormikField
-                  animated
-                  label={i18next.t('SIGNUP:SURNAME')}
-                  name={FIELDS.surname}
-                  showError={hasSignUpError}
-                  validate={validationsWrapper([validateRequired, validateOnlyText])}
-                />
-                <CustomTextInputFormikField
-                  animated
-                  label={i18next.t('SIGNUP:BIRTH_DATE')}
-                  name={FIELDS.birthDate}
-                  placeholder={i18next.t('SIGNUP:BIRTH_DATE_PLACEHOLDER')}
-                  showError={hasSignUpError}
-                  validate={validateRequired}
-                />
-                <CustomTextInputFormikField
-                  animated
-                  label={i18next.t('SIGNUP:SEX')}
-                  name={FIELDS.sex}
-                  placeholder={i18next.t('SIGNUP:SEX_PLACEHOLDER')}
-                  showError={hasSignUpError}
-                  validate={validationsWrapper([validateRequired, validateOnlyText])}
-                />
-                <CustomTextInputFormikField
-                  animated
-                  keyboardType="email-address"
-                  label={i18next.t('SIGNUP:MAIL')}
-                  name={FIELDS.email}
-                  placeholder={i18next.t('SIGNUP:MAIL_PLACEHOLDER')}
-                  showError={hasSignUpError}
-                  validate={validationsWrapper([validateRequired, validateEmail])}
-                />
-                <CustomTextInputFormikField
-                  animated
-                  showEye
-                  secureTextEntry
-                  label={i18next.t('SIGNUP:PASSWORD')}
-                  name={FIELDS.password}
-                  showError={hasSignUpError}
-                  validate={validationsWrapper([validateRequired, validateMinLength(8)])}
-                />
-                <CustomTextInputFormikField
-                  animated
-                  isOptional
-                  keyboardType="phone-pad"
-                  label={i18next.t('SIGNUP:PHONE_NUMBER')}
-                  name={FIELDS.phoneNumber}
-                  placeholder={i18next.t('SIGNUP:PHONE_NUMBER_PLACEHOLDER')}
-                  showError={hasSignUpError}
-                />
-                {hasSignUpError && (
-                  <CustomText error center>
-                    {i18next.t('SIGNUP:SIGNUP_FAILURE')}
-                  </CustomText>
-                )}
-                <CustomButton
-                  onPress={handleSubmit}
-                  style={styles.formButton}
-                  title={i18next.t('SIGNUP:SIGN_UP')}
-                  disabled={hasSignUpError || !isValid}
-                />
-              </View>
-            </TouchableWithoutFeedback>
-          </ScrollView>
-          {isIos && <KeyboardSpacer />}
-        </>
-      )}
-    </Formik>
+    <>
+      <ScrollView
+        bounces={false}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.container}
+        style={styles.stretchAndFlex}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={[styles.stretchAndFlex, styles.form]}>
+            <CustomTextInput
+              control={control}
+              name={FIELDS.name}
+              rules={{
+                validate: validationsWrapper([
+                  validateRequired,
+                  validateOnlyText
+                ])
+              }}
+              defaultValue={SIGNUP_INITIAL_VALUES[FIELDS.name]}
+              label={i18next.t('SIGNUP:NAME')}
+              error={errors[FIELDS.name]}
+              errorMessage={errors[FIELDS.name]?.message}
+            />
+            <CustomTextInput
+              control={control}
+              name={FIELDS.surname}
+              rules={{
+                validate: validationsWrapper([
+                  validateRequired,
+                  validateOnlyText
+                ])
+              }}
+              defaultValue={SIGNUP_INITIAL_VALUES[FIELDS.surname]}
+              label={i18next.t('SIGNUP:SURNAME')}
+              error={errors[FIELDS.surname]}
+              errorMessage={errors[FIELDS.surname]?.message}
+            />
+            <CustomTextInput
+              control={control}
+              name={FIELDS.birthDate}
+              rules={{ validate: validateRequired }}
+              defaultValue={SIGNUP_INITIAL_VALUES[FIELDS.birthDate]}
+              label={i18next.t('SIGNUP:BIRTH_DATE')}
+              error={errors[FIELDS.birthDate]}
+              errorMessage={errors[FIELDS.birthDate]?.message}
+              inputProps={{
+                placeholder: i18next.t('SIGNUP:BIRTH_DATE_PLACEHOLDER')
+              }}
+            />
+            <CustomTextInput
+              control={control}
+              name={FIELDS.email}
+              rules={{
+                validate: validationsWrapper([validateRequired, validateEmail])
+              }}
+              defaultValue={SIGNUP_INITIAL_VALUES[FIELDS.email]}
+              label={i18next.t('SIGNUP:MAIL')}
+              error={errors[FIELDS.email]}
+              errorMessage={errors[FIELDS.email]?.message}
+              inputProps={{
+                keyboardType: 'email-address',
+                placeholder: i18next.t('SIGNUP:MAIL_PLACEHOLDER')
+              }}
+            />
+            <CustomTextInput
+              control={control}
+              name={FIELDS.password}
+              rules={{
+                validate: validationsWrapper([
+                  validateRequired,
+                  validateMinLength(8)
+                ])
+              }}
+              defaultValue={SIGNUP_INITIAL_VALUES[FIELDS.password]}
+              label={i18next.t('SIGNUP:PASSWORD')}
+              error={errors[FIELDS.password]}
+              errorMessage={errors[FIELDS.password]?.message}
+              inputProps={{ secureTextEntry: true }}
+            />
+            <CustomTextInput
+              control={control}
+              name={FIELDS.phoneNumber}
+              defaultValue={SIGNUP_INITIAL_VALUES[FIELDS.phoneNumber]}
+              label={i18next.t('SIGNUP:PHONE_NUMBER')}
+              error={errors[FIELDS.phoneNumber]}
+              errorMessage={errors[FIELDS.phoneNumber]?.message}
+              inputProps={{
+                keyboardType: 'phone-pad',
+                placeholder: i18next.t('SIGNUP:PHONE_NUMBER_PLACEHOLDER')
+              }}
+            />
+            {!!signupError && (
+              <CustomText error center>
+                {i18next.t('SIGNUP:SIGNUP_FAILURE')}
+              </CustomText>
+            )}
+            <CustomButton
+              onPress={handleSubmit(onSubmit)}
+              style={styles.formButton}
+              title={i18next.t('SIGNUP:SIGN_UP')}
+              disabled={hasSignUpError}
+            />
+          </View>
+        </TouchableWithoutFeedback>
+      </ScrollView>
+      {isIos && <KeyboardSpacer />}
+    </>
   );
 }
 
