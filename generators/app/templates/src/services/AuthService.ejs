@@ -30,9 +30,6 @@ export const authSetup = async () => {
   }
   return currentUser;
 <%_ } _%>
-<%_ if(features.loginandsignup) { _%>
-  return { currentUser };
-<%_ } _%>
 };
 <%_ if(features.loginandsignup) { _%>
 export const login = (_: AuthData) => {
