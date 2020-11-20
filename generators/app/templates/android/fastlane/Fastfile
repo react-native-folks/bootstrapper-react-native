@@ -1,0 +1,36 @@
+import 'Fastfile.private'
+
+default_platform(:android)
+
+platform :android do
+
+  desc "Build"
+  lane :build do
+    gradle(task: "clean assembleRelease")
+    gradle(
+      task: "assemble",
+      build_type: "Release",
+    )
+  end
+
+  desc "Deploy dev to firebase"
+  lane :firebase_dev do
+    firebase_upload env: :dev
+  end
+
+  desc "Deploy staging to firebase"
+  lane :firebase_staging do
+    firebase_upload env: :staging
+  end
+
+  desc "Deploy prod to firebase"
+  lane :firebase_prod do
+    firebase_upload env: :release
+  end
+
+  desc "Deploy new production version to playstore"
+  lane :upload_app_to_playstore do
+    deploy_to_play_store
+  end
+  
+end

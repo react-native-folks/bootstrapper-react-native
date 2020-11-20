@@ -1,0 +1,57 @@
+# This file contains all lane to use on Fastlane.
+# Private lanes can receive different params from user lanes (declared on fastfile)
+# to setup different environment or that be needed
+
+platform :ios do
+  private_lane :firebase_upload do |options|
+    puts("Getting environment...")
+    env = options[:env]
+    puts "Environment selected: #{env}"
+    environment = get_environment_info(environment: env)
+    sh "fastlane run setup_jenkins"
+    cocoapods(try_repo_update_on_error: true)
+    match(type: environment["MATCH_TYPE"], readonly: false, shallow_clone: true, app_identifier: environment["BUNDLE_IDENTIFIER"])
+    gym(
+      workspace: environment["WORKSPACE_NAME"],
+      scheme: environment["SCHEME_NAME"],
+      archive_path: './archive.xcarchive',
+      output_name: environment["IPA_NAME"],
+      export_method: environment["EXPORT_METHOD"]
+    )
+
+    puts("Uploading to Firebase...")
+    firebase_app_distribution(
+      app: environment["FIREBASE_APP_ID"],
+      ipa_path: environment["IPA_NAME"],
+      release_notes_file: "../release_notes.txt", # Put release_notes file on react native root project to track to firebase
+      groups: "internal, socialCoach"
+    )
+  end
+
+  private_lane :testflight_upload do |options|
+    puts("Getting environment...")
+    env = options[:env]
+    puts "Environment selected: #{env}"
+    environment = get_environment_info(environment: env)
+    cocoapods(try_repo_update_on_error: true)
+    match(type: environment["MATCH_TYPE"], readonly: true, shallow_clone: true, app_identifier: environment["BUNDLE_IDENTIFIER"])
+    gym(
+      workspace: environment["WORKSPACE_NAME"],
+      scheme: environment["SCHEME_NAME"],
+      archive_path: './archive.xcarchive',
+      output_name: environment["IPA_NAME"],
+      export_method: environment["EXPORT_METHOD"]
+    )
+
+    puts("Uploading to ITC...")
+    upload_to_testflight(
+      username: environment["ITC_USERNAME"],
+      apple_id: environment["ITC_APPLE_ID"],
+      ipa: environment["IPA_NAME"],
+      app_identifier: environment["BUNDLE_IDENTIFIER"],
+      skip_submission: environment["SKIP_SUBMISSION"],
+      skip_waiting_for_build_processing: true,
+      team_id: environment["ITC_TEAM_ID"]
+    )
+  end
+end

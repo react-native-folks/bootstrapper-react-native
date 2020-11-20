@@ -1,0 +1,54 @@
+fastlane_version "2.148.1"
+default_platform :ios
+import 'Fastfile.private'
+
+platform :ios do
+
+  # before_all do
+  #   suffix = ENV['BRANCH'] && ENV['BRANCH'] != 'master' ? '-' + ENV['BRANCH'] : ''
+    #if ENV['BUILD_NUMBER']
+      #increment_build_number(
+        #build_number: ENV['BUILD_NUMBER'] + suffix
+      #)
+    #end
+  # end
+
+  desc "Builds Archive"
+  lane :archive do
+    sh "fastlane -v"
+    sh "fastlane run setup_jenkins"
+    environment = get_environment_info(environment: :dev)
+    cocoapods(try_repo_update_on_error: true)
+    match(type: environment["MATCH_TYPE"], readonly: true, shallow_clone: true, app_identifier: environment["BUNDLE_IDENTIFIER"])
+    gym(scheme: environment["SCHEME_NAME"], skip_package_ipa: true, archive_path: './archive.xcarchive')
+  end
+
+  desc "Share app on firebase for Dev"
+  lane :firebase_dev do
+    firebase_upload env: :develop
+  end
+
+  desc "Share app on firebase for Staging"
+  lane :firebase_staging do
+    firebase_upload env: :staging
+  end
+
+  desc "Share app on firebase for Production"
+  lane :firebase_prod do
+    firebase_upload env: :production
+  end
+
+  desc "Upload app on Testflight for Production"
+  lane :testflight_prod do
+    testflight_upload env: :production
+  end
+
+  after_all do |lane|
+    # This block is called, only if the executed lane was successful
+  end
+
+  error do |lane, exception|
+     # This block is called, only if some error occurs
+  end
+end
+

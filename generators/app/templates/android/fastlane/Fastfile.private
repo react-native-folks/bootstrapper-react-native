@@ -1,0 +1,52 @@
+# This file contains all lane to use on Fastlane.
+# Private lanes can receive different params from user lanes (declared on fastfile)
+# to setup different environment or that be needed
+
+platform :android do
+  private_lane :firebase_upload do |options|
+    puts("Getting environment...")
+    env = options[:env]
+    puts "Environment selected: #{env}"
+    environment = get_environment_info(environment: env)
+    desc "Deploy to firebase"
+    puts "Flavor: #{environment["FLAVOR"]}"
+    puts "BUILD_TYPE: #{environment["BUILD_TYPE"]}"
+    
+    gradle(
+      task: "clean assemble",
+      flavor: environment["FLAVOR"],
+      build_type: environment["BUILD_TYPE"],
+    )
+    desc "submit build to firebase app distribution"
+    firebase_app_distribution(
+        app: environment["FIREBASE_APP_ID"],
+        firebase_cli_token: ENV['FIREBASE_TOKEN'],
+        release_notes_file: "../release_notes.txt", # Put release_notes file on react native root project to track to firebase
+        groups: "internal"
+    )
+  end
+
+  private_lane :deploy_to_play_store do
+    environment = get_environment_info(environment: :release)
+    gradle(
+      task: "clean bundle",
+      flavor: environment["FLAVOR"],
+      build_type: environment["BUILD_TYPE"],
+      properties: {
+        "MY_APP_STORE_FILE" => "myApp.keystore", # This file should be on android root folder to run locally (or CI)
+        "MY_APP_STORE_PASSWORD" => ENV['KEYSTORE_PASS'],
+        "MY_APP_UPLOAD_KEY_ALIAS" => "my-app-alias",
+        "MY_APP_UPLOAD_KEY_PASSWORD" => ENV['KEYSTORE_PASS'],
+      },
+      print_command: false
+    )
+
+    upload_to_play_store(
+      release_status: "draft",
+      package_name: environment[PACKAGE_NAME],
+      aab: "app/build/outputs/bundle/productionRelease/app-production-release.aab",
+      track: "production",
+      json_key: "json_key.json"  # This file should be on android root folder to run locally (or CI)
+    )
+  end
+end
