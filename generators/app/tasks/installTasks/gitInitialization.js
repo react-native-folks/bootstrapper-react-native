@@ -55,7 +55,7 @@ module.exports = function gitInitialization() {
                     runCommand({
                       command: [
                         'git',
-                        ['push', 'origin', 'master'],
+                        ['push', 'origin', 'master', "--force"],
                         { cwd: `${process.cwd()}/${this.projectName}` }
                       ],
                       context: this.options

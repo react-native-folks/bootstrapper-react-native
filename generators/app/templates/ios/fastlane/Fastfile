@@ -43,6 +43,17 @@ platform :ios do
     testflight_upload env: :production
   end
 
+  desc "Update Bundle Identifier"
+  lane :update_bundle_identifier do |options|
+    project_name = options[:project_name]
+    new_bundle_identifier = options[:bundle_identifier]
+    update_app_identifier(
+      xcodeproj: "./#{project_name}.xcodeproj", # Optional path to xcodeproj, will use the first .xcodeproj if not set
+      plist_path: "./#{project_name}/Info.plist", # Path to info plist file, relative to xcodeproj
+      app_identifier: "#{new_bundle_identifier}" # The App Identifier
+    )
+  end
+
   after_all do |lane|
     # This block is called, only if the executed lane was successful
   end
