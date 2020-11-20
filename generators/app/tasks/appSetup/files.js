@@ -10,7 +10,7 @@ module.exports.REDUX_PATH = 'src/redux';
 module.exports.SERVICES_PATH = 'src/services';
 module.exports.UTILS_PATH = 'src/utils';
 
-// BASE FILES
+// BASE FILES'
 module.exports.ESLINT_IGNORE_FILE = '.eslintignore';
 module.exports.ESLINTRC_FILE = '.eslintrc.js';
 module.exports.MAIN = 'App.js';
@@ -20,6 +20,7 @@ module.exports.JEST_CONFIG_FILE = 'jest.config.js';
 module.exports.REACT_NATIVE_CONFIG = 'react-native.config.js';
 module.exports.README = 'README.md';
 module.exports.TSCONFIG_FILE = 'tsconfig.json';
+module.exports.GEMFILE_PATH = 'ios/Gemfile';
 
 // TESTS
 module.exports.TESTS_REDUX_PATH = `${module.exports.TESTS}/redux`;

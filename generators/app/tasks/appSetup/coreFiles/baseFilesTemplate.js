@@ -1,5 +1,6 @@
 const { copyFile, copyTemplateFile } = require('../utils');
 const {
+  GEMFILE_PATH,
   UTILS_PATH,
   GLOBAL_INTERFACES,
   NAVIGATION_INTERFACES,
@@ -49,6 +50,7 @@ const {
 } = require('../files');
 
 const FILES = [
+  GEMFILE_PATH,
   UTILS_PATH,
   GLOBAL_INTERFACES,
   NAVIGATION_INTERFACES,

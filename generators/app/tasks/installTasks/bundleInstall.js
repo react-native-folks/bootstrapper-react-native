@@ -15,5 +15,5 @@ module.exports = function bundleInstall() {
       failureMessage: '"bundle install" failed. Turn verbose mode on for detailed logging',
       context: this.options
     })
-  );
+  ).catch((err) => console.log(err));
 };
