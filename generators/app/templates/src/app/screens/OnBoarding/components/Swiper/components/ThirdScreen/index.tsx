@@ -8,7 +8,9 @@ import styles from './styles';
 function ThirdScreen() {
   return (
     <View style={styles.container}>
-      <CustomText center white>{i18next.t('ONBOARDING:THIRD_SCREEN')}</CustomText>
+      <CustomText center white>
+        {i18next.t('ONBOARDING:THIRD_SCREEN')}
+      </CustomText>
     </View>
   );
 }

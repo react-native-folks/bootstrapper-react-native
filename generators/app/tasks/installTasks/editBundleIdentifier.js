@@ -16,7 +16,8 @@ module.exports = function editBundleIdentifier() {
     ],
     loadingMessage: 'Updating bundle identifier...',
     successMessage: 'Bundle identifier updated!',
-    failureMessage: 'Bundle identifier update failed. Turn verbose mode on for detailed logging',
+    failureMessage:
+      'Bundle identifier update failed. Turn verbose mode on for detailed logging',
     context: this.options
   });
 };

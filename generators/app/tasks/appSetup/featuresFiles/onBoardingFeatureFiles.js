@@ -1,5 +1,9 @@
 const { copyFile, copyTemplateFile } = require('../utils');
-const { AUTH_SERVICE, ONBOARDING_PATH, ONBOARDING_SERVICE } = require('../files');
+const {
+  AUTH_SERVICE,
+  ONBOARDING_PATH,
+  ONBOARDING_SERVICE
+} = require('../files');
 
 const FILES = [ONBOARDING_PATH, ONBOARDING_SERVICE];
 

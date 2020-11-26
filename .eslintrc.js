@@ -2,7 +2,7 @@ module.exports = {
   extends: ['@react-native-community', 'plugin:prettier/recommended'],
   rules: {
     complexity: 'off',
-    'import/order': ['error', { 'newlines-between': 'always' }],
+    // 'import/order': ['error', { 'newlines-between': 'always' }],
     'no-nested-ternary': 'off',
     'no-magic-numbers': 'off',
     'new-cap': 'off',

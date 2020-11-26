@@ -1,6 +1,15 @@
 module.exports = {
   preset: 'react-native',
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node', 'png', 'jpg'],
+  moduleFileExtensions: [
+    'ts',
+    'tsx',
+    'js',
+    'jsx',
+    'json',
+    'node',
+    'png',
+    'jpg'
+  ],
   setupFilesAfterEnv: [
     '<rootDir>/__mocks__/setup.js',
     './node_modules/react-native-gesture-handler/jestSetup.js',

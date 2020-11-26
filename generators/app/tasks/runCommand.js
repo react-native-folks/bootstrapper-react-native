@@ -17,7 +17,8 @@ const ora = require('ora');
  */
 module.exports = function runCommand(options) {
   const spinner =
-    options.loadingMessage && ora({ spinner: 'bouncingBall', text: options.loadingMessage }).start();
+    options.loadingMessage &&
+    ora({ spinner: 'bouncingBall', text: options.loadingMessage }).start();
 
   return new Promise((resolve, reject) => {
     const command = spawn(...options.command);

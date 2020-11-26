@@ -85,13 +85,16 @@ function getLinterPluginVersions(projectName, options) {
     ],
     loadingMessage: "Getting eslint plugins' versions",
     successMessage: 'Successfuly download plugins version info',
-    failureMessage: 'Error getting info of eslint plugins. Turn verbose mode on for detailed logging',
+    failureMessage:
+      'Error getting info of eslint plugins. Turn verbose mode on for detailed logging',
     context: options
   }).then(({ result }) => {
     // keep latest if the dependency has different versions. e.g: eslint: '^3.19.0 || ^4.3.0'
     const dependencies = JSON.parse(result).data;
     Object.keys(dependencies).forEach(eachDependency => {
-      const latestDependencyVersion = latestSemver(dependencies[eachDependency].match(semverRegex()));
+      const latestDependencyVersion = latestSemver(
+        dependencies[eachDependency].match(semverRegex())
+      );
       dependencies[eachDependency] = `^${latestDependencyVersion}`;
     });
     return dependencies;
@@ -151,16 +154,23 @@ module.exports = function installDependencies() {
     DEPENDENCIES.push('react-native-swiper');
   }
 
-  return getLinterPluginVersions(this.projectName, this.options).then(plugins => {
-    const pluginNames = Object.keys(plugins);
-    const fixedDevDeps = DEV_DEPENDENCIES.map(
-      // Use a specific version of a dependency to avoid conflicts with other dependencies.
-      dependency => (pluginNames.includes(dependency) ? `${dependency}@${plugins[dependency]}` : dependency)
-    );
-    return yarnInstall(this.projectName, DEPENDENCIES, this.options)
-      .then(() => yarnInstall(this.projectName, fixedDevDeps, this.options, true))
-      .catch(() => {
-        process.exit(1);
-      });
-  });
+  return getLinterPluginVersions(this.projectName, this.options).then(
+    plugins => {
+      const pluginNames = Object.keys(plugins);
+      const fixedDevDeps = DEV_DEPENDENCIES.map(
+        // Use a specific version of a dependency to avoid conflicts with other dependencies.
+        dependency =>
+          pluginNames.includes(dependency)
+            ? `${dependency}@${plugins[dependency]}`
+            : dependency
+      );
+      return yarnInstall(this.projectName, DEPENDENCIES, this.options)
+        .then(() =>
+          yarnInstall(this.projectName, fixedDevDeps, this.options, true)
+        )
+        .catch(() => {
+          process.exit(1);
+        });
+    }
+  );
 };

@@ -1,5 +1,7 @@
 module.exports = function babelConfigSetup() {
-  const contentBabelConfig = this.fs.read(`${this.projectName}/babel.config.js`);
+  const contentBabelConfig = this.fs.read(
+    `${this.projectName}/babel.config.js`
+  );
   const babelContent = `presets: ['module:metro-react-native-babel-preset'],
   plugins: [
     'import-glob',

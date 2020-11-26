@@ -73,4 +73,5 @@ export const setLocalNotifications = () => {
   });
 };
 
-export const checkNotificationPermission = (cbk: any) => PushNotification.checkPermissions(cbk);
+export const checkNotificationPermission = (cbk: any) =>
+  PushNotification.checkPermissions(cbk);

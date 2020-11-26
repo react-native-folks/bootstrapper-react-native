@@ -1,6 +1,11 @@
 import React from 'react';
 import * as redux from 'react-redux';
-import { render, fireEvent, waitFor, waitForElementToBeRemoved } from 'react-native-testing-library';
+import {
+  render,
+  fireEvent,
+  waitFor,
+  waitForElementToBeRemoved
+} from 'react-native-testing-library';
 import Login from '@authScreens/Login';
 
 const INVALID_EMAIL = 'hello';
@@ -26,7 +31,9 @@ describe('<Login />', () => {
     fireEvent.changeText(emailInput, VALID_EMAIL);
     fireEvent.press(submitButton);
 
-    await waitForElementToBeRemoved(() => getByText('El formato del mail es inválido'));
+    await waitForElementToBeRemoved(() =>
+      getByText('El formato del mail es inválido')
+    );
   });
 
   test('Log in', async () => {
@@ -36,7 +43,9 @@ describe('<Login />', () => {
     const useDispatchSpy = jest.spyOn(redux, 'useDispatch');
     const dispatch = jest.fn();
     useDispatchSpy.mockReturnValue(dispatch);
-    const { getByText, getByTestId } = render(<Login navigation={navigation} />);
+    const { getByText, getByTestId } = render(
+      <Login navigation={navigation} />
+    );
     const emailInput = getByTestId('Email');
     const passwordInput = getByTestId('Contraseña');
     const submitButton = getByText('Iniciar sesión');

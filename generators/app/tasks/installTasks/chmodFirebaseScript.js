@@ -2,7 +2,11 @@ const runCommand = require('../runCommand');
 
 module.exports = function chmodFirebaseScript() {
   return runCommand({
-    command: ['chmod', ['u+x', 'firebaseFilesScript.sh'], { cwd: `${process.cwd()}/${this.projectName}` }],
+    command: [
+      'chmod',
+      ['u+x', 'firebaseFilesScript.sh'],
+      { cwd: `${process.cwd()}/${this.projectName}` }
+    ],
     loadingMessage: 'Changing permissions of the firebaseFilesScript file...',
     successMessage: 'Permissions to run the firebaseFilesScript ready!',
     failureMessage:

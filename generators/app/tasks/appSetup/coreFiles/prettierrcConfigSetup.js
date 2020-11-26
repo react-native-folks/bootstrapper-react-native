@@ -1,5 +1,7 @@
 module.exports = function babelConfigSetup() {
-  const contentPrettierConfig = this.fs.read(`${this.projectName}/.prettierrc.js`);
+  const contentPrettierConfig = this.fs.read(
+    `${this.projectName}/.prettierrc.js`
+  );
 
   const beforeContentPrettier = `bracketSpacing: false,
   jsxBracketSameLine: true,
@@ -12,7 +14,10 @@ module.exports = function babelConfigSetup() {
   trailingComma: 'none',
   arrowParens: 'avoid'`;
 
-  const updatedPrettierConfig = contentPrettierConfig.replace(beforeContentPrettier, newContentPrettier);
+  const updatedPrettierConfig = contentPrettierConfig.replace(
+    beforeContentPrettier,
+    newContentPrettier
+  );
 
   this.fs.write(`${this.projectName}/.prettierrc.js`, updatedPrettierConfig);
 };

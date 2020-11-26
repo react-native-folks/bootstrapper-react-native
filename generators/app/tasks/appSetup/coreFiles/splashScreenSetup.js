@@ -18,7 +18,9 @@ module.exports = function splashScreenSetup() {
   );
 
   // Update AppDelegate
-  const appDelegateContent = this.fs.read(`${this.projectName}/ios/${this.projectName}/AppDelegate.m`);
+  const appDelegateContent = this.fs.read(
+    `${this.projectName}/ios/${this.projectName}/AppDelegate.m`
+  );
   let updatedAppDelegateContent = appDelegateContent.replace(
     '#import <React/RCTRootView.h>',
     '#import <React/RCTRootView.h>\n#import "RNSplashScreen.h"'
@@ -27,7 +29,10 @@ module.exports = function splashScreenSetup() {
     'return YES;',
     '[RNSplashScreen show];\n\treturn YES;'
   );
-  this.fs.write(`${this.projectName}/ios/${this.projectName}/AppDelegate.m`, updatedAppDelegateContent);
+  this.fs.write(
+    `${this.projectName}/ios/${this.projectName}/AppDelegate.m`,
+    updatedAppDelegateContent
+  );
 
   // Add launch_screen.xml
   this.fs.copy(
@@ -57,12 +62,12 @@ module.exports = function splashScreenSetup() {
   const splashscreenfile = this.fs.read(
     `${this.projectName}/ios/${this.projectName}/LaunchScreen.storyboard`
   );
-  
+
   let updatedsplashscreenfile = splashscreenfile.replace(
     'text="APP-NAME"',
     `text="${this.projectName}"`
   );
-  
+
   this.fs.write(
     `${this.projectName}/ios/${this.projectName}/LaunchScreen.storyboard`,
     updatedsplashscreenfile

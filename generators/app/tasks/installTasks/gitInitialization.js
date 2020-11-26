@@ -11,13 +11,21 @@ module.exports = function gitInitialization() {
     .then(({ spinner }) =>
       // git add .
       runCommand({
-        command: ['git', ['add', '.'], { cwd: `${process.cwd()}/${this.projectName}` }],
+        command: [
+          'git',
+          ['add', '.'],
+          { cwd: `${process.cwd()}/${this.projectName}` }
+        ],
         context: this.options
       })
         .then(() =>
           // git commit -m 'Kickoff!'
           runCommand({
-            command: ['git', ['commit', '-m', '"Kickoff!"'], { cwd: `${process.cwd()}/${this.projectName}` }],
+            command: [
+              'git',
+              ['commit', '-m', '"Kickoff!"'],
+              { cwd: `${process.cwd()}/${this.projectName}` }
+            ],
             context: this.options
           }).then(() => {
             // check if the user wants to initialiaze the remote repository too
@@ -26,7 +34,8 @@ module.exports = function gitInitialization() {
               {
                 type: 'confirm',
                 name: 'pushToRepo',
-                message: 'Do you want to initialize your git remote repository? (i.e. github, bitbucket, etc)'
+                message:
+                  'Do you want to initialize your git remote repository? (i.e. github, bitbucket, etc)'
               }
               // eslint-disable-next-line consistent-return
             ]).then(({ pushToRepo }) => {
@@ -37,7 +46,8 @@ module.exports = function gitInitialization() {
                     type: 'input',
                     name: 'repoUrl',
                     message: "What's your repository url? (ssh or https)",
-                    validate: val => (val ? true : 'Repository url is required to initialize it')
+                    validate: val =>
+                      val ? true : 'Repository url is required to initialize it'
                   }
                 ]).then(({ repoUrl }) => {
                   this.repoUrl = repoUrl;
@@ -55,7 +65,7 @@ module.exports = function gitInitialization() {
                     runCommand({
                       command: [
                         'git',
-                        ['push', 'origin', 'master', "--force"],
+                        ['push', 'origin', 'master', '--force'],
                         { cwd: `${process.cwd()}/${this.projectName}` }
                       ],
                       context: this.options
@@ -70,10 +80,14 @@ module.exports = function gitInitialization() {
           })
         )
         .catch(() => {
-          spinner.fail('Some git command failed. Turn verbose mode on for detailed logging');
+          spinner.fail(
+            'Some git command failed. Turn verbose mode on for detailed logging'
+          );
         })
     )
     .catch(spinner => {
-      spinner.fail('Some git command failed. Turn verbose mode on for detailed logging');
+      spinner.fail(
+        'Some git command failed. Turn verbose mode on for detailed logging'
+      );
     });
 };

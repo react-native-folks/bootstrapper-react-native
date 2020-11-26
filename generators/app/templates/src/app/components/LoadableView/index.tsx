@@ -10,7 +10,11 @@ interface Loader {
   children: ReactElement;
 }
 
-const LoadingView = ({ isLoading, showChildren = true, children }: Loader): ReactElement => (
+const LoadingView = ({
+  isLoading,
+  showChildren = true,
+  children
+}: Loader): ReactElement => (
   <View style={styles.container}>
     {showChildren && children}
     {isLoading ? (

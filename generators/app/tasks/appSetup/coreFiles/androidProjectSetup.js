@@ -1,5 +1,7 @@
 function updateAppBuildGradle() {
-  const buildGradleContent = this.fs.read(`${this.projectName}/android/app/build.gradle`);
+  const buildGradleContent = this.fs.read(
+    `${this.projectName}/android/app/build.gradle`
+  );
   let updatedBuildGradleContent = buildGradleContent.replace(
     'apply plugin: "com.android.application"',
     'apply plugin: "com.android.application"\n\nproject.ext.envConfigFiles = [\n\tdevelopdebug: ".dev.env",\n\tdeveloprelease: ".dev.env",\n\tstagingdebug: ".staging.env",\n\tstagingrelease: ".staging.env",\n\tproductiondebug: ".production.env",\n\tproductionrelease: ".production.env"\n]\napply from: project(\':react-native-config\').projectDir.getPath() + "/dotenv.gradle"'
@@ -32,7 +34,10 @@ function updateAppBuildGradle() {
     'if (enableHermes) {',
     "implementation 'androidx.appcompat:appcompat:1.3.0-alpha02'\n\timplementation 'androidx.multidex:multidex:2.0.1'\n\tif (enableHermes) {"
   );
-  this.fs.write(`${this.projectName}/android/app/build.gradle`, updatedBuildGradleContent);
+  this.fs.write(
+    `${this.projectName}/android/app/build.gradle`,
+    updatedBuildGradleContent
+  );
 }
 
 function addRNGestureHandlerConfig() {
@@ -54,21 +59,31 @@ function addRNGestureHandlerConfig() {
 }
 
 function updateAppProguardRules() {
-  const proguardRulesContent = this.fs.read(`${this.projectName}/android/app/proguard-rules.pro`);
+  const proguardRulesContent = this.fs.read(
+    `${this.projectName}/android/app/proguard-rules.pro`
+  );
   const updatedProguardRulesContent = proguardRulesContent.replace(
     '# Add any project specific keep options here:',
     `# Add any project specific keep options here:\n# Hermes\n-keep class com.facebook.hermes.unicode.** { *; }\n\n# react-native-config\n-keep class com.${this.projectName.toLowerCase()}.BuildConfig { *; }`
   );
-  this.fs.write(`${this.projectName}/android/app/proguard-rules.pro`, updatedProguardRulesContent);
+  this.fs.write(
+    `${this.projectName}/android/app/proguard-rules.pro`,
+    updatedProguardRulesContent
+  );
 }
 
 function disableR8ForReleases() {
-  const gradleProperties = this.fs.read(`${this.projectName}/android/gradle.properties`);
+  const gradleProperties = this.fs.read(
+    `${this.projectName}/android/gradle.properties`
+  );
   const updatedGradleProperties = gradleProperties.replace(
     'android.enableJetifier=true',
     'android.enableJetifier=true\nandroid.enableR8=false'
   );
-  this.fs.write(`${this.projectName}/android/gradle.properties`, updatedGradleProperties);
+  this.fs.write(
+    `${this.projectName}/android/gradle.properties`,
+    updatedGradleProperties
+  );
 }
 
 module.exports = function androidProjectSetup() {

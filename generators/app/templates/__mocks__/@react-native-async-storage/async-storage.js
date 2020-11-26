@@ -12,7 +12,9 @@ export default {
     ),
   getItem: key =>
     new Promise(resolve =>
-      Object.prototype.hasOwnProperty.call(cache, key) ? resolve(cache[key]) : resolve(null)
+      Object.prototype.hasOwnProperty.call(cache, key)
+        ? resolve(cache[key])
+        : resolve(null)
     ),
   removeItem: key =>
     new Promise((resolve, reject) =>

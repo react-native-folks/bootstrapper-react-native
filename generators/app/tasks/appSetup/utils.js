@@ -1,6 +1,8 @@
 module.exports.copyFile = function copyFile(filepath) {
   if (!this.fs) {
-    throw new Error('File utils functions needs to be binded to the generator context');
+    throw new Error(
+      'File utils functions needs to be binded to the generator context'
+    );
   }
 
   this.fs.copy(
@@ -11,10 +13,15 @@ module.exports.copyFile = function copyFile(filepath) {
 
 module.exports.copyTemplateFile = function copyTemplateFile(filepath) {
   if (!this.fs) {
-    throw new Error('File utils functions needs to be binded to the generator context');
+    throw new Error(
+      'File utils functions needs to be binded to the generator context'
+    );
   }
 
-  const filepathWithoutExtension = filepath.substring(0, filepath.lastIndexOf('.'));
+  const filepathWithoutExtension = filepath.substring(
+    0,
+    filepath.lastIndexOf('.')
+  );
   const templatePath = `${filepathWithoutExtension}.ejs`;
 
   this.fs.copyTpl(

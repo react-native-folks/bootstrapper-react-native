@@ -1,6 +1,13 @@
 import { TextStyle } from 'react-native';
 import { isAndroid } from '@constants/platform';
-import { MONTSERRAT, REGULAR, SEMIBOLD, BOLD, NORMAL, ITALIC } from '@constants/fonts';
+import {
+  MONTSERRAT,
+  REGULAR,
+  SEMIBOLD,
+  BOLD,
+  NORMAL,
+  ITALIC
+} from '@constants/fonts';
 import { moderateScale } from '@utils/scalingUtils';
 import { StringObject } from '@interfaces/globalInterfaces';
 

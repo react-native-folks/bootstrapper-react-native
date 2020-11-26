@@ -22,11 +22,14 @@ export const apiSetup = (dispatch: Dispatch<any>) => {
     console.warn('API baseURL has not been properly initialized');
   }
   api.addResponseTransform(response => {
-    if (response.data) response.data = camelCaseSerializer.serialize(response.data);
+    if (response.data)
+      response.data = camelCaseSerializer.serialize(response.data);
   });
   api.addRequestTransform(request => {
-    if (request.data) request.data = snakeCaseSerializer.serialize(request.data);
-    if (request.params) request.params = snakeCaseSerializer.serialize(request.params);
+    if (request.data)
+      request.data = snakeCaseSerializer.serialize(request.data);
+    if (request.params)
+      request.params = snakeCaseSerializer.serialize(request.params);
   });
   api.addMonitor(response => {
     if (response.status === 401) {

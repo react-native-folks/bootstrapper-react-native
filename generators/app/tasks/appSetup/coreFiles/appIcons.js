@@ -18,10 +18,7 @@ function iosAppIcons() {
     'iTunesArtwork@2x.png'
   ];
 
-  const splashFiles = [
-    'Contents.json',
-    'SplashIcon.png'
-  ];
+  const splashFiles = ['Contents.json', 'SplashIcon.png'];
 
   appIconFiles.forEach(fileName => {
     this.fs.copy(
@@ -55,7 +52,14 @@ function iosAppIcons() {
 function androidAppIcons() {
   this.fs.copy(
     this.templatePath('icons/androidIcons'),
-    this.destinationPath(this.projectName, 'android', 'app', 'src', 'main', 'res')
+    this.destinationPath(
+      this.projectName,
+      'android',
+      'app',
+      'src',
+      'main',
+      'res'
+    )
   );
 }
 
