@@ -1,0 +1,21 @@
+import i18next from 'i18next';
+
+i18next.addResources('es', 'HOME', {
+  HI: 'Hola! Bienvenid@ a Kamino React Native',
+  ALERT_TITLE: 'Botón personalizable',
+  ALERT_MESSAGE: 'Presionaste en un botón personalizable. No es increible!!?',
+  BUTTON_TITLE: "Vamos!",
+  <%_ if(features.loginandsignup) { _%>
+  LOGOUT: 'Cerrar sesión!',
+  <%_ } _%>
+});
+
+i18next.addResources('en', 'HOME', {
+  HI: 'Hi! Welcome to Kamino React Native',
+  ALERT_TITLE: 'Custom Button',
+  ALERT_MESSAGE: 'You pressed on custom Button. Thats awesome!',
+  BUTTON_TITLE: "Let's go!",
+  <%_ if(features.loginandsignup) { _%>
+  LOGOUT: 'Logout!',
+  <%_ } _%>
+});

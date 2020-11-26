@@ -17,8 +17,8 @@ function updateAppBuildGradle() {
     'compileSdkVersion rootProject.ext.compileSdkVersion\n\tflavorDimensions "buildtype"'
   );
   updatedBuildGradleContent = updatedBuildGradleContent.replace(
-    'versionName generateVersionName()',
-    `versionName generateVersionName()\n\t\tresValue "string", "build_config_package", "com.${this.projectName.toLowerCase()}"\n\t\tmultiDexEnabled true`
+    'targetSdkVersion rootProject.ext.targetSdkVersion',
+    `targetSdkVersion rootProject.ext.targetSdkVersion\n\t\tresValue "string", "build_config_package", "com.${this.projectName.toLowerCase()}"\n\t\tmultiDexEnabled true`
   );
   updatedBuildGradleContent = updatedBuildGradleContent.replace(
     'minifyEnabled enableProguardInReleaseBuilds',

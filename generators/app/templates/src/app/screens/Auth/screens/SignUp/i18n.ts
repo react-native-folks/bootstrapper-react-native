@@ -13,3 +13,17 @@ i18next.addResources('es', 'SIGNUP', {
   SIGN_UP: 'Registrarse',
   SIGNUP_FAILURE: 'Ocurrió un error. Por favor inténtenlo nuevamente!'
 });
+
+i18next.addResources('en', 'SIGNUP', {
+  NAME: 'Name',
+  SURNAME: 'Surname',
+  BIRTH_DATE: 'Birthday',
+  BIRTH_DATE_PLACEHOLDER: 'MM/DD/AAAA',
+  MAIL: 'Email',
+  MAIL_PLACEHOLDER: 'email@domain.com',
+  PASSWORD: 'Password',
+  PHONE_NUMBER: 'Phone number',
+  PHONE_NUMBER_PLACEHOLDER: '1134454325',
+  SIGN_UP: 'Sign up',
+  SIGNUP_FAILURE: 'A problem was ocurred. Please, try again later!'
+});

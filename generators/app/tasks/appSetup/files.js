@@ -63,6 +63,7 @@ module.exports.LOADABLE_PATH = `${module.exports.COMPONENTS_PATH}/LoadableView`;
 module.exports.HOME_PATH = `${module.exports.SCREENS_PATH}/Home`;
 module.exports.HOME = `${module.exports.HOME_PATH}/index.tsx`;
 module.exports.HOME_STYLES = `${module.exports.HOME_PATH}/styles.ts`;
+module.exports.HOME_TRANSLATIIONS = `${module.exports.HOME_PATH}/i18n.ts`;
 // AUTH SCREENS - LOGIN AND SIGNUP
 module.exports.AUTH_PATH = `${module.exports.SCREENS_PATH}/Auth`;
 // APP SCREENS - ONBOARDING

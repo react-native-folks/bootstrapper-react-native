@@ -1,5 +1,6 @@
 import React, { <%_ if(features.loginandsignup) { _%>useCallback, <%_ } _%>memo } from 'react';
 import { Alert, View } from 'react-native';
+import i18next from 'i18next';
 <%_ if(features.loginandsignup) { _%>
   import { useDispatch } from 'react-redux';
   import { actionCreators as AuthActions } from '@redux/auth/actions';
@@ -8,6 +9,7 @@ import CustomShadowView from '@components/CustomShadowView';
 import CustomText from '@components/CustomText';
 import CustomButton from '@components/CustomButton';
 
+import './i18n';
 import styles from './styles';
 
 function Home() {
@@ -19,18 +21,18 @@ function Home() {
   return (
     <View style={styles.container}>
       <CustomShadowView strong style={styles.home}>
-        <CustomText blue>{'Hi! Welcome to Kamino React Native'}</CustomText>
+        <CustomText blue>{i18next.t('HOME:HI')}</CustomText>
         <CustomButton
           onPress={() =>
             Alert.alert(
-              'Custom Button',
-              'You pressed on custom Button. Thats awesome!'
+              i18next.t('HOME:ALERT_TITLE'),
+              i18next.t('HOME:ALERT_MESSAGE')
             )
           }
-          title={"Let's go!"}
+          title={i18next.t('HOME:BUTTON_TITLE')}
         />
     <%_ if(features.loginandsignup) { _%>
-      <CustomButton onPress={handleLogout} green title="Logout!" style={styles.logout} />
+      <CustomButton onPress={handleLogout} green title={i18next.t('HOME:LOGOUT')} style={styles.logout} />
     <%_ } _%>
       </CustomShadowView>
     </View>

@@ -6,6 +6,20 @@ import Routes from '@constants/routes';
 i18next.addResources('es', 'app', {
     <%_ if(features.loginandsignup) { _%>
     [Routes.Login]: 'Login',
+    [Routes.SignUp]: 'Registro',
+    <%_ } _%>
+    <%_ if(features.tabs) { _%>
+    [Routes.Tab1]: 'Tab 1',
+    [Routes.Tab2]: 'Tab 2',
+    <%_ } _%>
+    [Routes.Home]: 'Home'<%_ if(features.onboarding) { _%>,
+    [Routes.OnBoarding]: 'OnBoarding'
+    <%_ } _%>
+});
+
+i18next.addResources('en', 'app', {
+    <%_ if(features.loginandsignup) { _%>
+    [Routes.Login]: 'Login',
     [Routes.SignUp]: 'SignUp',
     <%_ } _%>
     <%_ if(features.tabs) { _%>

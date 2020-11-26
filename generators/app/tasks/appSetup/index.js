@@ -2,7 +2,7 @@ const ora = require('ora');
 
 // CORE FILES
 const androidProjectSetup = require('./coreFiles/androidProjectSetup');
-const appIcons = require('./coreFiles/appIcons'); // TODO - add when added new assets
+const appIcons = require('./coreFiles/appIcons');
 const babelConfigSetup = require('./coreFiles/babelConfigSetup');
 const baseFilesTemplate = require('./coreFiles/baseFilesTemplate');
 const cleanTargetsFromPods = require('./coreFiles/cleanTargetsFromPods');
