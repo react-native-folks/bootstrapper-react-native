@@ -144,14 +144,11 @@ module.exports = function installDependencies() {
 
   if (this.features.socialloginbuttons) {
     DEPENDENCIES.push('react-native-fbsdk');
+    DEPENDENCIES.push('@types/react-native-fbsdk');
   }
 
   if (this.features.drawer) {
     DEPENDENCIES.push('@react-navigation/drawer');
-  }
-
-  if (this.features.reduxpersist) {
-    DEPENDENCIES.push('redux-persist-seamless-immutable');
   }
 
   if (this.features.onboarding) {

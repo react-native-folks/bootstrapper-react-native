@@ -79,28 +79,22 @@ module.exports = function nextSteps() {
         .cyan
     );
     console.log(
-      '  -Open the project on xcode and create a empty swift file called bridge'
+      '  Open the project on xcode and create a empty swift file called bridge\n\t\tand accept the bridge header autogeneration from xcode prompt.'
         .cyan
     );
     console.log(
-      '     xcode will ask you if you want to autogenerate bridge header and you must accept'
+      '  Create a file called Config.xcconfig on the root of ios project\n\t\tand add it to build configurations.'
         .cyan
     );
     console.log(
-      '     This is important since some socials use swift on their SDKs'.cyan
-    );
-    console.log(
-      '  -You can find this social buttons on components folder. All buttons have the same interface.'
+      '  Complete the Socials keys and ids (like FACEBOOK_APP_ID)\n\t\ton corresponding .env files'
         .cyan
-    );
-    console.log(
-      '  -Add or create a file called Config.xcconfig on the root of ios project and add this file to targets config \n\tThis is needed to pass variables to info plist file dinamically.'
-        .cyan
-    );
-    console.log(
-      '  -Complete the Socials keys and ids on corresponding .env files'.cyan
     );
     console.log('\n');
   }
+  console.log(
+    '  Finaly you can find this social buttons on components folder. All buttons have the same interface.'
+      .cyan
+  );
   console.log('\n\n');
 };
