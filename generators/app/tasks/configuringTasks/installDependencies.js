@@ -145,6 +145,7 @@ module.exports = function installDependencies() {
   if (this.features.socialloginbuttons) {
     DEPENDENCIES.push('react-native-fbsdk');
     DEPENDENCIES.push('@types/react-native-fbsdk');
+    DEPENDENCIES.push('@invertase/react-native-apple-authentication');
   }
 
   if (this.features.drawer) {

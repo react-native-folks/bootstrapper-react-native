@@ -90,6 +90,10 @@ module.exports = function nextSteps() {
       '  Complete the Socials keys and ids (like FACEBOOK_APP_ID)\n\t\ton corresponding .env files'
         .cyan
     );
+    console.log(
+      '  Configure apple signing from apple member center for each\n\t\tscheme/identifier. https://github.com/invertase/react-native-apple-authentication/blob/master/docs/INITIAL_SETUP.md'
+        .cyan
+    );
     console.log('\n');
   }
   console.log(

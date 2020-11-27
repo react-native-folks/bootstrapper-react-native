@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Keyboard, TouchableWithoutFeedback, View, Alert } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback, View<%_ if(features.socialloginbuttons) { _%>, Alert<%_ } _%> } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import i18next from 'i18next';
@@ -12,7 +12,10 @@ import { actionCreators as AuthActions } from '@redux/auth/actions';
 import { FIELDS, LOGIN_INITIAL_VALUES } from '@screens/Auth/constants';
 import CustomTextInput from '@app/components/CustomTextInput';
 import LoadableImage from '@app/components/LoadableImage';
+<%_ if(features.socialloginbuttons) { _%>
 import FacebookButton from '@app/components/SocialButtons/FacebookButton';
+import AppleButton from '@app/components/SocialButtons/AppleButton';
+<%_ } _%>
 import {
   validationsWrapper,
   validateRequired,
@@ -36,6 +39,9 @@ function Login({ navigation }: Navigation) {
     },
     [dispatch, errors]
   );
+  <%_ if(features.socialloginbuttons) { _%>
+  const handleSocialLogin = (token: any) => dispatch(AuthActions.socialLogin(token));
+  <%_ } _%>
   const handleGoToSignUp = () => navigation.navigate(Routes.SignUp);
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -84,10 +90,16 @@ function Login({ navigation }: Navigation) {
           disabled={hasLoginError}
         />
         {/* TODO replace for template file here*/}
+        <%_ if(features.socialloginbuttons) { _%>
         <FacebookButton
-          onSuccess={data => Alert.alert('logeado', data)}
+          onSuccess={handleSocialLogin}
           onError={error => Alert.alert('ERROR', error)}
         />
+        <AppleButton
+          onSuccess={handleSocialLogin}
+          onError={error => Alert.alert('ERROR', error)}
+        />
+        <%_ } _%>
         <CustomButton
           borderless
           onPress={handleGoToSignUp}

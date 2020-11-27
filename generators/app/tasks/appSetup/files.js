@@ -61,6 +61,13 @@ module.exports.SOCIAL_BUTTONS = `${module.exports.COMPONENTS_PATH}/SocialButtons
 // APP COMPONENTS - LOADABLE
 module.exports.LOADABLE_PATH = `${module.exports.COMPONENTS_PATH}/LoadableView`;
 
+// APP SCREENS - LOGIN
+module.exports.LOGIN_PATH = `${module.exports.SCREENS_PATH}/Auth/screens/Login`;
+module.exports.LOGIN = `${module.exports.LOGIN_PATH}/index.tsx`;
+module.exports.LOGIN_STYLE = `${module.exports.LOGIN_PATH}/styles.ts`;
+module.exports.LOGIN_I18N = `${module.exports.LOGIN_PATH}/i18n.ts`;
+module.exports.LOGIN_TEST = `${module.exports.LOGIN_PATH}/index.test.js`;
+
 // APP SCREENS - HOME
 module.exports.HOME_PATH = `${module.exports.SCREENS_PATH}/Home`;
 module.exports.HOME = `${module.exports.HOME_PATH}/index.tsx`;

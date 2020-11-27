@@ -46,6 +46,19 @@ export const actionCreators = {
       })
     ]
   }),
+  <%_ if(features.onboarding) { _%>
+  socialLogin: (token: any) => ({
+    type: actions.LOGIN,
+    target: TARGETS.CURRENT_USER,
+    service: AuthService.login,
+    payload: token,
+    injections: [
+      withPostSuccess((_: any, response: ApiOkResponse<CurrentUser>) => {
+        AuthService.setCurrentUser(response.data!);
+      })
+    ]
+  }),
+  <%_ } _%>
   logout: () => ({
     type: actions.LOGOUT,
     target: TARGETS.CURRENT_USER,
