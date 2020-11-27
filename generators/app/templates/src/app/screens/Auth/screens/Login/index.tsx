@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback, View, Alert } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import i18next from 'i18next';
@@ -12,6 +12,7 @@ import { actionCreators as AuthActions } from '@redux/auth/actions';
 import { FIELDS, LOGIN_INITIAL_VALUES } from '@screens/Auth/constants';
 import CustomTextInput from '@app/components/CustomTextInput';
 import LoadableImage from '@app/components/LoadableImage';
+import FacebookButton from '@app/components/SocialButtons/FacebookButton';
 import {
   validationsWrapper,
   validateRequired,
@@ -81,6 +82,11 @@ function Login({ navigation }: Navigation) {
           style={styles.formButton}
           title={i18next.t('LOGIN:LOG_IN')}
           disabled={hasLoginError}
+        />
+        {/* TODO replace for template file here*/}
+        <FacebookButton
+          onSuccess={data => Alert.alert('logeado', data)}
+          onError={error => Alert.alert('ERROR', error)}
         />
         <CustomButton
           borderless

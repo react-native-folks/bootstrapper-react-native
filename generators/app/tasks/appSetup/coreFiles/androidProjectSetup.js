@@ -22,6 +22,12 @@ function updateAppBuildGradle() {
     'targetSdkVersion rootProject.ext.targetSdkVersion',
     `targetSdkVersion rootProject.ext.targetSdkVersion\n\t\tresValue "string", "build_config_package", "com.${this.projectName.toLowerCase()}"\n\t\tmultiDexEnabled true`
   );
+  if (this.features.socialloginbuttons) {
+    updatedBuildGradleContent = updatedBuildGradleContent.replace(
+      'multiDexEnabled true',
+      'resValue "string", "FACEBOOK_APP_ID", project.env.get("FACEBOOK_APP_ID")\n\t\tmultiDexEnabled true'
+    );
+  }
   updatedBuildGradleContent = updatedBuildGradleContent.replace(
     'minifyEnabled enableProguardInReleaseBuilds',
     'shrinkResources true\n\t\t\tminifyEnabled enableProguardInReleaseBuilds'

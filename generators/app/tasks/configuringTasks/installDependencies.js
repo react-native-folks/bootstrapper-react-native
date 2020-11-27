@@ -142,6 +142,10 @@ module.exports = function installDependencies() {
     }
   }
 
+  if (this.features.socialloginbuttons) {
+    DEPENDENCIES.push('react-native-fbsdk');
+  }
+
   if (this.features.drawer) {
     DEPENDENCIES.push('@react-navigation/drawer');
   }

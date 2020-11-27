@@ -22,6 +22,7 @@ const loginAndSignUpFeatureFiles = require('./featuresFiles/loginAndSignUpFeatur
 const onBoardingFeatureFiles = require('./featuresFiles/onBoardingFeatureFiles');
 const pushNotificationsFeatureFiles = require('./featuresFiles/pushNotificationsFeatureFiles');
 const pushNotificationsSetup = require('./featuresFiles/pushNotificationsSetup');
+const addSocialsToProject = require('./featuresFiles/socialButtonsFeatureSetup');
 
 module.exports = function index() {
   const spinner = ora({
@@ -60,6 +61,11 @@ module.exports = function index() {
   // ----------------    Features: Onboarding    ----------------
   if (this.features.onboarding) {
     onBoardingFeatureFiles.bind(this)();
+  }
+
+  // ----------------    Features: Social Buttons    ----------------
+  if (this.features.socialloginbuttons) {
+    addSocialsToProject.bind(this)();
   }
 
   // ----------------    Features: Firebase    ----------------

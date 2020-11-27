@@ -56,6 +56,8 @@ module.exports.CUSTOM_STATUS_BAR = `${module.exports.COMPONENTS_PATH}/CustomStat
 module.exports.CUSTOM_TEXT_PATH = `${module.exports.COMPONENTS_PATH}/CustomText`;
 // APP COMPONENTS - CUSTOM TEXT
 module.exports.CUSTOM_TEXT_INPUT_PATH = `${module.exports.COMPONENTS_PATH}/CustomTextInput`;
+// APP COMPONENTS - SOCIAL BUTTONS
+module.exports.SOCIAL_BUTTONS = `${module.exports.COMPONENTS_PATH}/SocialButtons`;
 // APP COMPONENTS - LOADABLE
 module.exports.LOADABLE_PATH = `${module.exports.COMPONENTS_PATH}/LoadableView`;
 

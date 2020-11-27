@@ -10,8 +10,17 @@ module.exports = function schemeBase(envName, buildConfig) {
           <ExecutionAction
              ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
              <ActionContent
-                title = "Run Script"
-                scriptText = "echo &quot;.${envName}.env&quot; &gt; /tmp/envfile &#10;">
+               title = "Run Script"
+               scriptText = "cat \${PROJECT_DIR}/../.${envName}.env &gt; \${SRCROOT}/Config.xcconfig&#10;echo &quot;.${envName}.env&quot; &gt; /tmp/envfile &#10;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
+                     BuildableName = "${this.projectName}.app"
+                     BlueprintName = "${this.projectName}"
+                     ReferencedContainer = "container:${this.projectName}.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
              </ActionContent>
           </ExecutionAction>
        </PreActions>

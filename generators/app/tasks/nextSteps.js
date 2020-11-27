@@ -71,5 +71,36 @@ module.exports = function nextSteps() {
     console.log('  style or remove Sign up'.cyan);
     console.log('\n');
   }
+
+  if (this.features.socialloginbuttons) {
+    // Social networks login buttons
+    console.log(
+      '● SOCIAL BUTTONS - Social buttons features have been added. \nIt includes Facebook, Google, Apple and Twitter buttons.\n\tYou need follow next steps to continue:'
+        .cyan
+    );
+    console.log(
+      '  -Open the project on xcode and create a empty swift file called bridge'
+        .cyan
+    );
+    console.log(
+      '     xcode will ask you if you want to autogenerate bridge header and you must accept'
+        .cyan
+    );
+    console.log(
+      '     This is important since some socials use swift on their SDKs'.cyan
+    );
+    console.log(
+      '  -You can find this social buttons on components folder. All buttons have the same interface.'
+        .cyan
+    );
+    console.log(
+      '  -Add or create a file called Config.xcconfig on the root of ios project and add this file to targets config \n\tThis is needed to pass variables to info plist file dinamically.'
+        .cyan
+    );
+    console.log(
+      '  -Complete the Socials keys and ids on corresponding .env files'.cyan
+    );
+    console.log('\n');
+  }
   console.log('\n\n');
 };

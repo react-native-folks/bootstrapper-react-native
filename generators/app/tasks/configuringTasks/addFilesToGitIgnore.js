@@ -4,6 +4,10 @@ module.exports = function addFilesToGitIgnore() {
     '\n# History (vs code)\n.history\n'
   );
   updatedGitIgnoreFile = updatedGitIgnoreFile.concat('\n# Env\n/*.env\n');
+  updatedGitIgnoreFile = updatedGitIgnoreFile.replace(
+    'DerivedData',
+    'DerivatedData\nConfig.xcconfig'
+  );
   if (this.features.hasFirebase) {
     updatedGitIgnoreFile = updatedGitIgnoreFile.concat(
       '\n# Google Services files\nandroid/app/google-services/\ngoogle-services.json\nios/GoogleServices\nGoogleService-Info.plist\n'

@@ -9,5 +9,6 @@ module.exports.GENERATOR_FEATURES = [
   'Login and SignUp',
   'Push Notifications',
   'Tabs',
-  'OnBoarding'
+  'OnBoarding',
+  'Social Login Buttons'
 ];
