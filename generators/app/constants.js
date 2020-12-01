@@ -12,3 +12,5 @@ module.exports.GENERATOR_FEATURES = [
   'OnBoarding',
   'Social Login Buttons'
 ];
+
+module.exports.GENERATOR_SOCIALS = ['Facebook', 'Apple', 'Google'];

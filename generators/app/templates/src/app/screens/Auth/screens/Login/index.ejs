@@ -91,14 +91,18 @@ function Login({ navigation }: Navigation) {
         />
         {/* TODO replace for template file here*/}
         <%_ if(features.socialloginbuttons) { _%>
+          <%_ if(features.socialButtons.facebook) { _%>
         <FacebookButton
           onSuccess={handleSocialLogin}
           onError={error => Alert.alert('ERROR', error)}
         />
+          <%_ } _%>
+          <%_ if(features.socialButtons.facebook) { _%>
         <AppleButton
           onSuccess={handleSocialLogin}
           onError={error => Alert.alert('ERROR', error)}
         />
+          <%_ } _%>
         <%_ } _%>
         <CustomButton
           borderless
