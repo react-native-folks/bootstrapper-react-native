@@ -1,9 +1,9 @@
 <%_ if(features.loginandsignup) { _%>
 import { createReducer, completeReducer, completeState<%_ if(features.onboarding) { _%>, onReadValue<%_ } _%> } from 'redux-recompose';
 import Immutable, { ImmutableObject } from 'seamless-immutable';
-import { CurrentUser } from '@interfaces/authInterfaces';
-import { Nullable } from '@interfaces/globalInterfaces';
-import { Action, AuthState } from '@interfaces/reduxInterfaces';
+import { CurrentUser } from 'interfaces/authInterfaces';
+import { Nullable } from 'interfaces/globalInterfaces';
+import { Action, AuthState } from 'interfaces/reduxInterfaces';
 
 import { actions } from './actions';
 
@@ -32,7 +32,7 @@ export default createReducer(Immutable(initialState), completeReducer(reducerDes
 <%_ } else if (features.onboarding) { _%>
 import { createReducer, onReadValue } from 'redux-recompose';
 import Immutable, { ImmutableObject } from 'seamless-immutable';
-import { Action, AuthState } from '@interfaces/reduxInterfaces';
+import { Action, AuthState } from 'interfaces/reduxInterfaces';
 
 import { actions } from './actions';
 
@@ -51,7 +51,7 @@ export default createReducer(Immutable(initialState), reducerDescription);
 <%_ } else { _%>
 import { createReducer } from 'redux-recompose';
 import Immutable, { ImmutableObject } from 'seamless-immutable';
-import { AuthState } from '@interfaces/reduxInterfaces';
+import { AuthState } from 'interfaces/reduxInterfaces';
 
 import { actions } from './actions';
 

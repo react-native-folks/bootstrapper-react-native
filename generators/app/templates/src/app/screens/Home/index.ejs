@@ -3,11 +3,9 @@ import { Alert, View } from 'react-native';
 import i18next from 'i18next';
 <%_ if(features.loginandsignup) { _%>
   import { useDispatch } from 'react-redux';
-  import { actionCreators as AuthActions } from '@redux/auth/actions';
+  import { actionCreators as AuthActions } from 'redux/auth/actions';
 <%_ } _%>
-import CustomShadowView from '@components/CustomShadowView';
-import CustomText from '@components/CustomText';
-import CustomButton from '@components/CustomButton';
+import { CustomShadowView, CustomText, CustomButton } from 'app/components';
 
 import './i18n';
 import styles from './styles';

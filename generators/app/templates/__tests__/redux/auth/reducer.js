@@ -1,5 +1,5 @@
-import { actions } from '@redux/auth/actions';
-import authReducer, { initialState } from '@redux/auth/reducer';
+import { actions } from 'redux/auth/actions';
+import authReducer, { initialState } from 'redux/auth/reducer';
 
 describe('testing reducers', () => {
   test('test reducer with AUTH_INIT action', async () => {

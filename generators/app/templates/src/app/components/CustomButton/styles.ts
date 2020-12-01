@@ -1,12 +1,5 @@
 import { StyleSheet } from 'react-native';
-import {
-  transparent,
-  blue,
-  black,
-  green,
-  gray,
-  white
-} from '@constants/colors';
+import { transparent, blue, black, green, gray, white } from 'constants/colors';
 
 const borderlessStyle = {
   borderWidth: 0,

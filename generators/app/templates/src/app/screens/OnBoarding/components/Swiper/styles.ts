@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { blue, black, white } from '@constants/colors';
+import { blue, black, white } from 'constants/colors';
 
 const DOT_SIZE = 12;
 const ACTIVE_DOT_SIZE = 15;

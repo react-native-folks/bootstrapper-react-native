@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import analytics from '@react-native-firebase/analytics';
 <%_ } _%>
 import { NavigationContainer, NavigationState } from '@react-navigation/native';
-import { navigationRef, getActiveRoute, getRoute } from '@navigationHelper';
-import CustomStatusBar from '@components/CustomStatusBar';
+import { navigationRef, getActiveRoute, getRoute } from 'app/components/AppNavigator/helper';
+import { CustomStatusBar } from 'app/components';
 
 import Navigator from './navigator';
 

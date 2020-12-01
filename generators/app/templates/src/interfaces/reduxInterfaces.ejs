@@ -1,8 +1,8 @@
 import { Dispatch } from 'react';
 import { ApiOkResponse, ApiErrorResponse } from 'apisauce';
 <%_ if(features.loginandsignup) { _%>
-import { CurrentUser } from '@interfaces/authInterfaces';
-import { Nullable } from '@interfaces/globalInterfaces';
+import { CurrentUser } from 'interfaces/authInterfaces';
+import { Nullable } from 'interfaces/globalInterfaces';
 <%_ } _%>
 
 export interface Action<T = null, P = null, K = null> {

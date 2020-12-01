@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { ActivityIndicator, View } from 'react-native';
-import { blue } from '@constants/colors';
+import { blue } from 'constants/colors';
 
 import styles from './styles';
 

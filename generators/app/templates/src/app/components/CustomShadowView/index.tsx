@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { View } from 'react-native';
-import { getCustomStyles } from '@utils/styleUtils';
+import { getCustomStyles } from 'utils/styleUtils';
 
 import { CustomShadowViewProps, VARIANTS } from './model';
 import styles from './styles';
