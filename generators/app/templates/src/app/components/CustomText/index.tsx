@@ -1,6 +1,6 @@
 import React, { useCallback, memo } from 'react';
 import { Text } from 'react-native';
-import { getCustomStyles } from '@utils/styleUtils';
+import { getCustomStyles } from 'utils/styleUtils';
 
 import { VARIANTS, CustomTextProps } from './model';
 import styles from './styles';

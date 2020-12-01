@@ -7,7 +7,7 @@ import {
   ViewStyle,
   ImageProps
 } from 'react-native';
-import { blue } from '@constants/colors';
+import { blue } from 'constants/colors';
 
 import styles from './styles';
 

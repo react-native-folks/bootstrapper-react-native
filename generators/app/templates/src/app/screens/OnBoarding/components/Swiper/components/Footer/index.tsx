@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import CustomButton from '@components/CustomButton';
+import { CustomButton } from 'app/components';
 
 import { FooterProps } from './interface';
 import { getScreensButtonsInfo } from './buttonsInfo';

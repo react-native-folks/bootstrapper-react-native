@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import i18next from 'i18next';
-import CustomText from '@components/CustomText';
+import { CustomText } from 'app/components';
 
 import styles from './styles';
 

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import fonts from '@config/fonts';
+import fonts from 'config/fonts';
 import {
   black,
   blue,
@@ -8,10 +8,10 @@ import {
   gray,
   transparent,
   red
-} from '@constants/colors';
-import { SIZES } from '@constants/fonts';
-import { moderateScale } from '@utils/scalingUtils';
-import { StringObject, NumberObject } from '@interfaces/globalInterfaces';
+} from 'constants/colors';
+import { SIZES } from 'constants/fonts';
+import { moderateScale } from 'utils/scalingUtils';
+import { StringObject, NumberObject } from 'interfaces/globalInterfaces';
 
 const getColors = (colorsObj: StringObject) =>
   Object.keys(colorsObj).reduce(

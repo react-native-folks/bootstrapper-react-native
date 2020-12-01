@@ -8,20 +8,18 @@ import {
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { useForm } from 'react-hook-form';
 import i18next from 'i18next';
-import CustomButton from '@components/CustomButton';
-import CustomText from '@components/CustomText';
-import { isIos } from '@constants/platform';
-import { Navigation } from '@interfaces/navigation';
-import { FIELDS, SIGNUP_INITIAL_VALUES } from '@screens/Auth/constants';
-import CustomTextInput from '@app/components/CustomTextInput';
-import * as AuthService from '@services/AuthService';
+import { CustomButton, CustomText, CustomTextInput } from 'app/components';
+import { isIos } from 'constants/platform';
+import { Navigation } from 'interfaces/navigation';
+import { FIELDS, SIGNUP_INITIAL_VALUES } from 'app/screens/Auth/constants';
+import * as AuthService from 'services/AuthService';
 import {
   validationsWrapper,
   validateRequired,
   validateEmail,
   validateMinLength,
   validateOnlyText
-} from '@utils/validations/validateUtils';
+} from 'utils/validations/validateUtils';
 
 import './i18n';
 import styles from './styles';

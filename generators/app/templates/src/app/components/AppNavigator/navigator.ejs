@@ -8,19 +8,19 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 <%_ } _%>
 <%_ if(features.onboarding || features.loginandsignup) { _%>
 import { useSelector } from 'react-redux';
-import { State } from '@interfaces/reduxInterfaces';
+import { State } from 'interfaces/reduxInterfaces';
 <%_ } _%>
-import Routes from '@constants/routes';
-import { <%_ if(features.loginandsignup) { _%>authStackNavConfig,<%_ } _%> appStackNavConfig<%_ if(features.drawer) { _%>, drawerStackNavConfig <%_ }_%><%_ if(features.tabs) { _%>, tabNavConfig <%_ }_%>} from '@config/navigation';
-import { inferRoute } from '@utils/navUtils';
+import Routes from 'constants/routes';
+import { <%_ if(features.loginandsignup) { _%>authStackNavConfig,<%_ } _%> appStackNavConfig<%_ if(features.drawer) { _%>, drawerStackNavConfig <%_ }_%><%_ if(features.tabs) { _%>, tabNavConfig <%_ }_%>} from 'config/navigation';
+import { inferRoute } from 'utils/navUtils';
 <%_ if(features.loginandsignup) { _%>
-import Login from '@authScreens/Login';
-import SignUp from '@authScreens/SignUp';
+import Login from 'app/screens/Auth/screens/Login';
+import SignUp from 'app/screens/Auth/screens/SignUp';
 <%_ } _%>
 <%_ if(features.onboarding) { _%>
-import OnBoarding from '@screens/OnBoarding';
+import OnBoarding from 'app/screens/OnBoarding';
 <%_ } _%>
-import Home from '@screens/Home';
+import Home from 'app/screens/Home';
 
 const Stack = createStackNavigator();
 <%_ if(features.loginandsignup) { _%>

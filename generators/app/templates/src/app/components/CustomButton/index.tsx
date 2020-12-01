@@ -1,6 +1,6 @@
 import React, { useCallback, memo } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { getCustomStyles } from '@utils/styleUtils';
+import { getCustomStyles } from 'utils/styleUtils';
 
 import CustomText from '../CustomText';
 

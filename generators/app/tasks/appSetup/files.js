@@ -38,6 +38,7 @@ module.exports.COMPONENTS_PATH = `${module.exports.APP_PATH}/components`;
 module.exports.SCREENS_PATH = `${module.exports.APP_PATH}/screens`;
 module.exports.APP_I18N = `${module.exports.APP_PATH}/i18n.ts`;
 module.exports.APP = `${module.exports.APP_PATH}/index.tsx`;
+module.exports.COMPONENTS = `${module.exports.COMPONENTS_PATH}/index.ts`;
 
 // APP COMPONENTS - APP NAVIGATOR
 module.exports.APP_NAVIGATOR_PATH = `${module.exports.COMPONENTS_PATH}/AppNavigator`;
@@ -63,24 +64,26 @@ module.exports.SOCIAL_GOOGLE_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialB
 // APP COMPONENTS - LOADABLE
 module.exports.LOADABLE_PATH = `${module.exports.COMPONENTS_PATH}/LoadableView`;
 
+// AUTH SCREENS - LOGIN AND SIGNUP
+module.exports.AUTH_PATH = `${module.exports.SCREENS_PATH}/Auth`;
+module.exports.AUTH_CONSTANTS = `${module.exports.AUTH_PATH}/constants.ts`;
+
 // APP SCREENS - LOGIN
-module.exports.LOGIN_PATH = `${module.exports.SCREENS_PATH}/Auth/screens/Login`;
+module.exports.LOGIN_PATH = `${module.exports.AUTH_PATH}/screens/Login`;
 module.exports.LOGIN = `${module.exports.LOGIN_PATH}/index.tsx`;
 module.exports.LOGIN_STYLE = `${module.exports.LOGIN_PATH}/styles.ts`;
 module.exports.LOGIN_I18N = `${module.exports.LOGIN_PATH}/i18n.ts`;
 module.exports.LOGIN_TEST = `${module.exports.LOGIN_PATH}/index.test.js`;
 
 // APP SCREENS - SIGN UP
-module.exports.AUTH_PATH_SIGNUP = `${module.exports.SCREENS_PATH}/Auth/screens/SignUp`;
-module.exports.AUTH_CONSTANTS = `${module.exports.SCREENS_PATH}/Auth/constants.ts`;
+module.exports.AUTH_PATH_SIGNUP = `${module.exports.AUTH_PATH}/screens/SignUp`;
 
 // APP SCREENS - HOME
 module.exports.HOME_PATH = `${module.exports.SCREENS_PATH}/Home`;
 module.exports.HOME = `${module.exports.HOME_PATH}/index.tsx`;
 module.exports.HOME_STYLES = `${module.exports.HOME_PATH}/styles.ts`;
 module.exports.HOME_TRANSLATIIONS = `${module.exports.HOME_PATH}/i18n.ts`;
-// AUTH SCREENS - LOGIN AND SIGNUP
-module.exports.AUTH_PATH = `${module.exports.SCREENS_PATH}/Auth`;
+
 // APP SCREENS - ONBOARDING
 module.exports.ONBOARDING_PATH = `${module.exports.SCREENS_PATH}/OnBoarding`;
 

@@ -3,29 +3,25 @@ import { Keyboard, TouchableWithoutFeedback, View<%_ if(features.socialloginbutt
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import i18next from 'i18next';
-import CustomButton from '@components/CustomButton';
-import CustomText from '@components/CustomText';
-import Routes from '@constants/routes';
-import { Navigation } from '@interfaces/navigation';
-import { State } from '@interfaces/reduxInterfaces';
-import { actionCreators as AuthActions } from '@redux/auth/actions';
-import { FIELDS, LOGIN_INITIAL_VALUES } from '@screens/Auth/constants';
-import CustomTextInput from '@app/components/CustomTextInput';
-import LoadableImage from '@app/components/LoadableImage';
-<%_ if(features.socialButtons.facebook) { _%>
-import FacebookButton from '@app/components/SocialButtons/FacebookButton';
-<%_ } _%>
-<%_ if(features.socialButtons.apple) { _%>
-import AppleButton from '@app/components/SocialButtons/AppleButton';
-<%_ } _%>
-<%_ if(features.socialButtons.google) { _%>
-import GoogleButton from '@app/components/SocialButtons/GoogleButton';
-<%_ } _%>
+import { 
+  CustomButton,
+  CustomText,
+  CustomTextInput,
+  LoadableImage,
+  <%_ if(features.socialButtons.facebook) { _%>FacebookButton,<%_ } _%>
+  <%_ if(features.socialButtons.apple) { _%>AppleButton,<%_ } _%>
+  <%_ if(features.socialButtons.google) { _%>GoogleButton<%_ } _%>
+} from 'app/components';
+import Routes from 'constants/routes';
+import { Navigation } from 'interfaces/navigation';
+import { State } from 'interfaces/reduxInterfaces';
+import { actionCreators as AuthActions } from 'redux/auth/actions';
+import { FIELDS, LOGIN_INITIAL_VALUES } from 'app/screens/Auth/constants';
 import {
   validationsWrapper,
   validateRequired,
   validateEmail
-} from '@utils/validations/validateUtils';
+} from 'utils/validations/validateUtils';
 
 import './i18n';
 

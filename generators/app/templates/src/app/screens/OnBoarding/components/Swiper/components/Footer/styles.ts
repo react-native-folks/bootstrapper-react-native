@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { gray } from '@constants/colors';
+import { gray } from 'constants/colors';
 
 export default StyleSheet.create({
   buttonContainer: {

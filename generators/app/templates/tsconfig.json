@@ -13,20 +13,10 @@
     "target": "esnext",
     "baseUrl": "./",
     "paths": {
-      "@app/*": ["src/app/*"],
-      "@authScreens/*": ["./src/app/screens/Auth/screens/*"],
-      "@components/*": ["src/app/components/*"],
-      "@config/*": ["src/config/*"],
-      "@constants/*": ["src/constants/*"],
-      "@interfaces/*": ["src/interfaces/*"],
-      "@navigationHelper": ["src/app/components/AppNavigator/helper.ts"],
-      "@redux/*": ["src/redux/*"],
-      "@screens/*": ["./src/app/screens/*"],
-      "@services/*": ["src/services/*"],
-      "@utils/*": ["src/utils/*"]
+      "*": ["src/*"]
     },
     "skipLibCheck": true
   },
   "include": ["index.d.ts", "src/**/*"],
-  "exclude": [ ".history", "node_modules", "**/node_modules/*"]
+  "exclude": [".history", "node_modules", "**/node_modules/*"]
 }

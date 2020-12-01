@@ -6,7 +6,7 @@ import {
   waitFor,
   waitForElementToBeRemoved
 } from 'react-native-testing-library';
-import Login from '@authScreens/Login';
+import Login from 'app/screens/Auth/screens/Login';
 
 const INVALID_EMAIL = 'hello';
 const VALID_EMAIL = 'email@email.com';
