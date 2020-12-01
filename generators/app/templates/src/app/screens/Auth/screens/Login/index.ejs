@@ -8,10 +8,9 @@ import {
   CustomText,
   CustomTextInput,
   LoadableImage,
-<%_ if(features.socialloginbuttons) { _%>
-  AppleButton
-  FacebookButton,
-<%_ } _%>
+  <%_ if(features.socialButtons.facebook) { _%>FacebookButton,<%_ } _%>
+  <%_ if(features.socialButtons.apple) { _%>AppleButton,<%_ } _%>
+  <%_ if(features.socialButtons.google) { _%>GoogleButton<%_ } _%>
 } from 'app/components';
 import Routes from 'constants/routes';
 import { Navigation } from 'interfaces/navigation';
@@ -92,12 +91,20 @@ function Login({ navigation }: Navigation) {
           disabled={hasLoginError}
         />
         {/* TODO replace for template file here*/}
-        <%_ if(features.socialloginbuttons) { _%>
+          <%_ if(features.socialButtons.facebook) { _%>
         <FacebookButton
           onSuccess={handleSocialLogin}
           onError={error => Alert.alert('ERROR', error)}
         />
+          <%_ } _%>
+          <%_ if(features.socialButtons.apple) { _%>
         <AppleButton
+          onSuccess={handleSocialLogin}
+          onError={error => Alert.alert('ERROR', error)}
+        />
+        <%_ } _%>
+        <%_ if(features.socialButtons.google) { _%>
+        <GoogleButton
           onSuccess={handleSocialLogin}
           onError={error => Alert.alert('ERROR', error)}
         />

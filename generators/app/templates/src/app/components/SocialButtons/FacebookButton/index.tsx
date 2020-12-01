@@ -44,7 +44,6 @@ const NativeFacebookButton = ({
     <View style={styles.nativeButtonContainer}>
       <LoginButton
         onLoginFinished={(error, result) => {
-          console.log('finished', error, result);
           if (error) {
             onError(error);
           } else if (result.isCancelled) {

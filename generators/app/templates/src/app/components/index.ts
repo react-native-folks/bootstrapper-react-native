@@ -6,3 +6,6 @@ export { default as CustomText } from './CustomText';
 export { default as CustomTextInput } from './CustomTextInput';
 export { default as LoadableImage } from './LoadableImage';
 export { default as LoadableView } from './LoadableView';
+export { default as AppleButton } from './SocialButtons/AppleButton';
+export { default as GoogleButton } from './SocialButtons/GoogleButton';
+export { default as FacebookButton } from './SocialButtons/FacebookButton';

@@ -17,7 +17,7 @@ const chmodFirebaseScript = require('./tasks/installTasks/chmodFirebaseScript');
 const gitInitialization = require('./tasks/installTasks/gitInitialization');
 // END
 const nextSteps = require('./tasks/nextSteps');
-const { GENERATOR_FEATURES } = require('./constants');
+const { GENERATOR_FEATURES, GENERATOR_SOCIALS } = require('./constants');
 
 class ReactNativeBootstrap extends Generator {
   constructor(args, opts) {
@@ -31,7 +31,7 @@ class ReactNativeBootstrap extends Generator {
     this.conflicter.force = true;
   }
 
-  prompting() {
+  async prompting() {
     return this.prompt([
       {
         type: 'input',
@@ -59,7 +59,7 @@ class ReactNativeBootstrap extends Generator {
         message: 'Would you like to enable landscape orientation? Default NO',
         default: false
       }
-    ]).then(({ features, landscape, name }) => {
+    ]).then(async ({ features, landscape, name }) => {
       this.projectName = name;
       this.features = features;
       this.features.landscape = landscape;
@@ -68,6 +68,22 @@ class ReactNativeBootstrap extends Generator {
         features.firebaseanalytics ||
         features.pushnotifications ||
         features.firebaseperformance;
+      if (this.features.socialloginbuttons) {
+        const { socialButtons } = await this.prompt([
+          {
+            type: 'checkbox',
+            name: 'socialButtons',
+            message: 'About social buttons: What service should be included?',
+            choices: GENERATOR_SOCIALS,
+            filter: values =>
+              values.reduce((answer, val) => {
+                answer[val.replace(/ /g, '').toLowerCase()] = true;
+                return answer;
+              }, {})
+          }
+        ]);
+        this.features = { ...this.features, socialButtons };
+      }
       return this.prompt([
         {
           type: 'input',

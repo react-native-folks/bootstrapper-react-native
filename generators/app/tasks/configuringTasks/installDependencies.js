@@ -143,9 +143,14 @@ module.exports = function installDependencies() {
   }
 
   if (this.features.socialloginbuttons) {
-    DEPENDENCIES.push('react-native-fbsdk');
-    DEPENDENCIES.push('@types/react-native-fbsdk');
-    DEPENDENCIES.push('@invertase/react-native-apple-authentication');
+    const { google, facebook, apple } = this.features.socialButtons;
+    if (google) DEPENDENCIES.push('@react-native-community/google-signin');
+    if (apple)
+      DEPENDENCIES.push('@invertase/react-native-apple-authentication');
+    if (facebook) {
+      DEPENDENCIES.push('react-native-fbsdk');
+      DEPENDENCIES.push('@types/react-native-fbsdk');
+    }
   }
 
   if (this.features.drawer) {
