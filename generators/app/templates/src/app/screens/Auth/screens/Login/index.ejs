@@ -12,9 +12,14 @@ import { actionCreators as AuthActions } from '@redux/auth/actions';
 import { FIELDS, LOGIN_INITIAL_VALUES } from '@screens/Auth/constants';
 import CustomTextInput from '@app/components/CustomTextInput';
 import LoadableImage from '@app/components/LoadableImage';
-<%_ if(features.socialloginbuttons) { _%>
+<%_ if(features.socialButtons.facebook) { _%>
 import FacebookButton from '@app/components/SocialButtons/FacebookButton';
+<%_ } _%>
+<%_ if(features.socialButtons.apple) { _%>
 import AppleButton from '@app/components/SocialButtons/AppleButton';
+<%_ } _%>
+<%_ if(features.socialButtons.google) { _%>
+import GoogleButton from '@app/components/SocialButtons/GoogleButton';
 <%_ } _%>
 import {
   validationsWrapper,
@@ -90,19 +95,23 @@ function Login({ navigation }: Navigation) {
           disabled={hasLoginError}
         />
         {/* TODO replace for template file here*/}
-        <%_ if(features.socialloginbuttons) { _%>
           <%_ if(features.socialButtons.facebook) { _%>
         <FacebookButton
           onSuccess={handleSocialLogin}
           onError={error => Alert.alert('ERROR', error)}
         />
           <%_ } _%>
-          <%_ if(features.socialButtons.facebook) { _%>
+          <%_ if(features.socialButtons.apple) { _%>
         <AppleButton
           onSuccess={handleSocialLogin}
           onError={error => Alert.alert('ERROR', error)}
         />
-          <%_ } _%>
+        <%_ } _%>
+        <%_ if(features.socialButtons.google) { _%>
+        <GoogleButton
+          onSuccess={handleSocialLogin}
+          onError={error => Alert.alert('ERROR', error)}
+        />
         <%_ } _%>
         <CustomButton
           borderless
