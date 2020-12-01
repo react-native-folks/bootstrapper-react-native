@@ -1,4 +1,4 @@
-import { GenericObjectInterface } from '@interfaces/globalInterfaces';
+import { GenericObjectInterface } from 'interfaces/globalInterfaces';
 
 export function arrayToObject<T>(arr: Array<T>) {
   const obj: GenericObjectInterface<T> = {};

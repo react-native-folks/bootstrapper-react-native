@@ -1,5 +1,5 @@
 import { TextStyle } from 'react-native';
-import { isAndroid } from '@constants/platform';
+import { isAndroid } from 'constants/platform';
 import {
   MONTSERRAT,
   REGULAR,
@@ -7,9 +7,9 @@ import {
   BOLD,
   NORMAL,
   ITALIC
-} from '@constants/fonts';
-import { moderateScale } from '@utils/scalingUtils';
-import { StringObject } from '@interfaces/globalInterfaces';
+} from 'constants/fonts';
+import { moderateScale } from 'utils/scalingUtils';
+import { StringObject } from 'interfaces/globalInterfaces';
 
 const REGULAR_WEIGHT: string = '400';
 const NORMAL_STYLE: string = 'normal';

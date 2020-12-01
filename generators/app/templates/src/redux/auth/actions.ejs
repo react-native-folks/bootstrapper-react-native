@@ -2,11 +2,11 @@
 import { ApiOkResponse } from 'apisauce';
 import { Dispatch } from 'react';
 import { createTypes, completeTypes, withPostSuccess } from 'redux-recompose';
-import * as AuthService from '@services/AuthService';
-import { CurrentUser, AuthData } from '@interfaces/authInterfaces';
-import { Action } from '@interfaces/reduxInterfaces';
+import * as AuthService from 'services/AuthService';
+import { CurrentUser, AuthData } from 'interfaces/authInterfaces';
+import { Action } from 'interfaces/reduxInterfaces';
 <%_ if(features.onboarding) { _%>
-import { setOnBoardingAccess, getOnBoardingAccess } from '@services/OnBoardingService';
+import { setOnBoardingAccess, getOnBoardingAccess } from 'services/OnBoardingService';
 <%_ } _%>
 
 export const actions = createTypes(completeTypes(['LOGIN', 'LOGOUT'], ['AUTH_INIT'<%_ if(features.onboarding) { _%>, 'HAS_ACCESS'<%_ } _%>]), '@@AUTH');
@@ -85,9 +85,9 @@ export const actionCreators = {
 <%_ } else if (features.onboarding) { _%>
 import { Dispatch } from 'react';
 import { createTypes } from 'redux-recompose';
-import { Action } from '@interfaces/reduxInterfaces';
-import * as AuthService from '@services/AuthService';
-import { setOnBoardingAccess } from '@services/OnBoardingService';
+import { Action } from 'interfaces/reduxInterfaces';
+import * as AuthService from 'services/AuthService';
+import { setOnBoardingAccess } from 'services/OnBoardingService';
 
 export const actions = createTypes(['AUTH_INIT', 'HAS_ACCESS'], '@@AUTH');
 

@@ -1,6 +1,6 @@
 import { TextProps, TextInputProps } from 'react-native';
 import { Control, ValidationRules } from 'react-hook-form';
-import { CustomTextProps } from '@components/CustomText/model';
+import { CustomTextProps } from 'app/components/CustomText/model';
 
 /*
  ** TODO: You can add styles to Base like Family Font to be the Text styles base!

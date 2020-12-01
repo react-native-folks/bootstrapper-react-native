@@ -3,24 +3,26 @@ import { Keyboard, TouchableWithoutFeedback, View<%_ if(features.socialloginbutt
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import i18next from 'i18next';
-import CustomButton from '@components/CustomButton';
-import CustomText from '@components/CustomText';
-import Routes from '@constants/routes';
-import { Navigation } from '@interfaces/navigation';
-import { State } from '@interfaces/reduxInterfaces';
-import { actionCreators as AuthActions } from '@redux/auth/actions';
-import { FIELDS, LOGIN_INITIAL_VALUES } from '@screens/Auth/constants';
-import CustomTextInput from '@app/components/CustomTextInput';
-import LoadableImage from '@app/components/LoadableImage';
+import { 
+  CustomButton,
+  CustomText,
+  CustomTextInput,
+  LoadableImage,
 <%_ if(features.socialloginbuttons) { _%>
-import FacebookButton from '@app/components/SocialButtons/FacebookButton';
-import AppleButton from '@app/components/SocialButtons/AppleButton';
+  AppleButton
+  FacebookButton,
 <%_ } _%>
+} from 'app/components';
+import Routes from 'constants/routes';
+import { Navigation } from 'interfaces/navigation';
+import { State } from 'interfaces/reduxInterfaces';
+import { actionCreators as AuthActions } from 'redux/auth/actions';
+import { FIELDS, LOGIN_INITIAL_VALUES } from 'app/screens/Auth/constants';
 import {
   validationsWrapper,
   validateRequired,
   validateEmail
-} from '@utils/validations/validateUtils';
+} from 'utils/validations/validateUtils';
 
 import './i18n';
 
