@@ -68,6 +68,7 @@ class ReactNativeBootstrap extends Generator {
         features.firebaseanalytics ||
         features.pushnotifications ||
         features.firebaseperformance;
+      this.features.socialButtons = {};
       if (this.features.socialloginbuttons) {
         const { socialButtons } = await this.prompt([
           {
