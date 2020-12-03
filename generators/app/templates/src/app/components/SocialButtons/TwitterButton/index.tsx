@@ -5,19 +5,15 @@ import {
   TouchableOpacityProps,
   TouchableOpacity
 } from 'react-native';
+import Config from 'react-native-config';
 
 import styles from './styles';
 
 const { RNTwitterSignIn } = NativeModules;
 
-const Constants = {
-  TWITTER_COMSUMER_KEY: 'C7iVXaf8m8WyPNeoYsyhiXVQD',
-  TWITTER_CONSUMER_SECRET: 'FguFYP6cToV2aguGBAw64iROg7TxxRsn6NN0kNKREggXoJdhbB'
-};
-
 RNTwitterSignIn.init(
-  Constants.TWITTER_COMSUMER_KEY,
-  Constants.TWITTER_CONSUMER_SECRET
+  Config.TWITTER_COMSUMER_KEY,
+  Config.TWITTER_CONSUMER_SECRET
 );
 
 interface TwitterResponse {

@@ -16,6 +16,7 @@ const GoogleLoginManager = async (
   onError: (error: any) => void
 ) => {
   try {
+    // TODO - Add responses interface
     await GoogleSignin.hasPlayServices();
     const userInfo = await GoogleSignin.signIn();
     onSuccess(userInfo.idToken);

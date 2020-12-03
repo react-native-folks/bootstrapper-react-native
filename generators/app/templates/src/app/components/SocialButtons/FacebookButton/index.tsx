@@ -19,6 +19,7 @@ const FacebookLoginManager = (
       if (result.isCancelled) {
         onError(null);
       } else {
+        // TODO - Add data interface
         AccessToken.getCurrentAccessToken().then((data: any) => {
           onSuccess(data?.accessToken?.toString());
         });
