@@ -11,7 +11,7 @@ import styles from './styles';
 
 const { RNTwitterSignIn } = NativeModules;
 
-RNTwitterSignIn.init(Config.nTWITTER_KEY, Config.nTWITTER_SECRET_KEY);
+RNTwitterSignIn.init(Config.TWITTER_KEY, Config.TWITTER_SECRET_KEY);
 
 interface TwitterResponse {
   authToken?: string;
