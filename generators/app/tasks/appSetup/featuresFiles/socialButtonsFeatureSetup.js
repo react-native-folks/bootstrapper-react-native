@@ -1,3 +1,4 @@
+const configureGoogleServicesFiles = require('./configureGoogleServicesFiles');
 const { copyFile } = require('../utils');
 const {
   SOCIAL_FACEBOOK_BUTTON,
@@ -31,7 +32,7 @@ function addSocialsToNativeProjects() {
       iosInfoPlistContent = iosInfoPlistContent.replace(
         '<key>CFBundleURLTypes</key>\r\n\t<array>',
         `<key>CFBundleURLTypes</key>\r\n\t<array>\n\t${generateIosUrlScheme(
-          'com.googleusercontent.apps.310288528932-nkvfhdujierf2peli90lnao5gr2kaqoi'
+          '$(GOOGLE_REVERSE_ID)'
         )}`
       );
 
@@ -68,6 +69,8 @@ function addSocialsToNativeProjects() {
           androidAppGradle
         );
       }
+
+      configureGoogleServicesFiles.bind(this)();
     }
 
     // Login with Facebook case

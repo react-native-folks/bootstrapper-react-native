@@ -12,6 +12,12 @@ module.exports = function createDotEnvFilesLocally() {
     );
   }
 
+  if (this.features.socialButtons.google) {
+    extraEnvContent = extraEnvContent.concat(
+      '\nGOOGLE_REVERSE_ID=[PUT_YOUR_REVERSE_ID_HERE]'
+    );
+  }
+
   this.fs.write(
     `${this.projectName}/.dev.env`,
     'EMPTY_VARIABLE=DEVELOPMENT'.concat(extraEnvContent)
