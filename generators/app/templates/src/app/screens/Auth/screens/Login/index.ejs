@@ -10,7 +10,8 @@ import {
   LoadableImage,
   <%_ if(features.socialButtons.facebook) { _%>FacebookButton,<%_ } _%>
   <%_ if(features.socialButtons.apple) { _%>AppleButton,<%_ } _%>
-  <%_ if(features.socialButtons.google) { _%>GoogleButton<%_ } _%>
+  <%_ if(features.socialButtons.google) { _%>GoogleButton,<%_ } _%>
+  <%_ if(features.socialButtons.twitter) { _%>TwitterButton,<%_ } _%>
 } from 'app/components';
 import Routes from 'constants/routes';
 import { Navigation } from 'interfaces/navigation';
@@ -105,6 +106,12 @@ function Login({ navigation }: Navigation) {
         <%_ } _%>
         <%_ if(features.socialButtons.google) { _%>
         <GoogleButton
+          onSuccess={handleSocialLogin}
+          onError={error => Alert.alert('ERROR', error)}
+        />
+        <%_ } _%>
+        <%_ if(features.socialButtons.twitter) { _%>
+        <TwitterButton
           onSuccess={handleSocialLogin}
           onError={error => Alert.alert('ERROR', error)}
         />

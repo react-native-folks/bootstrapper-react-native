@@ -2,7 +2,8 @@ const { copyFile } = require('../utils');
 const {
   SOCIAL_FACEBOOK_BUTTON,
   SOCIAL_APPLE_BUTTON,
-  SOCIAL_GOOGLE_BUTTON
+  SOCIAL_GOOGLE_BUTTON,
+  SOCIAL_TWITTER_BUTTON
 } = require('../files');
 
 function generateIosUrlScheme(scheme) {
@@ -78,6 +79,11 @@ function addSocialsToNativeProjects() {
         )}`
       );
 
+      iosInfoPlistContent = iosInfoPlistContent.replace(
+        '<key>NSLocationWhenInUseUsageDescription</key>',
+        `<key>FacebookAppID</key>\n\t<string>$(FACEBOOK_APP_ID)</string>\n\t<key>${this.projectName}</key>\n\t<string>MyGreatAppTesting</string>\n\t<key>NSLocationWhenInUseUsageDescription</key>`
+      );
+
       let androidManifestContent = this.fs.read(
         `${this.projectName}/android/app/src/main/AndroidManifest.xml`
       );
@@ -93,6 +99,35 @@ function addSocialsToNativeProjects() {
       );
     }
 
+    // Login with Twitter case
+    if (this.features.socialButtons.twitter) {
+      const appDelegateContent = this.fs.read(
+        `${this.projectName}/ios/${this.projectName}/AppDelegate.m`
+      );
+      let updatedAppDelegateContent = appDelegateContent.replace(
+        '#import <React/RCTRootView.h>',
+        '#import <React/RCTRootView.h>\n#import <TwitterKit/TWTRKit.h>'
+      );
+      updatedAppDelegateContent = updatedAppDelegateContent.replace(
+        'return YES;',
+        'return YES;\n}\n\n- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {\n\treturn [[Twitter sharedInstance] application:app openURL:url options:options];'
+      );
+      this.fs.write(
+        `${this.projectName}/ios/${this.projectName}/AppDelegate.m`,
+        updatedAppDelegateContent
+      );
+
+      iosInfoPlistContent = iosInfoPlistContent.replace(
+        '<key>CFBundleURLTypes</key>\r\n\t<array>',
+        `<key>CFBundleURLTypes</key>\r\n\t<array>\n\t${generateIosUrlScheme(
+          'twitterkit-$(TWITTER_KEY)'
+        )}`
+      );
+      iosInfoPlistContent = iosInfoPlistContent.replace(
+        '<key>NSLocationWhenInUseUsageDescription</key>',
+        '<key>LSApplicationQueriesSchemes</key>\n\t<array>\n\t\t<string>twitter</string>\n\t\t<string>twitterauth</string>\n\t</array>\n\t<key>NSLocationWhenInUseUsageDescription</key>'
+      );
+    }
     // Finish with writting ios and android files
     this.fs.write(
       `${this.projectName}/ios/${this.projectName}/Info.plist`,
@@ -104,7 +139,8 @@ function addSocialsToNativeProjects() {
 const FILES = [];
 
 function socialButtonsFeatureFiles() {
-  const { facebook, apple, google } = this.features.socialButtons;
+  const { facebook, apple, google, twitter } = this.features.socialButtons;
+  if (twitter) FILES.push(SOCIAL_TWITTER_BUTTON);
   if (facebook) FILES.push(SOCIAL_FACEBOOK_BUTTON);
   if (apple) FILES.push(SOCIAL_APPLE_BUTTON);
   if (google) FILES.push(SOCIAL_GOOGLE_BUTTON);

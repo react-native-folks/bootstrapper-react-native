@@ -19,7 +19,7 @@ const FacebookLoginManager = (
       if (result.isCancelled) {
         onError(null);
       } else {
-        AccessToken.getCurrentAccessToken().then(data => {
+        AccessToken.getCurrentAccessToken().then((data: any) => {
           onSuccess(data?.accessToken?.toString());
         });
       }
@@ -43,13 +43,13 @@ const NativeFacebookButton = ({
   return (
     <View style={styles.nativeButtonContainer}>
       <LoginButton
-        onLoginFinished={(error, result) => {
+        onLoginFinished={(error: any, result: any) => {
           if (error) {
             onError(error);
           } else if (result.isCancelled) {
             onError(null);
           } else {
-            AccessToken.getCurrentAccessToken().then(data => {
+            AccessToken.getCurrentAccessToken().then((data: any) => {
               onSuccess(data?.accessToken?.toString());
             });
           }

@@ -36,13 +36,13 @@ const GoogleLoginManager = async (
 };
 
 // Native Google button
-const NativeGoogleButton = ({ onSuccess, onError, ...buttonProps }: any) => {
+const NativeGoogleButton = ({ onPress, ...buttonProps }: any) => {
   return (
     <View style={styles.nativeButtonContainer}>
       <GoogleSigninButton
         size={GoogleSigninButton.Size.Standard}
         color={GoogleSigninButton.Color.Dark}
-        onPress={() => GoogleLoginManager(onSuccess, onError)}
+        onPress={onPress}
         disabled={buttonProps.disabled}
       />
     </View>
@@ -71,11 +71,7 @@ const GoogleButton = ({
       {children}
     </TouchableOpacity>
   ) : (
-    <NativeGoogleButton
-      onSuccess={onSuccess}
-      onError={onError}
-      {...buttonProps}
-    />
+    <NativeGoogleButton onPress={onPress} {...buttonProps} />
   );
 };
 

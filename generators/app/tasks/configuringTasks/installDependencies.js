@@ -143,7 +143,7 @@ module.exports = function installDependencies() {
   }
 
   if (this.features.socialloginbuttons) {
-    const { google, facebook, apple } = this.features.socialButtons;
+    const { google, facebook, apple, twitter } = this.features.socialButtons;
     if (google) DEPENDENCIES.push('@react-native-community/google-signin');
     if (apple)
       DEPENDENCIES.push('@invertase/react-native-apple-authentication');
@@ -151,6 +151,7 @@ module.exports = function installDependencies() {
       DEPENDENCIES.push('react-native-fbsdk');
       DEPENDENCIES.push('@types/react-native-fbsdk');
     }
+    if (twitter) DEPENDENCIES.push('react-native-login-twitter');
   }
 
   if (this.features.drawer) {

@@ -61,6 +61,8 @@ module.exports.CUSTOM_TEXT_INPUT_PATH = `${module.exports.COMPONENTS_PATH}/Custo
 module.exports.SOCIAL_APPLE_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButtons/AppleButton`;
 module.exports.SOCIAL_FACEBOOK_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButtons/FacebookButton`;
 module.exports.SOCIAL_GOOGLE_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButtons/GoogleButton`;
+module.exports.SOCIAL_TWITTER_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButtons/TwitterButton`;
+
 // APP COMPONENTS - LOADABLE
 module.exports.LOADABLE_PATH = `${module.exports.COMPONENTS_PATH}/LoadableView`;
 

@@ -46,7 +46,7 @@ export const actionCreators = {
       })
     ]
   }),
-  <%_ if(features.onboarding) { _%>
+  <%_ if(features.socialloginbuttons) { _%>
   socialLogin: (token: any) => ({
     type: actions.LOGIN,
     target: TARGETS.CURRENT_USER,
