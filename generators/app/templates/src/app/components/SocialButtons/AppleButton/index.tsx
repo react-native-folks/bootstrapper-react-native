@@ -16,6 +16,7 @@ async function onAppleButtonPress(
       requestedOperation: appleAuth.Operation.LOGIN,
       requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME]
     });
+    // TODO - Add response interface
     // get current authentication state for user
     // This method must be tested on a real device. On the iOS simulator it always throws an error.
     const credentialState = await appleAuth.getCredentialStateForUser(

@@ -6,6 +6,15 @@ export { default as CustomText } from './CustomText';
 export { default as CustomTextInput } from './CustomTextInput';
 export { default as LoadableImage } from './LoadableImage';
 export { default as LoadableView } from './LoadableView';
-export { default as AppleButton } from './SocialButtons/AppleButton';
-export { default as GoogleButton } from './SocialButtons/GoogleButton';
+<%_ if(features.socialButtons.facebook) { _%>
 export { default as FacebookButton } from './SocialButtons/FacebookButton';
+<%_ } _%>
+<%_ if(features.socialButtons.apple) { _%>
+export { default as AppleButton } from './SocialButtons/AppleButton';
+<%_ } _%>
+<%_ if(features.socialButtons.google) { _%>
+export { default as GoogleButton } from './SocialButtons/GoogleButton';
+<%_ } _%>
+<%_ if(features.socialButtons.twitter) { _%>
+export { default as TwitterButton } from './SocialButtons/TwitterButton';
+<%_ } _%>

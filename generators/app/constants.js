@@ -13,4 +13,4 @@ module.exports.GENERATOR_FEATURES = [
   'Social Login Buttons'
 ];
 
-module.exports.GENERATOR_SOCIALS = ['Facebook', 'Apple', 'Google'];
+module.exports.GENERATOR_SOCIALS = ['Facebook', 'Apple', 'Google', 'Twitter'];
