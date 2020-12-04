@@ -5,7 +5,7 @@ import i18next from 'i18next';
   import { useDispatch } from 'react-redux';
   import { actionCreators as AuthActions } from 'redux/auth/actions';
 <%_ } _%>
-import { CustomShadowView, CustomText, CustomButton } from 'app/components';
+import { CustomShadowView, CustomText, CustomButton<%_ if(features.googlemaps) { _%>, Maps<%_ } _%> } from 'app/components';
 
 import './i18n';
 import styles from './styles';
@@ -18,6 +18,9 @@ function Home() {
 
   return (
     <View style={styles.container}>
+      <%_ if(features.googlemaps) { _%>
+        <Maps />
+      <%_ } _%>
       <CustomShadowView strong style={styles.home}>
         <CustomText blue>{i18next.t('HOME:HI')}</CustomText>
         <CustomButton

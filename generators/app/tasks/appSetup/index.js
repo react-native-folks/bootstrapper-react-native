@@ -23,6 +23,7 @@ const onBoardingFeatureFiles = require('./featuresFiles/onBoardingFeatureFiles')
 const pushNotificationsFeatureFiles = require('./featuresFiles/pushNotificationsFeatureFiles');
 const pushNotificationsSetup = require('./featuresFiles/pushNotificationsSetup');
 const addSocialsToProject = require('./featuresFiles/socialButtonsFeatureSetup');
+const addGoogleMapsToProject = require('./featuresFiles/googleMapsFeatureSetup');
 
 module.exports = function index() {
   const spinner = ora({
@@ -85,6 +86,11 @@ module.exports = function index() {
     if (this.features.firebaseperformance) {
       firebasePerformanceSetup.bind(this)();
     }
+  }
+
+  // ----------------    Features: Google Maps    ----------------
+  if (this.features.googlemaps) {
+    addGoogleMapsToProject.bind(this)();
   }
 
   // ---------------    Enables fullscreen on iPad    ----------------------------
