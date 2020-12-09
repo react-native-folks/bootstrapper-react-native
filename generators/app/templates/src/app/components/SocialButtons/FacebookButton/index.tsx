@@ -11,7 +11,7 @@ import styles from './styles';
 
 // Custom facebook button Manager using the Facebook API provided
 const FacebookLoginManager = (
-  onSuccess: (token: any) => void,
+  onSuccess: (token: string) => void,
   onError: (error: any) => void
 ) =>
   LoginManager.logInWithPermissions(['public_profile']).then(
@@ -20,7 +20,7 @@ const FacebookLoginManager = (
         onError(null);
       } else {
         // TODO - Add data interface
-        AccessToken.getCurrentAccessToken().then((data: any) => {
+        AccessToken.getCurrentAccessToken().then((data: AccessToken | null) => {
           onSuccess(data?.accessToken?.toString());
         });
       }
@@ -38,7 +38,7 @@ const NativeFacebookButton = ({
   onSuccess,
   onError
 }: {
-  onSuccess: (token: any) => void;
+  onSuccess: (token: string) => void;
   onError: (error: any) => void;
 }) => {
   return (
@@ -64,8 +64,8 @@ const NativeFacebookButton = ({
 // * onSucces: callback to get current user access token
 // * onError: callback that return a string with error message o null in case of canlleded state to add custom behaviour
 interface FacebookButtonProps {
-  onSuccess: (token: any) => void;
-  onError: (data: any) => void;
+  onSuccess: (token: string) => void;
+  onError: (error: any) => void;
   children?: ReactElement;
   buttonProps?: TouchableOpacityProps;
   isLoggedIn?: boolean; // for custom purposes

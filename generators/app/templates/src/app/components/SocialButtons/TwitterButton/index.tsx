@@ -24,7 +24,7 @@ interface TwitterResponse {
 
 // Custom Twitter button Manager using the Twitter API provided
 const TwitterLoginManager = async (
-  onSuccess: (token: any) => void,
+  onSuccess: (token: string) => void,
   onError: (error: any) => void
 ) => {
   RNTwitterSignIn.logIn()
@@ -58,8 +58,8 @@ const NativeTwitterButton = ({ onPress, ...buttonProps }: any) => {
 };
 
 interface TwitterButtonProps {
-  onSuccess: (token: any) => void;
-  onError: (data: any) => void;
+  onSuccess: (token: string) => void;
+  onError: (error: any) => void;
   children?: ReactElement;
   buttonProps?: TouchableOpacityProps;
 }
