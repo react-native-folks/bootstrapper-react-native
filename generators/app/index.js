@@ -84,6 +84,17 @@ class ReactNativeBootstrap extends Generator {
           }
         ]);
         this.features = { ...this.features, socialButtons };
+        if (
+          this.features.socialButtons.facebook ||
+          this.features.socialButtons.twitter ||
+          this.features.socialButtons.google
+        ) {
+          this.features.socialButtons.apple = true;
+          console.log(
+            '● APPLE SIGN IN was added automatically because is mandatory for apple review if other socials sign in is on the app.'
+              .cyan
+          );
+        }
       }
       return this.prompt([
         {
