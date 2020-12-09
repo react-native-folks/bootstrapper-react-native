@@ -75,30 +75,10 @@ module.exports = function nextSteps() {
   if (this.features.socialloginbuttons) {
     // Social networks login buttons
     console.log(
-      '● SOCIAL BUTTONS - Social buttons features have been added. \nIt includes Facebook, Google, Apple and Twitter buttons.\n\tYou need follow next steps to continue:'
-        .cyan
+      '● SOCIAL BUTTONS - Each social button added has a readme file'.cyan
     );
-    console.log(
-      '  Open the project on xcode and create a empty swift file called bridge\n\t\tand accept the bridge header autogeneration from xcode prompt.'
-        .cyan
-    );
-    console.log(
-      '  Create a file called Config.xcconfig on the root of ios project\n\t\tand add it to build configurations.'
-        .cyan
-    );
-    console.log(
-      '  Complete the Socials keys and ids (like FACEBOOK_APP_ID)\n\t\ton corresponding .env files'
-        .cyan
-    );
-    console.log(
-      '  Configure apple signing from apple member center for each\n\t\tscheme/identifier. https://github.com/invertase/react-native-apple-authentication/blob/master/docs/INITIAL_SETUP.md'
-        .cyan
-    );
+    console.log('  Please check each one to finish the socials setup'.cyan);
     console.log('\n');
   }
-  console.log(
-    '  Finaly you can find this social buttons on components folder. All buttons have the same interface.'
-      .cyan
-  );
   console.log('\n\n');
 };
