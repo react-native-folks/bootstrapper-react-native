@@ -154,6 +154,10 @@ module.exports = function installDependencies() {
     if (twitter) DEPENDENCIES.push('react-native-login-twitter');
   }
 
+  if (this.features.googlemaps) {
+    DEPENDENCIES.push('react-native-maps');
+  }
+
   if (this.features.drawer) {
     DEPENDENCIES.push('@react-navigation/drawer');
   }

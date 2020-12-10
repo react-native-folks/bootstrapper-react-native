@@ -8,6 +8,9 @@ i18next.addResources('es', 'HOME', {
   <%_ if(features.loginandsignup) { _%>
   LOGOUT: 'Cerrar sesión!',
   <%_ } _%>
+  <%_ if(features.googlemaps) { _%>
+    GO_TO_MAP: 'Ir al mapa',
+  <%_ } _%>
 });
 
 i18next.addResources('en', 'HOME', {
@@ -17,5 +20,8 @@ i18next.addResources('en', 'HOME', {
   BUTTON_TITLE: "Let's go!",
   <%_ if(features.loginandsignup) { _%>
   LOGOUT: 'Logout!',
+  <%_ } _%>
+  <%_ if(features.googlemaps) { _%>
+    GO_TO_MAP: 'Go to maps',
   <%_ } _%>
 });

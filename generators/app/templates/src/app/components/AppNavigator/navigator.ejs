@@ -20,6 +20,9 @@ import SignUp from 'app/screens/Auth/screens/SignUp';
 <%_ if(features.onboarding) { _%>
 import OnBoarding from 'app/screens/OnBoarding';
 <%_ } _%>
+<%_ if(features.googlemaps) { _%>
+import MapView from 'app/screens/MapView';
+<%_ } _%>
 import Home from 'app/screens/Home';
 
 const Stack = createStackNavigator();
@@ -49,17 +52,36 @@ function HomeTabs() {
 const Drawer = createDrawerNavigator();
 function DrawerNavigator() {
   return (
-    <Drawer.Navigator {...drawerStackNavConfig}>{inferRoute(Drawer)({ [Routes.Home]: <%_ if(features.tabs) { _%>HomeTabs<%_ }else{ _%>Home <%_ } _%> })}</Drawer.Navigator>
+    <Drawer.Navigator {...drawerStackNavConfig}>
+      {inferRoute(Drawer)({ [Routes.Home]: <%_ if(features.tabs) { _%>HomeTabs<%_ }else{ _%>Home <%_ } _%> })}
+      <%_ if(features.googlemaps) { _%>
+        {inferRoute(Drawer)({ [Routes.MapView]: MapView })}
+      <%_ } _%>
+    </Drawer.Navigator>
   );
 }
 
 function AppStack() {
-  return <>{inferRoute(Stack)({ [Routes.Home]: DrawerNavigator })}</>;
+  return (
+    <>
+      {inferRoute(Stack)({ [Routes.Home]: DrawerNavigator })}
+      <%_ if(features.googlemaps) { _%>
+        {inferRoute(Stack)({ [Routes.MapView]: MapView })}
+      <%_ } _%>
+    </>
+  );
 }
 <%_ } else { _%>
 
 function AppStack() {
-  return <>{inferRoute(Stack)({ [Routes.Home]: <%_ if(features.tabs) { _%>HomeTabs<%_ } else { _%>Home <%_ } _%> })}</>;
+  return (
+    <>
+      {inferRoute(Stack)({ [Routes.Home]: <%_ if(features.tabs) { _%>HomeTabs<%_ } else { _%>Home <%_ } _%> })}
+      <%_ if(features.googlemaps) { _%>
+        {inferRoute(Stack)({ [Routes.MapView]: MapView })}
+      <%_ } _%>
+    </>
+  );
 }
 <%_ } _%>
 

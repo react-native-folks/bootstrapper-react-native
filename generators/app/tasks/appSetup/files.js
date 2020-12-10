@@ -62,7 +62,8 @@ module.exports.SOCIAL_APPLE_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialBu
 module.exports.SOCIAL_FACEBOOK_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButtons/FacebookButton`;
 module.exports.SOCIAL_GOOGLE_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButtons/GoogleButton`;
 module.exports.SOCIAL_TWITTER_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButtons/TwitterButton`;
-
+// APP COMPONENTS - GOOGLE MAPS
+module.exports.MAPS_COMPONENT_PATH = `${module.exports.COMPONENTS_PATH}/Maps`;
 // APP COMPONENTS - LOADABLE
 module.exports.LOADABLE_PATH = `${module.exports.COMPONENTS_PATH}/LoadableView`;
 
@@ -88,6 +89,9 @@ module.exports.HOME_TRANSLATIIONS = `${module.exports.HOME_PATH}/i18n.ts`;
 
 // APP SCREENS - ONBOARDING
 module.exports.ONBOARDING_PATH = `${module.exports.SCREENS_PATH}/OnBoarding`;
+
+// APP SCREENS - GOOGLE MAPS
+module.exports.GOOGLE_MAPS_PATH = `${module.exports.SCREENS_PATH}/MapView`;
 
 // CONFIG
 module.exports.PUSH_NOTIFICATIONS_CONFIG = `${module.exports.CONFIG_PATH}/pushNotifications.ts`;

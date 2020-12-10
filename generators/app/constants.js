@@ -2,15 +2,16 @@ module.exports.PUSH_NOTIFICATIONS_SETUP_LINK =
   'https://github.com/react-native-community/react-native-push-notification-ios';
 
 module.exports.GENERATOR_FEATURES = [
-  'Crashlytics',
+  'Login and SignUp',
+  'OnBoarding',
+  'Tabs',
   'Drawer',
+  'Social Login Buttons',
+  'Google Maps',
+  'Crashlytics',
   'Firebase Analytics',
   'Firebase Performance',
-  'Login and SignUp',
-  'Push Notifications',
-  'Tabs',
-  'OnBoarding',
-  'Social Login Buttons'
+  'Push Notifications'
 ];
 
 module.exports.GENERATOR_SOCIALS = ['Facebook', 'Apple', 'Google', 'Twitter'];

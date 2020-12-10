@@ -18,6 +18,12 @@ module.exports = function createDotEnvFilesLocally() {
     );
   }
 
+  if (this.features.googlemaps) {
+    extraEnvContent = extraEnvContent.concat(
+      '\nGOOGLE_MAPS_API_KEY=[PUT_YOUR_REVERSE_ID_HERE]'
+    );
+  }
+
   this.fs.write(
     `${this.projectName}/.dev.env`,
     'EMPTY_VARIABLE=DEVELOPMENT'.concat(extraEnvContent)

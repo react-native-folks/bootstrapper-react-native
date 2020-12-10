@@ -5,12 +5,16 @@ import i18next from 'i18next';
   import { useDispatch } from 'react-redux';
   import { actionCreators as AuthActions } from 'redux/auth/actions';
 <%_ } _%>
+<%_ if(features.googlemaps) { _%>
+import { Navigation } from 'interfaces/navigation';
+import routeNames from 'constants/routes';
+<%_ } _%>
 import { CustomShadowView, CustomText, CustomButton } from 'app/components';
 
 import './i18n';
 import styles from './styles';
 
-function Home() {
+function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _%>) {
   <%_ if(features.loginandsignup) { _%>
   const dispatch = useDispatch();
   const handleLogout = useCallback(() => dispatch(AuthActions.logout()), [dispatch]);
@@ -32,7 +36,13 @@ function Home() {
     <%_ if(features.loginandsignup) { _%>
       <CustomButton onPress={handleLogout} green title={i18next.t('HOME:LOGOUT')} style={styles.logout} />
     <%_ } _%>
+    <%_ if(features.googlemaps) { _%>
+      <CustomButton
+        onPress={() => navigation.navigate(routeNames.MapView)}
+        title={i18next.t('HOME:GO_TO_MAP')}
+        />
       </CustomShadowView>
+    <%_ } _%>
     </View>
   );
 }
