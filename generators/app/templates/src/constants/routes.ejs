@@ -14,7 +14,10 @@ const Routes: StringObject = {
   Tab2: 'Tab2',
   <%_ } _%>
   App: 'App',
-  Home: 'Home'
+  Home: 'Home',
+  <%_ if(features.googlemaps) { _%>
+  MapView: 'MapView',
+  <%_ } _%>
 };
 
 export default Routes;

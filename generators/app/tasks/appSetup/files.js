@@ -90,6 +90,9 @@ module.exports.HOME_TRANSLATIIONS = `${module.exports.HOME_PATH}/i18n.ts`;
 // APP SCREENS - ONBOARDING
 module.exports.ONBOARDING_PATH = `${module.exports.SCREENS_PATH}/OnBoarding`;
 
+// APP SCREENS - GOOGLE MAPS
+module.exports.GOOGLE_MAPS_PATH = `${module.exports.SCREENS_PATH}/MapView`;
+
 // CONFIG
 module.exports.PUSH_NOTIFICATIONS_CONFIG = `${module.exports.CONFIG_PATH}/pushNotifications.ts`;
 module.exports.API_CONFIG = `${module.exports.CONFIG_PATH}/api.ts`;

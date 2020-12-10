@@ -1,5 +1,5 @@
 const { copyFile } = require('../utils');
-const { MAPS_COMPONENT_PATH } = require('../files');
+const { MAPS_COMPONENT_PATH, GOOGLE_MAPS_PATH } = require('../files');
 
 function addGoogleMapsToNativeProjects() {
   // Android
@@ -59,7 +59,7 @@ function addGoogleMapsToNativeProjects() {
   );
 }
 
-const FILES = [MAPS_COMPONENT_PATH];
+const FILES = [GOOGLE_MAPS_PATH, MAPS_COMPONENT_PATH];
 
 function googleMapsFeatureFiles() {
   FILES.forEach(copyFile.bind(this));
