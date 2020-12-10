@@ -54,7 +54,9 @@ function DrawerNavigator() {
   return (
     <Drawer.Navigator {...drawerStackNavConfig}>
       {inferRoute(Drawer)({ [Routes.Home]: <%_ if(features.tabs) { _%>HomeTabs<%_ }else{ _%>Home <%_ } _%> })}
-      <%_ if(features.googlemaps) { _%>{inferRoute(Drawer)({ [Routes.MapView]: MapView })}<%_ } _%>
+      <%_ if(features.googlemaps) { _%>
+        {inferRoute(Drawer)({ [Routes.MapView]: MapView })}
+      <%_ } _%>
     </Drawer.Navigator>
   );
 }
@@ -66,7 +68,8 @@ function AppStack() {
       <%_ if(features.googlemaps) { _%>
         {inferRoute(Stack)({ [Routes.MapView]: MapView })}
       <%_ } _%>
-    </>);
+    </>
+  );
 }
 <%_ } else { _%>
 
@@ -77,7 +80,8 @@ function AppStack() {
       <%_ if(features.googlemaps) { _%>
         {inferRoute(Stack)({ [Routes.MapView]: MapView })}
       <%_ } _%>
-    </>);
+    </>
+  );
 }
 <%_ } _%>
 
