@@ -1,124 +1,63 @@
-<%_ if(features.loginandsignup) { _%>
-import { ApiOkResponse } from 'apisauce';
-import { Dispatch } from 'react';
-import { createTypes, completeTypes, withPostSuccess } from 'redux-recompose';
-import * as AuthService from 'services/AuthService';
-import { CurrentUser, AuthData } from 'interfaces/authInterfaces';
-import { Action } from 'interfaces/reduxInterfaces';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 <%_ if(features.onboarding) { _%>
-import { setOnBoardingAccess, getOnBoardingAccess } from 'services/OnBoardingService';
+import { AuthData } from 'interfaces/authInterfaces';
 <%_ } _%>
-
-export const actions = createTypes(completeTypes(['LOGIN', 'LOGOUT'], ['AUTH_INIT'<%_ if(features.onboarding) { _%>, 'HAS_ACCESS'<%_ } _%>]), '@@AUTH');
-
-const TARGETS = {
+import authService from 'services/auth';
 <%_ if(features.onboarding) { _%>
-  ONBOARDING: 'hasAccessOnBoarding',
+import {
+  setOnBoardingAccess,
+  getOnBoardingAccess
+} from 'services/OnBoardingService';
 <%_ } _%>
-  CURRENT_USER: 'currentUser'
-};
+import { createActionTypes } from 'redux/utils';
 
-export const actionCreators = {
-  init: () => async (dispatch: Dispatch<Action>) => {
+export const actionsTypes = createActionTypes(
+  ['AUTH_INIT', <%_ if(features.onboarding) { _%>'HAS_ACCESS', <%_ } _%><%_ if(features.loginandsignup) { _%>'LOGIN', 'LOGOUT'<%_ } _%>],
+  'auth'
+);
+
+const actionCreators = {
+  init: createAsyncThunk(actionsTypes.AUTH_INIT, async () => {
+    const currentUser = await authService.authSetup();
+    const hasAccessOnBoarding = await getOnBoardingAccess();
+
+    return { currentUser, hasAccessOnBoarding };
+  }),
+  <%_ if(features.loginandsignup) { _%>
+  login: createAsyncThunk(actionsTypes.LOGIN, async (authData: AuthData) => {
+    const response = await authService.login(authData);
+    authService.setCurrentUser(response.data!);
+
+    return { currentUser: response.data };
+  }),
+  logout: createAsyncThunk(actionsTypes.LOGOUT, async (_, { dispatch }) => {
+    const response = await authService.logout();
+    await authService.removeCurrentUser();
+    <%_ if(features.onboarding) { _%>
+    dispatch(actionCreators.setHasAccessOnBoarding(false));
+    <%_ } _%>
+
+    return { currentUser: response.data };
+  }),
+  <%_ } _%>
   <%_ if(features.onboarding) { _%>
-    const currentUser = await AuthService.authSetup();
-    const hasAccess = await getOnBoardingAccess();
-  <%_ } else { _%>
-    const currentUser = await AuthService.authSetup();
+  setHasAccessOnBoarding: createAsyncThunk(
+    actionsTypes.HAS_ACCESS,
+    async (value: boolean) => {
+      await setOnBoardingAccess(value);
+
+      return { hasAccessOnBoarding: value };
+    }
+  ),
   <%_ } _%>
-    dispatch({
-      type: actions.AUTH_INIT,
-      target: TARGETS.CURRENT_USER,
-      <%_ if(features.onboarding) { _%>
-      hasAccessOnBoarding: hasAccess,
-      <%_ } _%>
-      payload: currentUser
-    });
-  },
-  login: (authData: AuthData) => ({
-    type: actions.LOGIN,
-    target: TARGETS.CURRENT_USER,
-    service: AuthService.login,
-    payload: authData,
-    injections: [
-      withPostSuccess((_: any, response: ApiOkResponse<CurrentUser>) => {
-        AuthService.setCurrentUser(response.data!);
-      })
-    ]
-  }),
-  <%_ if(features.socialloginbuttons) { _%>
-  socialLogin: (token: any) => ({
-    type: actions.LOGIN,
-    target: TARGETS.CURRENT_USER,
-    service: AuthService.login,
-    payload: token,
-    injections: [
-      withPostSuccess((_: any, response: ApiOkResponse<CurrentUser>) => {
-        AuthService.setCurrentUser(response.data!);
-      })
-    ]
-  }),
+  <%_ if(features.onboarding) { _%>
+  socialLogin: createAsyncThunk(actionsTypes.LOGIN, async (token: any) => {
+    const response = await authService.login(token);
+    authService.setCurrentUser(response.data!);
+
+    return { currentUser: response.data };
+  })
   <%_ } _%>
-  logout: () => ({
-    type: actions.LOGOUT,
-    target: TARGETS.CURRENT_USER,
-    service: AuthService.logout,
-    injections: [
-      withPostSuccess(async (<%_ if(features.onboarding) { _%>dispatch: Dispatch<any><%_ } _%>) => {
-        await AuthService.removeCurrentUser();
-      <%_ if(features.onboarding) { _%>
-        dispatch(actionCreators.setHasAccessOnBoarding(false));
-      <%_ } _%>
-      })
-    ]
-  })<%_ if(features.onboarding) { _%>,
-  setHasAccessOnBoarding: (value: boolean) => async (dispatch: Dispatch<any>) => {
-    await setOnBoardingAccess(value);
-    dispatch({
-      type: actions.HAS_ACCESS,
-      target: TARGETS.ONBOARDING,
-      payload: value
-    });
-  }
-  <%_ }_%>
-};
-<%_ } else if (features.onboarding) { _%>
-import { Dispatch } from 'react';
-import { createTypes } from 'redux-recompose';
-import { Action } from 'interfaces/reduxInterfaces';
-import * as AuthService from 'services/AuthService';
-import { setOnBoardingAccess } from 'services/OnBoardingService';
-
-export const actions = createTypes(['AUTH_INIT', 'HAS_ACCESS'], '@@AUTH');
-
-const TARGETS = {
-  ONBOARDING: 'hasAccessOnBoarding'
 };
 
-export const actionCreators = {
-  init: () => async (dispatch: Dispatch<Action>) => {
-    const hasAccess = await AuthService.authSetup();
-    dispatch({
-      type: actions.AUTH_INIT,
-      target: TARGETS.ONBOARDING,
-      payload: hasAccess
-    });
-  },
-  setHasAccessOnBoarding: (value: boolean) => async (dispatch: Dispatch<Action>) => {
-    await setOnBoardingAccess(value);
-    dispatch({
-      type: actions.HAS_ACCESS,
-      target: TARGETS.ONBOARDING,
-      payload: value
-    });
-  }
-};
-<%_ } else { _%>
-import { createTypes } from 'redux-recompose';
-
-export const actions = createTypes(['AUTH_INIT'], '@@AUTH');
-
-export const actionCreators = {
-  init: () => ({ type: actions.AUTH_INIT })
-};
-<%_ } _%>
+export default actionCreators;

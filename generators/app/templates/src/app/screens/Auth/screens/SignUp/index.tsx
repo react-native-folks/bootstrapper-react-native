@@ -12,7 +12,7 @@ import { CustomButton, CustomText, CustomTextInput } from 'app/components';
 import { isIos } from 'constants/platform';
 import { Navigation } from 'interfaces/navigation';
 import { FIELDS, SIGNUP_INITIAL_VALUES } from 'app/screens/Auth/constants';
-import * as AuthService from 'services/AuthService';
+import authService from 'services/auth';
 import {
   validationsWrapper,
   validateRequired,
@@ -28,7 +28,7 @@ function SignUp({ navigation }: Navigation) {
   const [signupError, setSignupError] = useState('');
   const { control, handleSubmit, errors } = useForm();
   const onSubmit = async (data: any) => {
-    const response = await AuthService.signup(data);
+    const response = await authService.signup(data);
     if (response.ok) {
       navigation.goBack();
     } else {

@@ -8,6 +8,7 @@ const DEPENDENCIES = [
   '@react-native-community/masked-view',
   '@react-navigation/native',
   '@react-navigation/stack',
+  '@reduxjs/toolkit',
   'apisauce',
   'cerealizr',
   'i18next',
@@ -25,10 +26,6 @@ const DEPENDENCIES = [
   'reactotron-react-native',
   'reactotron-redux',
   'redux',
-  'redux-recompose',
-  'redux-thunk',
-  'reselect',
-  'seamless-immutable',
   'typescript'
 ];
 
@@ -40,7 +37,6 @@ const DEV_DEPENDENCIES = [
   '@types/react-native',
   '@types/react-redux',
   '@types/react-test-renderer',
-  '@types/seamless-immutable',
   'babel-eslint',
   'babel-plugin-import-glob',
   'babel-plugin-module-resolver',

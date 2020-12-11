@@ -1,0 +1,64 @@
+<%_ if(features.loginandsignup) { _%>
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ApiResponse } from 'apisauce';
+import api from 'config/api';
+import { CurrentUser, AuthData, SignUpData } from 'interfaces/auth';
+
+const CURRENT_USER_KEY = '@Auth:currentUser';
+
+const fakeApisaucePromise = ({
+  delay = 2000,
+  error = false,
+  data
+}: any): Promise<ApiResponse<any, any>> =>
+  new Promise((resolve, reject) =>
+    setTimeout(error ? reject : resolve, delay, {
+      ok: !error ? true : false,
+      problem: error ? 'CLIENT_ERROR' : null,
+      originalError: error ? {} : null,
+      data
+    })
+  );
+
+const authServices = {
+  setCurrentUser: (currentUser: CurrentUser) => {
+    api.setHeader('Authorization', `Bearer ${currentUser.sessionToken}`);
+    return AsyncStorage.setItem(CURRENT_USER_KEY, JSON.stringify(currentUser));
+  },
+  getCurrentUser: () =>
+    AsyncStorage.getItem(CURRENT_USER_KEY).then(value =>
+      JSON.parse(`${value}`)
+    ),
+  removeCurrentUser: () => AsyncStorage.removeItem(CURRENT_USER_KEY),
+  authSetup: async () => {
+    const currentUser = await authServices.getCurrentUser();
+    if (currentUser) {
+      api.setHeader('Authorization', `Bearer ${currentUser.sessionToken}`);
+    }
+    return currentUser;
+  },
+  login: (_: AuthData) => {
+    // TODO: Implement call to authentication API here
+    return fakeApisaucePromise({
+      data: {
+        user: { name: 'Kamino', lastname: 'Mahisoft', username: 'kamino' },
+        sessionToken: 'token'
+      }
+    });
+  },
+  logout: () => {
+    // TODO: Implement call to authentication API here
+    return fakeApisaucePromise({ delay: 500, data: null });
+  },
+  signup: (_: SignUpData) => {
+    // TODO: Implement call to registration API here
+    return fakeApisaucePromise({ data: {} });
+  }
+};
+<%_ } else {_%>
+const authServices = {
+  authSetup: () => {}
+};
+<%_ } _%>
+
+export default authServices;

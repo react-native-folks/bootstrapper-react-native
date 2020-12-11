@@ -7,7 +7,8 @@ import { apiSetup } from 'config/api';
 <%_ if(features.pushnotifications) { _%>
 import { configPushNotifications } from 'config/pushNotifications';
 <%_ } _%>
-import { actionCreators as AuthActions } from 'redux/auth/actions';
+import { authActions } from 'redux/auth';
+
 import './i18n';
 
 const App = () => {
@@ -22,7 +23,7 @@ const App = () => {
     configPushNotifications();
     <%_ } _%>
     apiSetup(dispatch);
-    dispatch(AuthActions.init());
+    dispatch(authActions.init());
   }, [dispatch]);
 
   return <AppNavigator />;
