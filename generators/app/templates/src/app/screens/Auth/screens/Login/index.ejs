@@ -9,7 +9,7 @@ import {
   View
 } from 'react-native';
 import { useForm } from 'react-hook-form';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import i18next from 'i18next';
 import { 
   CustomButton,
@@ -22,8 +22,8 @@ import {
   <%_ if(features.socialButtons.twitter) { _%>TwitterButton,<%_ } _%>
 } from 'app/components';
 import Routes from 'constants/routes';
+import { useSelector } from 'hooks/redux';
 import { Navigation } from 'interfaces/navigation';
-import { RootState } from 'interfaces/redux';
 import { authActions } from 'redux/auth';
 import { FIELDS, LOGIN_INITIAL_VALUES } from 'app/screens/Auth/constants';
 import {
@@ -40,13 +40,9 @@ function Login({ navigation }: Navigation) {
   const dispatch = useDispatch();
   const { control, handleSubmit, errors } = useForm();
 
-  const loading = useSelector<RootState, boolean>(
-    (state: RootState) => state.auth.loading
-  );
+  const loading = useSelector(state => state.auth.loading);
 
-  const hasLoginError = useSelector<RootState, boolean>(
-    (state: RootState) => !!state.auth.error
-  );
+  const hasLoginError = useSelector(state => !!state.auth.error);
 
   const handleLogin: (values: any) => void = useCallback(
     values => {

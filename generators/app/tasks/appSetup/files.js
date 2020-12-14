@@ -5,6 +5,7 @@ module.exports.FONTS = 'assets/fonts';
 module.exports.APP_PATH = 'src/app';
 module.exports.CONFIG_PATH = 'src/config';
 module.exports.CONSTANTS_PATH = 'src/constants';
+module.exports.HOOKS_PATH = 'src/hooks';
 module.exports.INTERFACES_PATH = 'src/interfaces';
 module.exports.REDUX_PATH = 'src/redux';
 module.exports.SERVICES_PATH = 'src/services';
@@ -108,6 +109,9 @@ module.exports.COLORS_CONSTANTS = `${module.exports.CONSTANTS_PATH}/colors.ts`;
 module.exports.ROUTES_CONSTANTS = `${module.exports.CONSTANTS_PATH}/routes.ts`;
 module.exports.FONTS_CONSTANTS = `${module.exports.CONSTANTS_PATH}/fonts.ts`;
 module.exports.STATUS_BAR_CONSTANTS = `${module.exports.CONSTANTS_PATH}/statusBar.ts`;
+
+// HOOKS
+module.exports.REDUX_HOOKS = `${module.exports.HOOKS_PATH}/redux.ts`;
 
 // INTERFACES
 module.exports.AUTH_INTERFACES = `${module.exports.INTERFACES_PATH}/authInterfaces.ts`;
