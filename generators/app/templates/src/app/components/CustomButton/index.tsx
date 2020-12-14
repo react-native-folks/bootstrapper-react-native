@@ -1,11 +1,13 @@
+import { isIos } from 'constants/platform';
+
 import React, { useCallback, memo } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { Pressable } from 'react-native';
 import { getCustomStyles } from 'utils/styleUtils';
 
 import CustomText from '../CustomText';
 
 import { VARIANTS, CustomButtonProps } from './model';
-import styles from './styles';
+import styles, { defaultAndroidRipple } from './styles';
 
 const CustomButton = (props: CustomButtonProps) => {
   const customStyles = useCallback(
@@ -19,40 +21,51 @@ const CustomButton = (props: CustomButtonProps) => {
   const {
     onPress,
     style,
-    activeOpacity,
+    pressedStyle,
     title,
     disabled = false,
     textStyle,
     textProps,
     radius = 10,
-    borderWidth = 0.5
+    borderWidth = 0.5,
+    androidRipple = null,
+    children,
+    ...otherProps
   } = props;
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={onPress}
-      style={[
+      android_ripple={androidRipple || defaultAndroidRipple}
+      style={({ pressed }) => [
         styles.container,
         (radius && { borderRadius: radius }) || {},
         (borderWidth && { borderWidth: borderWidth }) || {},
         customStyles(),
-        style
+        style,
+        isIos &&
+          pressed &&
+          (pressedStyle ? pressedStyle : styles.defaultPressed)
       ]}
-      activeOpacity={activeOpacity}
+      {...otherProps}
       disabled={disabled}>
-      {title && (
-        <CustomText
-          white
-          {...textProps}
-          style={[customTextStyles(), textStyle]}>
-          {title}
-        </CustomText>
-      )}
-    </TouchableOpacity>
+      {(pressed: { pressed: boolean }) =>
+        children
+          ? children(pressed)
+          : title && (
+              <CustomText
+                white
+                {...textProps}
+                style={[customTextStyles(), textStyle]}>
+                {title}
+              </CustomText>
+            )
+      }
+    </Pressable>
   );
 };
 
 CustomButton.defaultProps = {
-  activeOpacity: 0.8
+  delayLongPress: 500
 };
 
 export default memo(CustomButton);

@@ -33,6 +33,27 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
           }
           title={i18next.t('HOME:BUTTON_TITLE')}
         />
+        <CustomButton
+          onPress={() =>
+            Alert.alert(
+              i18next.t('HOME:ALERT_TITLE'),
+              i18next.t('HOME:ALERT_MESSAGE')
+            )
+          }
+          onLongPress={() =>
+            Alert.alert(
+              i18next.t('HOME:ALERT_TITLE'),
+              i18next.t('HOME:ALERT_MESSAGE_LONG')
+            )
+          }
+          onPressIn={() => console.warn('Press In Detection')}
+          title={i18next.t('HOME:BUTTON_TITLE_LONG')}
+        />
+        <CustomButton onPress={() => {}}>
+          {({ pressed }) => (
+            <CustomText white>{pressed ? ': O' : ': D'}</CustomText>
+          )}
+        </CustomButton>
     <%_ if(features.loginandsignup) { _%>
       <CustomButton onPress={handleLogout} green title={i18next.t('HOME:LOGOUT')} style={styles.logout} />
     <%_ } _%>
