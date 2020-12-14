@@ -1,23 +1,23 @@
-export { default as AppNavigator } from './AppNavigator';
-export { default as CustomButton } from './CustomButton';
-export { default as CustomShadowView } from './CustomShadowView';
-export { default as CustomStatusBar } from './CustomStatusBar';
-export { default as CustomText } from './CustomText';
-export { default as CustomTextInput } from './CustomTextInput';
-export { default as LoadableImage } from './LoadableImage';
-export { default as LoadableView } from './LoadableView';
+export { default } from './AppNavigator';
+export { default } from './CustomButton';
+export { default } from './CustomShadowView';
+export { default } from './CustomStatusBar';
+export { default } from './CustomText';
+export { default } from './CustomTextInput';
+export { default } from './LoadableImage';
+export { default } from './LoadableView';
 <%_ if(features.socialButtons.facebook) { _%>
-export { default as FacebookButton } from './SocialButtons/FacebookButton';
+export { default } from './SocialButtons/FacebookButton';
 <%_ } _%>
 <%_ if(features.socialButtons.apple) { _%>
-export { default as AppleButton } from './SocialButtons/AppleButton';
+export { default } from './SocialButtons/AppleButton';
 <%_ } _%>
 <%_ if(features.socialButtons.google) { _%>
-export { default as GoogleButton } from './SocialButtons/GoogleButton';
+export { default } from './SocialButtons/GoogleButton';
 <%_ } _%>
 <%_ if(features.socialButtons.twitter) { _%>
-export { default as TwitterButton } from './SocialButtons/TwitterButton';
+export { default } from './SocialButtons/TwitterButton';
 <%_ } _%>
 <%_ if(features.googlemaps) { _%>
-  export { default as Maps } from './Maps';
+  export { default } from './Maps';
 <%_ } _%>

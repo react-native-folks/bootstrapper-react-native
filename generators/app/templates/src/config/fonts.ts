@@ -1,6 +1,6 @@
 import { black } from 'constants/colors';
 import { SEMIBOLD, BOLD, ITALIC, SIZES } from 'constants/fonts';
-import { fontMaker } from 'utils/fontUtils';
+import { fontMaker } from 'utils/font';
 
 // Here you can make your custom fonts
 // I only recommend using family if you have more than one Font Family in the App.

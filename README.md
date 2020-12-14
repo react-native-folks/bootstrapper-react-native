@@ -22,7 +22,7 @@ This codebase is meant to be used to kickoff react native projects.
 The following optional features can be added out of the box to the new projects:
 
 - Login and SignUp
-- OnBoarding
+- Onboarding
 - Tabs
 - Drawer
 - Social Login Buttons

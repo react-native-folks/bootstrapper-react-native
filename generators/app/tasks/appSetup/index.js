@@ -19,7 +19,7 @@ const firebaseAnalyticsFeatureFiles = require('./featuresFiles/firebaseAnalytics
 const firebaseCoreFeatureFiles = require('./featuresFiles/firebaseCoreFeatureFiles');
 const firebasePerformanceSetup = require('./featuresFiles/firebasePerformanceSetup');
 const loginAndSignUpFeatureFiles = require('./featuresFiles/loginAndSignUpFeatureFiles');
-const onBoardingFeatureFiles = require('./featuresFiles/onBoardingFeatureFiles');
+const onboardingFeatureFiles = require('./featuresFiles/onboardingFeatureFiles');
 const pushNotificationsFeatureFiles = require('./featuresFiles/pushNotificationsFeatureFiles');
 const pushNotificationsSetup = require('./featuresFiles/pushNotificationsSetup');
 const addSocialsToProject = require('./featuresFiles/socialButtonsFeatureSetup');
@@ -61,7 +61,7 @@ module.exports = function index() {
 
   // ----------------    Features: Onboarding    ----------------
   if (this.features.onboarding) {
-    onBoardingFeatureFiles.bind(this)();
+    onboardingFeatureFiles.bind(this)();
   }
 
   // ----------------    Features: Social Buttons    ----------------

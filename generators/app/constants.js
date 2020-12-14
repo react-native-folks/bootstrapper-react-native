@@ -3,7 +3,7 @@ module.exports.PUSH_NOTIFICATIONS_SETUP_LINK =
 
 module.exports.GENERATOR_FEATURES = [
   'Login and SignUp',
-  'OnBoarding',
+  'Onboarding',
   'Tabs',
   'Drawer',
   'Social Login Buttons',

@@ -8,8 +8,8 @@ import {
   NORMAL,
   ITALIC
 } from 'constants/fonts';
-import { moderateScale } from 'utils/scalingUtils';
-import { StringObject } from 'interfaces/globalInterfaces';
+import { moderateScale } from 'utils/scaling';
+import { StringObject } from 'interfaces/global';
 
 const REGULAR_WEIGHT: string = '400';
 const NORMAL_STYLE: string = 'normal';

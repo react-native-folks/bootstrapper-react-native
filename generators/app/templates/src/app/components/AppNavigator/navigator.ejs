@@ -22,13 +22,13 @@ import {
   tabNavConfig
   <%_ } _%>
 } from 'config/navigation';
-import { inferRoute } from 'utils/navUtils';
+import { inferRoute } from 'utils/navigation';
 <%_ if(features.loginandsignup) { _%>
 import Login from 'app/screens/Auth/screens/Login';
 import SignUp from 'app/screens/Auth/screens/SignUp';
 <%_ } _%>
 <%_ if(features.onboarding) { _%>
-import OnBoarding from 'app/screens/OnBoarding';
+import Onboarding from 'app/screens/Onboarding';
 <%_ } _%>
 <%_ if(features.googlemaps) { _%>
 import MapView from 'app/screens/MapView';
@@ -96,11 +96,11 @@ function AppStack() {
 <%_ } _%>
 
 <%_ if(features.onboarding) { _%>
-const OnBoardingStack = () => (<>{inferRoute(Stack)({ [Routes.OnBoarding]: OnBoarding })}</>);
+const OnboardingStack = () => (<>{inferRoute(Stack)({ [Routes.Onboarding]: Onboarding })}</>);
 
 const Navigator = () => {
-  const hasAccessOnBoarding = useSelector(
-    state => state.auth.hasAccessOnBoarding
+  const hasAccessOnboarding = useSelector(
+    state => state.auth.hasAccessOnboarding
   );
 
   <%_ if(features.loginandsignup) { _%>
@@ -110,13 +110,13 @@ const Navigator = () => {
   
   return (
     <Stack.Navigator {...defaultStackConfig}>
-      {currentUser ? (hasAccessOnBoarding ? AppStack() : OnBoardingStack()) : AuthStack()}
+      {currentUser ? (hasAccessOnboarding ? AppStack() : OnboardingStack()) : AuthStack()}
     </Stack.Navigator>
   );
   <%_ } else { _%>
   return (
     <Stack.Navigator {...appStackNavConfig}>
-      {hasAccessOnBoarding ? AppStack() : OnBoardingStack()}
+      {hasAccessOnboarding ? AppStack() : OnboardingStack()}
     </Stack.Navigator>
   );
   <%_ }_%>
