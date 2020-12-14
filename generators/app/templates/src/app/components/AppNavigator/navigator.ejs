@@ -7,11 +7,21 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 <%_ } _%>
 <%_ if(features.onboarding || features.loginandsignup) { _%>
-import { useSelector } from 'react-redux';
-import { State } from 'interfaces/reduxInterfaces';
+import { useSelector } from 'hooks/redux';
 <%_ } _%>
 import Routes from 'constants/routes';
-import { <%_ if(features.loginandsignup) { _%>authStackNavConfig,<%_ } _%> appStackNavConfig<%_ if(features.drawer) { _%>, drawerStackNavConfig <%_ }_%><%_ if(features.tabs) { _%>, tabNavConfig <%_ }_%>} from 'config/navigation';
+import {
+  <%_ if(features.loginandsignup) { _%>
+  authStackNavConfig,
+  <%_ } _%>
+  appStackNavConfig,
+  <%_ if(features.drawer) { _%>
+  drawerStackNavConfig,
+  <%_ } _%>
+  <%_ if(features.tabs) { _%>
+  tabNavConfig
+  <%_ } _%>
+} from 'config/navigation';
 import { inferRoute } from 'utils/navUtils';
 <%_ if(features.loginandsignup) { _%>
 import Login from 'app/screens/Auth/screens/Login';
@@ -89,10 +99,15 @@ function AppStack() {
 const OnBoardingStack = () => (<>{inferRoute(Stack)({ [Routes.OnBoarding]: OnBoarding })}</>);
 
 const Navigator = () => {
-  const hasAccessOnBoarding = useSelector((state: State) => state.auth.hasAccessOnBoarding);
+  const hasAccessOnBoarding = useSelector(
+    state => state.auth.hasAccessOnBoarding
+  );
+
   <%_ if(features.loginandsignup) { _%>
-  const currentUser = useSelector((state: State) => state.auth.currentUser);
+  const currentUser = useSelector(state => state.auth.currentUser);
+
   const defaultStackConfig = currentUser ? appStackNavConfig : authStackNavConfig;
+  
   return (
     <Stack.Navigator {...defaultStackConfig}>
       {currentUser ? (hasAccessOnBoarding ? AppStack() : OnBoardingStack()) : AuthStack()}
@@ -109,8 +124,10 @@ const Navigator = () => {
 <%_ } else { _%>
 const Navigator = () => {
   <%_ if(features.loginandsignup) { _%>
-  const currentUser = useSelector((state: State) => state.auth.currentUser);
+  const currentUser = useSelector(state => state.auth.currentUser);
+
   const defaultStackConfig = currentUser ? appStackNavConfig : authStackNavConfig;
+  
   return <Stack.Navigator {...defaultStackConfig}>{currentUser ? AppStack() : AuthStack()}</Stack.Navigator>;
   <%_ } else { _%>
   return <Stack.Navigator {...appStackNavConfig}>{AppStack()}</Stack.Navigator>;

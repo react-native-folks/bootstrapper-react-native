@@ -3,10 +3,10 @@
 ## Prerequisites
 
 - CocoaPods: https://guides.cocoapods.org/using/getting-started.html#installation
-- Node: https://github.com/creationix/nvm#install-script
-- React Native Environment: https://facebook.github.io/react-native/docs/getting-started.html
+- Node: https://github.com/nvm-sh/nvm#install-script
+- React Native Environment: https://reactnative.dev/docs/getting-started
 - Ruby (for Fastlane): https://rvm.io/rvm/install
-- Yarn: https://yarnpkg.com/lang/en/docs/install/#alternatives-tab
+- Yarn: https://classic.yarnpkg.com/en/docs/install/#alternatives-tab
 
 ## TL;DR
 
@@ -21,14 +21,16 @@ bash <(curl -s git@bitbucket.org:mahisoft/kamino-react-native.git/run.sh)
 This codebase is meant to be used to kickoff react native projects.
 The following optional features can be added out of the box to the new projects:
 
-- Drawer
+- Login and SignUp
 - OnBoarding
 - Tabs
-- Login and SignUp
-- Firebase Analytics
+- Drawer
+- Social Login Buttons
+- Google Maps
 - Firebase Crashlytics
+- Firebase Analytics
 - Firebase Performance
-- Firebase Push Notifications
+- Firebase Push Notification
 
 ### Boilerplate
 
@@ -38,7 +40,6 @@ The boilerplate includes
 - [Basic constants](/generators/app/templates/src/constants)
 - [Basic utils](/generators/app/templates/src/utils)
 - [Font customization](/generators/app/templates/src/config/fonts.js)
-- [Formik: HOC to create Custom Fields](/generators/app/templates/src/app/components/withFormikField/index.tsx)
 - [Http client configuration](/generators/app/templates/src/config/api.js)
 - [i18next configuration](/generators/app/templates/src/config/i18n.js)
 - [Push Notifications configuration](/generators/app/templates/src/config/pushNotifications.js)
@@ -55,17 +56,16 @@ The boilerplate includes
 - [Cerealizr](https://github.com/damfinkel/cerealizr)
 - [i18next](https://www.i18next.com/)
 - [React](https://reactjs.org/)
+- [React Hook Form](https://react-hook-form.com/)
 - [React Native](https://reactnative.dev/)
 - [React Native Config](https://github.com/luggit/react-native-config)
 - [React Native Firebase](https://invertase.io/oss/react-native-firebase)
 - [React Native Push Notifications](https://github.com/zo0r/react-native-push-notification)
 - [React Native Swiper](https://github.com/leecade/react-native-swiper)
 - [React Navigation](https://reactnavigation.org/)
-- [React Redux](https://react-redux.js.org/)
 - [Redux](http://redux.js.org/)
-- [Redux Thunk](https://github.com/gaearon/redux-thunk)
-- [Reselect](https://github.com/reactjs/reselect)
-- [Seamless Immutable](https://github.com/rtfeldman/seamless-immutable)
+- [React Redux](https://react-redux.js.org/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
 
 ### Tooling
 

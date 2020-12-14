@@ -12,7 +12,6 @@ const onlyNumberRegex = /^[0-9]*$/g;
 export const validationsWrapper = (
   validations: Array<(value: string) => string | undefined>
 ) => (value: string) => {
-  // eslint-disable-next-line init-declarations
   let finalError: string | undefined;
   validations.some(validation => {
     const result = validation(value);

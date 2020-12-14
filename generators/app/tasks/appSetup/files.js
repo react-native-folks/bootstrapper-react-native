@@ -5,6 +5,7 @@ module.exports.FONTS = 'assets/fonts';
 module.exports.APP_PATH = 'src/app';
 module.exports.CONFIG_PATH = 'src/config';
 module.exports.CONSTANTS_PATH = 'src/constants';
+module.exports.HOOKS_PATH = 'src/hooks';
 module.exports.INTERFACES_PATH = 'src/interfaces';
 module.exports.REDUX_PATH = 'src/redux';
 module.exports.SERVICES_PATH = 'src/services';
@@ -109,22 +110,27 @@ module.exports.ROUTES_CONSTANTS = `${module.exports.CONSTANTS_PATH}/routes.ts`;
 module.exports.FONTS_CONSTANTS = `${module.exports.CONSTANTS_PATH}/fonts.ts`;
 module.exports.STATUS_BAR_CONSTANTS = `${module.exports.CONSTANTS_PATH}/statusBar.ts`;
 
+// HOOKS
+module.exports.REDUX_HOOKS = `${module.exports.HOOKS_PATH}/redux.ts`;
+
 // INTERFACES
 module.exports.AUTH_INTERFACES = `${module.exports.INTERFACES_PATH}/authInterfaces.ts`;
 module.exports.GLOBAL_INTERFACES = `${module.exports.INTERFACES_PATH}/globalInterfaces.ts`;
 module.exports.NAVIGATION_INTERFACES = `${module.exports.INTERFACES_PATH}/navigation.ts`;
 module.exports.REACTOTRON_INTERFACES = `${module.exports.INTERFACES_PATH}/reactotron.ts`;
-module.exports.REDUX_INTERFACES = `${module.exports.INTERFACES_PATH}/reduxInterfaces.ts`;
+module.exports.REDUX_INTERFACES = `${module.exports.INTERFACES_PATH}/redux.ts`;
 
 // REDUX
 module.exports.REDUX_STORE = `${module.exports.REDUX_PATH}/store.ts`;
+module.exports.REDUX_UTILS = `${module.exports.REDUX_PATH}/utils.ts`;
 // REDUX - AUTH
 module.exports.AUTH_REDUX_PATH = `${module.exports.REDUX_PATH}/auth`;
-module.exports.AUTH_ACTIONS = `${module.exports.AUTH_REDUX_PATH}/actions.ts`;
-module.exports.AUTH_REDUCER = `${module.exports.AUTH_REDUX_PATH}/reducer.ts`;
+module.exports.AUTH_REDUX_ACTIONS = `${module.exports.AUTH_REDUX_PATH}/actions.ts`;
+module.exports.AUTH_REDUX_INDEX = `${module.exports.AUTH_REDUX_PATH}/index.ts`;
+module.exports.AUTH_REDUX_SLICE = `${module.exports.AUTH_REDUX_PATH}/slice.ts`;
 // REDUX - MIDDLEWARES
-module.exports.ANALYTICS_MIDDLEWARE = `${module.exports.REDUX_PATH}/middlewares/analyticsMiddleware.ts`;
+module.exports.ANALYTICS_MIDDLEWARE = `${module.exports.REDUX_PATH}/middlewares/analytics.ts`;
 
 // SERVICES
-module.exports.AUTH_SERVICE = `${module.exports.SERVICES_PATH}/AuthService.ts`;
+module.exports.AUTH_SERVICE = `${module.exports.SERVICES_PATH}/auth.ts`;
 module.exports.ONBOARDING_SERVICE = `${module.exports.SERVICES_PATH}/OnBoardingService.ts`;

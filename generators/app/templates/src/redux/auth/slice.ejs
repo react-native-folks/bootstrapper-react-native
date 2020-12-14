@@ -1,0 +1,71 @@
+<%_ if(features.onboarding || features.loginandsignup || features.socialloginbuttons) { _%>
+import { isFulfilled } from '@reduxjs/toolkit';
+<%_ } _%> 
+<%_ if(features.loginandsignup || features.socialloginbuttons) { _%>
+import { CurrentUser } from 'interfaces/authInterfaces';
+<%_ } _%> 
+import { GenericFetchInitialState } from 'interfaces/redux';
+import { createFetchSlice } from 'redux/utils';
+
+import actionCreators, { actionsTypes } from './actions';
+
+interface AuthState {
+  initialLoading: boolean;
+  <%_ if(features.loginandsignup || features.socialloginbuttons) { _%>
+  currentUser: CurrentUser | null;
+  <%_ } _%> 
+  <%_ if(features.onboarding) { _%>
+  hasAccessOnBoarding: boolean;
+  <%_ } _%>
+}
+
+export const initialState: GenericFetchInitialState<AuthState> = {
+  initialLoading: true,
+  <%_ if(features.loginandsignup || features.socialloginbuttons) { _%>
+  currentUser: null,
+  <%_ } _%>
+  <%_ if(features.onboarding) { _%>
+  hasAccessOnBoarding: false,
+  <%_ } _%>
+  loading: false,
+  error: null
+};
+
+const authSlice = createFetchSlice({
+  name: actionsTypes.namespace,
+  initialState,
+  reducers: {},
+  extraReducers: builder => {
+    builder
+      .addCase(actionCreators.init.fulfilled, state => {
+        state.initialLoading = false;
+      })
+      <%_ if(features.onboarding) { _%>
+      .addMatcher(
+        isFulfilled(actionCreators.init, actionCreators.setHasAccessOnBoarding),
+        (state, action) => {
+          state.hasAccessOnBoarding = action.payload.hasAccessOnBoarding;
+        }
+      )
+      <%_ } _%>
+     <%_ if(features.loginandsignup || features.socialloginbuttons) { _%>
+      .addMatcher(
+        isFulfilled(
+          actionCreators.init,
+          <%_ if(features.loginandsignup) { _%>
+          actionCreators.login,
+          actionCreators.logout,
+          <%_ } _%>
+          <%_ if(features.socialloginbuttons) { _%>
+          actionCreators.socialLogin,
+          <%_ } _%>
+        ),
+        (state, action) => {
+          state.currentUser = action.payload.currentUser;
+        }
+      )
+      <%_ } _%>
+  }
+});
+
+export default authSlice;

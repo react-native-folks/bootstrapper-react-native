@@ -2,8 +2,8 @@ import React, { <%_ if(features.loginandsignup) { _%>useCallback, <%_ } _%>memo 
 import { Alert, View } from 'react-native';
 import i18next from 'i18next';
 <%_ if(features.loginandsignup) { _%>
-  import { useDispatch } from 'react-redux';
-  import { actionCreators as AuthActions } from 'redux/auth/actions';
+import { useDispatch } from 'react-redux';
+import { authActions } from 'redux/auth';
 <%_ } _%>
 <%_ if(features.googlemaps) { _%>
 import { Navigation } from 'interfaces/navigation';
@@ -17,7 +17,7 @@ import styles from './styles';
 function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _%>) {
   <%_ if(features.loginandsignup) { _%>
   const dispatch = useDispatch();
-  const handleLogout = useCallback(() => dispatch(AuthActions.logout()), [dispatch]);
+  const handleLogout = useCallback(() => dispatch(authActions.logout()), [dispatch]);
   <%_ } _%>
 
   return (

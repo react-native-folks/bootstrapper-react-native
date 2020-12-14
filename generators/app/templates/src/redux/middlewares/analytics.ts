@@ -1,9 +1,9 @@
 // TODO: Uncomment lines when you start using them
 // import analytics from '@react-native-firebase/analytics'; TODO: Use later when you want to catch some redux actions here in this middleware
 import { Dispatch } from 'react';
-// import { ReduxObject } from 'interfaces/reduxInterfaces';
+// import { RootState } from 'interfaces/redux';
 
-const eventsTrackingMiddleware = (/* TODO: { getState }: ReduxObject in the future*/) => (
+const eventsTrackingMiddleware = (/* TODO: { getState }: RootState in the future*/) => (
   next: Dispatch<any>
 ) => (action: any) => {
   switch (action.type) {

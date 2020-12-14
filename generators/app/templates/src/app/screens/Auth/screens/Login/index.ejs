@@ -1,7 +1,15 @@
 import React, { useCallback } from 'react';
-import { Keyboard, TouchableWithoutFeedback, View<%_ if(features.socialloginbuttons) { _%>, Alert<%_ } _%> } from 'react-native';
+import {
+  ActivityIndicator,
+  <%_ if(features.socialloginbuttons) { _%>
+  Alert,
+  <%_ } _%>
+  Keyboard,
+  TouchableWithoutFeedback,
+  View
+} from 'react-native';
 import { useForm } from 'react-hook-form';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import i18next from 'i18next';
 import { 
   CustomButton,
@@ -14,9 +22,9 @@ import {
   <%_ if(features.socialButtons.twitter) { _%>TwitterButton,<%_ } _%>
 } from 'app/components';
 import Routes from 'constants/routes';
+import { useSelector } from 'hooks/redux';
 import { Navigation } from 'interfaces/navigation';
-import { State } from 'interfaces/reduxInterfaces';
-import { actionCreators as AuthActions } from 'redux/auth/actions';
+import { authActions } from 'redux/auth';
 import { FIELDS, LOGIN_INITIAL_VALUES } from 'app/screens/Auth/constants';
 import {
   validationsWrapper,
@@ -31,20 +39,25 @@ import styles from './styles';
 function Login({ navigation }: Navigation) {
   const dispatch = useDispatch();
   const { control, handleSubmit, errors } = useForm();
-  const hasLoginError = useSelector<State, boolean>(
-    (state: State) => !!state.auth.currentUserError
-  );
+
+  const loading = useSelector(state => state.auth.loading);
+
+  const hasLoginError = useSelector(state => !!state.auth.error);
+
   const handleLogin: (values: any) => void = useCallback(
     values => {
       Keyboard.dismiss();
-      if (!Object.keys(errors).length) dispatch(AuthActions.login(values));
+      if (!Object.keys(errors).length) dispatch(authActions.login(values));
     },
     [dispatch, errors]
   );
+  
   <%_ if(features.socialloginbuttons) { _%>
-  const handleSocialLogin = (token: any) => dispatch(AuthActions.socialLogin(token));
+  const handleSocialLogin = (token: any) => dispatch(authActions.socialLogin(token));
+
   <%_ } _%>
   const handleGoToSignUp = () => navigation.navigate(Routes.SignUp);
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -122,6 +135,7 @@ function Login({ navigation }: Navigation) {
           style={styles.formButton}
           title={i18next.t('LOGIN:SIGN_UP')}
         />
+        <ActivityIndicator animating={loading} />
       </View>
     </TouchableWithoutFeedback>
   );

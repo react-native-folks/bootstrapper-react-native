@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { useDispatch } from 'react-redux';
-import { actionCreators } from 'redux/auth/actions';
+import { authActions } from 'redux/auth';
 
 import './i18n';
 import Swiper from './components/Swiper';
@@ -8,7 +8,7 @@ import Swiper from './components/Swiper';
 function OnBoardingContainer() {
   const dispatch = useDispatch();
   const handleSkipOnBoarding = () =>
-    dispatch(actionCreators.setHasAccessOnBoarding(true));
+    dispatch(authActions.setHasAccessOnBoarding(true));
   return <Swiper onSkip={handleSkipOnBoarding} />;
 }
 
