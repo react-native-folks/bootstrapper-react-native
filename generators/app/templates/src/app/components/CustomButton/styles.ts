@@ -1,9 +1,23 @@
+import {
+  transparent,
+  lightGray,
+  blue,
+  black,
+  green,
+  gray,
+  white
+} from 'constants/colors';
+
 import { StyleSheet } from 'react-native';
-import { transparent, blue, black, green, gray, white } from 'constants/colors';
 
 const borderlessStyle = {
   borderWidth: 0,
   backgroundColor: transparent
+};
+
+export const defaultAndroidRipple = {
+  borderless: false,
+  color: lightGray
 };
 
 export default StyleSheet.create({
@@ -14,6 +28,9 @@ export default StyleSheet.create({
     padding: 8,
     backgroundColor: blue,
     borderColor: gray
+  },
+  defaultPressed: {
+    opacity: 0.4
   },
   borderless: borderlessStyle,
   radial: {
