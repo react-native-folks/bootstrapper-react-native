@@ -1,4 +1,11 @@
-import { TouchableOpacityProps, ViewStyle, TextStyle } from 'react-native';
+import { ReactElement } from 'react';
+import {
+  TouchableOpacityProps,
+  ViewStyle,
+  TextStyle,
+  PressableAndroidRippleConfig,
+  PressableProps
+} from 'react-native';
 
 import { CustomTextProps } from '../CustomText/model';
 
@@ -25,12 +32,17 @@ interface CustomButtonVariants {
   transparent?: boolean;
 }
 
-export interface CustomButtonProps extends CustomButtonVariants {
+export interface CustomButtonProps
+  extends CustomButtonVariants,
+    PressableProps {
   onPress: TouchableOpacityProps['onPress'];
   activeOpacity?: number;
   disabled?: boolean;
   style?: ViewStyle;
   textStyle?: TextStyle;
+  pressedStyle?: ViewStyle;
+  androidRipple?: PressableAndroidRippleConfig;
+  children?: ({ pressed }: { pressed: boolean }) => ReactElement;
   title?: string;
   textProps?: CustomTextProps;
   radius?: number;

@@ -6,3 +6,4 @@ export const white: string = '#FFF';
 export const black: string = '#000';
 export const gray: string = '#rgba(0, 0, 0, 0.38)';
 export const darkGray: string = '#363636';
+export const lightGray: string = '#C2C2C2';
