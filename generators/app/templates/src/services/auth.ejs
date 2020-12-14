@@ -1,4 +1,3 @@
-<%_ if(features.loginandsignup) { _%>
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ApiResponse } from 'apisauce';
 import api from 'config/api';
@@ -55,10 +54,5 @@ const authServices = {
     return fakeApisaucePromise({ data: {} });
   }
 };
-<%_ } else {_%>
-const authServices = {
-  authSetup: () => {}
-};
-<%_ } _%>
 
 export default authServices;

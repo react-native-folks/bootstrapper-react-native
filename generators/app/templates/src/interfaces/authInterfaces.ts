@@ -1,4 +1,5 @@
 export interface CurrentUser {
+  user: { name: string; lastname: string; username: string };
   sessionToken: string;
 }
 

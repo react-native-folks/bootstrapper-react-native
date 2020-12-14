@@ -1,8 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-<%_ if(features.onboarding) { _%>
+<%_ if(features.loginandsignup) { _%>
 import { AuthData } from 'interfaces/authInterfaces';
 <%_ } _%>
+<%_ if(features.loginandsignup || features.socialloginbuttons) { _%>
 import authService from 'services/auth';
+<%_ } _%>
 <%_ if(features.onboarding) { _%>
 import {
   setOnBoardingAccess,
@@ -12,16 +14,20 @@ import {
 import { createActionTypes } from 'redux/utils';
 
 export const actionsTypes = createActionTypes(
-  ['AUTH_INIT', <%_ if(features.onboarding) { _%>'HAS_ACCESS', <%_ } _%><%_ if(features.loginandsignup) { _%>'LOGIN', 'LOGOUT'<%_ } _%>],
+  ['AUTH_INIT', <%_ if(features.onboarding) { _%>'HAS_ACCESS', <%_ } _%><%_ if(features.loginandsignup) { _%>'LOGIN', 'LOGOUT', <%_ } _%><%_ if(features.socialloginbuttons) { _%>'SOCIAL_LOGIN', <%_ } _%>],
   'auth'
 );
 
 const actionCreators = {
   init: createAsyncThunk(actionsTypes.AUTH_INIT, async () => {
+    <%_ if(features.loginandsignup) { _%>
     const currentUser = await authService.authSetup();
+    <%_ } _%>
+    <%_ if(features.onboarding) { _%>
     const hasAccessOnBoarding = await getOnBoardingAccess();
+    <%_ } _%>
 
-    return { currentUser, hasAccessOnBoarding };
+    return { <%_ if(features.loginandsignup) { _%>currentUser, <%_ } _%><%_ if(features.onboarding) { _%>hasAccessOnBoarding, <%_ } _%>};
   }),
   <%_ if(features.loginandsignup) { _%>
   login: createAsyncThunk(actionsTypes.LOGIN, async (authData: AuthData) => {
@@ -30,7 +36,7 @@ const actionCreators = {
 
     return { currentUser: response.data };
   }),
-  logout: createAsyncThunk(actionsTypes.LOGOUT, async (_, { dispatch }) => {
+  logout: createAsyncThunk(actionsTypes.LOGOUT, async (<%_ if(features.onboarding) { _%>_, { dispatch }<%_ } _%>) => {
     const response = await authService.logout();
     await authService.removeCurrentUser();
     <%_ if(features.onboarding) { _%>
@@ -50,8 +56,8 @@ const actionCreators = {
     }
   ),
   <%_ } _%>
-  <%_ if(features.onboarding) { _%>
-  socialLogin: createAsyncThunk(actionsTypes.LOGIN, async (token: any) => {
+  <%_ if(features.socialloginbuttons) { _%>
+  socialLogin: createAsyncThunk(actionsTypes.SOCIAL_LOGIN, async (token: any) => {
     const response = await authService.login(token);
     authService.setCurrentUser(response.data!);
 
