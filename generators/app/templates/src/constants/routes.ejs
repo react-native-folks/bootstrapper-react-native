@@ -1,4 +1,4 @@
-import { StringObject } from 'interfaces/globalInterfaces';
+import { StringObject } from 'interfaces/global';
 
 const Routes: StringObject = {
   <%_ if(features.loginandsignup) { _%>
@@ -7,7 +7,7 @@ const Routes: StringObject = {
   SignUp: 'SignUp',
   <%_ } _%>
   <%_ if(features.onboarding) { _%>
-  OnBoarding: 'OnBoarding',
+  Onboarding: 'Onboarding',
   <%_ } _%>
   <%_ if(features.tabs) { _%>
   Tab1: 'Tab1',

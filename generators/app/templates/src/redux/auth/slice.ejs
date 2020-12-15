@@ -2,7 +2,7 @@
 import { isFulfilled } from '@reduxjs/toolkit';
 <%_ } _%> 
 <%_ if(features.loginandsignup || features.socialloginbuttons) { _%>
-import { CurrentUser } from 'interfaces/authInterfaces';
+import { CurrentUser } from 'interfaces/auth';
 <%_ } _%> 
 import { GenericFetchInitialState } from 'interfaces/redux';
 import { createFetchSlice } from 'redux/utils';
@@ -15,7 +15,7 @@ interface AuthState {
   currentUser: CurrentUser | null;
   <%_ } _%> 
   <%_ if(features.onboarding) { _%>
-  hasAccessOnBoarding: boolean;
+  hasAccessOnboarding: boolean;
   <%_ } _%>
 }
 
@@ -25,7 +25,7 @@ export const initialState: GenericFetchInitialState<AuthState> = {
   currentUser: null,
   <%_ } _%>
   <%_ if(features.onboarding) { _%>
-  hasAccessOnBoarding: false,
+  hasAccessOnboarding: false,
   <%_ } _%>
   loading: false,
   error: null
@@ -42,9 +42,9 @@ const authSlice = createFetchSlice({
       })
       <%_ if(features.onboarding) { _%>
       .addMatcher(
-        isFulfilled(actionCreators.init, actionCreators.setHasAccessOnBoarding),
+        isFulfilled(actionCreators.init, actionCreators.setHasAccessOnboarding),
         (state, action) => {
-          state.hasAccessOnBoarding = action.payload.hasAccessOnBoarding;
+          state.hasAccessOnboarding = action.payload.hasAccessOnboarding;
         }
       )
       <%_ } _%>

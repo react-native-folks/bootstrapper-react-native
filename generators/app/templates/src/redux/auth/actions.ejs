@@ -1,15 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 <%_ if(features.loginandsignup) { _%>
-import { AuthData } from 'interfaces/authInterfaces';
+import { AuthData } from 'interfaces/auth';
 <%_ } _%>
 <%_ if(features.loginandsignup || features.socialloginbuttons) { _%>
 import authService from 'services/auth';
 <%_ } _%>
 <%_ if(features.onboarding) { _%>
 import {
-  setOnBoardingAccess,
-  getOnBoardingAccess
-} from 'services/OnBoardingService';
+  setOnboardingAccess,
+  getOnboardingAccess
+} from 'services/onboarding';
 <%_ } _%>
 import { createActionTypes } from 'redux/utils';
 
@@ -24,10 +24,10 @@ const actionCreators = {
     const currentUser = await authService.authSetup();
     <%_ } _%>
     <%_ if(features.onboarding) { _%>
-    const hasAccessOnBoarding = await getOnBoardingAccess();
+    const hasAccessOnboarding = await getOnboardingAccess();
     <%_ } _%>
 
-    return { <%_ if(features.loginandsignup) { _%>currentUser, <%_ } _%><%_ if(features.onboarding) { _%>hasAccessOnBoarding, <%_ } _%>};
+    return { <%_ if(features.loginandsignup) { _%>currentUser, <%_ } _%><%_ if(features.onboarding) { _%>hasAccessOnboarding, <%_ } _%>};
   }),
   <%_ if(features.loginandsignup) { _%>
   login: createAsyncThunk(actionsTypes.LOGIN, async (authData: AuthData) => {
@@ -40,19 +40,19 @@ const actionCreators = {
     const response = await authService.logout();
     await authService.removeCurrentUser();
     <%_ if(features.onboarding) { _%>
-    dispatch(actionCreators.setHasAccessOnBoarding(false));
+    dispatch(actionCreators.setHasAccessOnboarding(false));
     <%_ } _%>
 
     return { currentUser: response.data };
   }),
   <%_ } _%>
   <%_ if(features.onboarding) { _%>
-  setHasAccessOnBoarding: createAsyncThunk(
+  setHasAccessOnboarding: createAsyncThunk(
     actionsTypes.HAS_ACCESS,
     async (value: boolean) => {
-      await setOnBoardingAccess(value);
+      await setOnboardingAccess(value);
 
-      return { hasAccessOnBoarding: value };
+      return { hasAccessOnboarding: value };
     }
   ),
   <%_ } _%>

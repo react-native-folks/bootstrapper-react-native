@@ -10,8 +10,8 @@ import {
   red
 } from 'constants/colors';
 import { SIZES } from 'constants/fonts';
-import { moderateScale } from 'utils/scalingUtils';
-import { StringObject, NumberObject } from 'interfaces/globalInterfaces';
+import { moderateScale } from 'utils/scaling';
+import { StringObject, NumberObject } from 'interfaces/global';
 
 const getColors = (colorsObj: StringObject) =>
   Object.keys(colorsObj).reduce(

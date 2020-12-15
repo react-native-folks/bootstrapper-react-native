@@ -2,7 +2,7 @@ import { isIos } from 'constants/platform';
 
 import React, { useCallback, memo } from 'react';
 import { Pressable } from 'react-native';
-import { getCustomStyles } from 'utils/styleUtils';
+import { getCustomStyles } from 'utils/style';
 
 import CustomText from '../CustomText';
 

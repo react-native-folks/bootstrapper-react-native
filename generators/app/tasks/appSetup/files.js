@@ -89,7 +89,7 @@ module.exports.HOME_STYLES = `${module.exports.HOME_PATH}/styles.ts`;
 module.exports.HOME_TRANSLATIIONS = `${module.exports.HOME_PATH}/i18n.ts`;
 
 // APP SCREENS - ONBOARDING
-module.exports.ONBOARDING_PATH = `${module.exports.SCREENS_PATH}/OnBoarding`;
+module.exports.ONBOARDING_PATH = `${module.exports.SCREENS_PATH}/Onboarding`;
 
 // APP SCREENS - GOOGLE MAPS
 module.exports.GOOGLE_MAPS_PATH = `${module.exports.SCREENS_PATH}/MapView`;
@@ -98,7 +98,7 @@ module.exports.GOOGLE_MAPS_PATH = `${module.exports.SCREENS_PATH}/MapView`;
 module.exports.PUSH_NOTIFICATIONS_CONFIG = `${module.exports.CONFIG_PATH}/pushNotifications.ts`;
 module.exports.API_CONFIG = `${module.exports.CONFIG_PATH}/api.ts`;
 module.exports.CONFIG = `${module.exports.CONFIG_PATH}/index.ts`;
-module.exports.REACTOTRON_CONFIG = `${module.exports.CONFIG_PATH}/reactotronConfig.ts`;
+module.exports.REACTOTRON_CONFIG = `${module.exports.CONFIG_PATH}/reactotron.ts`;
 module.exports.I18N_CONFIG = `${module.exports.CONFIG_PATH}/i18n.ts`;
 module.exports.NAVIGATION_CONFIG = `${module.exports.CONFIG_PATH}/navigation.tsx`;
 module.exports.FONTS_CONFIG = `${module.exports.CONFIG_PATH}/fonts.ts`;
@@ -114,8 +114,8 @@ module.exports.STATUS_BAR_CONSTANTS = `${module.exports.CONSTANTS_PATH}/statusBa
 module.exports.REDUX_HOOKS = `${module.exports.HOOKS_PATH}/redux.ts`;
 
 // INTERFACES
-module.exports.AUTH_INTERFACES = `${module.exports.INTERFACES_PATH}/authInterfaces.ts`;
-module.exports.GLOBAL_INTERFACES = `${module.exports.INTERFACES_PATH}/globalInterfaces.ts`;
+module.exports.AUTH_INTERFACES = `${module.exports.INTERFACES_PATH}/auth.ts`;
+module.exports.GLOBAL_INTERFACES = `${module.exports.INTERFACES_PATH}/global.ts`;
 module.exports.NAVIGATION_INTERFACES = `${module.exports.INTERFACES_PATH}/navigation.ts`;
 module.exports.REACTOTRON_INTERFACES = `${module.exports.INTERFACES_PATH}/reactotron.ts`;
 module.exports.REDUX_INTERFACES = `${module.exports.INTERFACES_PATH}/redux.ts`;
@@ -133,4 +133,4 @@ module.exports.ANALYTICS_MIDDLEWARE = `${module.exports.REDUX_PATH}/middlewares/
 
 // SERVICES
 module.exports.AUTH_SERVICE = `${module.exports.SERVICES_PATH}/auth.ts`;
-module.exports.ONBOARDING_SERVICE = `${module.exports.SERVICES_PATH}/OnBoardingService.ts`;
+module.exports.ONBOARDING_SERVICE = `${module.exports.SERVICES_PATH}/onboarding.ts`;

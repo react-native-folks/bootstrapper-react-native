@@ -19,7 +19,7 @@ import {
   validateEmail,
   validateMinLength,
   validateOnlyText
-} from 'utils/validations/validateUtils';
+} from 'utils/validations';
 
 import './i18n';
 import styles from './styles';
