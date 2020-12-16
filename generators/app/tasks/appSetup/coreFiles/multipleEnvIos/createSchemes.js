@@ -3,7 +3,10 @@ const schemeBase = require('./schemeBase');
 module.exports = function createSchemes() {
   const commonPath = schemeName =>
     `${this.projectName}/ios/${this.projectName}.xcodeproj/xcshareddata/xcschemes/${schemeName}.xcscheme`;
-  this.fs.write(commonPath('develop'), schemeBase.bind(this)('dev', 'Debug'));
+  this.fs.write(
+    commonPath('develop'),
+    schemeBase.bind(this)('develop', 'Develop')
+  );
   this.fs.write(
     commonPath('staging'),
     schemeBase.bind(this)('staging', 'Staging')

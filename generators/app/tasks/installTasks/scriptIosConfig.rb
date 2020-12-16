@@ -33,12 +33,12 @@ project.targets.each do |target|
    end
   end
   # Add new Build Configurations to Target
-  target.add_build_configuration('QA', :release)
-  target.add_build_configuration('Stage', :release)
+  target.add_build_configuration('Develop', :release)
+  target.add_build_configuration('Staging', :release)
   target.add_build_configuration('Production', :release)
   target.build_configurations.each do |config|
    # Copy Release Build Configuration to new configs
-   if (config.name == 'Stage' || config.name == 'QA' || config.name == 'Production')
+   if (config.name == 'Staging' || config.name == 'Develop' || config.name == 'Production')
       config.base_configuration_reference=(release_base_config_file)
       config.build_settings=(release_build_settings)
    end
@@ -56,12 +56,12 @@ project.build_configurations.each do |config|
  end
 end
 # Add new Build Configurations to Project
-project.add_build_configuration('QA', :release)
-project.add_build_configuration('Stage', :release)
+project.add_build_configuration('Develop', :release)
+project.add_build_configuration('Staging', :release)
 project.add_build_configuration('Production', :release)
 project.build_configurations.each do |config|
  # Copy Release Build Configuration to new configs
- if (config.name == 'Stage' || config.name == 'QA' || config.name == 'Production')
+ if (config.name == 'Staging' || config.name == 'Develop' || config.name == 'Production')
   config.base_configuration_reference=(release_base_config_file)
   config.build_settings=(release_build_settings)
  end

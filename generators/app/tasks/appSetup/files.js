@@ -10,8 +10,8 @@ module.exports.INTERFACES_PATH = 'src/interfaces';
 module.exports.REDUX_PATH = 'src/redux';
 module.exports.SERVICES_PATH = 'src/services';
 module.exports.UTILS_PATH = 'src/utils';
-module.exports.FASTLANE_ANDROID_PATH = 'ios/fastlane';
-module.exports.FASTLANE_IOS_PATH = 'android/fastlane';
+module.exports.FASTLANE_ANDROID_PATH = 'android/fastlane';
+module.exports.FASTLANE_IOS_PATH = 'ios/fastlane';
 
 // BASE FILES'
 module.exports.ESLINT_IGNORE_FILE = '.eslintignore';
