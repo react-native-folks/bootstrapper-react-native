@@ -1,43 +1,39 @@
 module.exports = function createDotEnvFilesLocally() {
   let extraEnvContent = '';
 
-  const baseDevelopEnvContent = `
-# Fastlane vars
-FIREBASE_APP_ID = "#{FIREBASE_APP_ID}"
+  const baseDevelopEnvContent = `# Fastlane vars
+FIREBASE_APP_ID=[PUT_YOUR_APP_ID_HERE]
 
 # Fastlane iOS
-INFO_PLIST_DIR = '#{this.projectName}/Info.plist'
-PROJECT_FILE_DIR = '#{this.projectName}.xcodeproj'
-WORKSPACE_NAME = '#{this.projectName}.xcworkspace'
-BUNDLE_IDENTIFIER = "#{BUNDLE_IDENTIFIER}"
-PROVISION_NAME_PROD = "#{projectName}-Dev"
-APP_NAME = "#{projectName}(D)"
-MATCH_TYPE = "development"
-FIREBASE_APP_ID = "#{firebaseAppId}"
+APP_NAME = "${this.projectName}(D)"
+BUNDLE_IDENTIFIER = '${this.bundleId}.develop'
 EXPORT_METHOD = "development"
+INFO_PLIST_DIR = '${this.projectName}/Info.plist'
+IPA_NAME = '${this.projectName}(D).ipa'
+MATCH_TYPE = "development"
+PROJECT_FILE_DIR = '${this.projectName}.xcodeproj'
+PROVISION_NAME_PROD = "${this.projectName}-Dev"
 SCHEME_NAME = 'develop'
-IPA_NAME = '#{projectName}(D).ipa'
+WORKSPACE_NAME = '${this.projectName}.xcworkspace'
 
 # Fastlane Android
-FLAVOR = "Development"
-BUILD_TYPE = "Release"
+SOME_ANDROID_VAR=XXXX
 `;
 
-  const baseStagingEnvContent = `
-# Fastlane vars
-FIREBASE_APP_ID = "#{FIREBASE_APP_ID}"
+  const baseStagingEnvContent = `# Fastlane vars
+FIREBASE_APP_ID=[PUT_YOUR_APP_ID_HERE]
 
 # Fastlane iOS
-INFO_PLIST_DIR = '#{this.projectName}/Info.plist'
-PROJECT_FILE_DIR = '#{this.projectName}.xcodeproj'
-WORKSPACE_NAME = '#{this.projectName}.xcworkspace'
-BUNDLE_IDENTIFIER = '#{BUNDLE_IDENTIFIER}}'
-PROVISION_NAME_PROD = '#{projectName}-Staging'
-APP_NAME = '#{projectName}(S)'
-MATCH_TYPE = 'appstore'
+APP_NAME = '${this.projectName}(S)'
+BUNDLE_IDENTIFIER = '${this.bundleId}.staging'
 EXPORT_METHOD = 'app-store'
+INFO_PLIST_DIR = '${this.projectName}/Info.plist'
+IPA_NAME = '${this.projectName}(S).ipa'
+MATCH_TYPE = 'appstore'
+PROJECT_FILE_DIR = '${this.projectName}.xcodeproj'
+PROVISION_NAME_PROD = '${this.projectName}-Staging'
 SCHEME_NAME = 'staging'
-IPA_NAME = '#{projectName}(S).ipa'
+WORKSPACE_NAME = '${this.projectName}.xcworkspace'
 
 SKIP_SUBMISSION = true
 ITC_USERNAME = '#{APPLE_ID_EMAIL}'
@@ -46,25 +42,23 @@ ITC_TEAM_ID = '#{TEAM_ID}'
 ITC_TEAM_NAME = '#{TEAM_NAME}'
 
 # Fastlane Android
-FLAVOR = "Staging"
-BUILD_TYPE = "Release"
+SOME_ANDROID_VAR=XXXX
 `;
 
-  const baseProductionEnvContent = `
-# Fastlane vars
-FIREBASE_APP_ID = "#{FIREBASE_APP_ID}"
+  const baseProductionEnvContent = `# Fastlane vars
+FIREBASE_APP_ID=[PUT_YOUR_APP_ID_HERE]
 
 # Fastlane iOS
-INFO_PLIST_DIR = '#{this.projectName}/Info.plist'
-PROJECT_FILE_DIR = '#{this.projectName}.xcodeproj'
-WORKSPACE_NAME = '#{this.projectName}.xcworkspace'
-BUNDLE_IDENTIFIER = '#{BUNDLE_IDENTIFIER}'
-PROVISION_NAME_PROD = '#{projectName}'
-APP_NAME = '#{projectName}'
-MATCH_TYPE = 'appstore'
+APP_NAME = '${this.projectName}'
+BUNDLE_IDENTIFIER = '${this.bundleId}'
 EXPORT_METHOD = 'app-store'
+INFO_PLIST_DIR = '${this.projectName}/Info.plist'
+IPA_NAME = '${this.projectName}.ipa'
+MATCH_TYPE = 'appstore'
+PROJECT_FILE_DIR = '${this.projectName}.xcodeproj'
+PROVISION_NAME_PROD = '${this.projectName}'
 SCHEME_NAME = 'production'
-IPA_NAME = '#{projectName}.ipa'
+WORKSPACE_NAME = '${this.projectName}.xcworkspace'
 
 SKIP_SUBMISSION = true
 ITC_USERNAME = '#{APPLE_ID_EMAIL}'
@@ -73,8 +67,7 @@ ITC_TEAM_ID = '#{TEAM_ID}'
 ITC_TEAM_NAME = '#{TEAM_NAME}'
 
 # Fastlane Android
-FLAVOR = "Production"
-BUILD_TYPE = "Release"
+SOME_ANDROID_VAR=XXXX
 PACKAGE_NAME = "myAppPackageName"
 `;
 
