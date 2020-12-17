@@ -15,7 +15,7 @@ platform :android do
 
   desc "Deploy dev to firebase"
   lane :firebase_dev do
-    firebase_upload env: :dev
+    firebase_upload env: :develop
   end
 
   desc "Deploy staging to firebase"
@@ -25,7 +25,7 @@ platform :android do
 
   desc "Deploy prod to firebase"
   lane :firebase_prod do
-    firebase_upload env: :release
+    firebase_upload env: :production
   end
 
   desc "Deploy new production version to playstore"

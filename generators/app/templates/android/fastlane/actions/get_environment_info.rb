@@ -8,13 +8,15 @@ module Fastlane
       # this script returns the hash with all env variables for that environment.
 
       # File with env variables by environment
+      ENV_FOLDER = (Dir.pwd + "/../.env").freeze
+      
       ENVIRONMENTS_FILES = {
-        develop: File.dirname(__FILE__) + "/../envs/.env.develop",
-        staging: File.dirname(__FILE__) + "/../envs/.env.staging",
-        production: File.dirname(__FILE__) + "/../envs/.env.production",
+        develop: ENV_FOLDER + "/develop.env",
+        staging: ENV_FOLDER + "/staging.env",
+        production: ENV_FOLDER + "/production.env",
       }.freeze
 
-      OVERALL_ENVIRONMENT_FILE = (File.dirname(__FILE__) + "/../envs/.env").freeze
+      OVERALL_ENVIRONMENT_FILE = (ENV_FOLDER + "/.env").freeze
 
       def self.run(params)
         environment = params[:environment]

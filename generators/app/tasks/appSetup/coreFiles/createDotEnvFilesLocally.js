@@ -1,5 +1,76 @@
 module.exports = function createDotEnvFilesLocally() {
   let extraEnvContent = '';
+
+  const baseDevelopEnvContent = `# Fastlane vars
+FIREBASE_APP_ID=[PUT_YOUR_APP_ID_HERE]
+
+# Fastlane iOS
+APP_NAME = "${this.projectName}(D)"
+BUNDLE_IDENTIFIER = '${this.bundleId}.develop'
+EXPORT_METHOD = "development"
+INFO_PLIST_DIR = '${this.projectName}/Info.plist'
+IPA_NAME = '${this.projectName}(D).ipa'
+MATCH_TYPE = "development"
+PROJECT_FILE_DIR = '${this.projectName}.xcodeproj'
+PROVISION_NAME_PROD = "${this.projectName}-Dev"
+SCHEME_NAME = 'develop'
+WORKSPACE_NAME = '${this.projectName}.xcworkspace'
+
+# Fastlane Android
+SOME_ANDROID_VAR=XXXX
+`;
+
+  const baseStagingEnvContent = `# Fastlane vars
+FIREBASE_APP_ID=[PUT_YOUR_APP_ID_HERE]
+
+# Fastlane iOS
+APP_NAME = '${this.projectName}(S)'
+BUNDLE_IDENTIFIER = '${this.bundleId}.staging'
+EXPORT_METHOD = 'app-store'
+INFO_PLIST_DIR = '${this.projectName}/Info.plist'
+IPA_NAME = '${this.projectName}(S).ipa'
+MATCH_TYPE = 'appstore'
+PROJECT_FILE_DIR = '${this.projectName}.xcodeproj'
+PROVISION_NAME_PROD = '${this.projectName}-Staging'
+SCHEME_NAME = 'staging'
+WORKSPACE_NAME = '${this.projectName}.xcworkspace'
+
+SKIP_SUBMISSION = true
+ITC_USERNAME = '#{APPLE_ID_EMAIL}'
+ITC_APPLE_ID = '#{APPLE_ID}'
+ITC_TEAM_ID = '#{TEAM_ID}'
+ITC_TEAM_NAME = '#{TEAM_NAME}'
+
+# Fastlane Android
+SOME_ANDROID_VAR=XXXX
+`;
+
+  const baseProductionEnvContent = `# Fastlane vars
+FIREBASE_APP_ID=[PUT_YOUR_APP_ID_HERE]
+
+# Fastlane iOS
+APP_NAME = '${this.projectName}'
+BUNDLE_IDENTIFIER = '${this.bundleId}'
+EXPORT_METHOD = 'app-store'
+INFO_PLIST_DIR = '${this.projectName}/Info.plist'
+IPA_NAME = '${this.projectName}.ipa'
+MATCH_TYPE = 'appstore'
+PROJECT_FILE_DIR = '${this.projectName}.xcodeproj'
+PROVISION_NAME_PROD = '${this.projectName}'
+SCHEME_NAME = 'production'
+WORKSPACE_NAME = '${this.projectName}.xcworkspace'
+
+SKIP_SUBMISSION = true
+ITC_USERNAME = '#{APPLE_ID_EMAIL}'
+ITC_APPLE_ID = '#{APPLE_ID}'
+ITC_TEAM_ID = '#{TEAM_ID}'
+ITC_TEAM_NAME = '#{TEAM_NAME}'
+
+# Fastlane Android
+SOME_ANDROID_VAR=XXXX
+PACKAGE_NAME = "myAppPackageName"
+`;
+
   if (this.features.socialButtons.facebook) {
     extraEnvContent = extraEnvContent.concat(
       '\nFACEBOOK_APP_ID=[PUT_YOUR_ID_HERE]'
@@ -25,15 +96,15 @@ module.exports = function createDotEnvFilesLocally() {
   }
 
   this.fs.write(
-    `${this.projectName}/.dev.env`,
-    'EMPTY_VARIABLE=DEVELOPMENT'.concat(extraEnvContent)
+    `${this.projectName}/.env/develop.env`,
+    baseDevelopEnvContent.concat(extraEnvContent)
   );
   this.fs.write(
-    `${this.projectName}/.stage.env`,
-    'EMPTY_VARIABLE=STAGE'.concat(extraEnvContent)
+    `${this.projectName}/.env/staging.env`,
+    baseStagingEnvContent.concat(extraEnvContent)
   );
   this.fs.write(
-    `${this.projectName}/.production.env`,
-    'EMPTY_VARIABLE=PRODUCTION'.concat(extraEnvContent)
+    `${this.projectName}/.env/production.env`,
+    baseProductionEnvContent.concat(extraEnvContent)
   );
 };

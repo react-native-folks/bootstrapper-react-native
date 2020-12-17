@@ -1,6 +1,7 @@
 const { copyFile, copyTemplateFile } = require('../utils');
 const {
   FASTLANE_ANDROID_PATH,
+  FASTLANE_IOS_PATH,
   GEMFILE_PATH,
   UTILS_PATH,
   GLOBAL_INTERFACES,
@@ -57,6 +58,7 @@ const {
 
 const FILES = [
   FASTLANE_ANDROID_PATH,
+  FASTLANE_IOS_PATH,
   GEMFILE_PATH,
   UTILS_PATH,
   GLOBAL_INTERFACES,
