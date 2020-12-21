@@ -5,6 +5,7 @@ module.exports.FONTS = 'assets/fonts';
 module.exports.APP_PATH = 'src/app';
 module.exports.CONFIG_PATH = 'src/config';
 module.exports.CONSTANTS_PATH = 'src/constants';
+module.exports.NAVIGATION_PATH = 'src/app/navigation';
 module.exports.HOOKS_PATH = 'src/hooks';
 module.exports.INTERFACES_PATH = 'src/interfaces';
 module.exports.REDUX_PATH = 'src/redux';
@@ -41,11 +42,18 @@ module.exports.APP_I18N = `${module.exports.APP_PATH}/i18n.ts`;
 module.exports.APP = `${module.exports.APP_PATH}/index.tsx`;
 module.exports.COMPONENTS = `${module.exports.COMPONENTS_PATH}/index.ts`;
 
-// APP COMPONENTS - APP NAVIGATOR
-module.exports.APP_NAVIGATOR_PATH = `${module.exports.COMPONENTS_PATH}/AppNavigator`;
-module.exports.APP_NAVIGATOR = `${module.exports.APP_NAVIGATOR_PATH}/index.tsx`;
-module.exports.APP_NAVIGATOR_NAVIGATOR = `${module.exports.APP_NAVIGATOR_PATH}/navigator.tsx`;
-module.exports.NAVIGATION_HELPER = `${module.exports.APP_NAVIGATOR_PATH}/helper.ts`;
+// APP COMPONENTS - APP NAVIGATION
+module.exports.NAVIGATION_UTILS = `${module.exports.NAVIGATION_PATH}/utils.tsx`;
+module.exports.STATUS_BAR_CONSTANTS = `${module.exports.NAVIGATION_PATH}/config/statusBar.ts`;
+module.exports.NAVIGATION_AUTH_STACK = `${module.exports.NAVIGATION_PATH}/stacks/AuthStack.tsx`;
+module.exports.NAVIGATION_ONBOARDING_STACK = `${module.exports.NAVIGATION_PATH}/stacks/OnboardingStack.tsx`;
+module.exports.APP_NAVIGATOR_PATH = `${module.exports.NAVIGATION_PATH}/navigator.tsx`;
+module.exports.APP_NAVIGATION_INDEX = `${module.exports.NAVIGATION_PATH}/index.tsx`;
+module.exports.NAVIGATION_ROUTES = `${module.exports.NAVIGATION_PATH}/routes.ts`;
+module.exports.NAVIGATION_CONFIG = `${module.exports.NAVIGATION_PATH}/config/screensOptions.tsx`;
+module.exports.NAVIGATION_APP_STACK = `${module.exports.NAVIGATION_PATH}/stacks/AppStack.tsx`;
+module.exports.NAVIGATION_STACK_INDEX = `${module.exports.NAVIGATION_PATH}/stacks/index.ts`;
+
 // APP COMPONENTS - CUSTOM BUTTON
 module.exports.CUSTOM_BUTTON_PATH = `${module.exports.COMPONENTS_PATH}/CustomButton`;
 // APP COMPONENTS - CUSTOM SHADOW VIEW
@@ -100,15 +108,12 @@ module.exports.API_CONFIG = `${module.exports.CONFIG_PATH}/api.ts`;
 module.exports.CONFIG = `${module.exports.CONFIG_PATH}/index.ts`;
 module.exports.REACTOTRON_CONFIG = `${module.exports.CONFIG_PATH}/reactotron.ts`;
 module.exports.I18N_CONFIG = `${module.exports.CONFIG_PATH}/i18n.ts`;
-module.exports.NAVIGATION_CONFIG = `${module.exports.CONFIG_PATH}/navigation.tsx`;
 module.exports.FONTS_CONFIG = `${module.exports.CONFIG_PATH}/fonts.ts`;
 
 // CONSTANTS
 module.exports.PLATFORM_CONSTANTS = `${module.exports.CONSTANTS_PATH}/platform.ts`;
 module.exports.COLORS_CONSTANTS = `${module.exports.CONSTANTS_PATH}/colors.ts`;
-module.exports.ROUTES_CONSTANTS = `${module.exports.CONSTANTS_PATH}/routes.ts`;
 module.exports.FONTS_CONSTANTS = `${module.exports.CONSTANTS_PATH}/fonts.ts`;
-module.exports.STATUS_BAR_CONSTANTS = `${module.exports.CONSTANTS_PATH}/statusBar.ts`;
 
 // HOOKS
 module.exports.REDUX_HOOKS = `${module.exports.HOOKS_PATH}/redux.ts`;

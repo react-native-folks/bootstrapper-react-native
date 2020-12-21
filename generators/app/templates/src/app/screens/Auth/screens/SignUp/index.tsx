@@ -1,3 +1,5 @@
+import { isIos } from 'constants/platform';
+
 import React, { useState } from 'react';
 import {
   Keyboard,
@@ -6,10 +8,10 @@ import {
   View
 } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
+import { createStackNavigator } from '@react-navigation/stack';
 import { useForm } from 'react-hook-form';
 import i18next from 'i18next';
 import { CustomButton, CustomText, CustomTextInput } from 'app/components';
-import { isIos } from 'constants/platform';
 import { Navigation } from 'interfaces/navigation';
 import { FIELDS, SIGNUP_INITIAL_VALUES } from 'app/screens/Auth/constants';
 import authService from 'services/auth';
@@ -20,15 +22,21 @@ import {
   validateMinLength,
   validateOnlyText
 } from 'utils/validations';
-
 import './i18n';
+import LoadingView from 'app/components/LoadableView';
+import Routes from 'app/navigation/routes';
+import { appScreensNavOptions } from 'app/navigation/config/screensOptions';
+
 import styles from './styles';
 
 function SignUp({ navigation }: Navigation) {
+  const [loading, setLoading] = useState(false);
   const [signupError, setSignupError] = useState('');
   const { control, handleSubmit, errors } = useForm();
   const onSubmit = async (data: any) => {
+    setLoading(true);
     const response = await authService.signup(data);
+    setLoading(false);
     if (response.ok) {
       navigation.goBack();
     } else {
@@ -39,7 +47,7 @@ function SignUp({ navigation }: Navigation) {
 
   const hasSignUpError = Object.keys(errors).length > 0 || !!signupError;
   return (
-    <>
+    <LoadingView isLoading={loading}>
       <ScrollView
         bounces={false}
         keyboardShouldPersistTaps="handled"
@@ -145,8 +153,18 @@ function SignUp({ navigation }: Navigation) {
         </TouchableWithoutFeedback>
       </ScrollView>
       {isIos && <KeyboardSpacer />}
-    </>
+    </LoadingView>
   );
 }
 
-export default SignUp;
+const Stack = createStackNavigator();
+
+const SignupScreen = () => (
+  <Stack.Screen
+    name={Routes.SignUp}
+    component={SignUp}
+    options={appScreensNavOptions[Routes.SignUp]}
+  />
+);
+
+export default SignupScreen;

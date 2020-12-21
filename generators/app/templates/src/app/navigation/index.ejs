@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import analytics from '@react-native-firebase/analytics';
 <%_ } _%>
 import { NavigationContainer, NavigationState } from '@react-navigation/native';
-import { navigationRef, getActiveRoute, getRoute } from 'app/components/AppNavigator/helper';
 import { CustomStatusBar } from 'app/components';
 
+import { navigationRef, getActiveRoute, getRoute } from './utils';
 import Navigator from './navigator';
 
 const AppNavigator = () => {
@@ -24,9 +24,7 @@ const AppNavigator = () => {
     }
   };
   return (
-    <NavigationContainer
-      ref={navigationRef}
-      onStateChange={onStateChange}>
+    <NavigationContainer ref={navigationRef} onStateChange={onStateChange}>
       <CustomStatusBar routeName={routeName} />
       <Navigator />
     </NavigationContainer>

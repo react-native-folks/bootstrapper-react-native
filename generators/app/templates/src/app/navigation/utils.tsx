@@ -8,8 +8,8 @@ export default function useNavigation() {
 }
 
 export function getRoute(state: any): RouteProp<any, any> {
-  const route = state.routes[state.index];
-  return route.state ? getRoute(route.state) : route;
+  const route = state?.routes[state.index];
+  return route?.state ? getRoute(route.state) : route;
 }
 
 export function getActiveRoute() {

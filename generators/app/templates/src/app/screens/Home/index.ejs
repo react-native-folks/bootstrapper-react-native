@@ -1,13 +1,22 @@
-import React, { <%_ if(features.loginandsignup) { _%>useCallback, <%_ } _%>memo } from 'react';
+import React, { <%_ if(features.loginandsignup) { _%>useCallback, <%_ } _%> } from 'react';
 import { Alert, View } from 'react-native';
 import i18next from 'i18next';
+import Routes from 'app/navigation/routes';
+<%_ if(features.tabs) { _%>
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+<%_ } else { _%>
+<%_ if(features.drawer) { _%>
+import { createDrawerNavigator } from '@react-navigation/drawer';
+<%_ } else { _%>
+import { createStackNavigator } from '@react-navigation/stack';
+<%_ } _%>
+<%_ } _%>
 <%_ if(features.loginandsignup) { _%>
 import { useDispatch } from 'react-redux';
 import { authActions } from 'redux/auth';
 <%_ } _%>
 <%_ if(features.googlemaps) { _%>
 import { Navigation } from 'interfaces/navigation';
-import routeNames from 'constants/routes';
 <%_ } _%>
 import { CustomShadowView, CustomText, CustomButton } from 'app/components';
 
@@ -54,18 +63,44 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
             <CustomText white>{pressed ? ': O' : ': D'}</CustomText>
           )}
         </CustomButton>
+        <%_ if(features.googlemaps) { _%>
+        <CustomButton
+          onPress={() => navigation.navigate(Routes.MapView)}
+          title={i18next.t('HOME:GO_TO_MAP')}
+          />
+        <%_ } _%>
     <%_ if(features.loginandsignup) { _%>
       <CustomButton onPress={handleLogout} green title={i18next.t('HOME:LOGOUT')} style={styles.logout} />
-    <%_ } _%>
-    <%_ if(features.googlemaps) { _%>
-      <CustomButton
-        onPress={() => navigation.navigate(routeNames.MapView)}
-        title={i18next.t('HOME:GO_TO_MAP')}
-        />
     <%_ } _%>
       </CustomShadowView>
     </View>
   );
 }
 
-export default memo(Home);
+<%_ if(features.tabs) { _%>
+const Tab = createBottomTabNavigator();
+
+export const TabHomeOne = () => (
+  <Tab.Screen name={Routes.Tab1} component={Home} />
+);
+
+export const TabHomeTwo = () => (
+  <Tab.Screen name={Routes.Tab2} component={Home} />
+);
+<%_ } else { _%>
+<%_ if(features.drawer) { _%>
+const Drawer = createDrawerNavigator();
+
+const HomeScreen = () => (
+  <Drawer.Screen name={Routes.Home} component={Home} />
+);
+<%_ } else { _%>
+const Stack = createStackNavigator();
+
+const HomeScreen = () => (
+  <Stack.Screen name={Routes.Home} component={Home} />
+);
+<%_ } _%>
+export default HomeScreen;
+
+<%_ } _%>

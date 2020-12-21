@@ -1,0 +1,7 @@
+export { default as AppStack } from './AppStack';
+<%_ if(features.loginandsignup) { _%>
+export { default as AuthStack } from './AuthStack';
+<%_ } _%>
+<%_ if(features.onboarding) { _%>
+export { default as OnboardingStack } from './OnboardingStack';
+<%_ } _%>

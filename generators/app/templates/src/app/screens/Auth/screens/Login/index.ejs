@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { appScreensNavOptions } from 'app/navigation/config/screensOptions';
+import { createStackNavigator } from '@react-navigation/stack';
 import i18next from 'i18next';
 import { 
   CustomButton,
@@ -21,7 +23,7 @@ import {
   <%_ if(features.socialButtons.google) { _%>GoogleButton,<%_ } _%>
   <%_ if(features.socialButtons.twitter) { _%>TwitterButton,<%_ } _%>
 } from 'app/components';
-import Routes from 'constants/routes';
+import Routes from 'app/navigation/routes';
 import { useSelector } from 'hooks/redux';
 import { Navigation } from 'interfaces/navigation';
 import { authActions } from 'redux/auth';
@@ -104,7 +106,6 @@ function Login({ navigation }: Navigation) {
           title={i18next.t('LOGIN:LOG_IN')}
           disabled={hasLoginError}
         />
-        {/* TODO replace for template file here*/}
           <%_ if(features.socialButtons.facebook) { _%>
         <FacebookButton
           onSuccess={handleSocialLogin}
@@ -141,4 +142,14 @@ function Login({ navigation }: Navigation) {
   );
 }
 
-export default Login;
+const Stack = createStackNavigator();
+
+const LoginScreen = () => (
+  <Stack.Screen
+    name={Routes.Login}
+    component={Login}
+    options={appScreensNavOptions[Routes.Login]}
+  />
+);
+
+export default LoginScreen;
