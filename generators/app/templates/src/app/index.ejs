@@ -1,19 +1,21 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'hooks/redux';
 import Reactotron from 'reactotron-react-native';
 import SplashScreen from 'react-native-splash-screen';
-import { AppNavigator } from 'app/components';
+import AppNavigator from 'app/navigation/index';
 import { apiSetup } from 'config/api';
 <%_ if(features.pushnotifications) { _%>
 import { configPushNotifications } from 'config/pushNotifications';
 <%_ } _%>
 import { authActions } from 'redux/auth';
 
+import LoadingView from './components/LoadableView';
 import './i18n';
 
 const App = () => {
   const dispatch = useDispatch();
-
+  const initialLoading = useSelector(state => state.auth.initialLoading);
   useEffect(() => {
     SplashScreen.hide();
   }, []);
@@ -26,7 +28,11 @@ const App = () => {
     dispatch(authActions.init());
   }, [dispatch]);
 
-  return <AppNavigator />;
+  return initialLoading ? (
+    <LoadingView isLoading={initialLoading} />
+  ) : (
+    <AppNavigator />
+  );
 };
 
 const MyAppWithOverlay = __DEV__ ? Reactotron.overlay(App) : App;

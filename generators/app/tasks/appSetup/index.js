@@ -12,6 +12,8 @@ const iosProjectSetup = require('./coreFiles/iosProjectSetup');
 const packageJsonScripts = require('./coreFiles/packageJsonScripts');
 const prettierrcConfigSetup = require('./coreFiles/prettierrcConfigSetup');
 const splashScreenSetup = require('./coreFiles/splashScreenSetup');
+const navigationSetup = require('./coreFiles/navigationSetup');
+
 // FEATURES FILES
 const crashlyticsFeatureFiles = require('./featuresFiles/crashlyticsFeatureFiles');
 const disableLandscapeOrientation = require('./featuresFiles/disableLandscapeOrientation');
@@ -35,6 +37,7 @@ module.exports = function index() {
   createDotEnvFilesLocally.bind(this)();
   packageJsonScripts.bind(this)();
   baseFilesTemplate.bind(this)();
+  navigationSetup.bind(this)();
   appIcons.bind(this)();
   babelConfigSetup.bind(this)();
   prettierrcConfigSetup.bind(this)();

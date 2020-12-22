@@ -1,0 +1,32 @@
+const { copyFile, copyTemplateFile } = require('../utils');
+const {
+  NAVIGATION_INTERFACES,
+  NAVIGATION_UTILS,
+  STATUS_BAR_CONSTANTS,
+  NAVIGATION_AUTH_STACK,
+  NAVIGATION_ONBOARDING_STACK,
+  APP_NAVIGATOR_PATH,
+  APP_NAVIGATION_INDEX,
+  NAVIGATION_ROUTES,
+  NAVIGATION_CONFIG,
+  NAVIGATION_APP_STACK,
+  NAVIGATION_STACK_INDEX
+} = require('../files');
+
+const FILES = [NAVIGATION_INTERFACES, NAVIGATION_UTILS, STATUS_BAR_CONSTANTS];
+
+const TEMPLATE_FILES = [
+  NAVIGATION_CONFIG,
+  APP_NAVIGATOR_PATH,
+  APP_NAVIGATION_INDEX,
+  NAVIGATION_ROUTES,
+  NAVIGATION_APP_STACK,
+  NAVIGATION_STACK_INDEX
+];
+
+module.exports = function navigationSetup() {
+  if (this.features.loginandsignup) FILES.push(NAVIGATION_AUTH_STACK);
+  if (this.features.onboarding) FILES.push(NAVIGATION_ONBOARDING_STACK);
+  TEMPLATE_FILES.forEach(copyTemplateFile.bind(this));
+  FILES.forEach(copyFile.bind(this));
+};

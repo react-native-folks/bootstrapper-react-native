@@ -1,0 +1,90 @@
+import React from 'react';
+<%_ if(features.tabs) { _%>
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+<%_ } _%>
+<%_ if(features.drawer) { _%>
+import { createDrawerNavigator } from '@react-navigation/drawer';
+<%_ } _%>
+<%_ if(features.drawer || features.tabs) { _%>
+import Routes from 'app/navigation/routes';
+import { createStackNavigator } from '@react-navigation/stack';
+import {
+  <%_ if(features.drawer) { _%>
+  drawerStackNavConfig,
+  <%_ } _%>
+  <%_ if(features.tabs) { _%>
+  tabNavConfig,
+  <%_ } _%>
+} from 'app/navigation/config/screensOptions';
+<%_ } _%>
+
+<%_ if(features.tabs) { _%>
+import { TabHomeOne, TabHomeTwo } from 'app/screens/Home';
+<%_ } else { _%>
+import Home from 'app/screens/Home';
+<%_ } _%>
+<%_ if(features.googlemaps) { _%>
+import MapView from 'app/screens/MapView';
+<%_ } _%>
+
+<%_ if(features.drawer || features.tabs) { _%>
+const Stack = createStackNavigator();
+<%_ } _%>
+
+<%_ if(features.tabs) { _%>
+
+const Tab = createBottomTabNavigator();
+function HomeTabs() {
+  return (
+    <Tab.Navigator {...tabNavConfig}>
+      {TabHomeOne()}
+      {TabHomeTwo()}
+    </Tab.Navigator>
+  );
+}
+<%_ } _%>
+<%_ if(features.drawer) { _%>
+
+const Drawer = createDrawerNavigator();
+function DrawerNavigator() {
+  return (
+    <Drawer.Navigator {...drawerStackNavConfig}>
+      <%_ if(features.tabs) { _%>
+      <Drawer.Screen name={Routes.Home} component={HomeTabs} />
+      <%_ } else { _%>
+      {Home()}
+      <%_ } _%>
+      <%_ if(features.googlemaps) { _%>
+      {MapView()}
+      <%_ } _%>
+    </Drawer.Navigator>
+  );
+}
+
+export default function AppStack() {
+  return (
+    <>
+      <Stack.Screen name={Routes.Home} component={DrawerNavigator} />
+      <%_ if(features.googlemaps) { _%>
+      {MapView()}
+      <%_ } _%>
+    </>
+  );
+}
+<%_ } else { _%>
+
+export default function AppStack() {
+  return (
+    <>
+      <%_ if(features.tabs) { _%>
+      <Stack.Screen name={Routes.Home} component={HomeTabs} />
+      <%_ } else { _%>
+      {Home()}
+      <%_ } _%>
+      <%_ if(features.googlemaps) { _%>
+      {MapView()}
+      <%_ } _%>
+    </>
+  );
+}
+<%_ } _%>

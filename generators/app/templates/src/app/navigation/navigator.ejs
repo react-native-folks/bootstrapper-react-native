@@ -1,0 +1,62 @@
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+<%_ if(features.onboarding || features.loginandsignup) { _%>
+import { useSelector } from 'hooks/redux';
+<%_ } _%>
+import {
+  <%_ if(features.loginandsignup) { _%>
+  authStackNavConfig,
+  <%_ } _%>
+  appStackNavConfig,
+} from './config/screensOptions';
+import {
+  <%_ if(features.loginandsignup) { _%>
+  AuthStack,
+  <%_ } _%>
+  AppStack,
+  <%_ if(features.onboarding) { _%>
+  OnboardingStack,
+  <%_ } _%>
+} from './stacks';
+
+const Stack = createStackNavigator();
+
+<%_ if(features.onboarding) { _%>
+const Navigator = () => {
+  const hasAccessOnboarding = useSelector(
+    state => state.auth.hasAccessOnboarding
+  );
+
+  <%_ if(features.loginandsignup) { _%>
+  const currentUser = useSelector(state => state.auth.currentUser);
+
+  const defaultStackConfig = currentUser ? appStackNavConfig : authStackNavConfig;
+  
+  return (
+    <Stack.Navigator {...defaultStackConfig}>
+      {currentUser ? (hasAccessOnboarding ? AppStack() : OnboardingStack()) : AuthStack()}
+    </Stack.Navigator>
+  );
+  <%_ } else { _%>
+  return (
+    <Stack.Navigator {...appStackNavConfig}>
+      {hasAccessOnboarding ? AppStack() : OnboardingStack()}
+    </Stack.Navigator>
+  );
+  <%_ }_%>
+};
+<%_ } else { _%>
+const Navigator = () => {
+  <%_ if(features.loginandsignup) { _%>
+  const currentUser = useSelector(state => state.auth.currentUser);
+
+  const defaultStackConfig = currentUser ? appStackNavConfig : authStackNavConfig;
+  
+  return <Stack.Navigator {...defaultStackConfig}>{currentUser ? AppStack() : AuthStack()}</Stack.Navigator>;
+  <%_ } else { _%>
+  return <Stack.Navigator {...appStackNavConfig}>{AppStack()}</Stack.Navigator>;
+  <%_ } _%>
+};
+<%_ } _%>
+
+export default Navigator;
