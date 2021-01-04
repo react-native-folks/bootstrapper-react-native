@@ -72,25 +72,10 @@ function updateAppProguardRules() {
   );
 }
 
-function disableR8ForReleases() {
-  const gradleProperties = this.fs.read(
-    `${this.projectName}/android/gradle.properties`
-  );
-  const updatedGradleProperties = gradleProperties.replace(
-    'android.enableJetifier=true',
-    'android.enableJetifier=true\nandroid.enableR8=false'
-  );
-  this.fs.write(
-    `${this.projectName}/android/gradle.properties`,
-    updatedGradleProperties
-  );
-}
-
 module.exports = function androidProjectSetup() {
   updateAppBuildGradle.bind(this)();
   addRNGestureHandlerConfig.bind(this)();
   updateAppProguardRules.bind(this)();
-  disableR8ForReleases.bind(this)();
 };
 
 /*
