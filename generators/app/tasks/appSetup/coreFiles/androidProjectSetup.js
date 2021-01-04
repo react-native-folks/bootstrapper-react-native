@@ -22,12 +22,6 @@ function updateAppBuildGradle() {
     'targetSdkVersion rootProject.ext.targetSdkVersion',
     `targetSdkVersion rootProject.ext.targetSdkVersion\n\t\tresValue "string", "build_config_package", "com.${this.projectName.toLowerCase()}"\n\t\tmultiDexEnabled true`
   );
-  if (this.features.socialloginbuttons) {
-    updatedBuildGradleContent = updatedBuildGradleContent.replace(
-      'multiDexEnabled true',
-      'resValue "string", "FACEBOOK_APP_ID", project.env.get("FACEBOOK_APP_ID")\n\t\tmultiDexEnabled true'
-    );
-  }
   updatedBuildGradleContent = updatedBuildGradleContent.replace(
     'minifyEnabled enableProguardInReleaseBuilds',
     'shrinkResources true\n\t\t\tminifyEnabled enableProguardInReleaseBuilds'
@@ -78,25 +72,10 @@ function updateAppProguardRules() {
   );
 }
 
-function disableR8ForReleases() {
-  const gradleProperties = this.fs.read(
-    `${this.projectName}/android/gradle.properties`
-  );
-  const updatedGradleProperties = gradleProperties.replace(
-    'android.enableJetifier=true',
-    'android.enableJetifier=true\nandroid.enableR8=false'
-  );
-  this.fs.write(
-    `${this.projectName}/android/gradle.properties`,
-    updatedGradleProperties
-  );
-}
-
 module.exports = function androidProjectSetup() {
   updateAppBuildGradle.bind(this)();
   addRNGestureHandlerConfig.bind(this)();
   updateAppProguardRules.bind(this)();
-  disableR8ForReleases.bind(this)();
 };
 
 /*

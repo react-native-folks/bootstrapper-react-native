@@ -15,14 +15,14 @@ function addGoogleMapsToNativeProjects() {
 
   // Androd manifest
   let manifest = this.fs.read(
-    `${this.projectName}/android/app/src/main/AndroidMAnifest.xml`
+    `${this.projectName}/android/app/src/main/AndroidManifest.xml`
   );
   manifest = manifest.replace(
     '</application>',
     '\t<meta-data\n\t\t\t\tandroid:name="com.google.android.geo.API_KEY"\n\t\t\t\tandroid:value="@string/GOOGLE_MAPS_API_KEY"/>\n\t\t\t<uses-library android:name="org.apache.http.legacy" android:required="false"/>\n\t\t</application>'
   );
   this.fs.write(
-    `${this.projectName}/android/app/src/main/AndroidMAnifest.xml`,
+    `${this.projectName}/android/app/src/main/AndroidManifest.xml`,
     manifest
   );
 

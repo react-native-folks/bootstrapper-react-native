@@ -188,6 +188,14 @@ yarn run android:build.qa
 
 It will generate the apk file in the path `android/app/build/outputs/apk/[environment]/release/app-[environment]-release.apk`
 
+#### Notes:
+If you get an out of memory error building Android on Release mode, add the next line to `gradle.properties`
+
+```
+org.gradle.jvmargs=-Xmx4096m -XX:MaxPermSize=4096m -XX:+HeapDumpOnOutOfMemoryError
+````
+
+
 ### Uploading build to Firebase App Distribution
 Use the following commands from <%= projectName %>/android:
 

@@ -47,7 +47,7 @@ function addSocialsToNativeProjects() {
       );
 
       if (!androidGradle.includes('com.google.gms:google-services')) {
-        androidGradle.replace(
+        androidAppGradle = androidGradle.replace(
           'dependencies {',
           "dependencies {\n\t\tclasspath 'com.google.gms:google-services:4.3.3'"
         );
@@ -60,7 +60,7 @@ function addSocialsToNativeProjects() {
       );
 
       if (!androidAppGradle.includes('com.google.gms.google-services')) {
-        androidAppGradle.replace(
+        androidAppGradle = androidAppGradle.replace(
           'apply plugin: "com.android.application"',
           'apply plugin: "com.android.application"\napply plugin: "com.google.gms.google-services"'
         );
@@ -85,6 +85,20 @@ function addSocialsToNativeProjects() {
       iosInfoPlistContent = iosInfoPlistContent.replace(
         '<key>NSLocationWhenInUseUsageDescription</key>',
         `<key>FacebookAppID</key>\n\t<string>$(FACEBOOK_APP_ID)</string>\n\t<key>${this.projectName}</key>\n\t<string>MyGreatAppTesting</string>\n\t<key>NSLocationWhenInUseUsageDescription</key>`
+      );
+
+      let androidGradle = this.fs.read(
+        `${this.projectName}/android/build.gradle`
+      );
+
+      androidGradle = androidGradle.replace(
+        'multiDexEnabled true',
+        'resValue "string", "FACEBOOK_APP_ID", project.env.get("FACEBOOK_APP_ID")\n\t\tmultiDexEnabled true'
+      );
+
+      this.fs.write(
+        `${this.projectName}/android/app/build.gradle`,
+        androidGradle
       );
 
       let androidManifestContent = this.fs.read(
