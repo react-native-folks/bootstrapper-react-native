@@ -47,7 +47,7 @@ function addSocialsToNativeProjects() {
       );
 
       if (!androidGradle.includes('com.google.gms:google-services')) {
-        androidAppGradle = androidGradle.replace(
+        androidGradle = androidGradle.replace(
           'dependencies {',
           "dependencies {\n\t\tclasspath 'com.google.gms:google-services:4.3.3'"
         );
@@ -88,7 +88,7 @@ function addSocialsToNativeProjects() {
       );
 
       let androidGradle = this.fs.read(
-        `${this.projectName}/android/build.gradle`
+        `${this.projectName}/android/app/build.gradle`
       );
 
       androidGradle = androidGradle.replace(
