@@ -4,7 +4,7 @@ function updateAppBuildGradle() {
   );
   let updatedBuildGradleContent = buildGradleContent.replace(
     'apply plugin: "com.android.application"',
-    'apply plugin: "com.android.application"\n\nproject.ext.defaultEnvFile = ".envs/develop.env"\nproject.ext.envConfigFiles = [\n\tdevelop: ".envs/develop.env",\n\tstaging: ".envs/staging.env",\n\tproduction: ".envs/production.env"\n]\napply from: project(\':react-native-config\').projectDir.getPath() + "/dotenv.gradle"'
+    'apply from: "version.gradle"\napply plugin: "com.android.application"\n\nproject.ext.defaultEnvFile = ".envs/develop.env"\nproject.ext.envConfigFiles = [\n\tdevelop: ".envs/develop.env",\n\tstaging: ".envs/staging.env",\n\tproduction: ".envs/production.env"\n]\napply from: project(\':react-native-config\').projectDir.getPath() + "/dotenv.gradle"'
   );
   updatedBuildGradleContent = updatedBuildGradleContent.replace(
     'enableHermes: false,',
@@ -13,6 +13,14 @@ function updateAppBuildGradle() {
   updatedBuildGradleContent = updatedBuildGradleContent.replace(
     'def enableProguardInReleaseBuilds = false',
     'def enableProguardInReleaseBuilds = true'
+  );
+  updatedBuildGradleContent = updatedBuildGradleContent.replace(
+    'versionCode 1',
+    'versionCode generateVersionCode()'
+  );
+  updatedBuildGradleContent = updatedBuildGradleContent.replace(
+    'versionName "1.0"',
+    'versionName generateVersionName()\nresValue "string", "app_name", project.hasProperty(\'appName\') ? project.property(\'appName\') : "@string/default_app_name"\nsetProperty("archivesBaseName", generateBuildFileName())'
   );
   updatedBuildGradleContent = updatedBuildGradleContent.replace(
     'compileSdkVersion rootProject.ext.compileSdkVersion',
@@ -37,6 +45,18 @@ function updateAppBuildGradle() {
   this.fs.write(
     `${this.projectName}/android/app/build.gradle`,
     updatedBuildGradleContent
+  );
+
+  const androidResValuesContent = this.fs.read(
+    `${this.projectName}/android/app/src/main/res/values/strings.xml`
+  );
+  let updatedAndroidResValuesContent = androidResValuesContent.replace(
+    'app_name',
+    'default_app_name'
+  );
+  this.fs.write(
+    `${this.projectName}/android/app/src/main/res/values/strings.xml`,
+    updatedAndroidResValuesContent
   );
 }
 
@@ -72,10 +92,25 @@ function updateAppProguardRules() {
   );
 }
 
+function updateGradleProperties() {
+  const gradlePropertiesContent = this.fs.read(
+    `${this.projectName}/android/gradle.properties`
+  );
+  let updatedGradlePropertiesContent = gradlePropertiesContent.replace(
+    '# org.gradle.jvmargs=-Xmx2048m',
+    'org.gradle.jvmargs=-Xmx2048m'
+  );
+  this.fs.write(
+    `${this.projectName}/android/gradle.properties`,
+    updatedGradlePropertiesContent
+  );
+}
+
 module.exports = function androidProjectSetup() {
   updateAppBuildGradle.bind(this)();
   addRNGestureHandlerConfig.bind(this)();
   updateAppProguardRules.bind(this)();
+  updateGradleProperties.bind(this)();
 };
 
 /*

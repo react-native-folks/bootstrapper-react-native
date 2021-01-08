@@ -1,5 +1,6 @@
 const { copyFile, copyTemplateFile } = require('../utils');
 const {
+  ANDROID_VERSION_GRADLE,
   FASTLANE_ANDROID_PATH,
   FASTLANE_IOS_PATH,
   GEMFILE_PATH,
@@ -98,6 +99,7 @@ const FILES = [
 ];
 
 const TEMPLATE_FILES = [
+  ANDROID_VERSION_GRADLE,
   README,
   REDUX_STORE,
   REACTOTRON_CONFIG,

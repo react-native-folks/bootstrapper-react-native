@@ -4,11 +4,11 @@ module.exports = function packgeJsonScripts() {
   );
   packageJson.scripts = packageJson.scripts || {};
   packageJson.scripts['android:build.develop'] =
-    'cd android && ENVFILE=.env/develop.env ./gradlew clean && ./gradlew assembleDevelopRelease';
+    'cd android && ./gradlew clean assembleDevelopRelease';
   packageJson.scripts['android:build.staging'] =
-    'cd android && ENVFILE=.env/staging.env ./gradlew clean && ./gradlew assembleStagingRelease';
+    'cd android && ./gradlew clean assembleStagingRelease';
   packageJson.scripts['android:build.production'] =
-    'cd android && ENVFILE=.env/production.env ./gradlew clean && ./gradlew bundleProductionRelease';
+    'cd android && ./gradlew clean bundleProductionRelease';
   packageJson.scripts['android:clean'] = 'cd android/ && ./gradlew clean';
   packageJson.scripts.android =
     'npx react-native run-android --variant developDebug --appIdSuffix develop';
