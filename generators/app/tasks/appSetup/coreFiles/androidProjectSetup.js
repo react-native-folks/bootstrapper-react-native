@@ -20,7 +20,7 @@ function updateAppBuildGradle() {
   );
   updatedBuildGradleContent = updatedBuildGradleContent.replace(
     'versionName "1.0"',
-    'versionName generateVersionName()\nresValue "string", "app_name", project.hasProperty(\'appName\') ? project.property(\'appName\') : "@string/default_app_name"\nsetProperty("archivesBaseName", generateBuildFileName())'
+    'versionName generateVersionName()\n\t\tresValue "string", "app_name", project.hasProperty(\'appName\') ? project.property(\'appName\') : "@string/default_app_name"\n\t\tsetProperty("archivesBaseName", generateBuildFileName())'
   );
   updatedBuildGradleContent = updatedBuildGradleContent.replace(
     'compileSdkVersion rootProject.ext.compileSdkVersion',

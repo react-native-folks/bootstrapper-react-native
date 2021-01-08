@@ -12,40 +12,30 @@ Install _fastlane_ using
 ```
 [sudo] gem install fastlane -NV
 ```
-or alternatively using `brew cask install fastlane`
+or alternatively using `brew install fastlane`
 
 # Available Actions
 ## Android
-### android build
+### android distribute_develop
 ```
-fastlane android build
+fastlane android distribute_develop
 ```
-Build
-### android deploy
+Submit a new Develop Release Build to Firebase App Distribution.
+### android distribute_staging
 ```
-fastlane android deploy
+fastlane android distribute_staging
 ```
-Deploy a new version to the Google Play
-### android firebase_dev
+Submit a new Stage Release Build to Firebase App Distribution.
+### android distribute_production
 ```
-fastlane android firebase_dev
+fastlane android distribute_production
 ```
-Deploy dev to firebase
-### android firebase_staging
+Submit a new Production Release Build to Firebase App Distribution.
+### android release_production
 ```
-fastlane android firebase_staging
+fastlane android release_production
 ```
-Deploy staging to firebase
-### android firebase_prod
-```
-fastlane android firebase_prod
-```
-Deploy prod to firebase
-### android upload_app_to_playstore
-```
-fastlane android upload_app_to_playstore
-```
-Deploy prod to playstore
+Submit a new Production Release Build to Google Play Console.
 
 ----
 

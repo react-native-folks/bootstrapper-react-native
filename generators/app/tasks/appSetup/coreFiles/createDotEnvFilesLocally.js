@@ -17,7 +17,11 @@ SCHEME_NAME = 'develop'
 WORKSPACE_NAME = '${this.projectName}.xcworkspace'
 
 # Fastlane Android
-SOME_ANDROID_VAR=XXXX
+APP_NAME="${this.projectName} Develop"
+PACKAGE_NAME="${this.bundleId}.develop"
+# Modify here tester groups name that the build will be distributed
+# e.g: "develop,staging,auctionsync-staff"
+GROUPS="develop"
 `;
 
   const baseStagingEnvContent = `# Fastlane vars
@@ -42,7 +46,11 @@ ITC_TEAM_ID = '#{TEAM_ID}'
 ITC_TEAM_NAME = '#{TEAM_NAME}'
 
 # Fastlane Android
-SOME_ANDROID_VAR=XXXX
+APP_NAME="${this.projectName} Staging"
+PACKAGE_NAME="${this.bundleId}.staging"
+# Modify here tester groups name that the build will be distributed
+# e.g: "develop,staging,auctionsync-staff"
+GROUPS="develop"
 `;
 
   const baseProductionEnvContent = `# Fastlane vars
@@ -67,8 +75,11 @@ ITC_TEAM_ID = '#{TEAM_ID}'
 ITC_TEAM_NAME = '#{TEAM_NAME}'
 
 # Fastlane Android
-SOME_ANDROID_VAR=XXXX
-PACKAGE_NAME = "myAppPackageName"
+APP_NAME="${this.projectName}"
+PACKAGE_NAME="${this.bundleId}"
+# Modify here tester groups name that the build will be distributed
+# e.g: "develop,staging,auctionsync-staff"
+GROUPS="develop"
 `;
 
   if (this.features.socialButtons.facebook) {

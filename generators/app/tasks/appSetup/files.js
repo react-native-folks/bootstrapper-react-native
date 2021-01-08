@@ -25,7 +25,8 @@ module.exports.JEST_CONFIG_FILE = 'jest.config.js';
 module.exports.REACT_NATIVE_CONFIG = 'react-native.config.js';
 module.exports.README = 'README.md';
 module.exports.TSCONFIG_FILE = 'tsconfig.json';
-module.exports.GEMFILE_PATH = 'ios/Gemfile';
+module.exports.ANDROID_GEMFILE = 'android/Gemfile';
+module.exports.IOS_GEMFILE = 'ios/Gemfile';
 module.exports.ANDROID_VERSION_GRADLE = `${module.exports.ANDROID_APP_PATH}/version.gradle`;
 
 // TESTS

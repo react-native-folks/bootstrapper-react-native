@@ -1,52 +1,81 @@
-# This file contains all lane to use on Fastlane.
-# Private lanes can receive different params from user lanes (declared on fastfile)
-# to setup different environment or that be needed
-
 platform :android do
-  private_lane :firebase_upload do |options|
-    puts("Getting environment...")
-    env = options[:env]
-    puts "Environment selected: #{env}"
-    environment = get_environment_info(environment: env)
-    desc "Deploy to firebase"
-    puts "Flavor: #{environment["FLAVOR"]}"
-    puts "BUILD_TYPE: #{environment["BUILD_TYPE"]}"
-    
-    gradle(
-      task: "clean assemble",
-      flavor: environment["FLAVOR"],
-      build_type: environment["BUILD_TYPE"],
-    )
-    desc "submit build to firebase app distribution"
-    firebase_app_distribution(
-        app: environment["FIREBASE_APP_ID"],
-        firebase_cli_token: ENV['FIREBASE_TOKEN'],
-        release_notes_file: "../release_notes.txt", # Put release_notes file on react native root project to track to firebase
-        groups: "internal"
-    )
+
+  desc "Validate"
+  private_lane :validate do |options|
+    # TODO: Apply here valiations such as
+    # there is tokens setted, app ids, app configs, etc
+    UI.message "Validating..."
   end
 
-  private_lane :deploy_to_play_store do
-    environment = get_environment_info(environment: :release)
+  desc "Builds the app creating the `.apk` or `.aab` files"
+  private_lane :build_application do |options|
+    environment = options[:environment]
+    is_aab = options[:aab]
+    version_name = options[:version_name]
+    build_num = options[:build_number]
+      
+    buid_task = get_build_task(environment: environment, aab: is_aab)
+    app_Name = get_environment_info(environment: environment)["APP_NAME"]
+
     gradle(
-      task: "clean bundle",
-      flavor: environment["FLAVOR"],
-      build_type: environment["BUILD_TYPE"],
+      task: buid_task[:task],
+      flavor: buid_task[:flavor],
+      build_type: "Release",
       properties: {
-        "MY_APP_STORE_FILE" => "myApp.keystore", # This file should be on android root folder to run locally (or CI)
-        "MY_APP_STORE_PASSWORD" => ENV['KEYSTORE_PASS'],
-        "MY_APP_UPLOAD_KEY_ALIAS" => "my-app-alias",
-        "MY_APP_UPLOAD_KEY_PASSWORD" => ENV['KEYSTORE_PASS'],
-      },
-      print_command: false
+        **(!is_aab ? { appName: app_Name } : {})
+      }
     )
 
-    upload_to_play_store(
-      release_status: "draft",
-      package_name: environment[PACKAGE_NAME],
-      aab: "app/build/outputs/bundle/productionRelease/app-production-release.aab",
-      track: "production",
-      json_key: "json_key.json"  # This file should be on android root folder to run locally (or CI)
+  end
+
+  desc "Distribute the app to Firebase App Distribution"
+  private_lane :distribute_to_firebase do |options|
+    environment = options[:environment]
+
+    desc "Building .apk file..."
+    build_application(
+      environment: environment, 
+      version_name: options[:version_name],
+      build_number: options[:build_number],
+    )
+
+    desc "Distributing application to Firebase App Distribution..."
+    firebase_info = get_firebase_info(environment: environment)
+    firebase_app_distribution(
+      app: firebase_info[:app],
+      groups: firebase_info[:groups],
     )
   end
+
+  desc "Release the app to Google Play Console"
+  private_lane :release_to_play_console do |options|
+    environment = options[:environment]
+
+    desc "Building .aab file..."
+    build_application(
+      environment: environment, 
+      version_name: options[:version_name],
+      build_number: options[:build_number],
+      aab: true
+    )
+
+    desc "Distributing application to Firebase App Distribution..."
+    play_console_info = get_play_console_info(environment: environment)
+    upload_to_play_store(
+      package_name: play_console_info[:package_name],
+      json_key: play_console_info[:key_path], 
+      track: play_console_info[:track],
+      release_status: play_console_info[:release_status],
+      skip_upload_apk: true
+    )
+  end
+
+  def input(message, default)
+    if ENV["RUNNING_ON_CI"] == "true"
+      default
+    else
+      UI.input message
+    end
+  end
+
 end
