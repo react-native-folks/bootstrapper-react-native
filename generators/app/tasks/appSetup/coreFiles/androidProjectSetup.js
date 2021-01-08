@@ -4,7 +4,7 @@ function updateAppBuildGradle() {
   );
   let updatedBuildGradleContent = buildGradleContent.replace(
     'apply plugin: "com.android.application"',
-    'apply plugin: "com.android.application"\n\nproject.ext.envConfigFiles = [\n\tdevelopdebug: ".env/develop.env",\n\tdeveloprelease: ".env/develop.env",\n\tstagingdebug: ".env/staging.env",\n\tstagingrelease: ".env/staging.env",\n\tproductiondebug: ".env/production.env",\n\tproductionrelease: ".env/production.env"\n]\napply from: project(\':react-native-config\').projectDir.getPath() + "/dotenv.gradle"'
+    'apply plugin: "com.android.application"\n\nproject.ext.defaultEnvFile = ".envs/develop.env"\nproject.ext.envConfigFiles = [\n\tdevelop: ".envs/develop.env",\n\tstaging: ".envs/staging.env",\n\tproduction: ".envs/production.env"\n]\napply from: project(\':react-native-config\').projectDir.getPath() + "/dotenv.gradle"'
   );
   updatedBuildGradleContent = updatedBuildGradleContent.replace(
     'enableHermes: false,',

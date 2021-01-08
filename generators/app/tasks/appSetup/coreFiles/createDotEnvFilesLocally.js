@@ -96,15 +96,15 @@ PACKAGE_NAME = "myAppPackageName"
   }
 
   this.fs.write(
-    `${this.projectName}/.env/develop.env`,
+    `${this.projectName}/.envs/develop.env`,
     baseDevelopEnvContent.concat(extraEnvContent)
   );
   this.fs.write(
-    `${this.projectName}/.env/staging.env`,
+    `${this.projectName}/.envs/staging.env`,
     baseStagingEnvContent.concat(extraEnvContent)
   );
   this.fs.write(
-    `${this.projectName}/.env/production.env`,
+    `${this.projectName}/.envs/production.env`,
     baseProductionEnvContent.concat(extraEnvContent)
   );
 };

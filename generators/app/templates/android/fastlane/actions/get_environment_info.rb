@@ -8,7 +8,7 @@ module Fastlane
       # this script returns the hash with all env variables for that environment.
 
       # File with env variables by environment
-      ENV_FOLDER = (Dir.pwd + "/../.env").freeze
+      ENV_FOLDER = (Dir.pwd + "/../.envs").freeze
       
       ENVIRONMENTS_FILES = {
         develop: ENV_FOLDER + "/develop.env",
