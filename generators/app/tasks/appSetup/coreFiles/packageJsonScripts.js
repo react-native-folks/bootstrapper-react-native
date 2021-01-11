@@ -3,13 +3,25 @@ module.exports = function packgeJsonScripts() {
     this.destinationPath(this.projectName, 'package.json')
   );
   packageJson.scripts = packageJson.scripts || {};
+  packageJson.scripts.gradlew = 'cd android && ./gradlew';
   packageJson.scripts['android:build.develop'] =
-    'cd android && ENVFILE=.env/develop.env ./gradlew clean && ./gradlew assembleDevelopRelease';
+    'yarn gradlew clean assembleDevelopRelease';
   packageJson.scripts['android:build.staging'] =
-    'cd android && ENVFILE=.env/staging.env ./gradlew clean && ./gradlew assembleStagingRelease';
+    'yarn gradlew clean assembleStagingRelease';
   packageJson.scripts['android:build.production'] =
-    'cd android && ENVFILE=.env/production.env ./gradlew clean && ./gradlew bundleProductionRelease';
-  packageJson.scripts['android:clean'] = 'cd android/ && ./gradlew clean';
+    'yarn gradlew clean bundleProductionRelease';
+  packageJson.scripts['android:clean'] = 'yarn gradlew clean';
+  packageJson.scripts['fastlane:android'] =
+    'cd android && bundle exec fastlane android';
+  packageJson.scripts['fastlane:ios'] = 'cd ios && bundle exec fastlane ios';
+  packageJson.scripts['distribute:develop'] =
+    'yarn fastlane:android distribute_develop';
+  packageJson.scripts['distribute:staging'] =
+    'yarn fastlane:android distribute_staging';
+  packageJson.scripts['distribute:production'] =
+    'yarn fastlane:android distribute_production';
+  packageJson.scripts['publish:production'] =
+    'yarn fastlane:android release_production';
   packageJson.scripts.android =
     'npx react-native run-android --variant developDebug --appIdSuffix develop';
   packageJson.scripts.clean =

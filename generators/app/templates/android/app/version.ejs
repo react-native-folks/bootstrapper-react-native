@@ -1,0 +1,58 @@
+import groovy.json.JsonSlurper
+
+def getNpmVersion() {
+    def inputFile = new File("${project.rootDir}/../package.json")
+    def packageJson = new JsonSlurper().parseText(inputFile.text)
+    packageJson["version"]
+}
+
+def getNpmVersionArray() { // major [0], minor [1], patch [2]
+    def (major, minor, patch) = getNpmVersion().tokenize('.')
+    [Integer.parseInt(major), Integer.parseInt(minor), Integer.parseInt(patch)] as int[]
+}
+
+def getVersionNameMajor() { getNpmVersionArray()[0] }
+def getVersionNameMinor() { getNpmVersionArray()[1] }
+def getVersionNamePatch() { getNpmVersionArray()[2] }
+
+def String getHEADCommitHash() {
+    // Return the latest merge commit hash of the current branch
+    'git rev-parse HEAD --short --count --merges --first-parent'.execute().text.trim()
+}
+
+def Integer getHEADCommitCount() {
+    // Return the merge commits amount of the current branch
+    Integer.parseInt('git rev-list HEAD --count --merges --first-parent'.execute().text.trim())
+}
+
+def Integer getAppVersionCode() { 
+    getVersionNameMajor() * 10000000 + getVersionNameMinor() * 100000 + getVersionNamePatch() * 1000 + getHEADCommitCount() 
+}
+
+def String getAppVersionName() { 
+    "${getVersionNameMajor()}.${getVersionNameMinor()}.${getVersionNamePatch()}"
+}
+
+def Integer generateVersionCode() {
+    if (project.hasProperty('versionCode')) {
+        return project.property('versionCode') as int;
+    }
+    getAppVersionCode()
+}
+
+def String generateVersionName() {
+    if (project.hasProperty('versionName')) {
+        return project.property('versionName');
+    }
+    "${getAppVersionName()} (${getAppVersionCode()})"
+}
+
+def String generateBuildFileName(env) {
+    "<%= projectName %>-${getAppVersionName()}-${generateVersionCode()}"
+}
+
+ext {
+    generateVersionCode = this.&generateVersionCode
+    generateVersionName = this.&generateVersionName
+    generateBuildFileName = this.&generateBuildFileName
+}
