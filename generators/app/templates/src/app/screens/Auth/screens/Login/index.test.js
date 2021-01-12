@@ -1,94 +1,123 @@
 import React from 'react';
-import * as redux from 'react-redux';
-import {
-  render,
-  fireEvent,
-  waitFor,
-  waitForElementToBeRemoved
-} from 'react-native-testing-library';
-import Login from 'app/screens/Auth/screens/Login';
+import * as reactRedux from 'react-redux';
+import * as reduxHook from 'hooks/redux';
+import { fireEvent, render, act } from 'react-native-testing-library';
+import { Login } from 'app/screens/Auth/screens/Login';
+
+const EMAIL_INPUT_ID = 'email';
+const PASS_INPUT_ID = 'password';
+const SIGN_UP_BUTTON = 'signup-button';
+const ERROR_MESSAGE_ID = 'login-error-message';
+const INPUT_ERROR_EMAIL_ID = 'input-error-email';
+const INPUT_ERROR_PASS_ID = 'input-error-pass';
+const SUBMIT_BUTTON_ID = 'submit-button';
 
 const INVALID_EMAIL = 'hello';
 const VALID_EMAIL = 'email@email.com';
 const VALID_PASSWORD = 'HelloWord1234';
 
-describe('<Login />', () => {
-  test('Invalid inputs', async () => {
-    const { getByText, getAllByText, getByTestId } = render(<Login />);
+describe('Login Screen', () => {
+  let useDispatchmock = jest.fn();
+  const useDispatchSpy = jest.spyOn(reactRedux, 'useDispatch');
+  useDispatchSpy.mockImplementation(() => useDispatchmock);
+  const navMock = {
+    navigate: jest.fn()
+  };
 
-    const submitButton = getByText('Iniciar sesión');
-    const emailInput = getByTestId('Email');
+  const loginComponent = (props: any = {}) => (
+    <Login navigation={navMock} {...props} />
+  );
 
-    fireEvent.press(submitButton);
-    await waitFor(() => getAllByText('Este campo es obligatorio'));
-    expect(getAllByText('Este campo es obligatorio')).toHaveLength(2);
-
-    fireEvent.changeText(emailInput, INVALID_EMAIL);
-    fireEvent.press(submitButton);
-
-    await waitFor(() => getByText('El formato del mail es inválido'));
-
-    fireEvent.changeText(emailInput, VALID_EMAIL);
-    fireEvent.press(submitButton);
-
-    await waitForElementToBeRemoved(() =>
-      getByText('El formato del mail es inválido')
-    );
+  beforeEach(() => {
+    useDispatchmock.mockClear();
+    navMock.navigate.mockClear();
   });
 
-  test('Log in', async () => {
-    const navigation = {
-      navigate: jest.fn()
-    };
-    const useDispatchSpy = jest.spyOn(redux, 'useDispatch');
-    const dispatch = jest.fn();
-    useDispatchSpy.mockReturnValue(dispatch);
-    const { getByText, getByTestId } = render(
-      <Login navigation={navigation} />
-    );
-    const emailInput = getByTestId('Email');
-    const passwordInput = getByTestId('Contraseña');
-    const submitButton = getByText('Iniciar sesión');
-    await waitFor(async () => {
-      await fireEvent.changeText(emailInput, VALID_EMAIL);
-    });
-    await waitFor(async () => {
-      await fireEvent.changeText(passwordInput, VALID_PASSWORD);
-    });
-    await waitFor(async () => {
-      await fireEvent.press(submitButton);
-    });
-    expect(dispatch).toHaveBeenCalled();
-    useDispatchSpy.mockClear();
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
-  test('Sign up', () => {
-    const navigation = {
-      navigate: jest.fn()
-    };
-    const spy = jest.spyOn(navigation, 'navigate');
-    const { getByText } = render(<Login navigation={navigation} />);
-    const button = getByText('No tenes cuenta? Registrate!');
-    fireEvent.press(button);
-    expect(spy).toHaveBeenCalled();
-    spy.mockClear();
-  });
-
-  test('Login Snapshot', () => {
-    const spy = jest.spyOn(redux, 'useSelector');
-    spy.mockReturnValue({ auth: { currentUserError: null } });
-    const login = render(<Login />).toJSON();
+  test('Basic Login Snapshot', () => {
+    const login = render(loginComponent()).toJSON();
     expect(login).toMatchSnapshot();
-    spy.mockClear();
   });
 
-  test('Login Error Snapshot', () => {
-    const spy = jest.spyOn(redux, 'useSelector');
-    spy.mockReturnValue({ auth: { currentUserError: 'error' } });
-    const login = render(<Login />);
-    const { getByText } = login;
-    getByText('Email y/o contraseña incorrecto/s');
+  test('Login Error Snapshot', async () => {
+    const selectorHookSpy = jest.spyOn(reduxHook, 'useSelector');
+    selectorHookSpy.mockReturnValueOnce(false).mockReturnValueOnce(true);
+    const login = render(loginComponent());
     expect(login.toJSON()).toMatchSnapshot();
-    spy.mockClear();
+    selectorHookSpy.mockClear();
+  });
+
+  test('error message should be displayed if screen receive error from store', async () => {
+    const selectorHookSpy = jest.spyOn(reduxHook, 'useSelector');
+    selectorHookSpy.mockReturnValueOnce(false).mockReturnValueOnce(true);
+    const { queryByTestId } = render(loginComponent());
+    const generalMessageError = queryByTestId(ERROR_MESSAGE_ID);
+    expect(generalMessageError).not.toBeNull();
+  });
+
+  test('After submit without complete fields an error should be displayed on each field', async () => {
+    const { getByTestId, queryByTestId } = render(loginComponent());
+    const submitButton = getByTestId(SUBMIT_BUTTON_ID);
+    // Sanity expectation
+    expect(queryByTestId(INPUT_ERROR_EMAIL_ID)).toBeNull();
+    expect(queryByTestId(INPUT_ERROR_PASS_ID)).toBeNull();
+    await act(async () => {
+      fireEvent.press(submitButton);
+    });
+    expect(getByTestId(INPUT_ERROR_EMAIL_ID)).not.toBeNull();
+    expect(getByTestId(INPUT_ERROR_PASS_ID)).not.toBeNull();
+  });
+
+  test('Enter invalid email should display a error message on the email field', async () => {
+    const { getByTestId, queryByTestId } = render(loginComponent());
+    const submitButton = getByTestId(SUBMIT_BUTTON_ID);
+    const emailInput = getByTestId(EMAIL_INPUT_ID);
+    const passInput = getByTestId(PASS_INPUT_ID);
+    await act(async () => {
+      fireEvent.changeText(emailInput, INVALID_EMAIL);
+      fireEvent.changeText(passInput, VALID_PASSWORD);
+      fireEvent.press(submitButton);
+    });
+    expect(getByTestId(INPUT_ERROR_EMAIL_ID)).not.toBeNull();
+    // Sanity expectation
+    expect(queryByTestId(INPUT_ERROR_PASS_ID)).toBeNull();
+  });
+
+  test('After complete field with valid params, login dispatch should be called', async () => {
+    const { getByTestId } = render(loginComponent());
+    const submitButton = getByTestId(SUBMIT_BUTTON_ID);
+    const emailInput = getByTestId(EMAIL_INPUT_ID);
+    const passInput = getByTestId(PASS_INPUT_ID);
+    await act(async () => {
+      fireEvent.changeText(emailInput, VALID_EMAIL);
+      fireEvent.changeText(passInput, VALID_PASSWORD);
+      fireEvent.press(submitButton);
+    });
+    expect(useDispatchmock).toHaveBeenCalledTimes(1);
+  });
+
+  test('After correct error on field, login dispatch should be called', async () => {
+    const { getByTestId } = render(loginComponent());
+    const submitButton = getByTestId(SUBMIT_BUTTON_ID);
+    const emailInput = getByTestId(EMAIL_INPUT_ID);
+    const passInput = getByTestId(PASS_INPUT_ID);
+    await act(async () => {
+      fireEvent.changeText(emailInput, INVALID_EMAIL);
+      fireEvent.changeText(passInput, VALID_PASSWORD);
+      fireEvent.press(submitButton);
+      fireEvent.changeText(emailInput, VALID_EMAIL);
+      fireEvent.press(submitButton);
+    });
+    expect(useDispatchmock).toHaveBeenCalledTimes(1);
+  });
+
+  test('After press signup button, navigation should be called', async () => {
+    const { getByTestId } = render(loginComponent());
+    const signupButton = getByTestId(SIGN_UP_BUTTON);
+    fireEvent.press(signupButton);
+    expect(navMock.navigate).toHaveBeenCalled();
   });
 });

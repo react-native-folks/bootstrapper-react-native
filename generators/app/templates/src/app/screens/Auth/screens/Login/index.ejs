@@ -38,7 +38,7 @@ import './i18n';
 
 import styles from './styles';
 
-function Login({ navigation }: Navigation) {
+export function Login({ navigation }: Navigation) {
   const dispatch = useDispatch();
   const { control, handleSubmit, errors } = useForm();
 
@@ -91,14 +91,16 @@ function Login({ navigation }: Navigation) {
             label={i18next.t('LOGIN:PASSWORD')}
             inputProps={{ secureTextEntry: true }}
             errorMessage={errors[FIELDS.password]?.message}
+            errorTestID="input-error-pass"
           />
           {hasLoginError && (
-            <CustomText error center>
+            <CustomText testID="login-error-message" error center>
               {i18next.t('LOGIN:LOGIN_FAILURE')}
             </CustomText>
           )}
         </View>
         <CustomButton
+          testID="submit-button"
           green
           radius={3}
           onPress={handleSubmit(handleLogin)}
@@ -131,6 +133,7 @@ function Login({ navigation }: Navigation) {
         />
         <%_ } _%>
         <CustomButton
+          testID="signup-button"
           borderless
           onPress={handleGoToSignUp}
           style={styles.formButton}
