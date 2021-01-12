@@ -1,6 +1,8 @@
 import { authActions, authActionsTypes } from 'redux/auth';
 import AuthService from 'services/auth';
+<%_ if(features.onboarding) { _%>
 import * as OnboardingService from 'services/onboarding';
+<%_ } _%>
 
 import { store } from '../store';
 
@@ -10,19 +12,24 @@ describe('testing auth actions', () => {
   });
   test('call init should return AUTH_INIT action with payloads', async () => {
     jest.spyOn(AuthService, 'authSetup').mockImplementation(() => 'User');
+    <%_ if(features.onboarding) { _%>
     jest
       .spyOn(OnboardingService, 'getOnboardingAccess')
       .mockImplementation(() => true);
+    <%_ } _%>
     const initActionResult = await store.dispatch(authActions.init({}));
     expect(initActionResult.payload).toEqual({
       currentUser: 'User',
+      <%_ if(features.onboarding) { _%>
       hasAccessOnboarding: true
+      <%_ } _%>
     });
     expect(
       initActionResult.type.includes(authActionsTypes.AUTH_INIT)
     ).toBeTruthy();
   });
 
+  <%_ if(features.loginandsignup) { _%>
   // LOGIN FEATURE
   test('call login should return LOGIN action with payloads', async () => {
     jest.spyOn(AuthService, 'login').mockImplementation(() => ({
@@ -51,7 +58,9 @@ describe('testing auth actions', () => {
       logoutActionResult.type.includes(authActionsTypes.LOGOUT)
     ).toBeTruthy();
   });
+  <%_ } _%>
 
+  <%_ if(features.socialloginbuttons) { _%>
   // SOCIALS WITH LOGIN
   test('call socialLogin with token should return SOCIAL_LOGIN action with current user payload', async () => {
     jest.spyOn(AuthService, 'login').mockImplementation(() => ({
@@ -67,7 +76,9 @@ describe('testing auth actions', () => {
       socialLoginActionResult.type.includes(authActionsTypes.SOCIAL_LOGIN)
     ).toBeTruthy();
   });
+  <%_ } _%>
 
+  <%_ if(features.onboarding) { _%>
   // ONBOARDING
   test('call setHasAccessOnboarding with false should return HAS_ACCESS action with false param on payload', async () => {
     const onboardingActionResult = await store.dispatch(
@@ -92,4 +103,5 @@ describe('testing auth actions', () => {
       onboardingActionResult.type.includes(authActionsTypes.HAS_ACCESS)
     ).toBeTruthy();
   });
+  <%_ } _%>
 });

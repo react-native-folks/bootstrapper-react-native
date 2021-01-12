@@ -82,6 +82,7 @@ export function Login({ navigation }: Navigation) {
             }}
             error={errors[FIELDS.email]}
             errorMessage={errors[FIELDS.email]?.message}
+            errorTestID="input-error-email"
           />
           <CustomTextInput
             control={control}

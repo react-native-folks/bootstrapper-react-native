@@ -13,6 +13,7 @@ const packageJsonScripts = require('./coreFiles/packageJsonScripts');
 const prettierrcConfigSetup = require('./coreFiles/prettierrcConfigSetup');
 const splashScreenSetup = require('./coreFiles/splashScreenSetup');
 const navigationSetup = require('./coreFiles/navigationSetup');
+const testingSetup = require('./coreFiles/testingFilesSetup');
 
 // FEATURES FILES
 const crashlyticsFeatureFiles = require('./featuresFiles/crashlyticsFeatureFiles');
@@ -37,6 +38,7 @@ module.exports = function index() {
   createDotEnvFilesLocally.bind(this)();
   packageJsonScripts.bind(this)();
   baseFilesTemplate.bind(this)();
+  testingSetup.bind(this)();
   navigationSetup.bind(this)();
   appIcons.bind(this)();
   babelConfigSetup.bind(this)();

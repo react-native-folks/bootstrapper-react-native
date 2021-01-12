@@ -32,6 +32,7 @@ const DEPENDENCIES = [
 const DEV_DEPENDENCIES = [
   '@react-native-community/eslint-config',
   '@testing-library/jest-native',
+  '@testing-library/react-native',
   '@types/jest',
   '@types/react',
   '@types/react-native',

@@ -12,18 +12,23 @@ describe('testing reducers', () => {
       type: `${authActionsTypes.AUTH_INIT}/fulfilled`,
       payload: {
         currentUser: { id: '123', email: 'test@mail.com' },
+        <%_ if(features.onboarding) { _%>
         hasAccessOnboarding: true
+        <%_ } _%>
       }
     };
     const result = authReducer(authInitialState, action);
     expect(result).toEqual({
       ...authInitialState,
-      hasAccessOnboarding: true,
+      <%_ if(features.onboarding) { _%>
+      hasAccessOnboarding: true
+      <%_ } _%>
       initialLoading: false,
       currentUser: { id: '123', email: 'test@mail.com' }
     });
   });
 
+  <%_ if(features.loginandsignup) { _%>
   // LOGIN FEATURE
   test('test LOGIN reducer with LOGIN action', async () => {
     const action = {
@@ -51,7 +56,9 @@ describe('testing reducers', () => {
       currentUser: null
     });
   });
+  <%_ } _%>
 
+  <%_ if(features.socialloginbuttons) { _%>
   // SOCIAL LOGIN WITH LOGIN FEATURE
   test('test SOCIAL LOGIN reducer with SOCIAL_LOGIN action', async () => {
     const action = {
@@ -66,4 +73,5 @@ describe('testing reducers', () => {
       currentUser: { id: '123', email: 'test@mail.com' }
     });
   });
+  <%_ } _%>
 });
