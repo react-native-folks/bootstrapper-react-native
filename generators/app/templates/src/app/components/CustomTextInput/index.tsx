@@ -17,6 +17,7 @@ const CustomTextInput = ({
   style,
   errorMessage = '',
   inputProps,
+  errorTestID,
   ...props
 }: CustomTextInputProps) => {
   const customStyles = useCallback(
@@ -34,6 +35,7 @@ const CustomTextInput = ({
             </CustomText>
           )}
           <TextInput
+            testID={name}
             onBlur={onBlur}
             onChangeText={newValue => onChange(newValue)}
             value={value}
@@ -41,7 +43,7 @@ const CustomTextInput = ({
             style={[styles.base, customStyles(), style]}
           />
           {errorMessage !== '' && (
-            <CustomText error xsmall>
+            <CustomText testID={errorTestID} error xsmall>
               {errorMessage}
             </CustomText>
           )}

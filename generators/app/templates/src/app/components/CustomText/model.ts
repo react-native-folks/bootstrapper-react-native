@@ -49,6 +49,7 @@ export interface VariantsInterface {
 }
 
 export interface CustomTextProps extends VariantsInterface {
+  testID?: string | undefined;
   children: ReactNode;
   textProps?: TextProps;
   style?: any;
