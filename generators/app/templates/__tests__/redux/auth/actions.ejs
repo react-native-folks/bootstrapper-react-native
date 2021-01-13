@@ -1,7 +1,7 @@
 import { authActions, authActionsTypes } from 'redux/auth';
-import AuthService from 'services/auth';
+import authService from 'services/auth';
 <%_ if(features.onboarding) { _%>
-import * as OnboardingService from 'services/onboarding';
+import * as onboardingService from 'services/onboarding';
 <%_ } _%>
 
 import { store } from '../store';
@@ -11,10 +11,10 @@ describe('testing auth actions', () => {
     store.clearActions();
   });
   test('call init should return AUTH_INIT action with payloads', async () => {
-    jest.spyOn(AuthService, 'authSetup').mockImplementation(() => 'User');
+    jest.spyOn(authService, 'authSetup').mockImplementation(() => 'User');
     <%_ if(features.onboarding) { _%>
     jest
-      .spyOn(OnboardingService, 'getOnboardingAccess')
+      .spyOn(onboardingService, 'getOnboardingAccess')
       .mockImplementation(() => true);
     <%_ } _%>
     const initActionResult = await store.dispatch(authActions.init({}));
@@ -32,7 +32,7 @@ describe('testing auth actions', () => {
   <%_ if(features.loginandsignup) { _%>
   // LOGIN FEATURE
   test('call login should return LOGIN action with payloads', async () => {
-    jest.spyOn(AuthService, 'login').mockImplementation(() => ({
+    jest.spyOn(authService, 'login').mockImplementation(() => ({
       data: 'userData'
     }));
     const loginActionResult = await store.dispatch(
@@ -47,7 +47,7 @@ describe('testing auth actions', () => {
   });
 
   test('call logout should return LOGOUT action with payloads', async () => {
-    jest.spyOn(AuthService, 'logout').mockImplementation(() => ({
+    jest.spyOn(authService, 'logout').mockImplementation(() => ({
       data: null
     }));
     const logoutActionResult = await store.dispatch(authActions.logout());
@@ -63,7 +63,7 @@ describe('testing auth actions', () => {
   <%_ if(features.socialloginbuttons) { _%>
   // SOCIALS WITH LOGIN
   test('call socialLogin with token should return SOCIAL_LOGIN action with current user payload', async () => {
-    jest.spyOn(AuthService, 'login').mockImplementation(() => ({
+    jest.spyOn(authService, 'login').mockImplementation(() => ({
       data: 'userData'
     }));
     const socialLoginActionResult = await store.dispatch(

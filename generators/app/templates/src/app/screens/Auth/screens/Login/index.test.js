@@ -17,9 +17,9 @@ const VALID_EMAIL = 'email@email.com';
 const VALID_PASSWORD = 'HelloWord1234';
 
 describe('Login Screen', () => {
-  let useDispatchmock = jest.fn();
+  let useDispatchMock = jest.fn();
   const useDispatchSpy = jest.spyOn(reactRedux, 'useDispatch');
-  useDispatchSpy.mockImplementation(() => useDispatchmock);
+  useDispatchSpy.mockImplementation(() => useDispatchMock);
   const navMock = {
     navigate: jest.fn()
   };
@@ -29,7 +29,7 @@ describe('Login Screen', () => {
   );
 
   beforeEach(() => {
-    useDispatchmock.mockClear();
+    useDispatchMock.mockClear();
     navMock.navigate.mockClear();
   });
 
@@ -96,7 +96,7 @@ describe('Login Screen', () => {
       fireEvent.changeText(passInput, VALID_PASSWORD);
       fireEvent.press(submitButton);
     });
-    expect(useDispatchmock).toHaveBeenCalledTimes(1);
+    expect(useDispatchMock).toHaveBeenCalledTimes(1);
   });
 
   test('After correct error on field, login dispatch should be called', async () => {
@@ -111,7 +111,7 @@ describe('Login Screen', () => {
       fireEvent.changeText(emailInput, VALID_EMAIL);
       fireEvent.press(submitButton);
     });
-    expect(useDispatchmock).toHaveBeenCalledTimes(1);
+    expect(useDispatchMock).toHaveBeenCalledTimes(1);
   });
 
   test('After press signup button, navigation should be called', async () => {
