@@ -19,14 +19,14 @@ describe('Onboarding Screen', () => {
   // Onboarding Container should match with snapshot on render
   it('dispatch should be called when first onboarding button is pressed', async () => {
     const { getByTestId } = render(<OnboardingContainer />);
-    const leftFooterButton = getByTestId('firstButton');
+    const leftFooterButton = getByTestId('footer-left-action-button');
     fireEvent.press(leftFooterButton);
     expect(dispatchFunction).toHaveBeenCalled();
   });
 
   it('dispatch should be called after button pressed of the last screen', async () => {
     const { getByTestId } = render(<OnboardingContainer />);
-    const rightFooterButton = getByTestId('secondButton');
+    const rightFooterButton = getByTestId('footer-right-action-button');
     fireEvent.press(rightFooterButton); // first to second screen
     fireEvent.press(rightFooterButton); // second to third screen
     fireEvent.press(rightFooterButton); // third to skip
@@ -35,8 +35,8 @@ describe('Onboarding Screen', () => {
 
   it('dispatch should be called after go to to second screen and then back to first and skip onboarding', async () => {
     const { getByTestId } = render(<OnboardingContainer />);
-    const leftFooterButton = getByTestId('firstButton');
-    const rightFooterButton = getByTestId('secondButton');
+    const leftFooterButton = getByTestId('footer-left-action-button');
+    const rightFooterButton = getByTestId('footer-right-action-button');
     fireEvent.press(rightFooterButton); // first to second screen
     fireEvent.press(leftFooterButton); // second to first screen
     fireEvent.press(leftFooterButton); // left button to skip
