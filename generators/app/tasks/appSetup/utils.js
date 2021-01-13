@@ -30,3 +30,13 @@ module.exports.copyTemplateFile = function copyTemplateFile(filepath) {
     { projectName: this.projectName, features: this.features }
   );
 };
+
+module.exports.removeFile = function removeFile(filepath) {
+  if (!this.fs) {
+    throw new Error(
+      'File utils functions needs to be binded to the generator context'
+    );
+  }
+
+  this.fs.delete(this.templatePath(...filepath.split('/')));
+};

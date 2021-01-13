@@ -20,7 +20,7 @@ const GoogleLoginManager = async (
     // TODO - Add responses interface
     await GoogleSignin.hasPlayServices();
     const userInfo: User = await GoogleSignin.signIn();
-    onSuccess(userInfo.idToken);
+    onSuccess(userInfo.idToken || '');
   } catch (error) {
     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
       onError('Cancelled');

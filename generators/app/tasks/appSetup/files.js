@@ -33,10 +33,12 @@ module.exports.ANDROID_VERSION_GRADLE = `${module.exports.ANDROID_APP_PATH}/vers
 module.exports.TESTS_REDUX_PATH = `${module.exports.TESTS}/redux`;
 module.exports.TESTS_RESPONSES_PATH = `${module.exports.TESTS}/responses`;
 module.exports.TESTS_SCREENS_PATH = `${module.exports.TESTS}/screens`;
+module.exports.GOOGLE_SIGNIN_MOCK = `${module.exports.MOCKS}/@react-native-community/google-signin.js`;
 // TESTS - REDUX
 module.exports.TESTS_STORE = `${module.exports.TESTS_REDUX_PATH}/store.js`;
 module.exports.TESTS_UTILS = `${module.exports.TESTS_REDUX_PATH}/utils.js`;
-module.exports.TESTS_AUTH_PATH = `${module.exports.TESTS_REDUX_PATH}/auth`;
+module.exports.TESTS_AUTH_ACTIONS_PATH = `${module.exports.TESTS_REDUX_PATH}/auth/actions.js`;
+module.exports.TESTS_AUTH_SLICE_PATH = `${module.exports.TESTS_REDUX_PATH}/auth/slice.js`;
 
 // APP
 module.exports.COMPONENTS_PATH = `${module.exports.APP_PATH}/components`;

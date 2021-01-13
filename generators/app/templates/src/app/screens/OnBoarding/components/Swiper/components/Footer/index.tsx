@@ -12,6 +12,7 @@ function Footer(props: FooterProps) {
     <View style={styles.buttons}>
       {firstButton && (
         <CustomButton
+          testID="footer-left-action-button"
           {...firstButton}
           white
           style={styles.buttonContainer}
@@ -20,6 +21,7 @@ function Footer(props: FooterProps) {
       )}
       {secondButton && (
         <CustomButton
+          testID="footer-right-action-button"
           {...secondButton}
           white
           style={styles.buttonContainer}

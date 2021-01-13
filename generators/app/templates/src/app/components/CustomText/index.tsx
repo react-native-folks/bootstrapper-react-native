@@ -10,9 +10,12 @@ const CustomText = (props: CustomTextProps) => {
     () => getCustomStyles(VARIANTS, props, styles),
     [props]
   );
-  const { textProps, style, children } = props;
+  const { textProps, style, testID, children } = props;
   return (
-    <Text {...textProps} style={[styles.base, customStyles(), style]}>
+    <Text
+      testID={testID || children?.toString()}
+      {...textProps}
+      style={[styles.base, customStyles(), style]}>
       {children}
     </Text>
   );

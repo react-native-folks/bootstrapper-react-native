@@ -34,6 +34,7 @@ const CustomButton = (props: CustomButtonProps) => {
   } = props;
   return (
     <Pressable
+      testID={title ? title : ''}
       onPress={onPress}
       android_ripple={androidRipple || defaultAndroidRipple}
       style={({ pressed }) => [

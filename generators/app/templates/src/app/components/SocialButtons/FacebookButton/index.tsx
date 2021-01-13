@@ -21,7 +21,7 @@ const FacebookLoginManager = (
       } else {
         // TODO - Add data interface
         AccessToken.getCurrentAccessToken().then((data: AccessToken | null) => {
-          onSuccess(data?.accessToken?.toString());
+          onSuccess(data?.accessToken?.toString() || '');
         });
       }
     },

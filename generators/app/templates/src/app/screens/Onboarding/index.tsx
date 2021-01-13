@@ -8,7 +8,7 @@ import Routes from 'app/navigation/routes';
 import Swiper from './components/Swiper';
 import './i18n';
 
-function OnboardingContainer() {
+export function OnboardingContainer() {
   const dispatch = useDispatch();
   const handleSkipOnboarding = () =>
     dispatch(authActions.setHasAccessOnboarding(true));

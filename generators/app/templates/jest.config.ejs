@@ -1,0 +1,54 @@
+module.exports = {
+  preset: 'react-native',
+  moduleFileExtensions: [
+    'ts',
+    'tsx',
+    'js',
+    'jsx',
+    'json',
+    'node',
+    'png',
+    'jpg'
+  ],
+  setupFilesAfterEnv: [
+    '<rootDir>/__mocks__/setup.js',
+    <%_ if(features.socialButtons.google) { _%>
+    '<rootDir>/__mocks__/@react-native-community/google-signin.js',
+    <%_ } _%>
+    '<rootDir>/__mocks__/react-native-modules.js',
+    './node_modules/react-native-gesture-handler/jestSetup.js',
+    '@testing-library/jest-native/extend-expect'
+  ],
+  transformIgnorePatterns: [
+    '/node_modules/@react-native-async-storage/async-storage/(?!(lib))',
+    'node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@invertase/react-native-apple-authentication|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@react-native-firebase/app)'
+  ],
+  moduleNameMapper: {
+    '^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/__mocks__/fileMock.js'
+  },
+  testPathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/.history/',
+    '<rootDir>/__tests__/redux/store.js',
+    '<rootDir>/__tests__/redux/utils.js',
+    '<rootDir>/__tests__/responses/'
+  ],
+  collectCoverage: false,
+  collectCoverageFrom: [
+    '__tests__/**/*.{ts,js}',
+    '**/src/**/*.{js,ts}',
+    '!src/**/*{styles,i18n}.{ts,js}'
+  ],
+  coverageReporters: ['html', 'text-summary', 'text'],
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    '/jest',
+    'src/redux/store.js',
+    'src/config/',
+    'src/constants/',
+    '__tests__/redux/store.js',
+    '__tests__/redux/utils.js',
+    '__tests__/responses/'
+  ]
+};
