@@ -61,10 +61,6 @@ production_build_config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = bundle_id
 
 release_build_config.remove_from_project
 
-target.build_configurations.each do |config|
-   config.build_settings['SWIFT_VERSION'] = "5.0"
-end
-
 # Copy Release Build Configuration and delete Release Build Configuration from Project
 release_build_config = project.build_configurations.find { |each| each.name == 'Release' }
 release_base_config_file = release_build_config.base_configuration_reference
