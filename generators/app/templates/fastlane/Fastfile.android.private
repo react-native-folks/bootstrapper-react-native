@@ -16,8 +16,10 @@ platform :android do
       
     buid_task = get_build_task(environment: environment, aab: is_aab)
     app_Name = get_environment_info(environment: environment)["APP_NAME"]
+    project_dir = get_project_dir(environment: environment)
 
     gradle(
+      project_dir: project_dir[:android_dir],
       task: buid_task[:task],
       flavor: buid_task[:flavor],
       build_type: "Release",
@@ -42,7 +44,7 @@ platform :android do
     desc "Distributing application to Firebase App Distribution..."
     firebase_info = get_firebase_info(environment: environment)
     firebase_app_distribution(
-      app: firebase_info[:app],
+      app: firebase_info[:android_app],
       groups: firebase_info[:groups],
     )
   end

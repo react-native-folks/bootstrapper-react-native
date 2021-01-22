@@ -2,7 +2,7 @@ module.exports = function schemeBase(envName, buildConfig) {
   return `<?xml version="1.0" encoding="UTF-8"?>
  <Scheme
     LastUpgradeVersion = "1130"
-    version = "1.3">
+    version = "1.7">
     <BuildAction
        parallelizeBuildables = "YES"
        buildImplicitDependencies = "YES">

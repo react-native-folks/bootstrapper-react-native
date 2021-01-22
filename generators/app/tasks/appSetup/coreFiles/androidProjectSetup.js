@@ -28,7 +28,7 @@ function updateAppBuildGradle() {
   );
   updatedBuildGradleContent = updatedBuildGradleContent.replace(
     'targetSdkVersion rootProject.ext.targetSdkVersion',
-    `targetSdkVersion rootProject.ext.targetSdkVersion\n\t\tresValue "string", "build_config_package", "com.${this.projectName.toLowerCase()}"\n\t\tmultiDexEnabled true`
+    `targetSdkVersion rootProject.ext.targetSdkVersion\n\t\tresValue "string", "build_config_package", "${this.bundleId}"\n\t\tmultiDexEnabled true`
   );
   updatedBuildGradleContent = updatedBuildGradleContent.replace(
     'minifyEnabled enableProguardInReleaseBuilds',
@@ -60,22 +60,26 @@ function updateAppBuildGradle() {
   );
 }
 
+// kaminorn/android/app/src/main/java/com/mahisoft/kaminorn/MainActivity.java
+// kaminorn/android/app/src/main/java/com/mahisoft/kaminorn/MainActivity.java
+
 function addRNGestureHandlerConfig() {
-  const mainActivityContent = this.fs.read(
-    `${this.projectName}/android/app/src/main/java/com/${this.projectName}/MainActivity.java`
-  );
+  const mainActivityContentPath = `${
+    this.projectName
+  }/android/app/src/main/java/${this.bundleId.replace(
+    /\./g,
+    '/'
+  )}/MainActivity.java`;
+  const mainActivityContent = this.fs.readFile(mainActivityContentPath);
   let updatedMainActivityContent = mainActivityContent.replace(
     'import com.facebook.react.ReactActivity;',
     'import com.facebook.react.ReactActivity;\nimport com.facebook.react.ReactActivityDelegate;\nimport com.facebook.react.ReactRootView;\nimport com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;'
   );
   updatedMainActivityContent = updatedMainActivityContent.replace(
-    `return "${this.projectName}";`,
-    `return "${this.projectName}";\n\t}\n\n\t@Override\n\tprotected ReactActivityDelegate createReactActivityDelegate() {\n\t  return new ReactActivityDelegate(this, getMainComponentName()) {\n\t\t@Override\n\t\tprotected ReactRootView createRootView() {\n\t\t return new RNGestureHandlerEnabledRootView(MainActivity.this);\n\t\t}\n\t  };`
+    `return "${this.projectName}";\n\t}`,
+    `return "${this.projectName}";\n\t}\n\n\t@Override\n\tprotected ReactActivityDelegate createReactActivityDelegate() {\n\t\treturn new ReactActivityDelegate(this, getMainComponentName()) {\n\t\t\t@Override\n\t\t\tprotected ReactRootView createRootView() {\n\t\t\t\treturn new RNGestureHandlerEnabledRootView(MainActivity.this);\n\t\t\t}\n\t\t};\n\t}`
   );
-  this.fs.write(
-    `${this.projectName}/android/app/src/main/java/com/${this.projectName}/MainActivity.java`,
-    updatedMainActivityContent
-  );
+  this.fs.write(mainActivityContentPath, updatedMainActivityContent);
 }
 
 function updateAppProguardRules() {
@@ -84,7 +88,7 @@ function updateAppProguardRules() {
   );
   const updatedProguardRulesContent = proguardRulesContent.replace(
     '# Add any project specific keep options here:',
-    `# Add any project specific keep options here:\n# Hermes\n-keep class com.facebook.hermes.unicode.** { *; }\n\n# react-native-config\n-keep class com.${this.projectName.toLowerCase()}.BuildConfig { *; }`
+    `# Add any project specific keep options here:\n# Hermes\n-keep class com.facebook.hermes.unicode.** { *; }\n\n# react-native-config\n-keep class ${this.bundleId}.BuildConfig { *; }`
   );
   this.fs.write(
     `${this.projectName}/android/app/proguard-rules.pro`,
@@ -112,30 +116,3 @@ module.exports = function androidProjectSetup() {
   updateAppProguardRules.bind(this)();
   updateGradleProperties.bind(this)();
 };
-
-/*
-signingConfigs {
-        debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-        }
-
-        release {
-            // For production keystore signing replace MY_APP by your project name and add the information on your "~/.gradle/gradle.properties" file.
-            // The put the keystore on the "android/app". Its recomended add the file to .gitignore
-            if (project.hasProperty('MY_APP_STORE_FILE')) {
-                storeFile file(MY_APP_STORE_FILE)
-                storePassword MY_APP_STORE_PASSWORD
-                keyAlias MY_APP_UPLOAD_KEY_ALIAS
-                keyPassword MY_APP_UPLOAD_KEY_PASSWORD
-            } else {
-                storeFile file('debug.keystore')
-                storePassword 'android'
-                keyAlias 'androiddebugkey'
-                keyPassword 'android'
-            }
-        }
-    }
-*/

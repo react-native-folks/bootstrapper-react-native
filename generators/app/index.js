@@ -101,7 +101,7 @@ class ReactNativeBootstrap extends Generator {
           type: 'input',
           name: 'bundleId',
           message: 'Enter the bundle id for your ios app',
-          default: `com.kamino.${this.projectName}`
+          default: `com.mahisoft.${this.projectName}`
         }
       ]).then(answer => {
         this.bundleId = answer.bundleId;
@@ -121,15 +121,19 @@ class ReactNativeBootstrap extends Generator {
   }
 
   install() {
-    return Promise.resolve()
-      .then(() => bundleInstall.bind(this)())
-      .then(() => configureIosProject.bind(this)())
-      .then(() => installPods.bind(this)())
-      .then(() => linkAppAssets.bind(this)())
-      .then(() => editBundleIdentifier.bind(this)())
-      .then(() => lintFixProject.bind(this)())
-      .then(() => this.features.hasFirebase && chmodFirebaseScript.bind(this)())
-      .then(() => gitInitialization.bind(this)());
+    return (
+      Promise.resolve()
+        .then(() => bundleInstall.bind(this)())
+        .then(() => configureIosProject.bind(this)())
+        .then(() => installPods.bind(this)())
+        .then(() => linkAppAssets.bind(this)())
+        // .then(() => editBundleIdentifier.bind(this)())
+        .then(() => lintFixProject.bind(this)())
+        .then(
+          () => this.features.hasFirebase && chmodFirebaseScript.bind(this)()
+        )
+        .then(() => gitInitialization.bind(this)())
+    );
   }
 
   end() {

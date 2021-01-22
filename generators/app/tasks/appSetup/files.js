@@ -12,8 +12,7 @@ module.exports.REDUX_PATH = 'src/redux';
 module.exports.SERVICES_PATH = 'src/services';
 module.exports.UTILS_PATH = 'src/utils';
 module.exports.ANDROID_APP_PATH = 'android/app';
-module.exports.FASTLANE_ANDROID_PATH = 'android/fastlane';
-module.exports.FASTLANE_IOS_PATH = 'ios/fastlane';
+module.exports.FASTLANE_PATH = 'fastlane';
 
 // BASE FILES'
 module.exports.ESLINT_IGNORE_FILE = '.eslintignore';
@@ -25,8 +24,7 @@ module.exports.JEST_CONFIG_FILE = 'jest.config.js';
 module.exports.REACT_NATIVE_CONFIG = 'react-native.config.js';
 module.exports.README = 'README.md';
 module.exports.TSCONFIG_FILE = 'tsconfig.json';
-module.exports.ANDROID_GEMFILE = 'android/Gemfile';
-module.exports.IOS_GEMFILE = 'ios/Gemfile';
+module.exports.GEMFILE = 'Gemfile';
 module.exports.ANDROID_VERSION_GRADLE = `${module.exports.ANDROID_APP_PATH}/version.gradle`;
 
 // TESTS
