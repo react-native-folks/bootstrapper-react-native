@@ -112,6 +112,7 @@ class ReactNativeBootstrap extends Generator {
   configuring() {
     return Promise.resolve()
       .then(() => reactNativeInit.bind(this)())
+      .then(() => editBundleIdentifier.bind(this)())
       .then(() => installDependencies.bind(this)())
       .then(() => addFilesToGitIgnore.bind(this)());
   }
@@ -121,19 +122,14 @@ class ReactNativeBootstrap extends Generator {
   }
 
   install() {
-    return (
-      Promise.resolve()
-        .then(() => bundleInstall.bind(this)())
-        .then(() => configureIosProject.bind(this)())
-        .then(() => installPods.bind(this)())
-        .then(() => linkAppAssets.bind(this)())
-        // .then(() => editBundleIdentifier.bind(this)())
-        .then(() => lintFixProject.bind(this)())
-        .then(
-          () => this.features.hasFirebase && chmodFirebaseScript.bind(this)()
-        )
-        .then(() => gitInitialization.bind(this)())
-    );
+    return Promise.resolve()
+      .then(() => bundleInstall.bind(this)())
+      .then(() => configureIosProject.bind(this)())
+      .then(() => installPods.bind(this)())
+      .then(() => linkAppAssets.bind(this)())
+      .then(() => lintFixProject.bind(this)())
+      .then(() => this.features.hasFirebase && chmodFirebaseScript.bind(this)())
+      .then(() => gitInitialization.bind(this)());
   }
 
   end() {

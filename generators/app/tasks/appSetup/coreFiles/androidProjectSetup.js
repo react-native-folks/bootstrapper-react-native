@@ -60,17 +60,15 @@ function updateAppBuildGradle() {
   );
 }
 
-// kaminorn/android/app/src/main/java/com/mahisoft/kaminorn/MainActivity.java
-// kaminorn/android/app/src/main/java/com/mahisoft/kaminorn/MainActivity.java
-
 function addRNGestureHandlerConfig() {
-  const mainActivityContentPath = `${
-    this.projectName
-  }/android/app/src/main/java/${this.bundleId.replace(
-    /\./g,
-    '/'
-  )}/MainActivity.java`;
-  const mainActivityContent = this.fs.readFile(mainActivityContentPath);
+  const mainActivityContentPath = this.destinationPath(
+    this.projectName,
+    'android/app/src/main/java',
+    this.bundleId.replace(/\./g, '/'),
+    'MainActivity.java'
+  );
+
+  const mainActivityContent = this.fs.read(mainActivityContentPath);
   let updatedMainActivityContent = mainActivityContent.replace(
     'import com.facebook.react.ReactActivity;',
     'import com.facebook.react.ReactActivity;\nimport com.facebook.react.ReactActivityDelegate;\nimport com.facebook.react.ReactRootView;\nimport com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;'

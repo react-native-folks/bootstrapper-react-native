@@ -14,7 +14,6 @@ const prettierrcConfigSetup = require('./coreFiles/prettierrcConfigSetup');
 const splashScreenSetup = require('./coreFiles/splashScreenSetup');
 const navigationSetup = require('./coreFiles/navigationSetup');
 const testingSetup = require('./coreFiles/testingFilesSetup');
-const updateBundleIdSetup = require('./coreFiles/updateBundleIdSetup');
 
 // FEATURES FILES
 const crashlyticsFeatureFiles = require('./featuresFiles/crashlyticsFeatureFiles');
@@ -44,7 +43,6 @@ module.exports = function index() {
   appIcons.bind(this)();
   babelConfigSetup.bind(this)();
   prettierrcConfigSetup.bind(this)();
-  updateBundleIdSetup.bind(this)();
 
   // ----------------    Android project configurationn    ----------------
   androidProjectSetup.bind(this)();
