@@ -22,7 +22,8 @@
   "scripts": {
     "lint": "eslint .",
     "lint-diff": "git diff --staged --name-only --relative --diff-filter=ACM | grep -E \"\\.(ts|tsx|js|jsx)$\" | xargs eslint",
-    "lint-fix": "eslint . --fix"
+    "lint-fix": "eslint . --fix",
+    "test": "mocha"
   },
   "dependencies": {
     "acorn": "^7.1.1",
@@ -57,8 +58,11 @@
     "eslint-plugin-react-hooks": "^2.5.0",
     "eslint-plugin-react-native": "^3.8.1",
     "husky": "^4.2.5",
+    "mocha": "^8.2.1",
     "prettier": "^2.2.0",
-    "prettier-eslint": "^9.0.1"
+    "prettier-eslint": "^9.0.1",
+    "yeoman-assert": "^3.1.1",
+    "yeoman-test": "^4.0.0"
   },
   "husky": {
     "hooks": {
