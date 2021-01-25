@@ -1,11 +1,10 @@
-'use strict';
-
-var path = require('path');
-var assert = require('yeoman-assert');
-var helpers = require('yeoman-test');
+const path = require('path');
+const assert = require('yeoman-assert');
+const helpers = require('yeoman-test');
+const { GENERATOR_FEATURES } = require('../generators/app/constants');
 
 describe('kamino-react-native:app', function () {
-  var repositoryNameT1 = 'kaminorn';
+  const repositoryNameT1 = 'kaminorn';
 
   it(`Login And Onboarding - T1 - Created ${repositoryNameT1}`, async function () {
     helpers
@@ -13,7 +12,9 @@ describe('kamino-react-native:app', function () {
       .inDir(path.join(__dirname, './TestRepositoryT1'))
       .withPrompts({
         name: repositoryNameT1,
-        features: ['Login and SignUp', 'Onboarding'],
+        features: GENERATOR_FEATURES.filter(
+          f => f.localeCompare('Social Login Buttons') // All features without 'Social Login Buttons' that requires extra configuration
+        ),
         landscape: false
       })
       .then(function () {
@@ -26,22 +27,3 @@ describe('kamino-react-native:app', function () {
       });
   });
 });
-
-/*features
-[
-  'Login and SignUp',
-  'Onboarding',
-  'Tabs',
-  'Drawer',
-  'Social Login Buttons',
-  'Google Maps',
-  'Crashlytics',
-  'Firebase Analytics',
-  'Firebase Performance',
-  'Push Notifications'
-];
-
-socialButtons
-['Facebook', 'Apple', 'Google', 'Twitter'];
-
-*/
