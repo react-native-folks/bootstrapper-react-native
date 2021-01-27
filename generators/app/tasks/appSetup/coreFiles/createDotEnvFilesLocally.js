@@ -15,8 +15,7 @@ CERTIFICATES_GIT_BRANCH="master"
 BUILD_CONFIGURATION="Develop"
 SCHEME="develop"
 
-##### Other vars #####
-`;
+##### Other vars #####`;
 
   const baseStagingEnvContent = `##### Fastlane vars #####
 APP_ID = '${this.bundleId}.staging'
@@ -32,8 +31,7 @@ CERTIFICATES_GIT_BRANCH="master"
 BUILD_CONFIGURATION="Staging"
 SCHEME="staging"
 
-##### Other vars #####
-`;
+##### Other vars #####`;
 
   const baseProductionEnvContent = `##### Fastlane vars #####
 APP_ID = '${this.bundleId}'
@@ -50,8 +48,7 @@ BUILD_CONFIGURATION="Production"
 SCHEME="production"
 FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD="xxx-xxx-xxx-xxx"
 
-##### Other vars #####
-`;
+##### Other vars #####`;
 
   if (this.features.socialButtons.facebook) {
     extraEnvContent = extraEnvContent.concat(

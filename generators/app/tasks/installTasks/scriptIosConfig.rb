@@ -28,52 +28,59 @@ end
 
 target = project.targets.find { |each| each.name == project_name }
 
-# Versioning Script
-if !target.shell_script_build_phases.find { |bp| bp.name == 'Replace version from package.json' }
-   phase = target.new_shell_script_build_phase("Replace version from package.json")
-   phase.shell_script = "CURRENT_VERSION=`node \"require('../package.json').version\"`\nCOMMIT_COUNT=$(git rev-list HEAD --count --merges --first-parent)\n\nxcrun agvtool new-marketing-version $CURRENT_VERSION\nxcrun agvtool new-version -all $COMMIT_COUNT\n";
-end
 # Google Services Script
 if google_services && !target.shell_script_build_phases.find { |bp| bp.name == 'Google Services Script' }
    phase = target.new_shell_script_build_phase("Google Services Script")
    phase.shell_script = "\"$SRCROOT/../firebaseFilesScript.sh\" \"${PRODUCT_BUNDLE_IDENTIFIER}\" \"ios\"\ncp $SRCROOT/GoogleService-Info.plist $\{BUILT_PRODUCTS_DIR}/$\{PRODUCT_NAME}.app/GoogleService-Info.plist"
+
+   # Put the build phase at the beginning
+   target.build_phases.insert(0, target.build_phases.delete(phase))
+end
+
+# Versioning Script
+if !target.shell_script_build_phases.find { |bp| bp.name == 'Replace version from package.json' }
+   phase = target.new_shell_script_build_phase("Replace version from package.json")
+   phase.shell_script = "CURRENT_VERSION=`awk -F'\"' '/\"version\": \".+\"/{ print $4; exit; }' $SRCROOT/../package.json`\nCOMMIT_COUNT=$(git rev-list HEAD --count --merges --first-parent)\n\nxcrun agvtool new-marketing-version $CURRENT_VERSION\nxcrun agvtool new-version -all $COMMIT_COUNT\n";
+
+   # Put the build phase at the beginning
+   target.build_phases.insert(0, target.build_phases.delete(phase))
 end
 
 # Copy Release Build Configuration and delete Release Build Configuration from Target
 release_build_config = target.build_configurations.find { |each| each.name == 'Release' }
-release_base_config_file = release_build_config.base_configuration_reference
+release_build_settings = release_build_config.build_settings
 
 # Add new Build Configurations to Target
 debug_build_config = target.build_configurations.find { |each| each.name == 'Debug' }
 debug_build_config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = "#{bundle_id}.develop"
 
 develop_build_config = target.add_build_configuration('Develop', :release)
-develop_build_config.base_configuration_reference=(release_base_config_file)
+develop_build_config.build_settings.update(release_build_settings)
 develop_build_config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = "#{bundle_id}.develop"
 
 staging_build_config = target.add_build_configuration('Staging', :release)
-staging_build_config.base_configuration_reference=(release_base_config_file)
+staging_build_config.build_settings.update(release_build_settings)
 staging_build_config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = "#{bundle_id}.staging"
 
 production_build_config = target.add_build_configuration('Production', :release)
-production_build_config.base_configuration_reference=(release_base_config_file)
+production_build_config.build_settings.update(release_build_settings)
 production_build_config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = bundle_id
 
 release_build_config.remove_from_project
 
 # Copy Release Build Configuration and delete Release Build Configuration from Project
 release_build_config = project.build_configurations.find { |each| each.name == 'Release' }
-release_base_config_file = release_build_config.base_configuration_reference
+release_build_settings = release_build_config.build_settings
 
 # Add new Build Configurations to Project
 develop_build_config = project.add_build_configuration('Develop', :release)
-develop_build_config.base_configuration_reference=(release_base_config_file)
+develop_build_config.build_settings.update(release_build_settings)
 
 staging_build_config = project.add_build_configuration('Staging', :release)
-staging_build_config.base_configuration_reference=(release_base_config_file)
+staging_build_config.build_settings.update(release_build_settings)
 
 production_build_config = project.add_build_configuration('Production', :release)
-production_build_config.base_configuration_reference=(release_base_config_file)
+production_build_config.build_settings.update(release_build_settings)
 
 release_build_config.remove_from_project
 
