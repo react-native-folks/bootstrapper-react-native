@@ -8,6 +8,7 @@ module.exports = function configureIosProject() {
         'scriptIosConfig.rb',
         this.projectName,
         process.cwd(),
+        this.bundleId,
         this.features.hasFirebase
       ],
       { cwd: `${this.templatePath()}/../tasks/installTasks` }

@@ -9,17 +9,16 @@ function configureGoogleServices() {
     const isProd = env === 'production';
     this.fs.write(
       `${this.projectName}/android/app/google-services/google-services-${env}.json`,
-      googleServicesAndroidContent.replace(
-        'com.kamino',
-        `com.${this.projectName.toLowerCase()}${isProd ? '' : `.${env}`}`
-      )
+      googleServicesAndroidContent
+        .split('com.mahisoft')
+        .join(`${this.bundleId}${isProd ? '' : `.${env}`}`)
     );
     const capitalizedEnv = env.charAt(0).toUpperCase() + env.substring(1);
     this.fs.write(
       `${this.projectName}/ios/GoogleServices/GoogleService${capitalizedEnv}-Info.plist`,
       googleServiceIOSContent.replace(
-        'com.kamino',
-        `com.${this.projectName}${isProd ? '' : `.${env}`}`
+        'com.mahisoft',
+        `${this.bundleId}${isProd ? '' : `.${env}`}`
       )
     );
   });
@@ -31,7 +30,7 @@ function copyFirebaseFilesScript() {
   );
   this.fs.write(
     `${this.projectName}/firebaseFilesScript.sh`,
-    firebaseFilesScriptContent
+    firebaseFilesScriptContent.split('com.mahisoft').join(this.bundleId)
   );
 }
 

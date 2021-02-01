@@ -1,86 +1,54 @@
 module.exports = function createDotEnvFilesLocally() {
   let extraEnvContent = '';
 
-  const baseDevelopEnvContent = `# Fastlane vars
-FIREBASE_APP_ID=[PUT_YOUR_APP_ID_HERE]
-
-# Fastlane iOS
-APP_NAME = "${this.projectName}(D)"
-BUNDLE_IDENTIFIER = '${this.bundleId}.develop'
-EXPORT_METHOD = "development"
-INFO_PLIST_DIR = '${this.projectName}/Info.plist'
-IPA_NAME = '${this.projectName}(D).ipa'
-MATCH_TYPE = "development"
-PROJECT_FILE_DIR = '${this.projectName}.xcodeproj'
-PROVISION_NAME_PROD = "${this.projectName}-Dev"
-SCHEME_NAME = 'develop'
-WORKSPACE_NAME = '${this.projectName}.xcworkspace'
-
-# Fastlane Android
-APP_NAME="${this.projectName} Develop"
-PACKAGE_NAME="${this.bundleId}.develop"
-# Modify here tester groups name that the build will be distributed
-# e.g: "develop,staging,auctionsync-staff"
-GROUPS="develop"
-`;
-
-  const baseStagingEnvContent = `# Fastlane vars
-FIREBASE_APP_ID=[PUT_YOUR_APP_ID_HERE]
-
-# Fastlane iOS
-APP_NAME = '${this.projectName}(S)'
-BUNDLE_IDENTIFIER = '${this.bundleId}.staging'
-EXPORT_METHOD = 'app-store'
-INFO_PLIST_DIR = '${this.projectName}/Info.plist'
-IPA_NAME = '${this.projectName}(S).ipa'
-MATCH_TYPE = 'appstore'
-PROJECT_FILE_DIR = '${this.projectName}.xcodeproj'
-PROVISION_NAME_PROD = '${this.projectName}-Staging'
-SCHEME_NAME = 'staging'
-WORKSPACE_NAME = '${this.projectName}.xcworkspace'
-
-SKIP_SUBMISSION = true
-ITC_USERNAME = '#{APPLE_ID_EMAIL}'
-ITC_APPLE_ID = '#{APPLE_ID}'
-ITC_TEAM_ID = '#{TEAM_ID}'
-ITC_TEAM_NAME = '#{TEAM_NAME}'
-
-# Fastlane Android
-APP_NAME="${this.projectName} Staging"
-PACKAGE_NAME="${this.bundleId}.staging"
-# Modify here tester groups name that the build will be distributed
-# e.g: "develop,staging,auctionsync-staff"
-GROUPS="develop"
-`;
-
-  const baseProductionEnvContent = `# Fastlane vars
-FIREBASE_APP_ID=[PUT_YOUR_APP_ID_HERE]
-
-# Fastlane iOS
+  const baseDevelopEnvContent = `##### Fastlane vars #####
+APP_ID = '${this.bundleId}.develop'
 APP_NAME = '${this.projectName}'
-BUNDLE_IDENTIFIER = '${this.bundleId}'
-EXPORT_METHOD = 'app-store'
-INFO_PLIST_DIR = '${this.projectName}/Info.plist'
-IPA_NAME = '${this.projectName}.ipa'
-MATCH_TYPE = 'appstore'
-PROJECT_FILE_DIR = '${this.projectName}.xcodeproj'
-PROVISION_NAME_PROD = '${this.projectName}'
-SCHEME_NAME = 'production'
-WORKSPACE_NAME = '${this.projectName}.xcworkspace'
+FIREBASE_GROUPS="develop"
+FIREBASE_IOS_APP_ID="1:500596129221:ios:fbcf4309ede028d1ccdfac"
+FIREBASE_ANDROID_APP_ID="1:500596129221:android:2268780c70b8078accdfac"
+APPLE_ID="user@mahisoft.com"
+APPLE_TEAM_ID="92KJ98262N"
+APP_STORE_CONNECT_TEAM="117822377"
+CERTIFICATES_GIT_URL="git@github.com:xxx/xxxxxxxxxxx.git"
+CERTIFICATES_GIT_BRANCH="master"
+BUILD_CONFIGURATION="Develop"
+SCHEME="develop"
 
-SKIP_SUBMISSION = true
-ITC_USERNAME = '#{APPLE_ID_EMAIL}'
-ITC_APPLE_ID = '#{APPLE_ID}'
-ITC_TEAM_ID = '#{TEAM_ID}'
-ITC_TEAM_NAME = '#{TEAM_NAME}'
+##### Other vars #####`;
 
-# Fastlane Android
-APP_NAME="${this.projectName}"
-PACKAGE_NAME="${this.bundleId}"
-# Modify here tester groups name that the build will be distributed
-# e.g: "develop,staging,auctionsync-staff"
-GROUPS="develop"
-`;
+  const baseStagingEnvContent = `##### Fastlane vars #####
+APP_ID = '${this.bundleId}.staging'
+APP_NAME = '${this.projectName}'
+FIREBASE_GROUPS="develop"
+FIREBASE_IOS_APP_ID="1:500596129221:ios:xxxxxxxxxxxxxxxxx"
+FIREBASE_ANDROID_APP_ID="1:500596129221:android:xxxxxxxxxxxxxxxxx"
+APPLE_ID="user@mahisoft.com"
+APPLE_TEAM_ID="92KJ98262N"
+APP_STORE_CONNECT_TEAM="117822377"
+CERTIFICATES_GIT_URL="git@github.com:xxx/xxxxxxxxxxx.git"
+CERTIFICATES_GIT_BRANCH="master"
+BUILD_CONFIGURATION="Staging"
+SCHEME="staging"
+
+##### Other vars #####`;
+
+  const baseProductionEnvContent = `##### Fastlane vars #####
+APP_ID = '${this.bundleId}'
+APP_NAME = '${this.projectName}'
+FIREBASE_GROUPS="develop"
+FIREBASE_IOS_APP_ID="1:500596129221:ios:xxxxxxxxxxxxxxxxx"
+FIREBASE_ANDROID_APP_ID="1:500596129221:android:xxxxxxxxxxxxxxxxx"
+APPLE_ID="user@mahisoft.com"
+APPLE_TEAM_ID="92KJ98262N"
+APP_STORE_CONNECT_TEAM="117822377"
+CERTIFICATES_GIT_URL="git@github.com:xxx/xxxxxxxxxxx.git"
+CERTIFICATES_GIT_BRANCH="master"
+BUILD_CONFIGURATION="Production"
+SCHEME="production"
+FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD="xxx-xxx-xxx-xxx"
+
+##### Other vars #####`;
 
   if (this.features.socialButtons.facebook) {
     extraEnvContent = extraEnvContent.concat(
