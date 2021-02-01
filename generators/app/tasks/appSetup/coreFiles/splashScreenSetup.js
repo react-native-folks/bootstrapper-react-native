@@ -1,8 +1,13 @@
 module.exports = function splashScreenSetup() {
-  // Update MainActivity
-  const mainActivityContent = this.fs.read(
-    `${this.projectName}/android/app/src/main/java/com/${this.projectName}/MainActivity.java`
+  const mainActivityContentPath = this.destinationPath(
+    this.projectName,
+    'android/app/src/main/java',
+    this.bundleId.replace(/\./g, '/'),
+    'MainActivity.java'
   );
+
+  // Update MainActivity
+  const mainActivityContent = this.fs.read(mainActivityContentPath);
   let updatedMainActivityContent = mainActivityContent.replace(
     'import com.facebook.react.ReactActivity;',
     'import android.os.Bundle;\nimport org.devio.rn.splashscreen.SplashScreen;\nimport com.facebook.react.ReactActivity;'
@@ -12,10 +17,7 @@ module.exports = function splashScreenSetup() {
     'public class MainActivity extends ReactActivity {\n\t@Override\n\tprotected void onCreate(Bundle savedInstanceState) {\n\t\tSplashScreen.show(this);\n\t\tsuper.onCreate(savedInstanceState);\n\t}'
   );
 
-  this.fs.write(
-    `${this.projectName}/android/app/src/main/java/com/${this.projectName}/MainActivity.java`,
-    updatedMainActivityContent
-  );
+  this.fs.write(mainActivityContentPath, updatedMainActivityContent);
 
   // Update AppDelegate
   const appDelegateContent = this.fs.read(
