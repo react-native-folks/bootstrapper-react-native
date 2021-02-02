@@ -9,7 +9,15 @@ import {
   View
 } from 'react-native';
 import { useForm } from 'react-hook-form';
+<%_ if(features.statemanagement.redux) { _%>
 import { useDispatch } from 'react-redux';
+<%_ } _%>
+<%_ if(features.statemanagement.recoil) { _%>
+import { useRecoilState } from 'recoil';
+import { currentUserState } from 'recoilState/auth/atoms';
+import { useLazyFetch } from 'hooks/useFetch';
+import authServices from 'services/auth';
+<%_ } _%>
 import { appScreensNavOptions } from 'app/navigation/config/screensOptions';
 import { createStackNavigator } from '@react-navigation/stack';
 import i18next from 'i18next';
@@ -24,9 +32,11 @@ import {
   <%_ if(features.socialButtons.twitter) { _%>TwitterButton,<%_ } _%>
 } from 'app/components';
 import Routes from 'app/navigation/routes';
-import { useSelector } from 'hooks/redux';
 import { Navigation } from 'interfaces/navigation';
+<%_ if(features.statemanagement.redux) { _%>
+import { useSelector } from 'hooks/redux';
 import { authActions } from 'redux/auth';
+<%_ }_%>
 import { FIELDS, LOGIN_INITIAL_VALUES } from 'app/screens/Auth/constants';
 import {
   validationsWrapper,
@@ -39,13 +49,25 @@ import './i18n';
 import styles from './styles';
 
 export function Login({ navigation }: Navigation) {
-  const dispatch = useDispatch();
   const { control, handleSubmit, errors } = useForm();
-
+  <%_ if(features.statemanagement.redux) { _%>
+  const dispatch = useDispatch();
   const loading = useSelector(state => state.auth.loading);
-
   const hasLoginError = useSelector(state => !!state.auth.error);
+  <%_ } _%>
+  <%_ if(features.statemanagement.recoil) { _%>
+  const [, setCurrentUser] = useRecoilState(currentUserState);
+  const [, loading, authError, login] = useLazyFetch({
+    request: authServices.login,
+    withPostSuccess: async (data: any) => {
+      await authServices.setCurrentUser(data);
+      setCurrentUser(data);
+    }
+  });
+  const hasLoginError = !!authError;
+  <%_ } _%>
 
+  <%_ if(features.statemanagement.redux) { _%>
   const handleLogin: (values: any) => void = useCallback(
     values => {
       Keyboard.dismiss();
@@ -53,9 +75,24 @@ export function Login({ navigation }: Navigation) {
     },
     [dispatch, errors]
   );
-  
+  <%_ } _%>
+  <%_ if(features.statemanagement.recoil) { _%>
+  const handleLogin: (values: any) => void = useCallback(
+    values => {
+      Keyboard.dismiss();
+      if (!Object.keys(errors).length) login(values);
+    },
+    [errors, login]
+  );
+  <%_ } _%>
+
   <%_ if(features.socialloginbuttons) { _%>
+  <%_ if(features.statemanagement.redux) { _%>
   const handleSocialLogin = (token: any) => dispatch(authActions.socialLogin(token));
+  <%_ } _%>
+  <%_ if(features.statemanagement.recoil) { _%>
+  const handleSocialLogin = (token: any) => login(token);
+  <%_ } _%>
 
   <%_ } _%>
   const handleGoToSignUp = () => navigation.navigate(Routes.SignUp);
@@ -140,7 +177,7 @@ export function Login({ navigation }: Navigation) {
           style={styles.formButton}
           title={i18next.t('LOGIN:SIGN_UP')}
         />
-        <ActivityIndicator animating={loading} />
+        <ActivityIndicator animating={loading} color="gray" />
       </View>
     </TouchableWithoutFeedback>
   );

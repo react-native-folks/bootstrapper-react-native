@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { View, TextInput } from 'react-native';
 import { Controller } from 'react-hook-form';
 import { getCustomStyles } from 'utils/style';
-import { CustomText } from 'app/components';
+import CustomText from '../CustomText';
 
 import { CustomTextInputProps, VARIANTS } from './model';
 import styles from './styles';

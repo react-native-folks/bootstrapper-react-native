@@ -1,6 +1,18 @@
 import React, { useEffect } from 'react';
+<%_ if(features.statemanagement.recoil) { _%>
+import { useRecoilState } from 'recoil';
+import { setupSelector } from 'recoilState/auth/selectors';
+<%_ if(features.onboarding) { _%>
+import onboardingServices from 'services/onboarding';
+<%_ } _%>
+<%_ if(features.loginandsignup) { _%>
+import authServices from 'services/auth';
+<%_ } _%>
+<%_ } _%>
+<%_ if(features.statemanagement.redux) { _%>
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'hooks/redux';
+<%_ } _%>
 import Reactotron from 'reactotron-react-native';
 import SplashScreen from 'react-native-splash-screen';
 import AppNavigator from 'app/navigation/index';
@@ -8,14 +20,21 @@ import { apiSetup } from 'config/api';
 <%_ if(features.pushnotifications) { _%>
 import { configPushNotifications } from 'config/pushNotifications';
 <%_ } _%>
+<%_ if(features.statemanagement.redux) { _%>
 import { authActions } from 'redux/auth';
+<%_ } _%>
 
 import LoadingView from './components/LoadableView';
 import './i18n';
 
 const App = () => {
+  <%_ if(features.statemanagement.recoil) { _%>
+  const [initialLoading, setupAppData] = useRecoilState(setupSelector);
+  <%_ } _%>
+  <%_ if(features.statemanagement.redux) { _%>
   const dispatch = useDispatch();
   const initialLoading = useSelector(state => state.auth.initialLoading);
+  <%_ } _%>
   useEffect(() => {
     SplashScreen.hide();
   }, []);
@@ -24,15 +43,31 @@ const App = () => {
     <%_ if(features.pushnotifications) { _%>
     configPushNotifications();
     <%_ } _%>
-    apiSetup(dispatch);
+    apiSetup();
+    <%_ if(features.statemanagement.recoil) { _%>
+    async function appSetup() {
+      const appData: any = {};
+      <%_ if(features.loginandsignup) { _%>
+      appData.currentUser = await authServices.authSetup();
+      <%_ } _%>
+      <%_ if(features.onboarding) { _%>
+      appData.hasAccessOnboarding = await onboardingServices.getOnboardingAccess();
+      <%_ } _%>
+      setupAppData(appData);
+    }
+    appSetup();
+    <%_ } _%>
+    <%_ if(features.statemanagement.redux) { _%>
     dispatch(authActions.init());
+    <%_ } _%>
+  <%_ if(features.statemanagement.redux) { _%>
   }, [dispatch]);
+  <%_ } _%>
+  <%_ if(features.statemanagement.recoil) { _%>
+  }, [setupAppData]);
+  <%_ } _%>
 
-  return initialLoading ? (
-    <LoadingView isLoading={initialLoading} />
-  ) : (
-    <AppNavigator />
-  );
+  return initialLoading ? <LoadingView isLoading /> : <AppNavigator />
 };
 
 const MyAppWithOverlay = __DEV__ ? Reactotron.overlay(App) : App;

@@ -3,7 +3,6 @@ import { create, NETWORK_ERROR } from 'apisauce';
 import { CamelcaseSerializer, SnakecaseSerializer } from 'cerealizr';
 import Config from 'react-native-config';
 import Reactotron from 'reactotron-react-native';
-import { Dispatch } from 'react';
 
 const snakeCaseSerializer = new SnakecaseSerializer();
 const camelCaseSerializer = new CamelcaseSerializer();
@@ -17,7 +16,7 @@ const api = create({
 
 api.addMonitor(((Reactotron as unknown) as { apisauce: any }).apisauce);
 
-export const apiSetup = (dispatch: Dispatch<any>) => {
+export const apiSetup = () => {
   if (baseURL === 'http://mahisoft.com') {
     console.warn('API baseURL has not been properly initialized');
   }
@@ -33,13 +32,11 @@ export const apiSetup = (dispatch: Dispatch<any>) => {
   });
   api.addMonitor(response => {
     if (response.status === 401) {
-      // dispatch(actions.sessionExpired());
       console.warn('Unhandled session expiration');
     }
   });
   api.addMonitor(response => {
     if (response.problem === NETWORK_ERROR) {
-      // dispatch(actions.noInternetConnection());
       console.warn('Unhandled request without connection');
     }
   });

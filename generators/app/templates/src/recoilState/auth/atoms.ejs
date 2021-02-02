@@ -1,0 +1,31 @@
+import { atom } from 'recoil';
+import { AuthState } from 'interfaces/auth';
+
+export const initialState: AuthState = {
+  initialLoading: true,
+  <%_ if(features.loginandsignup) { _%>
+  currentUser: null,
+  <%_ } _%>
+  <%_ if(features.onboarding) { _%>
+  hasAccessOnboarding: false
+  <%_ } _%>
+};
+
+<%_ if(features.loginandsignup) { _%>
+export const currentUserState = atom({
+  key: 'currentUser',
+  default: initialState.currentUser
+});
+<%_ } _%>
+
+<%_ if(features.onboarding) { _%>
+export const onboardingState = atom({
+  key: 'hasAccessOnboarding',
+  default: initialState.hasAccessOnboarding
+});
+<%_ } _%>
+
+export const initialLoadingState = atom({
+  key: 'initialLoading',
+  default: initialState.initialLoading
+});

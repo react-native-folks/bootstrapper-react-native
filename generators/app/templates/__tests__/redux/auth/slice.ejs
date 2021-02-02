@@ -11,7 +11,9 @@ describe('testing reducers', () => {
     const action = {
       type: `${authActionsTypes.AUTH_INIT}/fulfilled`,
       payload: {
+        <%_ if(features.loginandsignup) { _%>
         currentUser: { id: '123', email: 'test@mail.com' },
+        <%_ } _%>
         <%_ if(features.onboarding) { _%>
         hasAccessOnboarding: true
         <%_ } _%>
@@ -21,10 +23,12 @@ describe('testing reducers', () => {
     expect(result).toEqual({
       ...authInitialState,
       <%_ if(features.onboarding) { _%>
-      hasAccessOnboarding: true
+      hasAccessOnboarding: true,
       <%_ } _%>
       initialLoading: false,
+      <%_ if(features.loginandsignup) { _%>
       currentUser: { id: '123', email: 'test@mail.com' }
+      <%_ } _%>
     });
   });
 

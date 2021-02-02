@@ -1,7 +1,13 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 <%_ if(features.onboarding || features.loginandsignup) { _%>
+<%_ if(features.statemanagement.redux) { _%>
 import { useSelector } from 'hooks/redux';
+<%_ } _%>
+<%_ if(features.statemanagement.recoil) { _%>
+import { useRecoilValue } from 'recoil';
+import { <%_ if(features.onboarding) { _%>onboardingState, <%_ } _%><%_ if(features.loginandsignup) { _%>currentUserState<%_ } _%> } from 'recoilState/auth/atoms';
+<%_ } _%>
 <%_ } _%>
 import {
   <%_ if(features.loginandsignup) { _%>
@@ -23,12 +29,24 @@ const Stack = createStackNavigator();
 
 <%_ if(features.onboarding) { _%>
 const Navigator = () => {
+  <%_ if(features.statemanagement.redux) { _%>
   const hasAccessOnboarding = useSelector(
     state => state.auth.hasAccessOnboarding
   );
-
+  <%_ } _%>
+  <%_ if(features.statemanagement.recoil) { _%>
+  const hasAccessOnboarding = useRecoilValue(onboardingState);
+  <%_ } _%>
+  
+  
   <%_ if(features.loginandsignup) { _%>
+  <%_ if(features.statemanagement.redux) { _%>
   const currentUser = useSelector(state => state.auth.currentUser);
+  <%_ } _%>
+  <%_ if(features.statemanagement.recoil) { _%>
+  const currentUser = useRecoilValue(currentUserState);
+  <%_ } _%>
+  
 
   const defaultStackConfig = currentUser ? appStackNavConfig : authStackNavConfig;
   
@@ -48,7 +66,12 @@ const Navigator = () => {
 <%_ } else { _%>
 const Navigator = () => {
   <%_ if(features.loginandsignup) { _%>
+  <%_ if(features.statemanagement.redux) { _%>
   const currentUser = useSelector(state => state.auth.currentUser);
+  <%_ } _%>
+  <%_ if(features.statemanagement.recoil) { _%>
+  const currentUser = useRecoilValue(currentUserState);
+  <%_ } _%>
 
   const defaultStackConfig = currentUser ? appStackNavConfig : authStackNavConfig;
   

@@ -15,3 +15,5 @@ module.exports.GENERATOR_FEATURES = [
 ];
 
 module.exports.GENERATOR_SOCIALS = ['Facebook', 'Apple', 'Google', 'Twitter'];
+
+module.exports.GENERATOR_STATE_MANAGEMENTS = ['Redux', 'Recoil'];

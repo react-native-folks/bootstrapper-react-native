@@ -2,7 +2,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Reactotron, { overlay, trackGlobalErrors } from 'reactotron-react-native';
 import ReactotronFlipper from 'reactotron-react-native/dist/flipper';
 import apisaucePlugin from 'reactotron-apisauce';
+<%_ if(features.statemanagement.redux) { _%>
 import { reactotronRedux } from 'reactotron-redux';
+<%_ } _%>
 import { NativeModules } from 'react-native';
 import { Tron } from 'interfaces/reactotron';
 
@@ -25,7 +27,9 @@ if (__DEV__) {
     .setAsyncStorageHandler?.(AsyncStorage)
     .use(trackGlobalErrors({}))
     .use(apisaucePlugin())
+    <%_ if(features.statemanagement.redux) { _%>
     .use(reactotronRedux())
+    <%_ } _%>
     .use(overlay())
     .useReactNative()
     .connect();

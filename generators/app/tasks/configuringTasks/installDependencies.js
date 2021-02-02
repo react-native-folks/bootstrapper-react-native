@@ -17,12 +17,9 @@ const DEPENDENCIES = [
   'react-native-safe-area-context',
   'react-native-screens',
   'react-native-splash-screen',
-  'react-redux',
   'react-hook-form',
   'reactotron-apisauce',
   'reactotron-react-native',
-  'reactotron-redux',
-  'redux',
   'typescript'
 ];
 
@@ -33,7 +30,6 @@ const DEV_DEPENDENCIES = [
   '@types/jest',
   '@types/react',
   '@types/react-native',
-  '@types/react-redux',
   '@types/react-test-renderer',
   'babel-eslint',
   'babel-plugin-import-glob',
@@ -47,8 +43,7 @@ const DEV_DEPENDENCIES = [
   'prettier-eslint',
   'prettier',
   'react-native-mock-render',
-  'react-native-testing-library',
-  'redux-mock-store'
+  'react-native-testing-library'
 ];
 
 function yarnInstall(projectName, deps, options, dev) {
@@ -114,6 +109,18 @@ module.exports = function installDependencies() {
 
   if (this.features.onboarding) {
     DEPENDENCIES.push('react-native-swiper');
+  }
+
+  if (this.features.statemanagement.recoil) {
+    DEPENDENCIES.push('recoil');
+  }
+
+  if (this.features.statemanagement.redux) {
+    DEPENDENCIES.push('redux');
+    DEPENDENCIES.push('react-redux');
+    DEPENDENCIES.push('reactotron-redux');
+    DEV_DEPENDENCIES.push('@types/react-redux');
+    DEV_DEPENDENCIES.push('redux-mock-store');
   }
 
   return yarnInstall(this.projectName, DEPENDENCIES, this.options)

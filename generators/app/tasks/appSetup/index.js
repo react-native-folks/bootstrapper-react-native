@@ -23,11 +23,11 @@ const firebaseCoreFeatureFiles = require('./featuresFiles/firebaseCoreFeatureFil
 const firebasePerformanceSetup = require('./featuresFiles/firebasePerformanceSetup');
 const loginAndSignUpFeatureFiles = require('./featuresFiles/loginAndSignUpFeatureFiles');
 const onboardingFeatureFiles = require('./featuresFiles/onboardingFeatureFiles');
+const stateManagementFeatureFiles = require('./featuresFiles/stateManagementFeatureFiles');
 const pushNotificationsFeatureFiles = require('./featuresFiles/pushNotificationsFeatureFiles');
 const pushNotificationsSetup = require('./featuresFiles/pushNotificationsSetup');
 const addSocialsToProject = require('./featuresFiles/socialButtonsFeatureSetup');
 const addGoogleMapsToProject = require('./featuresFiles/googleMapsFeatureSetup');
-
 module.exports = function index() {
   const spinner = ora({
     spinner: 'bouncingBall',
@@ -38,6 +38,7 @@ module.exports = function index() {
   createDotEnvFilesLocally.bind(this)();
   packageJsonScripts.bind(this)();
   baseFilesTemplate.bind(this)();
+  stateManagementFeatureFiles.bind(this)();
   testingSetup.bind(this)();
   navigationSetup.bind(this)();
   appIcons.bind(this)();

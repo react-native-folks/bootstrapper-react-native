@@ -1,0 +1,35 @@
+import { selector } from 'recoil';
+<%_ if(features.loginandsignup || features.onboarding) { _%>
+import { AuthState } from 'interfaces/auth';
+<%_ } _%>
+
+import {
+  <%_ if(features.loginandsignup) { _%>
+  currentUserState,
+  <%_ } _%>
+  <%_ if(features.onboarding) { _%>
+  onboardingState,
+  <%_ } _%>
+  initialLoadingState
+} from './atoms';
+
+export const setupSelector = selector({
+  key: 'setupSelector',
+  get: ({ get }) => {
+    return get(initialLoadingState);
+  },
+  <%_ if(features.loginandsignup || features.onboarding) { _%>
+  set: async ({ set }, setupData) => {
+    const authdata = setupData as AuthState;
+  <%_ } else { _%>
+  set: async ({ set }) => {
+  <%_ } _%>
+    <%_ if(features.loginandsignup) { _%>
+    set(currentUserState, authdata.currentUser);
+    <%_ } _%>
+    <%_ if(features.onboarding) { _%>
+    set(onboardingState, authdata.hasAccessOnboarding);
+    <%_ } _%>
+    set(initialLoadingState, false);
+  }
+});

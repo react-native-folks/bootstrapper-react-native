@@ -9,6 +9,7 @@ module.exports.NAVIGATION_PATH = 'src/app/navigation';
 module.exports.HOOKS_PATH = 'src/hooks';
 module.exports.INTERFACES_PATH = 'src/interfaces';
 module.exports.REDUX_PATH = 'src/redux';
+module.exports.RECOIL_PATH = 'src/recoilState';
 module.exports.SERVICES_PATH = 'src/services';
 module.exports.UTILS_PATH = 'src/utils';
 module.exports.ANDROID_APP_PATH = 'android/app';
@@ -101,9 +102,17 @@ module.exports.HOME_TRANSLATIIONS = `${module.exports.HOME_PATH}/i18n.ts`;
 
 // APP SCREENS - ONBOARDING
 module.exports.ONBOARDING_PATH = `${module.exports.SCREENS_PATH}/Onboarding`;
+module.exports.ONBOARDING_COMPONENTS_PATH = `${module.exports.SCREENS_PATH}/Onboarding/components`;
+module.exports.ONBOARDING_INDEX_PATH = `${module.exports.SCREENS_PATH}/Onboarding/index.tsx`;
+module.exports.ONBOARDING_TEST_PATH = `${module.exports.SCREENS_PATH}/Onboarding/index.test.tsx`;
+module.exports.ONBOARDING_I18N_PATH = `${module.exports.SCREENS_PATH}/Onboarding/i18n.ts`;
 
 // APP SCREENS - GOOGLE MAPS
 module.exports.GOOGLE_MAPS_PATH = `${module.exports.SCREENS_PATH}/MapView`;
+
+// APP STATE MANAGEMENT - RECOIL
+module.exports.RECOIL_AUTH_ATOMS_PATH = `${module.exports.RECOIL_PATH}/auth/atoms.ts`;
+module.exports.RECOIL_AUTH_SELECTORS_PATH = `${module.exports.RECOIL_PATH}/auth/selectors.ts`;
 
 // CONFIG
 module.exports.PUSH_NOTIFICATIONS_CONFIG = `${module.exports.CONFIG_PATH}/pushNotifications.ts`;
@@ -120,6 +129,7 @@ module.exports.FONTS_CONSTANTS = `${module.exports.CONSTANTS_PATH}/fonts.ts`;
 
 // HOOKS
 module.exports.REDUX_HOOKS = `${module.exports.HOOKS_PATH}/redux.ts`;
+module.exports.FETCH_HOOKS = `${module.exports.HOOKS_PATH}/useFetch.ts`;
 
 // INTERFACES
 module.exports.AUTH_INTERFACES = `${module.exports.INTERFACES_PATH}/auth.ts`;

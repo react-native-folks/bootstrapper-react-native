@@ -5,6 +5,11 @@ const ONBOARDING_KEY = '@Onboarding:hasAccess';
 export const setOnboardingAccess = (value: boolean) =>
   AsyncStorage.setItem(ONBOARDING_KEY, JSON.stringify(value));
 export const getOnboardingAccess = () =>
-  AsyncStorage.getItem(ONBOARDING_KEY).then((value: string) =>
-    JSON.parse(`${value}`)
-  );
+  AsyncStorage.getItem(ONBOARDING_KEY).then(value => JSON.parse(`${value}`));
+
+const onboardingServices = {
+  setOnboardingAccess,
+  getOnboardingAccess
+};
+
+export default onboardingServices;
