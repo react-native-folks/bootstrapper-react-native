@@ -1,13 +1,21 @@
 import React from 'react';
+<%_ if(features.statemanagement.redux) { _%>
 import * as reactRedux from 'react-redux';
 import * as reduxHook from 'hooks/redux';
+<%_ } _%>
 import { fireEvent, render, act } from 'react-native-testing-library';
 import { Login } from 'app/screens/Auth/screens/Login';
+<%_ if(features.statemanagement.recoil) { _%>
+import { RecoilRoot } from 'recoil';
+import authServices from 'services/auth';
+<%_ } _%>
 
 const EMAIL_INPUT_ID = 'email';
 const PASS_INPUT_ID = 'password';
 const SIGN_UP_BUTTON = 'signup-button';
+<%_ if(features.statemanagement.redux) { _%>
 const ERROR_MESSAGE_ID = 'login-error-message';
+<%_ } _%>
 const INPUT_ERROR_EMAIL_ID = 'input-error-email';
 const INPUT_ERROR_PASS_ID = 'input-error-pass';
 const SUBMIT_BUTTON_ID = 'submit-button';
@@ -17,19 +25,32 @@ const VALID_EMAIL = 'email@email.com';
 const VALID_PASSWORD = 'HelloWord1234';
 
 describe('Login Screen', () => {
-  let useDispatchMock = jest.fn();
+  let testMockFunction = jest.fn();
+  <%_ if(features.statemanagement.redux) { _%>
   const useDispatchSpy = jest.spyOn(reactRedux, 'useDispatch');
-  useDispatchSpy.mockImplementation(() => useDispatchMock);
+  useDispatchSpy.mockImplementation(() => testMockFunction);
+  <%_ } _%>
+  <%_ if(features.statemanagement.recoil) { _%>
+  const autServiceLoginMock = jest.spyOn(authServices, 'login');
+  autServiceLoginMock.mockImplementation(testMockFunction);
+  <%_ } _%>
   const navMock = {
     navigate: jest.fn()
   };
 
   const loginComponent = (props: any = {}) => (
-    <Login navigation={navMock} {...props} />
+    <%_ if(features.statemanagement.recoil) { _%>
+      <RecoilRoot>
+        <Login navigation={navMock} {...props} />
+      </RecoilRoot>
+    <%_ } _%>
+    <%_ if(features.statemanagement.redux) { _%>
+      <Login navigation={navMock} {...props} />
+    <%_ } _%>
   );
 
   beforeEach(() => {
-    useDispatchMock.mockClear();
+    testMockFunction.mockClear();
     navMock.navigate.mockClear();
   });
 
@@ -43,13 +64,18 @@ describe('Login Screen', () => {
   });
 
   test('Login Error Snapshot', async () => {
+    <%_ if(features.statemanagement.redux) { _%>
     const selectorHookSpy = jest.spyOn(reduxHook, 'useSelector');
     selectorHookSpy.mockReturnValueOnce(false).mockReturnValueOnce(true);
+    <%_ } _%>
     const login = render(loginComponent());
     expect(login.toJSON()).toMatchSnapshot();
+    <%_ if(features.statemanagement.redux) { _%>
     selectorHookSpy.mockClear();
+    <%_ } _%>
   });
 
+  <%_ if(features.statemanagement.redux) { _%>
   test('error message should be displayed if screen receive error from store', async () => {
     const selectorHookSpy = jest.spyOn(reduxHook, 'useSelector');
     selectorHookSpy.mockReturnValueOnce(false).mockReturnValueOnce(true);
@@ -57,6 +83,7 @@ describe('Login Screen', () => {
     const generalMessageError = queryByTestId(ERROR_MESSAGE_ID);
     expect(generalMessageError).not.toBeNull();
   });
+  <%_ }_%>
 
   test('After submit without complete fields an error should be displayed on each field', async () => {
     const { getByTestId, queryByTestId } = render(loginComponent());
@@ -86,7 +113,7 @@ describe('Login Screen', () => {
     expect(queryByTestId(INPUT_ERROR_PASS_ID)).toBeNull();
   });
 
-  test('After complete field with valid params, login dispatch should be called', async () => {
+  test('After complete field with valid params, login should be called', async () => {
     const { getByTestId } = render(loginComponent());
     const submitButton = getByTestId(SUBMIT_BUTTON_ID);
     const emailInput = getByTestId(EMAIL_INPUT_ID);
@@ -96,10 +123,10 @@ describe('Login Screen', () => {
       fireEvent.changeText(passInput, VALID_PASSWORD);
       fireEvent.press(submitButton);
     });
-    expect(useDispatchMock).toHaveBeenCalledTimes(1);
+    expect(testMockFunction).toHaveBeenCalledTimes(1);
   });
 
-  test('After correct error on field, login dispatch should be called', async () => {
+  test('After correct error on field, login should be called', async () => {
     const { getByTestId } = render(loginComponent());
     const submitButton = getByTestId(SUBMIT_BUTTON_ID);
     const emailInput = getByTestId(EMAIL_INPUT_ID);
@@ -111,7 +138,7 @@ describe('Login Screen', () => {
       fireEvent.changeText(emailInput, VALID_EMAIL);
       fireEvent.press(submitButton);
     });
-    expect(useDispatchMock).toHaveBeenCalledTimes(1);
+    expect(testMockFunction).toHaveBeenCalledTimes(1);
   });
 
   test('After press signup button, navigation should be called', async () => {

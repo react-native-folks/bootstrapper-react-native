@@ -15,11 +15,10 @@ const FILES = [
   AUTH_INTERFACES,
   AUTH_PATH_SIGNUP,
   LOGIN_STYLE,
-  LOGIN_I18N,
-  LOGIN_TEST
+  LOGIN_I18N
 ];
 
-const TEMPLATE_FILES = [AUTH_SERVICE, LOGIN];
+const TEMPLATE_FILES = [AUTH_SERVICE, LOGIN, LOGIN_TEST];
 
 module.exports = function loginAndSignUpFeatureFiles() {
   TEMPLATE_FILES.forEach(copyTemplateFile.bind(this));
