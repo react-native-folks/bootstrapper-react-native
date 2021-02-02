@@ -1,5 +1,7 @@
 import { authActions, authActionsTypes } from 'redux/auth';
+<%_ if(features.loginandsignup) { _%>
 import authService from 'services/auth';
+<%_ } _%>
 <%_ if(features.onboarding) { _%>
 import * as onboardingService from 'services/onboarding';
 <%_ } _%>
@@ -11,7 +13,9 @@ describe('testing auth actions', () => {
     store.clearActions();
   });
   test('call init should return AUTH_INIT action with payloads', async () => {
+    <%_ if(features.loginandsignup) { _%>
     jest.spyOn(authService, 'authSetup').mockImplementation(() => 'User');
+    <%_ } _%>
     <%_ if(features.onboarding) { _%>
     jest
       .spyOn(onboardingService, 'getOnboardingAccess')
@@ -19,7 +23,9 @@ describe('testing auth actions', () => {
     <%_ } _%>
     const initActionResult = await store.dispatch(authActions.init({}));
     expect(initActionResult.payload).toEqual({
+      <%_ if(features.loginandsignup) { _%>
       currentUser: 'User',
+      <%_ } _%>
       <%_ if(features.onboarding) { _%>
       hasAccessOnboarding: true
       <%_ } _%>

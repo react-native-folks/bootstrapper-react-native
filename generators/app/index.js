@@ -17,7 +17,11 @@ const chmodFirebaseScript = require('./tasks/installTasks/chmodFirebaseScript');
 const gitInitialization = require('./tasks/installTasks/gitInitialization');
 // END
 const nextSteps = require('./tasks/nextSteps');
-const { GENERATOR_FEATURES, GENERATOR_SOCIALS } = require('./constants');
+const {
+  GENERATOR_FEATURES,
+  GENERATOR_SOCIALS,
+  GENERATOR_STATE_MANAGEMENTS
+} = require('./constants');
 
 class ReactNativeBootstrap extends Generator {
   constructor(args, opts) {
@@ -96,6 +100,20 @@ class ReactNativeBootstrap extends Generator {
           );
         }
       }
+      this.features.statemanagement = {
+        redux: false,
+        recoil: false
+      };
+      const { stateManagement } = await this.prompt([
+        {
+          type: 'list',
+          name: 'stateManagement',
+          message: 'What application state management do you want to use?',
+          choices: GENERATOR_STATE_MANAGEMENTS,
+          filter: value => value.replace(/ /g, '').toLowerCase()
+        }
+      ]);
+      this.features.statemanagement[stateManagement] = true;
       return this.prompt([
         {
           type: 'input',

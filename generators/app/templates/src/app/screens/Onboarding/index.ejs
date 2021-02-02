@@ -1,6 +1,13 @@
 import React from 'react';
+<%_ if(features.statemanagement.redux) { _%>
 import { useDispatch } from 'react-redux';
 import { authActions } from 'redux/auth';
+<%_ } _%>
+<%_ if(features.statemanagement.recoil) { _%>
+import { useRecoilState } from 'recoil';
+import { onboardingState } from 'recoilState/auth/atoms';
+import onboardingServices from 'services/onboarding';
+<%_ } _%>
 import { createStackNavigator } from '@react-navigation/stack';
 import { appScreensNavOptions } from 'app/navigation/config/screensOptions';
 import Routes from 'app/navigation/routes';
@@ -9,9 +16,18 @@ import Swiper from './components/Swiper';
 import './i18n';
 
 export function OnboardingContainer() {
+  <%_ if(features.statemanagement.redux) { _%>
   const dispatch = useDispatch();
   const handleSkipOnboarding = () =>
     dispatch(authActions.setHasAccessOnboarding(true));
+  <%_ } _%>
+  <%_ if(features.statemanagement.recoil) { _%>
+  const [, setHasOnboardingState] = useRecoilState(onboardingState);
+  const handleSkipOnboarding = () => {
+    onboardingServices.setOnboardingAccess(true);
+    setHasOnboardingState(true);
+  };
+  <%_ } _%>
   return <Swiper onSkip={handleSkipOnboarding} />;
 }
 

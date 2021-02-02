@@ -1,4 +1,4 @@
-import React, { <%_ if(features.loginandsignup) { _%>useCallback, <%_ } _%> } from 'react';
+import React, { <%_ if(features.loginandsignup && features.statemanagement.redux) { _%>useCallback, <%_ } _%> } from 'react';
 import { Alert, View } from 'react-native';
 import i18next from 'i18next';
 import Routes from 'app/navigation/routes';
@@ -12,8 +12,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 <%_ } _%>
 <%_ } _%>
 <%_ if(features.loginandsignup) { _%>
+<%_ if(features.statemanagement.redux) { _%>
 import { useDispatch } from 'react-redux';
 import { authActions } from 'redux/auth';
+<%_ } _%>
+<%_ if(features.statemanagement.recoil) { _%>
+import { useRecoilState } from 'recoil';
+import { currentUserState } from 'recoilState/auth/atoms';
+import { useLazyFetch } from 'hooks/useFetch';
+import authServices from 'services/auth';
+<%_ } _%>
 <%_ } _%>
 <%_ if(features.googlemaps) { _%>
 import { Navigation } from 'interfaces/navigation';
@@ -25,8 +33,22 @@ import styles from './styles';
 
 function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _%>) {
   <%_ if(features.loginandsignup) { _%>
+  <%_ if(features.statemanagement.redux) { _%>
   const dispatch = useDispatch();
   const handleLogout = useCallback(() => dispatch(authActions.logout()), [dispatch]);
+  <%_ } _%>
+  <%_ if(features.statemanagement.recoil) { _%>
+  const [, setCurrentUser] = useRecoilState(currentUserState);
+  const [, , , logout] = useLazyFetch({
+    request: authServices.logout,
+    withSuccessSelector: () => {
+      setCurrentUser(null);
+      authServices.removeCurrentUser();
+    }
+  });
+  
+  const handleLogout = () => logout(null);
+  <%_ } _%>
   <%_ } _%>
 
   return (

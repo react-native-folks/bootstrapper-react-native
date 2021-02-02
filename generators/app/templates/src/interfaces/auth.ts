@@ -1,3 +1,9 @@
+export interface AuthState {
+  initialLoading?: boolean;
+  currentUser: CurrentUser | null;
+  hasAccessOnboarding: boolean;
+}
+
 export interface CurrentUser {
   user: { name: string; lastname: string; username: string };
   sessionToken: string;
