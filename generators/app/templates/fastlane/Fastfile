@@ -1,0 +1,159 @@
+fastlane_require 'pry'
+fastlane_version "2.148.1"
+import 'Fastfile.ios.private'
+import 'Fastfile.android.private'
+
+platform :android do |options| 
+
+  desc "Submit a new Release Build to Firebase App Distribution."
+  lane :distribute do |options|
+    distribute_to_firebase environment: options[:environment].to_sym
+  end
+
+  desc "Submit a new Production Release Build to Google Play Console."
+  lane :publish do |options|
+    release_to_play_console environment: :production
+  end
+
+end
+
+platform :ios do |options| 
+
+  desc "Before doing anything else."
+  before_all do |lane, options|
+    validate
+    general_config
+  end
+
+  desc "After all the steps have completed succesfully."
+  after_all do |lane|
+    clean
+  end
+
+  desc "If there was an error."
+  error do |lane, exception|
+    clean
+  end
+
+  desc "Distribute a new release to Firebase App Distribution"
+  lane :distribute do |options|
+    environment = options[:environment].to_sym
+    environment_config(environment: environment)
+    certificates_config(environment: environment)
+    distribute_to_firebase environment: environment, build_number: options[:build_number], version_number: options[:version_number] 
+  end
+
+  desc "New release to App Store Connect for AppStore (Release)."
+  lane :publish do |options|
+    environment_config(environment: :production)
+    certificates_config(environment: :production)
+    publish_to_testflight environment: :production, build_number: options[:build_number], version_number: options[:version_number] 
+  end
+
+  desc "Creates the `App ID` and `Provisioning Profile` for the configurations mapped to `:dev` and `:develop`."
+  lane :create_development_app do
+    environment_config(environment: :develop)
+    certificates_config(environment: :develop)
+    create_app environment: :develop
+  end
+
+  desc "Creates the `App ID` and `Provisioning Profile` for the configuration mapped to `:staging`."
+  lane :create_staging_app do
+    environment_config(environment: :staging)
+    certificates_config(environment: :staging)
+    create_app environment: :staging
+  end
+
+  desc "Creates the `App ID` and `Provisioning Profile` for the configuration mapped to `:production`."
+  lane :create_production_app do
+    environment_config(environment: :production)
+    certificates_config(environment: :production)
+    create_app environment: :production
+  end
+
+  desc "Generates the push notifications certificates for the build configurations mapped to `:dev` and `:develop`."
+  lane :generate_push_certificates_development do
+    environment_config(environment: :develop)
+    certificates_config(environment: :develop)
+    generate_push_certificates environment: :develop
+  end
+
+  desc "Generates the push notifications certificates for the build configurations mapped to `:staging`."
+  lane :generate_push_certificates_staging do
+    environment_config(environment: :staging)
+    certificates_config(environment: :staging)
+    generate_push_certificates environment: :staging
+  end
+
+  desc "Generates the push notifications certificates for the build configurations mapped to `:production`."
+  lane :generate_push_certificates_production do
+    environment_config(environment: :production)
+    certificates_config(environment: :production)
+    generate_push_certificates environment: :production
+  end
+
+  desc "Updates or downloads the `Certificates` and `Provisioning Profiles` for the configurations mapped to `:dev` and `:develop`."
+  lane :download_development_certificates do
+    environment_config(environment: :develop)
+    certificates_config(environment: :develop)
+    refresh_certificates environment: :develop
+  end
+
+  desc "Updates or downloads the `Certificates` and `Provisioning Profiles` for the configurations mapped to `:staging`."
+  lane :download_staging_certificates do
+    environment_config(environment: :staging)
+    certificates_config(environment: :staging)
+    refresh_certificates environment: :staging
+  end
+
+  desc "Updates or downloads the `Certificates` and `Provisioning Profiles` for the configurations mapped to `:production`."
+  lane :download_production_certificates do
+    environment_config(environment: :production)
+    certificates_config(environment: :production)
+    refresh_certificates environment: :production
+  end
+
+  desc "Updates or downloads the `Certificates` and `Provisioning Profiles` for the configurations mapped to `:dev` and `:develop`."
+  lane :recreate_development_certificates do
+    environment_config(environment: :develop)
+    certificates_config(environment: :develop)
+    recreate_certificates environment: :develop
+  end
+
+  desc "Updates or downloads the `Certificates` and `Provisioning Profiles` for the configurations mapped to `:staging`."
+  lane :recreate_staging_certificates do
+    environment_config(environment: :staging)
+    certificates_config(environment: :staging)
+    recreate_certificates environment: :staging
+  end
+
+  desc "Updates or downloads the `Certificates` and `Provisioning Profiles` for the configurations mapped to `:production`."
+  lane :recreate_production_certificates do
+    environment_config(environment: :production)
+    certificates_config(environment: :production)
+    recreate_certificates environment: :production, readonly: false
+  end
+
+  desc "Adds a new device and regenerates the development `Provisioning Profile` to include it."
+  lane :add_device do |options|
+    certificates_config(environment: :develop)
+    add_single_device
+  end
+
+  desc "Testing targets and environment configuration"
+  lane :test_config_qa do |options|
+    environment_config(environment: :develop)
+    certificates_config(environment: :develop)
+  end
+
+  desc "Update Bundle Identifier"
+  lane :update_bundle_identifier do |options|
+    project_name = options[:project_name]
+    update_app_identifier(
+      xcodeproj: "./#{project_name}.xcodeproj", # Optional path to xcodeproj, will use the first .xcodeproj if not set
+      plist_path: "./#{project_name}/Info.plist", # Path to info plist file, relative to xcodeproj
+      app_identifier: "#{options[:bundle_identifier]}" # The App Identifier
+    )
+  end
+
+end
