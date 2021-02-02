@@ -8,7 +8,7 @@ const { GENERATOR_FEATURES } = require('../generators/app/constants');
 describe('kamino-react-native:app', () => {
   const PROJECT_NAME = 'kaminorn';
   const TEMP_FOLDER = '../../tmp';
-  const GENERATOR_TIMEOUT = 480000;
+  const GENERATOR_TIMEOUT = 480000; // 8 min
 
   beforeAll(
     done =>
@@ -23,7 +23,8 @@ describe('kamino-react-native:app', () => {
           ),
           pushToRepo: false
         })
-        .on('end', done),
+        .on('end', done)
+        .on('error', error => done(error)),
     GENERATOR_TIMEOUT
   );
 
