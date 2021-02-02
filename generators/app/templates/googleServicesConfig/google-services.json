@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1048568404151:android:59c730a1cafc7acdcd5532",
         "android_client_info": {
-          "package_name": "com.kamino"
+          "package_name": "com.mahisoft"
         }
       },
       "oauth_client": [
@@ -35,7 +35,7 @@
               "client_id": "1048568404151-camksnsehgk30fn2fckt1fu9iis8jc3m.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.kamino"
+                "bundle_id": "com.mahisoft"
               }
             }
           ]

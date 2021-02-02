@@ -1,35 +1,10 @@
 module.exports = {
-  extends: ['@react-native-community', 'plugin:prettier/recommended'],
+  extends: '@react-native-community',
   plugins: ['import'],
   rules: {
-    'react/jsx-filename-extension': 'off',
-    'import/named': 'off',
-    'react-native/no-color-literals': 'error',
-    'react-native/no-inline-styles': 'error',
-    '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    complexity: 'off',
     'import/order': ['error', { 'newlines-between': 'always' }],
-    'no-nested-ternary': 'off',
-    'no-magic-numbers': 'off',
-    'new-cap': 'off'
+    'comma-dangle': ['error', 'never']
   },
-  overrides: [
-    {
-      files: ['*.js', '*.jsx'],
-      parser: 'babel-eslint'
-    },
-    {
-      files: ['*.ts', '*.tsx'],
-      parser: '@typescript-eslint/parser'
-    },
-    {
-      files: ['styles.ts', 'styles.tsx'],
-      rules: {
-        'no-magic-numbers': 'off'
-      }
-    }
-  ],
   settings: {
     'import/ignore': ['node_modules'],
     'import/resolver': {

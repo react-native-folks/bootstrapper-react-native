@@ -5,3 +5,6 @@ npm-debug.log
 # VS Code tools
 .history
 .vscode
+test/*
+!test/**.js 
+.yarn
