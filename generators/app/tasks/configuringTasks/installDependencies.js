@@ -35,6 +35,7 @@ const DEV_DEPENDENCIES = [
   'babel-plugin-import-glob',
   'babel-plugin-module-resolver',
   'eslint',
+  'eslint-plugin-import',
   'husky',
   'jest-react-native',
   'jsdom-global',
