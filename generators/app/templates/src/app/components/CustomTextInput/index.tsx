@@ -8,6 +8,9 @@ import { CustomTextInputProps, VARIANTS } from './model';
 import styles from './styles';
 
 const CustomTextInput = ({
+  testID,
+  labelTestID,
+  errorTestID,
   control,
   name,
   defaultValue = '',
@@ -17,7 +20,6 @@ const CustomTextInput = ({
   style,
   errorMessage = '',
   inputProps,
-  errorTestID,
   ...props
 }: CustomTextInputProps) => {
   const customStyles = useCallback(
@@ -30,12 +32,12 @@ const CustomTextInput = ({
       render={({ onChange, onBlur, value }) => (
         <View style={styles.container}>
           {label !== '' && (
-            <CustomText gray bold small {...labelProps}>
+            <CustomText testID={labelTestID} gray bold small {...labelProps}>
               {label}
             </CustomText>
           )}
           <TextInput
-            testID={name}
+            testID={testID || name}
             onBlur={onBlur}
             onChangeText={newValue => onChange(newValue)}
             value={value}

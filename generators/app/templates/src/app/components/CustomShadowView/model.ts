@@ -5,6 +5,7 @@ export interface CustomShadowViewProps extends VariantsInterface {
   viewProps?: ViewProps;
   style?: StyleProp<ViewStyle> | StyleProp<TextStyle>;
   children: ReactNode | Array<ReactNode>;
+  testID?: string | undefined;
 }
 
 /*

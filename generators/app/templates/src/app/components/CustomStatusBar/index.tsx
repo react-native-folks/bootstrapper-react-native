@@ -9,7 +9,7 @@ interface CustomStatusBarProps {
 const CustomStatusBar = ({ routeName }: CustomStatusBarProps) => {
   const statusBarProps =
     statusBarStyles[routeName || ''] || statusBarStyles.default;
-  return <StatusBar animated {...statusBarProps} />;
+  return <StatusBar testID="status-bar" animated {...statusBarProps} />;
 };
 
 export default CustomStatusBar;

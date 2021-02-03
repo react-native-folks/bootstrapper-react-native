@@ -6,6 +6,7 @@ import { CustomShadowViewProps, VARIANTS } from './model';
 import styles from './styles';
 
 const CustomShadowView = ({
+  testID,
   viewProps,
   style,
   children,
@@ -18,7 +19,10 @@ const CustomShadowView = ({
     [medium, props, rounded]
   );
   return (
-    <View {...viewProps} style={[styles.base, customStyles(), style]}>
+    <View
+      testID={testID}
+      {...viewProps}
+      style={[styles.base, customStyles(), style]}>
       {children}
     </View>
   );
