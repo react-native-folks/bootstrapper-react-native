@@ -5,7 +5,7 @@ import Routes from 'app/navigation/routes';
 import { Maps } from 'app/components';
 
 function MapView() {
-  return <Maps />;
+  return <Maps testID="google-maps-container" />;
 }
 
 const Stack = createStackNavigator();

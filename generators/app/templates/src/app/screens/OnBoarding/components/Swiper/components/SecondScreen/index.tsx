@@ -8,7 +8,7 @@ import styles from './styles';
 function SecondScreen() {
   return (
     <View testID="onboarding-second-screen" style={styles.container}>
-      <CustomText center white>
+      <CustomText testID="second-screen-message-text" center white>
         {i18next.t('ONBOARDING:SECOND_SCREEN')}
       </CustomText>
     </View>

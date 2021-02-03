@@ -23,8 +23,11 @@ function CustomStepSwipper({ onSkip }: Props) {
     setScrollIndex(scrollIndex - 1);
   }, [scrollIndex]);
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      testID="onboarding-swiper-area-container"
+      style={styles.container}>
       <Swiper
+        testID="onboarding-swaper-component"
         activeDotStyle={styles.activeDot}
         dotStyle={styles.dot}
         paginationStyle={styles.pagination}

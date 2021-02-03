@@ -47,14 +47,17 @@ function SignUp({ navigation }: Navigation) {
 
   const hasSignUpError = Object.keys(errors).length > 0 || !!signupError;
   return (
-    <LoadingView isLoading={loading}>
+    <LoadingView testID="signup-screen-container-view" isLoading={loading}>
       <ScrollView
+        testID="scrollview-form-container"
         bounces={false}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.container}
         style={styles.stretchAndFlex}>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <TouchableWithoutFeedback
+          testID="dismiss-keyboard-touchable"
+          onPress={Keyboard.dismiss}>
           <View style={[styles.stretchAndFlex, styles.form]}>
             <CustomTextInput
               control={control}
@@ -69,6 +72,8 @@ function SignUp({ navigation }: Navigation) {
               label={i18next.t('SIGNUP:NAME')}
               error={errors[FIELDS.name]}
               errorMessage={errors[FIELDS.name]?.message}
+              labelTestID="input-title-name"
+              errorTestID="input-error-name"
             />
             <CustomTextInput
               control={control}
@@ -83,6 +88,8 @@ function SignUp({ navigation }: Navigation) {
               label={i18next.t('SIGNUP:SURNAME')}
               error={errors[FIELDS.surname]}
               errorMessage={errors[FIELDS.surname]?.message}
+              labelTestID="input-title-surname"
+              errorTestID="input-error-surname"
             />
             <CustomTextInput
               control={control}
@@ -95,6 +102,8 @@ function SignUp({ navigation }: Navigation) {
               inputProps={{
                 placeholder: i18next.t('SIGNUP:BIRTH_DATE_PLACEHOLDER')
               }}
+              labelTestID="input-title-birthdate"
+              errorTestID="input-error-birthdate"
             />
             <CustomTextInput
               control={control}
@@ -110,6 +119,8 @@ function SignUp({ navigation }: Navigation) {
                 keyboardType: 'email-address',
                 placeholder: i18next.t('SIGNUP:MAIL_PLACEHOLDER')
               }}
+              labelTestID="input-title-email"
+              errorTestID="input-error-email"
             />
             <CustomTextInput
               control={control}
@@ -125,6 +136,8 @@ function SignUp({ navigation }: Navigation) {
               error={errors[FIELDS.password]}
               errorMessage={errors[FIELDS.password]?.message}
               inputProps={{ secureTextEntry: true }}
+              labelTestID="input-title-pass"
+              errorTestID="input-error-pass"
             />
             <CustomTextInput
               control={control}
@@ -137,6 +150,8 @@ function SignUp({ navigation }: Navigation) {
                 keyboardType: 'phone-pad',
                 placeholder: i18next.t('SIGNUP:PHONE_NUMBER_PLACEHOLDER')
               }}
+              labelTestID="input-title-phone"
+              errorTestID="input-error-phone"
             />
             {!!signupError && (
               <CustomText error center>
@@ -144,6 +159,7 @@ function SignUp({ navigation }: Navigation) {
               </CustomText>
             )}
             <CustomButton
+              testID="submit-signup-button"
               onPress={handleSubmit(onSubmit)}
               style={styles.formButton}
               title={i18next.t('SIGNUP:SIGN_UP')}
