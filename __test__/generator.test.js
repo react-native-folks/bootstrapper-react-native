@@ -2,6 +2,7 @@ const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 const rimraf = require('rimraf');
+const { exec } = require('child_process');
 
 const cases = [
   [1, ['Drawer', 'Tabs', 'Google Maps']], // drawer + tabs + google maps
@@ -15,6 +16,22 @@ const cases = [
   // [], // onboarding
   // [] // nada
 ];
+
+function buildAndroid(projDir) {
+  return new Promise(resolve => {
+    exec(
+      `cd ${projDir}/android && ./gradlew clean assembleDevelopDebug`,
+      (error, stdout, stderr) => {
+        resolve({
+          code: error && error.code ? error.code : 0,
+          error,
+          stdout,
+          stderr
+        });
+      }
+    );
+  });
+}
 
 describe('kamino-react-native:app', () => {
   const PROJECT_NAME = 'kaminorn';
@@ -36,6 +53,7 @@ describe('kamino-react-native:app', () => {
             .withPrompts({
               name: projectName,
               features,
+              stateManagement: 'redux',
               pushToRepo: false
             }),
         GENERATOR_TIMEOUT
@@ -46,6 +64,24 @@ describe('kamino-react-native:app', () => {
           path.join(__dirname, `${TEMP_FOLDER}/${projectName}/package.json`)
         );
       });
+
+      it(
+        `Android build must create corresponding apk for project ${projectName}`,
+        async () => {
+          if (caseId === 1) {
+            await buildAndroid(
+              path.join(__dirname, `${TEMP_FOLDER}/${projectName}`)
+            );
+            assert.file(
+              path.join(
+                __dirname,
+                `${TEMP_FOLDER}/${projectName}/android/app/build/outputs/apk/develop/debug/${PROJECT_NAME}${caseId}-0.0.1-1000-develop-debug.apk`
+              )
+            );
+          }
+        },
+        GENERATOR_TIMEOUT
+      );
     },
     GENERATOR_TIMEOUT
   );
