@@ -89,7 +89,7 @@ module.exports.LOGIN_PATH = `${module.exports.AUTH_PATH}/screens/Login`;
 module.exports.LOGIN = `${module.exports.LOGIN_PATH}/index.tsx`;
 module.exports.LOGIN_STYLE = `${module.exports.LOGIN_PATH}/styles.ts`;
 module.exports.LOGIN_I18N = `${module.exports.LOGIN_PATH}/i18n.ts`;
-module.exports.LOGIN_TEST = `${module.exports.LOGIN_PATH}/index.test.js`;
+module.exports.LOGIN_TEST = `${module.exports.LOGIN_PATH}/index.test.tsx`;
 
 // APP SCREENS - SIGN UP
 module.exports.AUTH_PATH_SIGNUP = `${module.exports.AUTH_PATH}/screens/SignUp`;

@@ -15,8 +15,10 @@ const FILES = [MOCKS, TESTS_STORE, TESTS_UTILS, TESTS_RESPONSES_PATH];
 const TEMPLATE_FILES = [JEST_CONFIG_FILE];
 
 module.exports = function baseFilesTemplate() {
-  TEMPLATE_FILES.push(TESTS_AUTH_ACTIONS_PATH);
-  TEMPLATE_FILES.push(TESTS_AUTH_SLICE_PATH);
+  if (this.features.statemanagement.redux) {
+    TEMPLATE_FILES.push(TESTS_AUTH_ACTIONS_PATH);
+    TEMPLATE_FILES.push(TESTS_AUTH_SLICE_PATH);
+  }
   TEMPLATE_FILES.forEach(copyTemplateFile.bind(this));
   FILES.forEach(copyFile.bind(this));
   if (!this.features.socialButtons.google) {

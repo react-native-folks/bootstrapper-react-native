@@ -10,12 +10,11 @@ const {
 
 const FILES = [
   ONBOARDING_COMPONENTS_PATH,
-  ONBOARDING_TEST_PATH,
   ONBOARDING_I18N_PATH,
   ONBOARDING_SERVICE
 ];
 
-const TEMPLATE_FILES = [ONBOARDING_INDEX_PATH];
+const TEMPLATE_FILES = [ONBOARDING_INDEX_PATH, ONBOARDING_TEST_PATH];
 
 module.exports = function onboardingFeatureFiles() {
   if (!this.features.loginandsignup) {
