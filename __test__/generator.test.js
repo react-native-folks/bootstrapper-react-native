@@ -68,17 +68,15 @@ describe('kamino-react-native:app', () => {
       it(
         `Android build must create corresponding apk for project ${projectName}`,
         async () => {
-          if (caseId === 1) {
-            await buildAndroid(
-              path.join(__dirname, `${TEMP_FOLDER}/${projectName}`)
-            );
-            assert.file(
-              path.join(
-                __dirname,
-                `${TEMP_FOLDER}/${projectName}/android/app/build/outputs/apk/develop/debug/${PROJECT_NAME}${caseId}-0.0.1-1000-develop-debug.apk`
-              )
-            );
-          }
+          await buildAndroid(
+            path.join(__dirname, `${TEMP_FOLDER}/${projectName}`)
+          );
+          assert.file(
+            path.join(
+              __dirname,
+              `${TEMP_FOLDER}/${projectName}/android/app/build/outputs/apk/develop/debug/${PROJECT_NAME}${caseId}-0.0.1-1000-develop-debug.apk`
+            )
+          );
         },
         GENERATOR_TIMEOUT
       );
