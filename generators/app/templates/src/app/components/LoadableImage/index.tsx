@@ -18,11 +18,13 @@ interface LoadableImageProps {
   url?: string;
   imageProps?: ImageProps;
   shouldLoad?: boolean;
+  testID?: string | undefined;
 }
 
 // Loadable image component for adding loading spinner to images from remote locations (no local assets)
 
 const LoadableImage = ({
+  testID,
   url,
   style,
   loaderStyle,
@@ -41,6 +43,7 @@ const LoadableImage = ({
   return (
     <View>
       <Image
+        testID={testID}
         resizeMode="contain"
         onLoadStart={startLoading}
         onLoadEnd={endLoading}
@@ -51,6 +54,7 @@ const LoadableImage = ({
       />
       {(shouldLoad || loading) && (
         <ActivityIndicator
+          testID={testID ? `activity-indicator-${testID}` : undefined}
           animating
           size={size}
           style={[styles.container, loaderStyle]}

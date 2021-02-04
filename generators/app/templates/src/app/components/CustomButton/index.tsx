@@ -37,7 +37,7 @@ const CustomButton = (props: CustomButtonProps) => {
       testID={title ? title : ''}
       onPress={onPress}
       android_ripple={androidRipple || defaultAndroidRipple}
-      style={({ pressed }) => [
+      style={({ pressed }: { pressed: boolean }) => [
         styles.container,
         (radius && { borderRadius: radius }) || {},
         (borderWidth && { borderWidth: borderWidth }) || {},

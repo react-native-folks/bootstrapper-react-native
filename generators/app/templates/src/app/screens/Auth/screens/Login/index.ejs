@@ -98,10 +98,11 @@ export function Login({ navigation }: Navigation) {
   const handleGoToSignUp = () => navigation.navigate(Routes.SignUp);
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        <View style={styles.form}>
+    <TouchableWithoutFeedback testID="dismiss-keyboard-touchable" onPress={Keyboard.dismiss}>
+      <View testID="login-screen-container-view" style={styles.container}>
+        <View testID="form-view-container" style={styles.form}>
           <LoadableImage
+            testID="app-icon-image-loader"
             url={'https://www.mahisoft.com/img/logo.png'}
             style={styles.logo}
           />
@@ -119,6 +120,7 @@ export function Login({ navigation }: Navigation) {
             }}
             error={errors[FIELDS.email]}
             errorMessage={errors[FIELDS.email]?.message}
+            labelTestID="input-title-email"
             errorTestID="input-error-email"
           />
           <CustomTextInput
@@ -129,6 +131,7 @@ export function Login({ navigation }: Navigation) {
             label={i18next.t('LOGIN:PASSWORD')}
             inputProps={{ secureTextEntry: true }}
             errorMessage={errors[FIELDS.password]?.message}
+            labelTestID="input-title-pass"
             errorTestID="input-error-pass"
           />
           {hasLoginError && (
@@ -177,7 +180,7 @@ export function Login({ navigation }: Navigation) {
           style={styles.formButton}
           title={i18next.t('LOGIN:SIGN_UP')}
         />
-        <ActivityIndicator animating={loading} color="gray" />
+        <ActivityIndicator testID="activity-indicator-screen" animating={loading} color="gray" />
       </View>
     </TouchableWithoutFeedback>
   );

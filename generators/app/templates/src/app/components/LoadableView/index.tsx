@@ -10,19 +10,25 @@ interface Loader {
   showChildren?: boolean;
   children?: ReactNode | ReactNode[];
   style?: ViewStyle;
+  testID?: string | undefined;
 }
 
 const LoadingView = ({
+  testID,
   isLoading,
   showChildren = true,
   children,
   style
 }: Loader): ReactElement => (
-  <View style={style || styles.container}>
+  <View testID={testID} style={style || styles.container}>
     {showChildren && children}
     {isLoading ? (
       <View style={styles.loaderContainer}>
-        <ActivityIndicator size="large" color={blue} />
+        <ActivityIndicator
+          testID={testID ? `activity-indicator-${testID}` : undefined}
+          size="large"
+          color={blue}
+        />
       </View>
     ) : null}
   </View>

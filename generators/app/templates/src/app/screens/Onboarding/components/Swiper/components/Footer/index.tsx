@@ -9,7 +9,7 @@ import styles from './styles';
 function Footer(props: FooterProps) {
   const { firstButton, secondButton } = getScreensButtonsInfo(props);
   return (
-    <View style={styles.buttons}>
+    <View testID="footer-buttons-container-view" style={styles.buttons}>
       {firstButton && (
         <CustomButton
           testID="footer-left-action-button"

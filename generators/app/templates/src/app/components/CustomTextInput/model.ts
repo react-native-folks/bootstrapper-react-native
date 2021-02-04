@@ -54,7 +54,9 @@ export interface VariantsInterface {
 }
 
 export interface CustomTextInputProps extends VariantsInterface {
+  testID?: string | undefined;
   errorTestID?: string | undefined;
+  labelTestID?: string | undefined;
   control: Control<Record<string, any>>;
   name: string;
   defaultValue?: string;

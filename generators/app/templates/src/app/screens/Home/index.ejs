@@ -52,10 +52,11 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
   <%_ } _%>
 
   return (
-    <View style={styles.container}>
-      <CustomShadowView strong style={styles.home}>
-        <CustomText blue>{i18next.t('HOME:HI')}</CustomText>
+    <View testID="screen-home-container-view" style={styles.container}>
+      <CustomShadowView testID="buttons-shadow-container" strong style={styles.home}>
+        <CustomText testID="welcome-message-text" blue>{i18next.t('HOME:HI')}</CustomText>
         <CustomButton
+          testID="alert-message-button"
           onPress={() =>
             Alert.alert(
               i18next.t('HOME:ALERT_TITLE'),
@@ -65,6 +66,7 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
           title={i18next.t('HOME:BUTTON_TITLE')}
         />
         <CustomButton
+        testID="alert-message-long-press-button"
           onPress={() =>
             Alert.alert(
               i18next.t('HOME:ALERT_TITLE'),
@@ -80,19 +82,20 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
           onPressIn={() => console.warn('Press In Detection')}
           title={i18next.t('HOME:BUTTON_TITLE_LONG')}
         />
-        <CustomButton onPress={() => {}}>
+        <CustomButton testID="smile-face-button" onPress={() => {}}>
           {({ pressed }) => (
-            <CustomText white>{pressed ? ': O' : ': D'}</CustomText>
+            <CustomText testID="smile-face-text" white>{pressed ? ': O' : ': D'}</CustomText>
           )}
         </CustomButton>
         <%_ if(features.googlemaps) { _%>
         <CustomButton
+          testID="goto-maps-view-button"
           onPress={() => navigation.navigate(Routes.MapView)}
           title={i18next.t('HOME:GO_TO_MAP')}
           />
         <%_ } _%>
     <%_ if(features.loginandsignup) { _%>
-      <CustomButton onPress={handleLogout} green title={i18next.t('HOME:LOGOUT')} style={styles.logout} />
+      <CustomButton testID="logout-button" onPress={handleLogout} green title={i18next.t('HOME:LOGOUT')} style={styles.logout} />
     <%_ } _%>
       </CustomShadowView>
     </View>
