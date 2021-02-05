@@ -17,9 +17,7 @@ function runExecCommand(command) {
 }
 
 function buildAndroidProject(projDir) {
-  return runExecCommand(
-    `cd ${projDir}/android && ./gradlew clean assembleDevelopRelease`
-  );
+  return runExecCommand(`cd ${projDir} && yarn android:build.develop`);
 }
 
 function runLintAndTestsOnProject(projDir) {
