@@ -3,25 +3,9 @@ const util = require('util');
 
 const execPromise = util.promisify(exec);
 
-function buildAndroidProject(projDir) {
+function runExecCommand(command) {
   return new Promise(resolve => {
-    exec(
-      `cd ${projDir}/android && ./gradlew clean assembleDevelopRelease`,
-      (error, stdout, stderr) => {
-        resolve({
-          code: error && error.code ? error.code : 0,
-          error,
-          stdout,
-          stderr
-        });
-      }
-    );
-  });
-}
-
-function runLintAndTestsOnProject(projDir) {
-  return new Promise(resolve => {
-    exec(`cd ${projDir} && yarn lint && yarn test`, (error, stdout, stderr) => {
+    exec(command, (error, stdout, stderr) => {
       resolve({
         code: error && error.code ? error.code : 0,
         error,
@@ -30,6 +14,16 @@ function runLintAndTestsOnProject(projDir) {
       });
     });
   });
+}
+
+function buildAndroidProject(projDir) {
+  return runExecCommand(
+    `cd ${projDir}/android && ./gradlew clean assembleDevelopRelease`
+  );
+}
+
+function runLintAndTestsOnProject(projDir) {
+  return runExecCommand(`cd ${projDir} && yarn lint && yarn test`);
 }
 
 async function getCodeAndVersionNumber(projDir) {
