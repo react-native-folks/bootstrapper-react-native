@@ -2,9 +2,11 @@ const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 const rimraf = require('rimraf');
-const { exec } = require('child_process');
-const util = require('util');
-const execPromise = util.promisify(exec);
+const {
+  buildAndroidProject,
+  runLintAndTestsOnProject,
+  getCodeAndVersionNumber
+} = require('./utils.js');
 
 const cases = [
   [1, ['Drawer', 'Tabs', 'Google Maps']] // drawer + tabs + google maps
@@ -18,38 +20,6 @@ const cases = [
   // [], // onboarding
   // [] // nada
 ];
-
-function buildAndroid(projDir) {
-  return new Promise(resolve => {
-    exec(
-      `cd ${projDir}/android && ./gradlew clean assembleDevelopDebug`,
-      (error, stdout, stderr) => {
-        resolve({
-          code: error && error.code ? error.code : 0,
-          error,
-          stdout,
-          stderr
-        });
-      }
-    );
-  });
-}
-
-function runLintAndTests(projDir) {
-  return new Promise(resolve => {
-    exec(
-      `cd ${projDir}/android && yarn lint && yarn test`,
-      (error, stdout, stderr) => {
-        resolve({
-          code: error && error.code ? error.code : 0,
-          error,
-          stdout,
-          stderr
-        });
-      }
-    );
-  });
-}
 
 describe('kamino-react-native:app', () => {
   const PROJECT_NAME = 'kaminorn';
@@ -84,7 +54,7 @@ describe('kamino-react-native:app', () => {
       it(
         'Project Lint and Tests should pass success for project ${projectName}',
         async () => {
-          const result = await runLintAndTests(
+          const result = await runLintAndTestsOnProject(
             path.join(__dirname, `${TEMP_FOLDER}/${projectName}`)
           );
           assert(result.code === 0);
@@ -95,19 +65,16 @@ describe('kamino-react-native:app', () => {
       it(
         `Android build must create corresponding apk for project ${projectName}`,
         async () => {
-          const { stdout } = await execPromise(
-            `cd ${projectDir} && git rev-list HEAD --count --merges --first-parent`
+          const { versionNumber, buildNumber } = await getCodeAndVersionNumber(
+            projectDir
           );
-          const buildNumber = stdout ? Number(stdout) : 0;
-          const versionNumber =
-            require(`${projectDir}/package.json`).version ?? '0.0.1';
-          await buildAndroid(projectDir);
+          await buildAndroidProject(projectDir);
           assert.file(
             path.join(
               projectDir,
-              `/android/app/build/outputs/apk/develop/debug/${PROJECT_NAME}${caseId}-${versionNumber}-${
+              `/android/app/build/outputs/apk/develop/release/${PROJECT_NAME}${caseId}-${versionNumber}-${
                 1000 + buildNumber
-              }-develop-debug.apk`
+              }-develop-release.apk`
             )
           );
         },
