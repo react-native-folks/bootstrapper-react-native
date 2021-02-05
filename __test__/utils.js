@@ -36,8 +36,14 @@ async function getCodeAndVersionNumber(projDir) {
   const { stdout } = await execPromise(
     `cd ${projDir} && git rev-list HEAD --count --merges --first-parent`
   );
-  const buildNumber = stdout ? Number(stdout) : 0;
+  const commitNumberCount = stdout ? Number(stdout) : 0;
   const versionNumber = require(`${projDir}/package.json`).version ?? '0.0.1';
+  const trimmedVersion = versionNumber.split('.');
+  const buildNumber =
+    Number(trimmedVersion[0]) * 10000000 +
+    Number(trimmedVersion[1]) * 100000 +
+    Number(trimmedVersion[2]) * 1000 +
+    Number(commitNumberCount);
   return { buildNumber, versionNumber };
 }
 

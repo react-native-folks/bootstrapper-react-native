@@ -72,9 +72,7 @@ describe('kamino-react-native:app', () => {
           assert.file(
             path.join(
               projectDir,
-              `/android/app/build/outputs/apk/develop/release/${PROJECT_NAME}${caseId}-${versionNumber}-${
-                1000 + buildNumber
-              }-develop-release.apk`
+              `/android/app/build/outputs/apk/develop/release/${PROJECT_NAME}${caseId}-${versionNumber}-${buildNumber}-develop-release.apk`
             )
           );
         },
