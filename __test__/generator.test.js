@@ -1,7 +1,13 @@
+const fs = require('fs');
 const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
-var fs = require('fs');
+
+const {
+  buildAndroidProject,
+  runLintAndTestsOnProject,
+  getCodeAndVersionNumber
+} = require('./utils.js');
 
 const cases = [
   { features: ['drawer', 'tabs', 'googlemaps'], stateManagement: 'redux' },
@@ -12,11 +18,6 @@ const cases = [
   { features: ['loginandsignup'], stateManagement: 'redux' },
   { features: ['onboarding'], stateManagement: 'redux' },
   { features: [], stateManagement: 'redux' }
-  // y despues  con recoil
-  // [], // login + onboarding
-  // [], // login
-  // [], // onboarding
-  // [] // nada
 ].map((v, i) => {
   v.features = v.features.reduce((p, c) => ({ ...p, [c]: true }), {});
   return [i + 1, v];
@@ -35,7 +36,7 @@ describe('kamino-react-native:app', () => {
   });
 
   it.concurrent.each(cases)(
-    'Test case %p: Test if generator creates project succesfully',
+    'Test case %p - Test if generator creates the project succesfully',
     (id, { features, stateManagement }) =>
       helpers
         .run(path.join(__dirname, '../generators/app'))
@@ -52,16 +53,51 @@ describe('kamino-react-native:app', () => {
 
   describe.each(cases)(
     'Test case %p - Check files by feature were generated correctly ',
-    (id, { features, stateManagement }) => {
+    id => {
       const projectName = `kaminorn${id}`;
+      const projectDir = path.join(TEMP_FOLDER, projectName);
 
       it(`Check package.json`, () => {
-        assert.file(`${TEMP_FOLDER}/${projectName}/package.json`);
+        assert.file(path.join(projectDir, 'package.json'));
       });
 
       it(`Check index.js`, () => {
-        assert.file(`${TEMP_FOLDER}/${projectName}/index.js`);
+        assert.file(path.join(projectDir, 'index.js'));
       });
+    }
+  );
+
+  describe.each(cases)(
+    'Test case %p - Check if the project passes his tests and builds successfully',
+    id => {
+      const projectName = `kaminorn${id}`;
+      const projectDir = path.join(TEMP_FOLDER, projectName);
+
+      it(
+        `Project Lint and Tests should pass success for project ${projectName}`,
+        async () => {
+          const result = await runLintAndTestsOnProject(projectDir);
+          assert(result.code === 0);
+        },
+        GENERATOR_TIMEOUT
+      );
+
+      it(
+        `Android build must create corresponding apk for project ${projectName}`,
+        async () => {
+          const { versionNumber, buildNumber } = await getCodeAndVersionNumber(
+            projectDir
+          );
+          await buildAndroidProject(projectDir);
+          assert.file(
+            path.join(
+              projectDir,
+              `/android/app/build/outputs/apk/develop/release/${projectName}-${versionNumber}-${buildNumber}-develop-release.apk`
+            )
+          );
+        },
+        GENERATOR_TIMEOUT
+      );
     }
   );
 });
