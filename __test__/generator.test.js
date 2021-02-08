@@ -22,33 +22,31 @@ const cases = [
   return [i + 1, v];
 });
 
-const TEMP_FOLDER = path.join(__dirname, '../../tmp');
-
 describe('kamino-react-native:app', () => {
+  const TEMP_FOLDER = path.join(__dirname, '../../tmp');
   const GENERATOR_TIMEOUT = 480000; // 8 min
 
-  // TODO: Fix this asynchronous folder creation
-  // beforeAll(async done => {
-  //   if (!fs.existsSync(TEMP_FOLDER)) {
-  //     await fs.mkdirSync(TEMP_FOLDER);
-  //   }
-  //   done();
-  // });
+  beforeAll(done => {
+    helpers.testDirectory(TEMP_FOLDER, done);
+  });
+
+  afterAll(() => {
+    fs.rmdirSync(TEMP_FOLDER, { recursive: true });
+  });
 
   it.concurrent.each(cases)(
     'Test case %p: Test if generator creates project succesfully',
     (id, { features, stateManagement }) =>
       helpers
         .run(path.join(__dirname, '../generators/app'))
-        .cd(TEMP_FOLDER)
-        // .inDir(path.join(__dirname, TEMP_FOLDER))
-        // .withArguments('-v') // Turn verbose on
+        .setDir(TEMP_FOLDER)
         .withPrompts({
           name: `kaminorn${id}`,
           features,
           stateManagement,
           pushToRepo: false
         }),
+    // .withArguments('-v') // Turn verbose on
     GENERATOR_TIMEOUT
   );
 
@@ -66,8 +64,4 @@ describe('kamino-react-native:app', () => {
       });
     }
   );
-
-  afterAll(() => {
-    fs.rm(TEMP_FOLDER);
-  });
 });
