@@ -5,7 +5,7 @@ const helpers = require('yeoman-test');
 
 const {
   buildAndroidProject,
-  runLintAndTestsOnProject,
+  runTestsOnProject,
   getCodeAndVersionNumber
 } = require('./utils.js');
 
@@ -74,9 +74,9 @@ describe('kamino-react-native:app', () => {
       const projectDir = path.join(TEMP_FOLDER, projectName);
 
       it(
-        `Project Lint and Tests should pass success for project ${projectName}`,
+        `Project Tests should pass success for project ${projectName}`,
         async () => {
-          const result = await runLintAndTestsOnProject(projectDir);
+          const result = await runTestsOnProject(projectDir);
           assert(result.code === 0);
         },
         GENERATOR_TIMEOUT

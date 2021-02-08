@@ -20,8 +20,8 @@ function buildAndroidProject(projDir) {
   return runExecCommand(`cd ${projDir} && yarn android:build.develop`);
 }
 
-function runLintAndTestsOnProject(projDir) {
-  return runExecCommand(`cd ${projDir} && yarn lint && yarn test`);
+function runTestsOnProject(projDir) {
+  return runExecCommand(`cd ${projDir} && yarn test`);
 }
 
 async function getCodeAndVersionNumber(projDir) {
@@ -41,6 +41,6 @@ async function getCodeAndVersionNumber(projDir) {
 
 module.exports = {
   buildAndroidProject,
-  runLintAndTestsOnProject,
+  runTestsOnProject,
   getCodeAndVersionNumber
 };
