@@ -1,62 +1,82 @@
+const fs = require('fs');
 const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
-const rimraf = require('rimraf');
+
 const {
   buildAndroidProject,
-  runLintAndTestsOnProject,
+  runTestsOnProject,
   getCodeAndVersionNumber
 } = require('./utils.js');
 
 const cases = [
-  [1, ['Drawer', 'Tabs', 'Google Maps']] // drawer + tabs + google maps
-  // [2, ['Login and SignUp', 'Onboarding']], // login + onboarding
-  // [3, ['Login and SignUp']], // login
-  // [4, ['Onboarding']], // onboarding
-  // [5, []] // nada
-  // y despues  con recoil
-  // [], // login + onboarding
-  // [], // login
-  // [], // onboarding
-  // [] // nada
-];
+  { features: ['drawer', 'tabs', 'googlemaps'], stateManagement: 'redux' },
+  { features: ['drawer', 'tabs'], stateManagement: 'redux' },
+  { features: ['drawer'], stateManagement: 'redux' },
+  { features: ['tabs'], stateManagement: 'redux' },
+  { features: ['loginandsignup', 'onboarding'], stateManagement: 'redux' },
+  { features: ['loginandsignup'], stateManagement: 'redux' },
+  { features: ['onboarding'], stateManagement: 'redux' },
+  { features: [], stateManagement: 'redux' }
+].map((v, i) => {
+  v.features = v.features.reduce((p, c) => ({ ...p, [c]: true }), {});
+  return [i + 1, v];
+});
 
 describe('kamino-react-native:app', () => {
-  const PROJECT_NAME = 'kaminorn';
-  const TEMP_FOLDER = '../../tmp';
+  const TEMP_FOLDER = path.join(__dirname, '../../tmp');
   const GENERATOR_TIMEOUT = 480000; // 8 min
 
-  describe.each(cases)(
-    'Test generator, case %p with features %p',
-    (caseId, features) => {
-      const projectName = `${PROJECT_NAME}${caseId}`;
-      const projectDir = path.join(__dirname, `${TEMP_FOLDER}/${projectName}`);
-      it.concurrent(
-        `Create project ${projectName}`,
-        () =>
-          helpers
-            .run(path.join(__dirname, '../generators/app'))
-            .inDir(path.join(__dirname, TEMP_FOLDER))
-            // .withArguments('-v') // Turn verbose on
-            .withPrompts({
-              name: projectName,
-              features,
-              stateManagement: 'redux',
-              pushToRepo: false
-            }),
-        GENERATOR_TIMEOUT
-      );
+  beforeAll(done => {
+    helpers.testDirectory(TEMP_FOLDER, done);
+  });
 
-      it(`Check package.json on ${projectName}`, () => {
-        assert.file(`${projectDir}/package.json`);
+  afterAll(() => {
+    fs.rmdirSync(TEMP_FOLDER, { recursive: true });
+  });
+
+  it.concurrent.each(cases)(
+    'Test case %p - Test if generator creates the project succesfully',
+    (id, { features, stateManagement }) =>
+      helpers
+        .run(path.join(__dirname, '../generators/app'))
+        .setDir(TEMP_FOLDER)
+        .withPrompts({
+          name: `kaminorn${id}`,
+          features,
+          stateManagement,
+          pushToRepo: false
+        }),
+    // .withArguments('-v') // Turn verbose on
+    GENERATOR_TIMEOUT
+  );
+
+  describe.each(cases)(
+    'Test case %p - Check files by feature were generated correctly ',
+    id => {
+      const projectName = `kaminorn${id}`;
+      const projectDir = path.join(TEMP_FOLDER, projectName);
+
+      it(`Check package.json`, () => {
+        assert.file(path.join(projectDir, 'package.json'));
       });
 
+      it(`Check index.js`, () => {
+        assert.file(path.join(projectDir, 'index.js'));
+      });
+    }
+  );
+
+  describe.each(cases)(
+    'Test case %p - Check if the project passes his tests and builds successfully',
+    id => {
+      const projectName = `kaminorn${id}`;
+      const projectDir = path.join(TEMP_FOLDER, projectName);
+
       it(
-        'Project Lint and Tests should pass success for project ${projectName}',
+        `Project Tests should pass success for project ${projectName}`,
         async () => {
-          const result = await runLintAndTestsOnProject(
-            path.join(__dirname, `${TEMP_FOLDER}/${projectName}`)
-          );
+          const result = await runTestsOnProject(projectDir);
           assert(result.code === 0);
         },
         GENERATOR_TIMEOUT
@@ -72,17 +92,12 @@ describe('kamino-react-native:app', () => {
           assert.file(
             path.join(
               projectDir,
-              `/android/app/build/outputs/apk/develop/release/${PROJECT_NAME}${caseId}-${versionNumber}-${buildNumber}-develop-release.apk`
+              `/android/app/build/outputs/apk/develop/release/${projectName}-${versionNumber}-${buildNumber}-develop-release.apk`
             )
           );
         },
         GENERATOR_TIMEOUT
       );
-    },
-    GENERATOR_TIMEOUT
+    }
   );
-
-  afterAll(() => {
-    rimraf.sync(path.join(__dirname, TEMP_FOLDER));
-  });
 });

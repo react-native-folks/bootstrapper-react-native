@@ -20,8 +20,8 @@ function buildAndroidProject(projDir) {
   return runExecCommand(`cd ${projDir} && yarn android:build.develop`);
 }
 
-function runLintAndTestsOnProject(projDir) {
-  return runExecCommand(`cd ${projDir} && yarn lint && yarn test`);
+function runTestsOnProject(projDir) {
+  return runExecCommand(`cd ${projDir} && yarn test`);
 }
 
 async function getCodeAndVersionNumber(projDir) {
@@ -29,7 +29,7 @@ async function getCodeAndVersionNumber(projDir) {
     `cd ${projDir} && git rev-list HEAD --count --merges --first-parent`
   );
   const commitNumberCount = stdout ? Number(stdout) : 0;
-  const versionNumber = require(`${projDir}/package.json`).version ?? '0.0.1';
+  const versionNumber = require(`${projDir}/package.json`).version || '0.0.1';
   const trimmedVersion = versionNumber.split('.');
   const buildNumber =
     Number(trimmedVersion[0]) * 10000000 +
@@ -41,6 +41,6 @@ async function getCodeAndVersionNumber(projDir) {
 
 module.exports = {
   buildAndroidProject,
-  runLintAndTestsOnProject,
+  runTestsOnProject,
   getCodeAndVersionNumber
 };
