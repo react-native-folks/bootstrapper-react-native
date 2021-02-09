@@ -14,10 +14,14 @@ const statusBarConfig = {
 
 export const statusBarStyles = {
   // TODO: Change these styles to customize the status bar
+  <%_ if (features.loginandsignup) { _%>
   [Routes.Login]: statusBarConfig.transparentStatusBar,
   [Routes.SignUp]: statusBarConfig.blueStatusBar,
+  <%_ } _%>
+  <%_ if (features.tabs) { _%>
   [Routes.Tab1]: statusBarConfig.blueStatusBar,
-  [Routes.Tab2]: statusBarConfig.whiteStatusBar,
+  [Routes.Tab2]: statusBarConfig.transparentStatusBar,
+  <%_ } _%>
   [Routes.Home]: statusBarConfig.blueStatusBar,
   default: statusBarConfig.transparentStatusBar
 };
