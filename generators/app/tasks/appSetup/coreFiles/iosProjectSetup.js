@@ -13,5 +13,12 @@ module.exports = function fixBundleIndentifier() {
     `${this.projectName}/ios/${this.projectName}.xcodeproj/project.pbxproj`,
     fixedProjectContent
   );
+  // Forced flipper sdk to version 74 since actually RN initialize projects on 54
+  const podfileContent = this.fs.read(`${this.projectName}/ios/Podfile`);
+  const fixedPodfileContent = podfileContent.replace(
+    'use_flipper!',
+    "use_flipper!({ 'Flipper' => '0.74.0' })"
+  );
+  this.fs.write(`${this.projectName}/ios/Podfile`, fixedPodfileContent);
   createSchemes.bind(this)();
 };
