@@ -8,6 +8,8 @@ const statusBarConfig = {
     translucent: true,
     backgroundColor: 'rgba(255, 255, 255, 0.6)'
   },
+  // BackgroundColor just apply on Android devices
+  // iOS is always translucent - keep in mind to set the barStyle
   blueStatusBar: { barStyle: 'light-content', backgroundColor: blue },
   whiteStatusBar: { barStyle: 'dark-content', backgroundColor: white }
 } as const;
@@ -15,15 +17,15 @@ const statusBarConfig = {
 export const statusBarStyles = {
   // TODO: Change these styles to customize the status bar
   <%_ if (features.loginandsignup) { _%>
-  [Routes.Login]: statusBarConfig.transparentStatusBar,
+  [Routes.Login]: statusBarConfig.whiteStatusBar,
   [Routes.SignUp]: statusBarConfig.blueStatusBar,
   <%_ } _%>
   <%_ if (features.tabs) { _%>
   [Routes.Tab1]: statusBarConfig.blueStatusBar,
-  [Routes.Tab2]: statusBarConfig.transparentStatusBar,
+  [Routes.Tab2]: statusBarConfig.blueStatusBar,
   <%_ } _%>
   [Routes.Home]: statusBarConfig.blueStatusBar,
-  default: statusBarConfig.transparentStatusBar
+  default: statusBarConfig.blueStatusBar
 };
 
 export default statusBarConfig;

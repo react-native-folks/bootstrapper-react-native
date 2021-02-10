@@ -34,6 +34,7 @@ const getSizes = (sizesObj: NumberObject) =>
 export default StyleSheet.create({
   base: {
     ...fonts.baseFont,
+    paddingVertical: 10,
     backgroundColor: transparent,
     borderBottomWidth: 0.5,
     borderBottomColor: gray
