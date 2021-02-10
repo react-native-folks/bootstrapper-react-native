@@ -5,9 +5,6 @@ import fonts from 'config/fonts';
 
 import Routes from '../routes';
 
-import statusBarConfig from './statusBar';
-
-
 // Default nav options for all screens
 const defaultNavOptions = ({ route }: Navigation) => ({
     // Change screen title from i18n traslates files
@@ -79,18 +76,4 @@ export const appScreensNavOptions = {
   [Routes.Home]: {
     headerTitle: 'Home'
   }
-};
-
-export const statusBarStyles = {
-  // TODO: Change these styles to customize the status bar
-  <%_ if (features.loginandsignup) { _%>
-  [Routes.Login]: statusBarConfig.transparentStatusBar,
-  [Routes.SignUp]: statusBarConfig.blueStatusBar,
-  <%_ } _%>
-  <%_ if (features.tabs) { _%>
-  [Routes.Tab1]: statusBarConfig.blueStatusBar,
-  [Routes.Tab2]: statusBarConfig.transparentStatusBar,
-  <%_ } _%>
-  [Routes.Home]: statusBarConfig.blueStatusBar,
-  default: statusBarConfig.transparentStatusBar
 };
