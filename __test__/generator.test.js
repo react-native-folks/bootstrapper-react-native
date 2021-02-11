@@ -1,48 +1,23 @@
-const fs = require('fs');
 const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 
-const {
-  buildAndroidProject,
-  runTestsOnProject,
-  getCodeAndVersionNumber
-} = require('./utils.js');
+const { CASES, TEMP_FOLDER, GENERATOR_TIMEOUT } = require('./constants');
+const { getProjectName } = require('./utils');
 
-const cases = [
-  { features: ['drawer', 'tabs', 'googlemaps'], stateManagement: 'redux' },
-  { features: ['drawer', 'tabs'], stateManagement: 'redux' },
-  { features: ['drawer'], stateManagement: 'redux' },
-  { features: ['tabs'], stateManagement: 'redux' },
-  { features: ['loginandsignup', 'onboarding'], stateManagement: 'redux' },
-  { features: ['loginandsignup'], stateManagement: 'redux' },
-  { features: ['onboarding'], stateManagement: 'redux' },
-  { features: [], stateManagement: 'redux' }
-].map((v, i) => {
-  v.features = v.features.reduce((p, c) => ({ ...p, [c]: true }), {});
-  return [i + 1, v];
-});
-
-describe('kamino-react-native:app', () => {
-  const TEMP_FOLDER = path.join(__dirname, '../../tmp');
-  const GENERATOR_TIMEOUT = 480000; // 8 min
-
+describe('Test Yeoman generator if can generate projects succesfully', () => {
   beforeAll(done => {
     helpers.testDirectory(TEMP_FOLDER, done);
   });
 
-  afterAll(() => {
-    fs.rmdirSync(TEMP_FOLDER, { recursive: true });
-  });
-
-  it.concurrent.each(cases)(
+  test.concurrent.each(CASES)(
     'Test case %p - Test if generator creates the project succesfully',
     (id, { features, stateManagement }) =>
       helpers
         .run(path.join(__dirname, '../generators/app'))
         .setDir(TEMP_FOLDER)
         .withPrompts({
-          name: `kaminorn${id}`,
+          name: getProjectName(id),
           features,
           stateManagement,
           pushToRepo: false
@@ -51,11 +26,10 @@ describe('kamino-react-native:app', () => {
     GENERATOR_TIMEOUT
   );
 
-  describe.each(cases)(
+  describe.each(CASES)(
     'Test case %p - Check files by feature were generated correctly ',
     id => {
-      const projectName = `kaminorn${id}`;
-      const projectDir = path.join(TEMP_FOLDER, projectName);
+      const projectDir = path.join(TEMP_FOLDER, getProjectName(id));
 
       it(`Check package.json`, () => {
         assert.file(path.join(projectDir, 'package.json'));
@@ -64,40 +38,6 @@ describe('kamino-react-native:app', () => {
       it(`Check index.js`, () => {
         assert.file(path.join(projectDir, 'index.js'));
       });
-    }
-  );
-
-  describe.each(cases)(
-    'Test case %p - Check if the project passes his tests and builds successfully',
-    id => {
-      const projectName = `kaminorn${id}`;
-      const projectDir = path.join(TEMP_FOLDER, projectName);
-
-      it(
-        `Project Tests should pass success for project ${projectName}`,
-        async () => {
-          const result = await runTestsOnProject(projectDir);
-          assert(result.code === 0);
-        },
-        GENERATOR_TIMEOUT
-      );
-
-      it(
-        `Android build must create corresponding apk for project ${projectName}`,
-        async () => {
-          const { versionNumber, buildNumber } = await getCodeAndVersionNumber(
-            projectDir
-          );
-          await buildAndroidProject(projectDir);
-          assert.file(
-            path.join(
-              projectDir,
-              `/android/app/build/outputs/apk/develop/release/${projectName}-${versionNumber}-${buildNumber}-develop-release.apk`
-            )
-          );
-        },
-        GENERATOR_TIMEOUT
-      );
     }
   );
 });

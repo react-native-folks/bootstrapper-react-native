@@ -7,7 +7,7 @@ const addFilesToGitIgnore = require('./tasks/configuringTasks/addFilesToGitIgnor
 // WRITING
 const appSetup = require('./tasks/appSetup');
 // INSTALL
-const bundleInstall = require('./tasks/installTasks/bundleInstall');
+// const bundleInstall = require('./tasks/installTasks/bundleInstall');
 const configureIosProject = require('./tasks/installTasks/configureIosProject');
 const installPods = require('./tasks/installTasks/installPods');
 const linkAppAssets = require('./tasks/installTasks/linkAppAssets');
@@ -140,14 +140,18 @@ class ReactNativeBootstrap extends Generator {
   }
 
   install() {
-    return Promise.resolve()
-      .then(() => bundleInstall.bind(this)())
-      .then(() => configureIosProject.bind(this)())
-      .then(() => installPods.bind(this)())
-      .then(() => linkAppAssets.bind(this)())
-      .then(() => lintFixProject.bind(this)())
-      .then(() => this.features.hasFirebase && chmodFirebaseScript.bind(this)())
-      .then(() => gitInitialization.bind(this)());
+    return (
+      Promise.resolve()
+        // .then(() => bundleInstall.bind(this)())
+        .then(() => configureIosProject.bind(this)())
+        .then(() => installPods.bind(this)())
+        .then(() => linkAppAssets.bind(this)())
+        .then(() => lintFixProject.bind(this)())
+        .then(
+          () => this.features.hasFirebase && chmodFirebaseScript.bind(this)()
+        )
+        .then(() => gitInitialization.bind(this)())
+    );
   }
 
   end() {
