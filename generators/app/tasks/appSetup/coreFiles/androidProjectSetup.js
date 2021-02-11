@@ -102,6 +102,11 @@ function updateGradleProperties() {
     '# org.gradle.jvmargs=-Xmx2048m',
     'org.gradle.jvmargs=-Xmx2048m'
   );
+  // Forced flipper sdk to version 74 since actually RN initialize projects on 54
+  updatedGradlePropertiesContent = updatedGradlePropertiesContent.replace(
+    new RegExp(/FLIPPER_VERSION=\d+\.\d+\.\d+/, 'g'),
+    'FLIPPER_VERSION=0.74.0'
+  );
   this.fs.write(
     `${this.projectName}/android/gradle.properties`,
     updatedGradlePropertiesContent
