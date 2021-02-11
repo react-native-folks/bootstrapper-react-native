@@ -21,8 +21,8 @@ describe('Test Yeoman generator if can generate projects succesfully', () => {
           features,
           stateManagement,
           pushToRepo: false
-        }),
-    // .withArguments('-v') // Turn verbose on
+        })
+        .withArguments('--skipBundler'), // Skips bundle installation
     GENERATOR_TIMEOUT
   );
 

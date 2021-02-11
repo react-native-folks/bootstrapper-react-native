@@ -16,7 +16,7 @@ const CASES = [
 
 const TEMP_FOLDER = path.join(__dirname, '../../tmp');
 const PROJECT_NAME = 'kaminorn';
-const GENERATOR_TIMEOUT = 480000; // 8 min
+const GENERATOR_TIMEOUT = 720000; // 12 min
 
 module.exports = {
   CASES,
