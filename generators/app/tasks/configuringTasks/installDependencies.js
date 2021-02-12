@@ -69,9 +69,11 @@ module.exports = function installDependencies() {
 
   if (this.features.hasFirebase) {
     DEPENDENCIES.push('@react-native-firebase/app');
-    DEPENDENCIES.push('@react-native-firebase/crashlytics');
-    DEPENDENCIES.push('@react-native-firebase/analytics');
-    DEPENDENCIES.push('@react-native-firebase/perf');
+    if (this.features.firebase) {
+      DEPENDENCIES.push('@react-native-firebase/crashlytics');
+      DEPENDENCIES.push('@react-native-firebase/analytics');
+      DEPENDENCIES.push('@react-native-firebase/perf');
+    }
     if (this.features.pushnotifications) {
       DEPENDENCIES.push('react-native-push-notification');
       DEPENDENCIES.push('@react-native-firebase/messaging');

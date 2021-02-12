@@ -78,10 +78,11 @@ module.exports = function index() {
   // ----------------    Features: Firebase    ----------------
   if (this.features.hasFirebase) {
     firebaseCoreFeatureFiles.bind(this)();
-    crashlyticsFeatureFiles.bind(this)();
-    firebaseAnalyticsFeatureFiles.bind(this)();
-    firebasePerformanceSetup.bind(this)();
-
+    if (this.features.firebase) {
+      crashlyticsFeatureFiles.bind(this)();
+      firebaseAnalyticsFeatureFiles.bind(this)();
+      firebasePerformanceSetup.bind(this)();
+    }
     if (this.features.pushnotifications) {
       pushNotificationsFeatureFiles.bind(this)();
       pushNotificationsSetup.bind(this)();
