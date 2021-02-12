@@ -1,7 +1,7 @@
-import { configureStore <%_ if(features.firebaseanalytics) { _%>, getDefaultMiddleware <%_ } _%>} from '@reduxjs/toolkit';
+import { configureStore <%_ if(features.firebase) { _%>, getDefaultMiddleware <%_ } _%>} from '@reduxjs/toolkit';
 import Reactotron from 'reactotron-react-native';
 import auth from 'redux/auth';
-<%_ if(features.firebaseanalytics) { _%>
+<%_ if(features.firebase) { _%>
 import analyticsMiddleware from 'redux/middlewares/analytics';
 <%_ } _%>
 
@@ -9,7 +9,7 @@ const store = configureStore({
   reducer: {
     auth
   },
-  <%_ if(features.firebaseanalytics) { _%>
+  <%_ if(features.firebase) { _%>
   middleware: getDefaultMiddleware().prepend(analyticsMiddleware),
   <%_ } _%>
   ...(__DEV__ && { enhancers: [Reactotron.createEnhancer!(true)] })

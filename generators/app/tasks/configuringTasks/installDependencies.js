@@ -69,21 +69,14 @@ module.exports = function installDependencies() {
 
   if (this.features.hasFirebase) {
     DEPENDENCIES.push('@react-native-firebase/app');
-
-    if (this.features.crashlytics) {
-      DEPENDENCIES.push('@react-native-firebase/crashlytics');
-    }
-    if (this.features.firebaseanalytics) {
-      DEPENDENCIES.push('@react-native-firebase/analytics');
-    }
+    DEPENDENCIES.push('@react-native-firebase/crashlytics');
+    DEPENDENCIES.push('@react-native-firebase/analytics');
+    DEPENDENCIES.push('@react-native-firebase/perf');
     if (this.features.pushnotifications) {
       DEPENDENCIES.push('react-native-push-notification');
       DEPENDENCIES.push('@react-native-firebase/messaging');
       DEPENDENCIES.push('@react-native-community/push-notification-ios');
       DEV_DEPENDENCIES.push('@types/react-native-push-notification');
-    }
-    if (this.features.firebaseperformance) {
-      DEPENDENCIES.push('@react-native-firebase/perf');
     }
   }
 

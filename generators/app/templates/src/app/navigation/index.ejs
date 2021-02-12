@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-<%_ if(features.firebaseanalytics) { _%>
+<%_ if(features.firebase) { _%>
 import analytics from '@react-native-firebase/analytics';
 <%_ } _%>
 import { NavigationContainer, NavigationState } from '@react-navigation/native';
@@ -17,7 +17,7 @@ const AppNavigator = () => {
     const previousRouteName = routeName;
     const currentRouteName = getRoute(state)?.name;
     if (previousRouteName !== currentRouteName) {
-      <%_ if(features.firebaseanalytics) { _%>
+      <%_ if(features.firebase) { _%>
       analytics().logScreenView({ screen_class: currentRouteName, screen_name: currentRouteName });
       <%_ } _%>
       setRouteName(currentRouteName);
