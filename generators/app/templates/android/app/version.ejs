@@ -48,7 +48,7 @@ def String generateVersionName() {
 }
 
 def String generateBuildFileName(env) {
-    "<%= projectName %>-${getAppVersionName()}-${generateVersionCode()}"
+    "<%= projectName %>-${generateVersionName()}-${generateVersionCode()}"
 }
 
 ext {

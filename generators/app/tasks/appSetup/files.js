@@ -22,17 +22,21 @@ module.exports.MAIN = 'App.js';
 module.exports.INDEX_D_FILE = 'index.d.ts';
 module.exports.INDEX = 'index.js';
 module.exports.JEST_CONFIG_FILE = 'jest.config.js';
+module.exports.DETOX_FILE = '.detoxrc.json';
 module.exports.REACT_NATIVE_CONFIG = 'react-native.config.js';
 module.exports.README = 'README.md';
 module.exports.TSCONFIG_FILE = 'tsconfig.json';
 module.exports.GEMFILE = 'Gemfile';
 module.exports.ANDROID_VERSION_GRADLE = `${module.exports.ANDROID_APP_PATH}/version.gradle`;
-
+module.exports.ANDROID_SECURITY_NETWORK_FILE = `${module.exports.ANDROID_APP_PATH}/src/main/res/xml/network_security_config.xml`;
+module.exports.E2E_CONFIG_FILE = 'e2e/config.json';
+module.exports.E2E_ENVIRONMENT_FILE = 'e2e/environment.js';
 // TESTS
 module.exports.TESTS_REDUX_PATH = `${module.exports.TESTS}/redux`;
 module.exports.TESTS_RESPONSES_PATH = `${module.exports.TESTS}/responses`;
 module.exports.TESTS_SCREENS_PATH = `${module.exports.TESTS}/screens`;
 module.exports.GOOGLE_SIGNIN_MOCK = `${module.exports.MOCKS}/@react-native-community/google-signin.js`;
+
 // TESTS - REDUX
 module.exports.TESTS_STORE = `${module.exports.TESTS_REDUX_PATH}/store.js`;
 module.exports.TESTS_UTILS = `${module.exports.TESTS_REDUX_PATH}/utils.js`;
