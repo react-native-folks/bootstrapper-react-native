@@ -227,3 +227,19 @@ Follow the instructions in the [Fastlane README](ios/README.md) that will help y
 There is a lot of fastlane lanes that will help you to create apps, certificates, make deploys and more.
 
 Follow the instructions in the [Fastlane README](ios/fastlane/README.md) to see all available lanes.
+
+## Testing
+
+Project is using jest for Unit testing and Detox for e2e test.
+Use the next scripts to run the test:
+
+#### Jest
+Run tests -> `yarn test`
+Run and updated snapshots -> `yarn test -u` (just if you are sure you need that)
+Run test and generate code coverage -> `yarn coverage`
+
+#### Detox
+Run on emulator -> `yarn detox`
+Run on device -> `yarn detox:attached` (Probably you will must modify .detoxrc.json device.attached config )
+
+Dont forget update and add new test 😃

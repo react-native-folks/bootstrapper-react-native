@@ -7,6 +7,7 @@
 - React Native Environment: https://reactnative.dev/docs/getting-started
 - Ruby (for Fastlane): https://rvm.io/rvm/install
 - Yarn: https://classic.yarnpkg.com/en/docs/install/#alternatives-tab
+- Detox-cli: https://github.com/wix/Detox/blob/master/docs/Introduction.GettingStarted.md#install-detox-command-line-tools-detox-cli
 
 ## TL;DR
 
@@ -75,6 +76,7 @@ The boilerplate includes
 - [TypeScript](https://www.typescriptlang.org/)
 - [Flipper](https://fbflipper.com/)
 - [Jest](https://jestjs.io/)
+- [Detox](https://github.com/wix/Detox)
 - [React Native Testing Library](https://github.com/callstack/react-native-testing-library)
 
 ### Kick off manually
@@ -85,6 +87,6 @@ For kick off your own project using the template generator script you'll need to
 2. run `yo rootPath/generators/app/index.js` you'll need [Yeoman](https://yeoman.io/learning/index.html) installed for this. Also, the argument `-v` can be used for logging.
 3. Some prompts will pop up on your terminal. Pick whatever configuration works best for your current proyect.
 4. After the script is finished, your project folder will be successfully generated with all the necessary yarn dependencies installed. Do `cd you/project/path`.
-5. Start budler using `yarn start`.
-6. Run `npx react-native run-ios --scheme develop` or `yarn ios` for iOS and `npx react-native run-android --variant=developDebug` or `yarn android` for Android.
+5. Start bundler using `yarn start`.
+6. Run `npx react-native run-ios --scheme develop` or `yarn ios` for iOS and `npx react-native run-android --variant=developDebug` or `yarn android` for Android also check the provided scripts on package.json
 7. Start working on your project!

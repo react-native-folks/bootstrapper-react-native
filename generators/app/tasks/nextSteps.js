@@ -32,6 +32,13 @@ module.exports = function nextSteps() {
       .cyan
   );
   console.log('\n');
+  // Detox
+  console.log('● Detox - Detox was added to the project'.cyan);
+  console.log(
+    '  Check the .detoxrc.json file and replace the "avdName" to one of your emulators to run e2e tests'
+      .cyan
+  );
+  console.log('\n');
   // Firebase
   if (this.features.hasFirebase) {
     console.log(
