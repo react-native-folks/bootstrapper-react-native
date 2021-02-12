@@ -74,10 +74,7 @@ class ReactNativeBootstrap extends Generator {
       this.features = features;
       this.features.landscape = landscape;
       this.features.hasFirebase =
-        features.crashlytics ||
-        features.firebaseanalytics ||
-        features.pushnotifications ||
-        features.firebaseperformance;
+        features.firebase || features.pushnotifications;
       this.features.socialButtons = {};
       if (this.features.socialloginbuttons) {
         const { socialButtons } = await this.prompt([
