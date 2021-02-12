@@ -32,6 +32,12 @@ class ReactNativeBootstrap extends Generator {
       type: Boolean,
       default: false
     });
+    this.option('skipBundler', {
+      desc: 'Skips Bundler installation',
+      alias: 'sb',
+      type: Boolean,
+      default: false
+    });
     this.conflicter.force = true;
   }
 
@@ -141,7 +147,7 @@ class ReactNativeBootstrap extends Generator {
 
   install() {
     return Promise.resolve()
-      .then(() => bundleInstall.bind(this)())
+      .then(() => !this.options.skipBundler && bundleInstall.bind(this)())
       .then(() => configureIosProject.bind(this)())
       .then(() => installPods.bind(this)())
       .then(() => linkAppAssets.bind(this)())

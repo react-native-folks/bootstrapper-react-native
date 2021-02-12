@@ -1,7 +1,13 @@
 const { exec } = require('child_process');
 const util = require('util');
 
+const { PROJECT_NAME } = require('./constants');
+
 const execPromise = util.promisify(exec);
+
+function getProjectName(caseNumber) {
+  return PROJECT_NAME + caseNumber;
+}
 
 function runExecCommand(command) {
   return new Promise(resolve => {
@@ -40,6 +46,7 @@ async function getCodeAndVersionNumber(projDir) {
 }
 
 module.exports = {
+  getProjectName,
   buildAndroidProject,
   runTestsOnProject,
   getCodeAndVersionNumber
