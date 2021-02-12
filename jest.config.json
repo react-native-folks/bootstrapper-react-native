@@ -1,0 +1,4 @@
+{
+  "name": "kamino-react-native",
+  "testSequencer": "./__test__/testSecuencer.js"
+}
