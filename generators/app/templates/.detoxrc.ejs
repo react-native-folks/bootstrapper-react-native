@@ -1,0 +1,26 @@
+{
+  "testRunner": "jest",
+  "runnerConfig": "e2e/config.json",
+  "configurations": {
+      "android.emu.release": {
+          "testBinaryPath": "android/app/build/outputs/apk/androidTest/develop/release/<%= projectName %>-0.0.1-1000-develop-release-androidTest.apk",
+          "binaryPath": "android/app/build/outputs/apk/develop/release/<%= projectName %>-0.0.1-1000-develop-release.apk",
+          "build":
+              "cd android && ./gradlew assembleDevelopRelease assembleAndroidTest -DtestBuildType=release -PappName=<%= projectName %> -PversionName=0.0.1 -PversionCode=1000 && cd ..",
+          "type": "android.emulator",
+          "device": {
+              "avdName": "Pixel_2_API_30"
+          }
+      },
+      "android.attached.release": {
+        "testBinaryPath": "android/app/build/outputs/apk/androidTest/develop/release/<%= projectName %>-0.0.1-1000-develop-release-androidTest.apk",
+        "binaryPath": "android/app/build/outputs/apk/develop/release/<%= projectName %>-0.0.1-1000-develop-release.apk",
+          "build":
+                "cd android && ./gradlew assembleDevelopRelease assembleAndroidTest -DtestBuildType=release -PappName=<%= projectName %> -PversionName=0.0.1 -PversionCode=1000 && cd ..",
+          "type": "android.attached",
+          "device": {
+              "avdName": "Pixel_2_API_30"
+          }
+      }
+  }
+}

@@ -31,6 +31,22 @@ module.exports.copyTemplateFile = function copyTemplateFile(filepath) {
   );
 };
 
+module.exports.copyFileFromDiferentLocation = function copyFileFromDiferentLocation(
+  filepathFrom,
+  filepathTo
+) {
+  if (!this.fs) {
+    throw new Error(
+      'File utils functions needs to be binded to the generator context'
+    );
+  }
+
+  this.fs.copy(
+    this.templatePath(...filepathFrom.split('/')),
+    this.destinationPath(this.projectName, ...filepathTo.split('/'))
+  );
+};
+
 module.exports.removeFile = function removeFile(filepath) {
   if (!this.fs) {
     throw new Error(
