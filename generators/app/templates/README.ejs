@@ -243,3 +243,9 @@ Run on emulator -> `yarn detox`
 Run on device -> `yarn detox:attached` (Probably you will must modify .detoxrc.json device.attached config )
 
 Dont forget update and add new test 😃
+
+## Issues and suggestions
+
+#### Navigation
+Actually, there is a bug on navigation library that produce a little screen jump on android when you navigate from a screen with translucent status bar to a screen without translucent statusbar.
+So we recommend using no translucent status bar between screen in the same stack (no problem between different stacks).

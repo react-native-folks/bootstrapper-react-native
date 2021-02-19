@@ -100,17 +100,27 @@ function updateDetoxFilesWithProjectProperties() {
   // copy and modify testFile into android package path
   copyFileFromDiferentLocation.bind(this)(
     `android/app/src/androidTest/java/com/DetoxTest.java`,
-    `android/app/src/androidTest/java/com/${this.projectName}/DetoxTest.java`
+    `android/app/src/androidTest/java/${this.bundleId
+      .replace(/\./g, '/')
+      .toLowerCase()}/DetoxTest.java`
   );
   const detoxTestJavaContent = this.fs.read(
-    `${this.projectName}/android/app/src/androidTest/java/com/${this.projectName}/DetoxTest.java`
+    `${
+      this.projectName
+    }/android/app/src/androidTest/java/${this.bundleId
+      .replace(/\./g, '/')
+      .toLowerCase()}/DetoxTest.java`
   );
   let updatedDetoxTestJavaContent = detoxTestJavaContent.replace(
     new RegExp(/\[APP_ID\]/, 'g'),
     `${this.bundleId.toLowerCase()}`
   );
   this.fs.write(
-    `${this.projectName}/android/app/src/androidTest/java/com/${this.projectName}/DetoxTest.java`,
+    `${
+      this.projectName
+    }/android/app/src/androidTest/java/${this.bundleId
+      .replace(/\./g, '/')
+      .toLowerCase()}/DetoxTest.java`,
     updatedDetoxTestJavaContent
   );
 }

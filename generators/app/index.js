@@ -45,10 +45,10 @@ class ReactNativeBootstrap extends Generator {
     return this.prompt([
       {
         type: 'input',
-        name: 'name',
+        name: 'title',
         message: "What's your project name?",
         validate: val =>
-          String(val).match(/^[$A-Z_][0-9A-Z_$]*$/i)
+          String(val).match(/^[a-zA-Z0-9 ]*$/i)
             ? true
             : `${val} is not a valid name for a project. Please use a valid identifier name (alphanumeric).`
       },
@@ -69,15 +69,13 @@ class ReactNativeBootstrap extends Generator {
         message: 'Would you like to enable landscape orientation? Default NO',
         default: false
       }
-    ]).then(async ({ features, landscape, name }) => {
-      this.projectName = name;
+    ]).then(async ({ features, landscape, title }) => {
+      this.title = title;
+      this.projectName = title.replace(/\s+/g, '').toLowerCase();
       this.features = features;
       this.features.landscape = landscape;
       this.features.hasFirebase =
-        features.crashlytics ||
-        features.firebaseanalytics ||
-        features.pushnotifications ||
-        features.firebaseperformance;
+        features.firebase || features.pushnotifications;
       this.features.socialButtons = {};
       if (this.features.socialloginbuttons) {
         const { socialButtons } = await this.prompt([

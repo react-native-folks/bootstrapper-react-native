@@ -28,9 +28,7 @@ The following optional features can be added out of the box to the new projects:
 - Drawer
 - Social Login Buttons
 - Google Maps
-- Firebase Crashlytics
-- Firebase Analytics
-- Firebase Performance
+- Firebase Crashlytics, Analytics and Performance
 - Firebase Push Notification
 
 ### Boilerplate

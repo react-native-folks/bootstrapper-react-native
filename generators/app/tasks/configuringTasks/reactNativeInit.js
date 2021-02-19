@@ -4,7 +4,14 @@ module.exports = function reactNativeInit() {
   return runCommand({
     command: [
       'npx',
-      ['react-native', 'init', this.projectName, '--skip-install']
+      [
+        'react-native',
+        'init',
+        this.projectName,
+        '--skip-install',
+        '--title',
+        this.title
+      ]
     ],
     loadingMessage: 'Initializing react-native',
     context: this.options
