@@ -1,0 +1,55 @@
+/* eslint-disable no-undef */
+/* eslint-disable prettier/prettier */
+import {element, by, waitFor, device} from 'detox';
+
+<%_ if(features.loginandsignup) { _%>
+const testingElements = require('./utils/testingElements');
+const testingData = require('./utils/testingData');
+<%_ } _%>
+<%_ if(features.loginandsignup) { _%>
+const login = require('./utils/login');
+<%_ } _%>
+<%_ if(features.onboarding) { _%>
+const onboarding = require('./utils/onboarding');
+<%_ } _%>
+const home = require('./utils/homeNavigation');
+const okAlert = 'OK';
+
+beforeAll(async () => {
+  await device.launchApp({newInstance: true});
+});
+
+beforeEach(async () => {
+  await device.reloadReactNative();
+});
+
+ describe('Home feature test', () => {
+
+  test('Should click all buttons at home view', async () => {
+    <%_ if(features.loginandsignup) { _%>
+    await login.typeEmailLogin(testingData.email);
+    await login.typePasswordLogin(testingData.password);
+    await login.clickLoginButton();
+    <%_ } _%>
+
+    <%_ if(features.onboarding) { _%>
+    await waitFor(element(by.text('Skip'))).toBeVisible().withTimeout(10000);
+    await onboarding.clickSkipButton();
+    <%_ } _%>
+    await home.clickOnPressAlertButton();
+    await waitFor(element(by.text(okAlert))).toBeVisible().withTimeout(10000);
+    await element(by.text(okAlert)).tap();
+
+    await home.clickOnLongPressAlertButton();
+    await waitFor(element(by.text(okAlert))).toBeVisible().withTimeout(10000);
+    await element(by.text(okAlert)).tap();
+
+    await home.clickOnPressChangeButton();
+
+    <%_ if(features.loginandsignup) { _%>
+    await home.clickLogoutButton();
+    await waitFor(element(by.id(testingElements.loginSubmitButton))).toBeVisible().withTimeout(10000);
+    await waitFor(element(by.id(testingElements.logoutSubmitButton))).not.toBeVisible().withTimeout(10000);
+    <%_ } _%>
+ });
+});

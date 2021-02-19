@@ -1,0 +1,45 @@
+/* eslint-disable prettier/prettier */
+import {element, by, waitFor} from 'detox';
+
+const elements = require('./testingElements.js');
+
+async function clickOnPressAlertButton()  {
+    await waitFor(element(by.id(elements.onPressAlertButton))).toBeVisible().withTimeout(10000);
+    await element(by.id(elements.onPressAlertButton)).tap();
+}
+
+async function clickOnLongPressAlertButton()  {
+    await waitFor(element(by.id(elements.onLongPressAlertButton))).toBeVisible().withTimeout(10000);
+    await element(by.id(elements.onLongPressAlertButton)).longPress();
+ }
+
+async function clickOnPressChangeButton()  {
+    await waitFor(element(by.id(elements.onPressChangeButton))).toBeVisible().withTimeout(10000);
+    await element(by.id(elements.onPressChangeButton)).longPress();
+}
+<%_ if(features.googlemaps) { _%>
+
+async function clickMapButton()  {
+    await waitFor(element(by.id(elements.goToMapButton))).toBeVisible().withTimeout(10000);
+    await element(by.id(elements.goToMapButton)).tap();
+}
+<%_ } _%>
+<%_ if(features.loginandsignup) { _%>
+
+async function clickLogoutButton()  {
+    await waitFor(element(by.id(elements.logoutSubmitButton))).toBeVisible().withTimeout(10000);
+    await element(by.id(elements.logoutSubmitButton)).tap();
+}
+<%_ } _%>
+
+module.exports = {
+    clickOnPressAlertButton,
+    clickOnLongPressAlertButton,
+    clickOnPressChangeButton,
+    <%_ if(features.googlemaps) { _%>
+    clickMapButton,
+    <%_ } _%>
+    <%_ if(features.loginandsignup) { _%>
+    clickLogoutButton
+    <%_ } _%>
+};
