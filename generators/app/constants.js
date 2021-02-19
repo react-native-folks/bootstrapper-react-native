@@ -8,9 +8,7 @@ module.exports.GENERATOR_FEATURES = [
   'Drawer',
   'Social Login Buttons',
   'Google Maps',
-  'Crashlytics',
-  'Firebase Analytics',
-  'Firebase Performance',
+  'Firebase',
   'Push Notifications'
 ];
 
