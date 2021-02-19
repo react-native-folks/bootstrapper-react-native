@@ -239,8 +239,11 @@ Run and updated snapshots -> `yarn test -u` (just if you are sure you need that)
 Run test and generate code coverage -> `yarn coverage`
 
 #### Detox
-Run on emulator -> `yarn detox`
-Run on device -> `yarn detox:attached` (Probably you will must modify .detoxrc.json device.attached config )
+First you need to create a testing build.
+Run `yarn detoxBuild` to compile a testing build. Then you can run the tests:
+
+Run on emulator -> `yarn detoxTest`  (Check the .detoxrc.json file to be sure that you will use the correct android emulator name)
+Run on device -> `yarn detoxTest:device` (Probably you will must modify .detoxrc.json device.attached config )
 
 Dont forget update and add new test 😃
 
