@@ -102,6 +102,6 @@ Test includes:
 - App Detox (e2e) execution inside each created project
 
 ## Notes About testing
-Testing generator is really expensive so run all test maybe can take a long time and consume CPU resources.
+Testing generator is really expensive so run all tests maybe can take a long time and consume CPU resources.
 
-For Detox execution an exisitin simulator device is needed. by default the name is "Pixel_2_API_30". If you want to run detox test you maybe need edit yout android emulator name, create one with the pointed name or modify the avdName param on "generators/app/templates/.detoxrc.ejs".
+For Detox execution, an existing simulator device is needed. By default, the name is "Pixel_2_API_30". If you want to run Detox test you maybe need to edit your android emulator name, create one with the pointed name or modify the avdName param on "generators/app/templates/.detoxrc.ejs".
