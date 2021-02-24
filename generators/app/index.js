@@ -20,7 +20,8 @@ const nextSteps = require('./tasks/nextSteps');
 const {
   GENERATOR_FEATURES,
   GENERATOR_SOCIALS,
-  GENERATOR_STATE_MANAGEMENTS
+  GENERATOR_STATE_MANAGEMENTS,
+  PLATFORM_OPTIONS
 } = require('./constants');
 
 class ReactNativeBootstrap extends Generator {
@@ -53,6 +54,13 @@ class ReactNativeBootstrap extends Generator {
             : `${val} is not a valid name for a project. Please use a valid identifier name (alphanumeric).`
       },
       {
+        type: 'list',
+        name: 'platformsSkipped',
+        message: 'Do you want to skip some platform instalation?',
+        choices: PLATFORM_OPTIONS,
+        filter: value => value.replace(/ /g, '').toLowerCase()
+      },
+      {
         type: 'checkbox',
         name: 'features',
         message: "What's features should this project include?",
@@ -69,8 +77,12 @@ class ReactNativeBootstrap extends Generator {
         message: 'Would you like to enable landscape orientation? Default NO',
         default: false
       }
-    ]).then(async ({ features, landscape, title }) => {
+    ]).then(async ({ features, platformsSkipped, landscape, title }) => {
       this.title = title;
+      this.platforms = {
+        android: platformsSkipped === 'none' || platformsSkipped === 'ios',
+        ios: platformsSkipped === 'none' || platformsSkipped === 'android'
+      };
       this.projectName = title.replace(/\s+/g, '').toLowerCase();
       this.features = features;
       this.features.landscape = landscape;
