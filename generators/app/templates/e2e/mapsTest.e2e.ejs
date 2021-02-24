@@ -1,0 +1,51 @@
+/* eslint-disable prettier/prettier */
+import { element, by, waitFor, device } from 'detox';
+
+<%_ if(features.loginandsignup) { _%>
+const testingElements = require('./utils/testingElements');
+const testingData = require('./utils/testingData');
+const login = require('./utils/login');
+<%_ } _%>
+<%_ if(features.onboarding) { _%>
+const onboarding = require('./utils/onboarding');
+<%_ } _%>
+const home = require('./utils/homeNavigation');
+
+beforeAll(async () => {
+  await device.launchApp({ newInstance: true });
+});
+
+beforeEach(async () => {
+  await device.reloadReactNative();
+});
+
+describe('Maps feature test', () => {
+  <%_ if(features.loginandsignup) { _%>
+  test('After login should tap and go to Maps section at home view and go back to login', async () => {
+  <%_ } _%>
+  <%_ if(!features.loginandsignup && features.onboarding) { _%>
+  test('After skip onboarding and go to home should tap and go to Maps section at home view and go back to login', async () => {
+  <%_ } _%>
+  <%_ if(!features.loginandsignup && !features.onboarding) { _%>
+  test('Should tap and go to Maps section at home view and go back to login', async () => {
+  <%_ } _%>
+    <%_ if(features.loginandsignup) { _%>
+    await login.typeEmailLogin(testingData.email);
+    await login.typePasswordLogin(testingData.password);
+    await login.clickLoginButton();
+    <%_ } _%>
+    // ONBOARDING
+    <%_ if(features.onboarding) { _%>
+    await onboarding.clickLeftFooterButton();
+    <%_ } _%>
+    await home.clickMapButton();
+    await device.pressBack();
+    <%_ if(features.loginandsignup) { _%>
+    await home.clickLogoutButton();
+    await waitFor(element(by.id(testingElements.loginSubmitButton)))
+      .toBeVisible().withTimeout(10000);
+    await waitFor(element(by.id(testingElements.logoutSubmitButton)))
+      .not.toBeVisible().withTimeout(10000);
+    <%_ } _%>
+  });
+});

@@ -1,0 +1,46 @@
+/* eslint-disable prettier/prettier */
+
+
+// Elements at different views
+
+module.exports = {
+    <%_ if(features.loginandsignup) { _%>
+    //Login && Signup
+    loginSubmitButton: 'submit-button',
+    gotoSignupButton:'signup-button',
+    email:'email',
+    password : 'password',
+    firstName: 'name',
+    surName: 'surname',
+    birthDate: 'birthDate',
+    phoneNumber: 'phoneNumber',
+    signupSubmitButton: 'submit-signup-button',
+    <%_ } _%>
+    //Home
+    onPressAlertButton:'alert-message-button',
+    onLongPressAlertButton:'alert-message-long-press-button',
+    onPressChangeButton: 'smile-face-button',
+    <%_ if(features.googlemaps) { _%>
+    goToMapButton:'goto-maps-view-button',
+    <%_ } _%>
+    <%_ if(features.loginandsignup) { _%>
+    logoutSubmitButton:'logout-button',
+    <%_ } _%>
+    <%_ if(features.onboarding) { _%>
+    //Onboarding Footer
+    footerContainer: 'onboarding-swiper-area-container',
+    swiper:'onboarding-swaper-component',
+    footerLeftActionButton:'footer-left-action-button',
+    footerRightActionButton:'footer-right-action-button',
+    <%_ } _%>
+    <%_ if(features.loginandsignup) { _%>
+    //Errors
+    errorName: 'input-error-name',
+    errorSurname:'input-error-surname',
+    errorBirthdate:'input-error-birthdate',
+    errorEmail:'input-error-email',
+    errorPassword:'input-error-pass',
+    errorPhone:'input-error-phone',
+    errorLogin: 'login-error-message'
+    <%_ } _%>
+};

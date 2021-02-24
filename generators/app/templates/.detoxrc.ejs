@@ -1,6 +1,22 @@
 {
   "testRunner": "jest",
   "runnerConfig": "e2e/config.json",
+  "artifacts": {
+    "plugins": {
+        "log": {
+            "enabled": true
+        },
+        "screenshot": {
+            "enabled": true,
+            "shouldTakeAutomaticSnapshots": true,
+            "keepOnlyFailedTestsArtifacts": false,
+            "takeWhen": {
+                "testStart": true,
+                "testDone": true
+            }
+        }
+    }
+},
   "configurations": {
       "android.emu.release": {
           "testBinaryPath": "android/app/build/outputs/apk/androidTest/develop/release/<%= projectName %>-0.0.1-1000-develop-release-androidTest.apk",

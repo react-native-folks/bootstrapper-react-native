@@ -16,7 +16,18 @@ const {
   DETOX_FILE,
   ANDROID_SECURITY_NETWORK_FILE,
   E2E_CONFIG_FILE,
-  E2E_ENVIRONMENT_FILE
+  E2E_ENVIRONMENT_FILE,
+  E2E_NAVIGATION_TEST_PATH,
+  E2E_AUTH_TEST_PATH,
+  E2E_HOME_TEST_PATH,
+  E2E_MAPS_TEST_PATH,
+  E2E_ONBOARDING_TEST_PATH,
+  E2E_UTILS_HOME_NAVIGATION,
+  E2E_UTILS_LOGIN,
+  E2E_UTILS_ONBOARDING,
+  E2E_UTILS_SIGNUP,
+  E2E_UTILS_TESTING_DATA,
+  E2E_UTILS_TESTING_ELEMENTS
 } = require('../files');
 
 function setupAndroidFilesForDetox() {
@@ -124,7 +135,14 @@ const FILES = [
   E2E_ENVIRONMENT_FILE
 ];
 
-const TEMPLATE_FILES = [JEST_CONFIG_FILE, DETOX_FILE];
+const TEMPLATE_FILES = [
+  JEST_CONFIG_FILE,
+  DETOX_FILE,
+  E2E_NAVIGATION_TEST_PATH,
+  E2E_HOME_TEST_PATH,
+  E2E_UTILS_HOME_NAVIGATION,
+  E2E_UTILS_TESTING_ELEMENTS
+];
 
 module.exports = function baseFilesTemplate() {
   setupAndroidFilesForDetox.bind(this)();
@@ -132,6 +150,21 @@ module.exports = function baseFilesTemplate() {
     TEMPLATE_FILES.push(TESTS_AUTH_ACTIONS_PATH);
     TEMPLATE_FILES.push(TESTS_AUTH_SLICE_PATH);
   }
+  // E2E test specific files for each feature
+  if (this.features.loginandsignup) {
+    TEMPLATE_FILES.push(E2E_AUTH_TEST_PATH);
+    FILES.push(E2E_UTILS_LOGIN);
+    FILES.push(E2E_UTILS_SIGNUP);
+    FILES.push(E2E_UTILS_TESTING_DATA);
+  }
+  if (this.features.googlemaps) {
+    TEMPLATE_FILES.push(E2E_MAPS_TEST_PATH);
+  }
+  if (this.features.onboarding) {
+    TEMPLATE_FILES.push(E2E_ONBOARDING_TEST_PATH);
+    FILES.push(E2E_UTILS_ONBOARDING);
+  }
+
   TEMPLATE_FILES.forEach(copyTemplateFile.bind(this));
   FILES.forEach(copyFile.bind(this));
   if (!this.features.socialButtons.google) {

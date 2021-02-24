@@ -1,0 +1,62 @@
+/* eslint-disable no-undef */
+/* eslint-disable prettier/prettier */
+import {element, by, waitFor, device} from 'detox';
+
+const testingElements =  require('./utils/testingElements');
+<%_ if(features.loginandsignup) { _%>
+const testingData = require('./utils/testingData');
+const login = require('./utils/login');
+const home = require('./utils/homeNavigation');
+<%_ } _%>
+const onboarding = require('./utils/onboarding');
+
+<%_ if(features.loginandsignup) { _%>
+beforeAll(async () => {
+  await device.launchApp({newInstance: true});
+});
+<%_ } _%>
+
+beforeEach(async () => {
+  <%_ if(features.loginandsignup) { _%>
+  await device.reloadReactNative();
+  await login.typeEmailLogin(testingData.email);
+  await login.typePasswordLogin(testingData.password);
+  await login.clickLoginButton();
+  <%_ } else { _%>
+    await device.relaunchApp({ delete: true }); // reinstall app to avoid onboarding stored data.
+  <%_ } _%>
+});
+
+<%_ if(features.loginandsignup) { _%>
+afterEach(async () => {
+  await home.clickLogoutButton();
+  await waitFor(element(by.id(testingElements.loginSubmitButton))).toBeVisible().withTimeout(10000);
+  await waitFor(element(by.id(testingElements.logoutSubmitButton))).not.toBeVisible().withTimeout(10000);
+});
+<%_ } _%>
+
+describe('Onboarding Navigation Test', () => {
+
+  test('should skip onboarding and go to home', async () => {
+    await waitFor(element(by.id(testingElements.footerLeftActionButton).withAncestor(by.id(testingElements.footerContainer)))).toBeVisible().withTimeout(10000);
+    await onboarding.clickLeftFooterButton();
+    await waitFor(element(by.id(testingElements.onPressChangeButton))).toBeVisible().withTimeout(10000);
+  });
+
+  test('should click next at onboarding, until finish and go to home', async () => {
+    await waitFor(element(by.id(testingElements.footerRightActionButton).withAncestor(by.id(testingElements.footerContainer)))).toBeVisible().withTimeout(10000);
+    await onboarding.clickRightFooterButton();// first to second screen
+    await onboarding.clickRightFooterButton();// second to third screen
+    await onboarding.clickRightFooterButton(); // third to go Home
+    await waitFor(element(by.id(testingElements.onPressChangeButton))).toBeVisible().withTimeout(10000);
+   });
+
+   test('should click next at onboarding, then previous, skip and go to home', async () => {
+    await waitFor(element(by.id(testingElements.footerRightActionButton).withAncestor(by.id(testingElements.footerContainer)))).toBeVisible().withTimeout(10000);
+    await onboarding.clickRightFooterButton();// first to second screen
+    await onboarding.clickLeftFooterButton();// go to previous screen
+    await onboarding.clickLeftFooterButton(); // skip to go Home
+    await waitFor(element(by.id(testingElements.onPressChangeButton))).toBeVisible().withTimeout(10000);
+   });
+
+});
