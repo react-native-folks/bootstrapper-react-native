@@ -11,7 +11,7 @@ module.exports = function schemeBase(envName, buildConfig) {
              ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
              <ActionContent
                title = "Run Script"
-               scriptText = "cat \${PROJECT_DIR}/../.envs/${envName}.env &gt; \${SRCROOT}/Config.xcconfig&#10;echo &quot;.envs/${envName}.env&quot; &gt; /tmp/envfile &#10;">
+               scriptText = "cat \${PROJECT_DIR}/../.envs/${envName}.env &gt; \${SRCROOT}/Config.xcconfig&#10;echo &quot;.envs/${envName}.env&quot; &gt; /tmp/envfile &#10;&#10;# Versioning Script&#10;CURRENT_VERSION=\`awk -F&apos;&quot;&apos; &apos;/&quot;version&quot;: &quot;.+&quot;/{ print $4; exit; }&apos; $SRCROOT/../package.json\`&#10;COMMIT_COUNT=$(git rev-list HEAD --count --merges --first-parent)&#10;&#10;xcrun agvtool new-marketing-version $CURRENT_VERSION&#10;xcrun agvtool new-version -all $COMMIT_COUNT&#10;&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"

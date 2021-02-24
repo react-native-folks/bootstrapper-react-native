@@ -37,15 +37,6 @@ if google_services && !target.shell_script_build_phases.find { |bp| bp.name == '
    target.build_phases.insert(0, target.build_phases.delete(phase))
 end
 
-# Versioning Script
-if !target.shell_script_build_phases.find { |bp| bp.name == 'Replace version from package.json' }
-   phase = target.new_shell_script_build_phase("Replace version from package.json")
-   phase.shell_script = "CURRENT_VERSION=`awk -F'\"' '/\"version\": \".+\"/{ print $4; exit; }' $SRCROOT/../package.json`\nCOMMIT_COUNT=$(git rev-list HEAD --count --merges --first-parent)\n\nxcrun agvtool new-marketing-version $CURRENT_VERSION\nxcrun agvtool new-version -all $COMMIT_COUNT\n";
-
-   # Put the build phase at the beginning
-   target.build_phases.insert(0, target.build_phases.delete(phase))
-end
-
 # Copy Release Build Configuration and delete Release Build Configuration from Target
 release_build_config = target.build_configurations.find { |each| each.name == 'Release' }
 release_build_settings = release_build_config.build_settings
@@ -57,6 +48,7 @@ debug_build_config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = "#{bundle_id}.d
 develop_build_config = target.add_build_configuration('Develop', :release)
 develop_build_config.build_settings.update(release_build_settings)
 develop_build_config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = "#{bundle_id}.develop"
+develop_build_config.build_settings['ONLY_ACTIVE_ARCH'] = "YES"
 
 staging_build_config = target.add_build_configuration('Staging', :release)
 staging_build_config.build_settings.update(release_build_settings)
