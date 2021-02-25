@@ -88,3 +88,20 @@ For kick off your own project using the template generator script you'll need to
 5. Start bundler using `yarn start`.
 6. Run `npx react-native run-ios --scheme develop` or `yarn ios` for iOS and `npx react-native run-android --variant=developDebug` or `yarn android` for Android. Also check the provided scripts on package.json
 7. Start working on your project!
+
+### Testing
+Kamino React Native include test using jest tools.
+
+To run the test just call `yarn jest` on root folder.
+
+Test includes:
+- A selection of feature combination cases
+- App creation check for each case
+- App build check (after create) for each case
+- App jest execution inside each created project for each case
+- App Detox (e2e) execution inside each created project
+
+## Notes About testing
+Testing generator is really expensive so run all tests maybe can take a long time and consume CPU resources.
+
+For Detox execution, an existing simulator device is needed. By default, the name is "Pixel_2_API_30". If you want to run Detox test you maybe need to edit your android emulator name, create one with the pointed name or modify the avdName param on "generators/app/templates/.detoxrc.ejs".

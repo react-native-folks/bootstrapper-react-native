@@ -1,6 +1,7 @@
 // BASE FOLDERS
 module.exports.MOCKS = '__mocks__';
 module.exports.TESTS = '__tests__';
+module.exports.E2E_PATH = 'e2e';
 module.exports.FONTS = 'assets/fonts';
 module.exports.APP_PATH = 'src/app';
 module.exports.CONFIG_PATH = 'src/config';
@@ -29,13 +30,26 @@ module.exports.TSCONFIG_FILE = 'tsconfig.json';
 module.exports.GEMFILE = 'Gemfile';
 module.exports.ANDROID_VERSION_GRADLE = `${module.exports.ANDROID_APP_PATH}/version.gradle`;
 module.exports.ANDROID_SECURITY_NETWORK_FILE = `${module.exports.ANDROID_APP_PATH}/src/main/res/xml/network_security_config.xml`;
-module.exports.E2E_CONFIG_FILE = 'e2e/config.json';
-module.exports.E2E_ENVIRONMENT_FILE = 'e2e/environment.js';
+module.exports.E2E_CONFIG_FILE = `${module.exports.E2E_PATH}/config.json`;
+module.exports.E2E_ENVIRONMENT_FILE = `${module.exports.E2E_PATH}/environment.js`;
+module.exports.E2E_UTILS = `${module.exports.E2E_PATH}/utils`;
 // TESTS
 module.exports.TESTS_REDUX_PATH = `${module.exports.TESTS}/redux`;
 module.exports.TESTS_RESPONSES_PATH = `${module.exports.TESTS}/responses`;
 module.exports.TESTS_SCREENS_PATH = `${module.exports.TESTS}/screens`;
 module.exports.GOOGLE_SIGNIN_MOCK = `${module.exports.MOCKS}/@react-native-community/google-signin.js`;
+
+module.exports.E2E_NAVIGATION_TEST_PATH = `${module.exports.E2E_PATH}/appNavigationTest.e2e.js`;
+module.exports.E2E_AUTH_TEST_PATH = `${module.exports.E2E_PATH}/authTest.e2e.js`;
+module.exports.E2E_HOME_TEST_PATH = `${module.exports.E2E_PATH}/homeTest.e2e.js`;
+module.exports.E2E_MAPS_TEST_PATH = `${module.exports.E2E_PATH}/mapsTest.e2e.js`;
+module.exports.E2E_ONBOARDING_TEST_PATH = `${module.exports.E2E_PATH}/onboardingTest.e2e.js`;
+module.exports.E2E_UTILS_HOME_NAVIGATION = `${module.exports.E2E_UTILS}/homeNavigation.js`;
+module.exports.E2E_UTILS_LOGIN = `${module.exports.E2E_UTILS}/login.js`;
+module.exports.E2E_UTILS_ONBOARDING = `${module.exports.E2E_UTILS}/onboarding.js`;
+module.exports.E2E_UTILS_SIGNUP = `${module.exports.E2E_UTILS}/signup.js`;
+module.exports.E2E_UTILS_TESTING_DATA = `${module.exports.E2E_UTILS}/testingData.js`;
+module.exports.E2E_UTILS_TESTING_ELEMENTS = `${module.exports.E2E_UTILS}/testingElements.js`;
 
 // TESTS - REDUX
 module.exports.TESTS_STORE = `${module.exports.TESTS_REDUX_PATH}/store.js`;
