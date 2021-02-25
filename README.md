@@ -31,6 +31,8 @@ The following optional features can be added out of the box to the new projects:
 - Firebase Crashlytics, Analytics and Performance
 - Firebase Push Notification
 
+
+You can exclude Android or iOS platform setup and dependencies instalation. Keep in mind that the project will be create for both platforms anyway, but the excluded will not compile. After prject generation, you can remove the excluded platform project folder if you want.
 ### Boilerplate
 
 The boilerplate includes
@@ -42,12 +44,14 @@ The boilerplate includes
 - [Http client configuration](/generators/app/templates/src/config/api.js)
 - [i18next configuration](/generators/app/templates/src/config/i18n.js)
 - [Push Notifications configuration](/generators/app/templates/src/config/pushNotifications.js)
-- [React Navigation: Routes configuration](/generators/app/templates/src/app/components/AppNavigator/navigator.ejs)
+- [React Navigation: Routes configuration](generators/app/templates/src/app/navigation/navigator.ejs)
 - [Reactotron configuration](/generators/app/templates/src/config/reactotronConfig.ejs)
 - [Redux store intialization](/generators/app/templates/src/redux/store.ejs)
+- [Recoil intialization](/generators/app/templates/src/recoilState/atoms.ejs)
 - [Splash Screen](/generators/app/tasks/appSetup/coreFiles/splashScreenSetup.js)
 - [TypeScript basic interfaces](/generators/app/templates/src/interfaces)
 - [TypeScript configuration](/generators/app/templates/tsconfig.json)
+- [Detox configuration](generators/app/templates/.detoxrc.ejs)
 
 ### Tech Stack
 
@@ -62,9 +66,15 @@ The boilerplate includes
 - [React Native Push Notifications](https://github.com/zo0r/react-native-push-notification)
 - [React Native Swiper](https://github.com/leecade/react-native-swiper)
 - [React Navigation](https://reactnavigation.org/)
+- [Google Maps](https://github.com/react-native-maps/react-native-maps)
+- [Facebook Signin](https://github.com/facebook/react-native-fbsdk)
+- [Twitter Signin](https://www.npmjs.com/package/react-native-login-twitter)
+- [Google Signin](https://github.com/react-native-google-signin/google-signin)
+- [Apple Signin](https://github.com/invertase/react-native-apple-authentication)
 - [Redux](http://redux.js.org/)
 - [React Redux](https://react-redux.js.org/)
 - [Redux Toolkit](https://redux-toolkit.js.org/)
+- [Recoil](https://recoiljs.org/)
 
 ### Tooling
 
