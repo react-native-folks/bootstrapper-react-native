@@ -47,6 +47,6 @@ function addConfigToIosFiles() {
 
 module.exports = function firebaseCoreFeatureFiles() {
   configureGoogleServicesFiles.bind(this)();
-  addConfigToAndroidFiles.bind(this)();
-  addConfigToIosFiles.bind(this)();
+  this.platforms.android && addConfigToAndroidFiles.bind(this)();
+  this.platforms.ios && addConfigToIosFiles.bind(this)();
 };
