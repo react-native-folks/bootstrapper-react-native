@@ -11,11 +11,11 @@ const {
 const { CASES, TEMP_FOLDER, GENERATOR_TIMEOUT } = require('./constants');
 
 describe('Check if the project passes his tests and builds successfully', () => {
-  afterAll(() => {
-    fs.rmdirSync(TEMP_FOLDER, { recursive: true });
-  });
+  // afterAll(() => {
+  //   fs.rmdirSync(TEMP_FOLDER, { recursive: true });
+  // });
 
-  test.concurrent.each(CASES)(
+  test.each(CASES)(
     'Test case %p - Project Tests should pass success',
     async id => {
       const projectDir = path.join(TEMP_FOLDER, getProjectName(id));
@@ -25,7 +25,7 @@ describe('Check if the project passes his tests and builds successfully', () => 
     GENERATOR_TIMEOUT
   );
 
-  test.concurrent.each(CASES)(
+  test.each(CASES)(
     'Test case %p - Android build must create corresponding apk',
     async id => {
       const projectDir = path.join(TEMP_FOLDER, getProjectName(id));

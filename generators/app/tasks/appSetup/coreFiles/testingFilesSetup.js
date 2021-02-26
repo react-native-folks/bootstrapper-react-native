@@ -72,7 +72,7 @@ function setupAndroidFilesForDetox() {
   let updatedProjectGradle = projectGradle.replace(
     targetReg,
     `${
-      projectGradle.match(targetReg)[0] ?? 'targetSdkVersion = 29'
+      projectGradle.match(targetReg)[0] || 'targetSdkVersion = 29'
     }\n\t\tkotlinVersion = "1.4.21"`
   );
   // Detox need to force minSDK to 18 instead of 16 that is the react native default
