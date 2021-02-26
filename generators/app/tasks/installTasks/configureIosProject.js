@@ -8,6 +8,7 @@ module.exports = function configureIosProject() {
         'scriptIosConfig.rb',
         this.projectName,
         process.cwd(),
+        this.title,
         this.bundleId,
         this.features.hasFirebase
       ],

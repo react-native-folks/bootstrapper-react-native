@@ -51,8 +51,8 @@ function updateAppBuildGradle() {
     `${this.projectName}/android/app/src/main/res/values/strings.xml`
   );
   let updatedAndroidResValuesContent = androidResValuesContent.replace(
-    'app_name',
-    'default_app_name'
+    /name="app_name">.+<\/string>/,
+    `name="default_app_name">${this.title}</string>`
   );
   this.fs.write(
     `${this.projectName}/android/app/src/main/res/values/strings.xml`,

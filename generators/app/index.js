@@ -51,7 +51,8 @@ class ReactNativeBootstrap extends Generator {
         validate: val =>
           String(val).match(/^[a-zA-Z0-9 ]*$/i)
             ? true
-            : `${val} is not a valid name for a project. Please use a valid identifier name (alphanumeric).`
+            : `${val} is not a valid name for a project. Please use a valid identifier name (alphanumeric).`,
+        filter: value => value.replace(/\s+$/, '')
       },
       {
         type: 'list',
