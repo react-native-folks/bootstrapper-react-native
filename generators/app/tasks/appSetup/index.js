@@ -46,11 +46,11 @@ module.exports = function index() {
   prettierrcConfigSetup.bind(this)();
 
   // ----------------    Android project configurationn    ----------------
-  androidProjectSetup.bind(this)();
+  this.platforms.android && androidProjectSetup.bind(this)();
 
   // ----------------     iOS project configuration    ----------------
-  iosProjectSetup.bind(this)();
-  cleanTargetsFromPods.bind(this)();
+  this.platforms.ios && iosProjectSetup.bind(this)();
+  this.platforms.ios && cleanTargetsFromPods.bind(this)();
 
   // ----------------    Disable Landscape orientiation    ----------------
   if (!this.features.landscape) {

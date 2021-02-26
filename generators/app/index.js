@@ -20,7 +20,8 @@ const nextSteps = require('./tasks/nextSteps');
 const {
   GENERATOR_FEATURES,
   GENERATOR_SOCIALS,
-  GENERATOR_STATE_MANAGEMENTS
+  GENERATOR_STATE_MANAGEMENTS,
+  PLATFORM_OPTIONS
 } = require('./constants');
 
 class ReactNativeBootstrap extends Generator {
@@ -50,7 +51,15 @@ class ReactNativeBootstrap extends Generator {
         validate: val =>
           String(val).match(/^[a-zA-Z0-9 ]*$/i)
             ? true
-            : `${val} is not a valid name for a project. Please use a valid identifier name (alphanumeric).`
+            : `${val} is not a valid name for a project. Please use a valid identifier name (alphanumeric).`,
+        filter: value => value.replace(/\s+$/, '')
+      },
+      {
+        type: 'list',
+        name: 'platformsSkipped',
+        message: 'Do you want to skip some platform instalation?',
+        choices: PLATFORM_OPTIONS,
+        filter: value => value.replace(/ /g, '').toLowerCase()
       },
       {
         type: 'checkbox',
@@ -69,8 +78,12 @@ class ReactNativeBootstrap extends Generator {
         message: 'Would you like to enable landscape orientation? Default NO',
         default: false
       }
-    ]).then(async ({ features, landscape, title }) => {
+    ]).then(async ({ features, platformsSkipped, landscape, title }) => {
       this.title = title;
+      this.platforms = {
+        android: platformsSkipped === 'none' || platformsSkipped === 'ios',
+        ios: platformsSkipped === 'none' || platformsSkipped === 'android'
+      };
       this.projectName = title.replace(/\s+/g, '').toLowerCase();
       this.features = features;
       this.features.landscape = landscape;
@@ -93,9 +106,10 @@ class ReactNativeBootstrap extends Generator {
         ]);
         this.features = { ...this.features, socialButtons };
         if (
-          this.features.socialButtons.facebook ||
-          this.features.socialButtons.twitter ||
-          this.features.socialButtons.google
+          (this.features.socialButtons.facebook ||
+            this.features.socialButtons.twitter ||
+            this.features.socialButtons.google) &&
+          this.platforms.ios
         ) {
           this.features.socialButtons.apple = true;
           console.log(
@@ -122,7 +136,7 @@ class ReactNativeBootstrap extends Generator {
         {
           type: 'input',
           name: 'bundleId',
-          message: 'Enter the bundle id for your ios app',
+          message: 'Enter the bundle id for your app',
           default: `com.mahisoft.${this.projectName}`
         }
       ]).then(answer => {
@@ -145,9 +159,14 @@ class ReactNativeBootstrap extends Generator {
 
   install() {
     return Promise.resolve()
-      .then(() => !this.options.skipBundler && bundleInstall.bind(this)())
-      .then(() => configureIosProject.bind(this)())
-      .then(() => installPods.bind(this)())
+      .then(
+        () =>
+          !this.options.skipBundler &&
+          this.platforms.ios &&
+          bundleInstall.bind(this)()
+      )
+      .then(() => this.platforms.ios && configureIosProject.bind(this)())
+      .then(() => this.platforms.ios && installPods.bind(this)())
       .then(() => linkAppAssets.bind(this)())
       .then(() => lintFixProject.bind(this)())
       .then(() => this.features.hasFirebase && chmodFirebaseScript.bind(this)())

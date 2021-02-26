@@ -64,6 +64,6 @@ function androidAppIcons() {
 }
 
 module.exports = function appIcons() {
-  iosAppIcons.bind(this)();
-  androidAppIcons.bind(this)();
+  this.platforms.ios && iosAppIcons.bind(this)();
+  this.platforms.android && androidAppIcons.bind(this)();
 };
