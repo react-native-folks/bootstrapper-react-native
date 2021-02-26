@@ -32,7 +32,8 @@ The following optional features can be added out of the box to the new projects:
 - Firebase Push Notification
 
 
-You can exclude Android or iOS platform setup and dependencies instalation. Keep in mind that the project will be create for both platforms anyway, but the excluded will not compile. After prject generation, you can remove the excluded platform project folder if you want.
+You can exclude Android or iOS platform setup and dependencies instalation. Keep in mind that the project will be created for both platforms anyway, but the excluded will not compile. After prject generation, you can remove the excluded platform project folder if you want.
+
 ### Boilerplate
 
 The boilerplate includes

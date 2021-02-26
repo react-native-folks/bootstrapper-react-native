@@ -17,7 +17,7 @@ describe('Test Yeoman generator if can generate projects succesfully', () => {
         .run(path.join(__dirname, '../generators/app'))
         .setDir(TEMP_FOLDER)
         .withPrompts({
-          name: getProjectName(id),
+          title: getProjectName(id),
           features,
           stateManagement,
           pushToRepo: false
