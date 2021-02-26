@@ -1,12 +1,19 @@
 require 'xcodeproj'
 project_name = ARGV[0]
 total_path = ARGV[1]
-bundle_id = ARGV[2]
-google_services = ARGV[3] == 'true'
-project_path = total_path + '/' + project_name + '/ios/' + project_name + '.xcodeproj'
+app_name = ARGV[2]
+bundle_id = ARGV[3]
+google_services = ARGV[4] == 'true'
+ios_folder = total_path + '/' + project_name + '/ios/'
+project_path = ios_folder + project_name + '.xcodeproj'
 project = Xcodeproj::Project.open(project_path)
+plist = Xcodeproj::Plist.read_from_path(ios_folder + project_name + '/Info.plist')
 release_base_config_file = nil
 release_build_settings = nil
+
+# Update info plist
+plist['CFBundleDisplayName'] = app_name
+Xcodeproj::Plist.write_to_path(plist, ios_folder + project_name + '/Info.plist')
 
 # Delete unused targets
 def delete_targets_from_project(project, project_name)
@@ -48,15 +55,18 @@ debug_build_config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = "#{bundle_id}.d
 develop_build_config = target.add_build_configuration('Develop', :release)
 develop_build_config.build_settings.update(release_build_settings)
 develop_build_config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = "#{bundle_id}.develop"
+develop_build_config.build_settings['TARGETED_DEVICE_FAMILY'] = "1,2"
 develop_build_config.build_settings['ONLY_ACTIVE_ARCH'] = "YES"
 
 staging_build_config = target.add_build_configuration('Staging', :release)
 staging_build_config.build_settings.update(release_build_settings)
 staging_build_config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = "#{bundle_id}.staging"
+staging_build_config.build_settings['TARGETED_DEVICE_FAMILY'] = "1,2"
 
 production_build_config = target.add_build_configuration('Production', :release)
 production_build_config.build_settings.update(release_build_settings)
 production_build_config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = bundle_id
+production_build_config.build_settings['TARGETED_DEVICE_FAMILY'] = "1,2"
 
 release_build_config.remove_from_project
 
