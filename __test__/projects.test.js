@@ -11,9 +11,9 @@ const {
 const { CASES, TEMP_FOLDER, GENERATOR_TIMEOUT } = require('./constants');
 
 describe('Check if the project passes his tests and builds successfully', () => {
-  // afterAll(() => {
-  //   fs.rmdirSync(TEMP_FOLDER, { recursive: true });
-  // });
+  afterAll(() => {
+    fs.rmdirSync(TEMP_FOLDER, { recursive: true });
+  });
 
   test.concurrent.each(CASES)(
     'Test case %p - Project Tests should pass success',
