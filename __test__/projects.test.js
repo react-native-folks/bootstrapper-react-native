@@ -15,7 +15,7 @@ describe('Check if the project passes his tests and builds successfully', () => 
   //   fs.rmdirSync(TEMP_FOLDER, { recursive: true });
   // });
 
-  test.each(CASES)(
+  test.concurrent.each(CASES)(
     'Test case %p - Project Tests should pass success',
     async id => {
       const projectDir = path.join(TEMP_FOLDER, getProjectName(id));

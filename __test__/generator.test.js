@@ -20,9 +20,9 @@ describe('Test Yeoman generator if can generate projects succesfully', () => {
           title: getProjectName(id),
           features,
           stateManagement,
-          pushToRepo: false
-        })
-        .withArguments('--skipBundler'), // Skips bundle installation
+          pushToRepo: false,
+          platformsSkipped: 'ios'
+        }),
     GENERATOR_TIMEOUT
   );
 
