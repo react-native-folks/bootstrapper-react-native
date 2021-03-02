@@ -25,7 +25,7 @@ describe('Check if the project passes his tests and builds successfully', () => 
     GENERATOR_TIMEOUT
   );
 
-  test.concurrent.each(CASES)(
+  test.each(CASES)(
     'Test case %p - Android build must create corresponding apk',
     async id => {
       const projectDir = path.join(TEMP_FOLDER, getProjectName(id));
