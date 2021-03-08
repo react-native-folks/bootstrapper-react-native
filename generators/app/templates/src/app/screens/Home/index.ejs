@@ -1,6 +1,7 @@
 import React, { <%_ if(features.loginandsignup && features.statemanagement.redux) { _%>useCallback, <%_ } _%> } from 'react';
 import { Alert, View } from 'react-native';
 import i18next from 'i18next';
+import { RadioButton, useTheme } from 'react-native-paper';
 import Routes from 'app/navigation/routes';
 <%_ if(features.tabs) { _%>
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -26,10 +27,11 @@ import authServices from 'services/auth';
 <%_ if(features.googlemaps) { _%>
 import { Navigation } from 'interfaces/navigation';
 <%_ } _%>
+import { ThemeContext } from 'hooks/theme';
 import { CustomShadowView, CustomText, CustomButton } from 'app/components';
 
 import './i18n';
-import styles from './styles';
+import createStyle from './styles';
 
 function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _%>) {
   <%_ if(features.loginandsignup) { _%>
@@ -37,6 +39,14 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
   const dispatch = useDispatch();
   const handleLogout = useCallback(() => dispatch(authActions.logout()), [dispatch]);
   <%_ } _%>
+  const theme = useTheme();
+  const styles = createStyle(theme);
+  const [selectedTheme, setSelectedTheme] = React.useState('light');
+  const { changeTheme } = React.useContext(ThemeContext);
+  const changeValue = (value: string) => {
+    setSelectedTheme(value);
+    changeTheme(value);
+  };
   <%_ if(features.statemanagement.recoil) { _%>
   const [, setCurrentUser] = useRecoilState(currentUserState);
   const [, , , logout] = useLazyFetch({
@@ -57,6 +67,7 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
         <CustomText testID="welcome-message-text" blue>{i18next.t('HOME:HI')}</CustomText>
         <CustomButton
           testID="alert-message-button"
+          secondary
           onPress={() =>
             Alert.alert(
               i18next.t('HOME:ALERT_TITLE'),
@@ -66,7 +77,8 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
           title={i18next.t('HOME:BUTTON_TITLE')}
         />
         <CustomButton
-        testID="alert-message-long-press-button"
+          testID="alert-message-long-press-button"
+          secondary
           onPress={() =>
             Alert.alert(
               i18next.t('HOME:ALERT_TITLE'),
@@ -82,22 +94,49 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
           onPressIn={() => console.warn('Press In Detection')}
           title={i18next.t('HOME:BUTTON_TITLE_LONG')}
         />
-        <CustomButton testID="smile-face-button" onPress={() => {}}>
+        <CustomButton testID="smile-face-button" secondary onPress={() => {}}>
           {({ pressed }) => (
-            <CustomText testID="smile-face-text" white>{pressed ? ': O' : ': D'}</CustomText>
+            <CustomText testID="smile-face-text" onSecondary>{pressed ? ': O' : ': D'}</CustomText>
           )}
         </CustomButton>
         <%_ if(features.googlemaps) { _%>
         <CustomButton
           testID="goto-maps-view-button"
+          primary
           onPress={() => navigation.navigate(Routes.MapView)}
           title={i18next.t('HOME:GO_TO_MAP')}
           />
         <%_ } _%>
     <%_ if(features.loginandsignup) { _%>
-      <CustomButton testID="logout-button" onPress={handleLogout} green title={i18next.t('HOME:LOGOUT')} style={styles.logout} />
+      <CustomButton testID="logout-button" primary onPress={handleLogout} title={i18next.t('HOME:LOGOUT')} style={styles.logout} />
     <%_ } _%>
       </CustomShadowView>
+      <View style={styles.themeSelectorContainer}>
+        <CustomText testID="theme-sector-group-text" primary>
+          {i18next.t('HOME:THEME_GROUP_TEXT')}
+        </CustomText>
+        <RadioButton.Group
+          onValueChange={newValue => changeValue(newValue)}
+          value={selectedTheme}>
+          <View style={styles.themeSelectorGroup}>
+            <RadioButton.Item
+              label="Light"
+              value="light"
+              style={styles.selectorItem}
+            />
+            <RadioButton.Item
+              label="Dark"
+              value="dark"
+              style={styles.selectorItem}
+            />
+            <RadioButton.Item
+              label="System"
+              value="system"
+              style={styles.selectorItem}
+            />
+          </View>
+        </RadioButton.Group>
+      </View>
     </View>
   );
 }

@@ -1,5 +1,3 @@
-import { StyleSheet } from 'react-native';
-import fonts from 'config/fonts';
 import {
   black,
   blue,
@@ -10,6 +8,9 @@ import {
   red
 } from 'constants/colors';
 import { SIZES } from 'constants/fonts';
+
+import { StyleSheet } from 'react-native';
+import fonts from 'config/fonts';
 import { moderateScale } from 'utils/scaling';
 import { StringObject, NumberObject } from 'interfaces/global';
 
@@ -31,50 +32,52 @@ const getSizes = (sizesObj: NumberObject) =>
     {}
   );
 
-export default StyleSheet.create({
-  base: {
-    ...fonts.baseFont,
-    paddingVertical: 10,
-    backgroundColor: transparent,
-    borderBottomWidth: 0.5,
-    borderBottomColor: gray
-  },
-  box: {
-    borderWidth: 0.5,
-    borderRadius: 10,
-    borderBottomColor: gray
-  },
-  emptyBox: {
-    borderWidth: 0
-  },
-  semiBold: fonts.semiBoldFont,
-  bold: fonts.boldFont,
-  italic: fonts.baseItalicFont,
-  center: {
-    textAlign: 'center'
-  },
-  justify: {
-    textAlign: 'justify' // iOS only
-  },
-  right: {
-    textAlign: 'right'
-  },
-  error: {
-    color: red
-  },
-  // Colors
-  ...getColors({ blue, gray, green, white, black }),
-  // Sizes
-  ...getSizes({
-    xxsmall: SIZES.XXSMALL,
-    xsmall: SIZES.XSMALL,
-    small: SIZES.SMALL,
-    medium: SIZES.MEDIUM,
-    xmedium: SIZES.XMEDIUM,
-    big: SIZES.BIG,
-    xbig: SIZES.XBIG
-  }),
-  container: {
-    marginVertical: 10
-  }
-});
+export default (appTheme: any) =>
+  StyleSheet.create({
+    base: {
+      ...fonts.baseFont,
+      paddingVertical: 10,
+      backgroundColor: transparent,
+      borderBottomWidth: 0.5,
+      borderBottomColor: appTheme.colors.accent,
+      color: appTheme.colors.input
+    },
+    box: {
+      borderWidth: 0.5,
+      borderRadius: 10,
+      borderBottomColor: gray
+    },
+    emptyBox: {
+      borderWidth: 0
+    },
+    semiBold: fonts.semiBoldFont,
+    bold: fonts.boldFont,
+    italic: fonts.baseItalicFont,
+    center: {
+      textAlign: 'center'
+    },
+    justify: {
+      textAlign: 'justify' // iOS only
+    },
+    right: {
+      textAlign: 'right'
+    },
+    error: {
+      color: red
+    },
+    // Colors
+    ...getColors({ blue, gray, green, white, black }),
+    // Sizes
+    ...getSizes({
+      xxsmall: SIZES.XXSMALL,
+      xsmall: SIZES.XSMALL,
+      small: SIZES.SMALL,
+      medium: SIZES.MEDIUM,
+      xmedium: SIZES.XMEDIUM,
+      big: SIZES.BIG,
+      xbig: SIZES.XBIG
+    }),
+    container: {
+      marginVertical: 10
+    }
+  });

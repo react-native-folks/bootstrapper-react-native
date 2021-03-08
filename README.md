@@ -62,6 +62,7 @@ The boilerplate includes
 - [React Hook Form](https://react-hook-form.com/)
 - [React Native Config](https://github.com/luggit/react-native-config)
 - [React Native Firebase](https://invertase.io/oss/react-native-firebase)
+- [React Native Paper](https://callstack.github.io/react-native-paper/getting-started.html)
 - [React Native Push Notifications](https://github.com/zo0r/react-native-push-notification)
 - [React Native Swiper](https://github.com/leecade/react-native-swiper)
 - [React Navigation](https://reactnavigation.org/)

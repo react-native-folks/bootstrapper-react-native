@@ -2,21 +2,24 @@ import { isIos } from 'constants/platform';
 
 import React, { useCallback, memo } from 'react';
 import { Pressable } from 'react-native';
+import { useTheme } from 'react-native-paper';
 import { getCustomStyles } from 'utils/style';
 
 import CustomText from '../CustomText';
 
 import { VARIANTS, CustomButtonProps } from './model';
-import styles, { defaultAndroidRipple } from './styles';
+import createStyle, { defaultAndroidRipple } from './styles';
 
 const CustomButton = (props: CustomButtonProps) => {
+  const theme = useTheme();
+  const styles = createStyle(theme);
   const customStyles = useCallback(
     () => getCustomStyles(VARIANTS, props, styles),
-    [props]
+    [props, styles]
   );
   const customTextStyles = useCallback(
     () => getCustomStyles(VARIANTS, props, styles, 'Content'),
-    [props]
+    [props, styles]
   );
   const {
     onPress,
@@ -54,7 +57,8 @@ const CustomButton = (props: CustomButtonProps) => {
           ? children(pressed)
           : title && (
               <CustomText
-                white
+                onPrimary={otherProps.primary}
+                onSecondary={otherProps.secondary}
                 {...textProps}
                 style={[customTextStyles(), textStyle]}>
                 {title}

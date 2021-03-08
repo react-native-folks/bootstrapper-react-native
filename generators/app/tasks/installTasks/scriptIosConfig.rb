@@ -13,6 +13,24 @@ release_build_settings = nil
 
 # Update info plist
 plist['CFBundleDisplayName'] = app_name
+plist['UIAppFonts'].concat([ # Append fonts declaration for Vector Icons
+   'AntDesign.ttf',
+   'Entypo.ttf',
+   'EvilIcons.ttf',
+   'Feather.ttf',
+   'FontAwesome.ttf',
+   'FontAwesome5_Brands.ttf',
+   'FontAwesome5_Regular.ttf',
+   'FontAwesome5_Solid.ttf',
+   'Fontisto.ttf',
+   'Foundation.ttf',
+   'Ionicons.ttf',
+   'MaterialCommunityIcons.ttf',
+   'MaterialIcons.ttf',
+   'Octicons.ttf',
+   'SimpleLineIcons.ttf',
+   'Zocial.ttf'
+])
 Xcodeproj::Plist.write_to_path(plist, ios_folder + project_name + '/Info.plist')
 
 # Delete unused targets

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import analytics from '@react-native-firebase/analytics';
 <%_ } _%>
 import { NavigationContainer, NavigationState } from '@react-navigation/native';
+import { Provider as PaperProvider } from 'react-native-paper';
+import { useAppTheme, ThemeContext, ThemeProperty } from 'hooks/theme';
 import { CustomStatusBar } from 'app/components';
 
 import { navigationRef, getActiveRoute, getRoute } from './utils';
@@ -10,9 +12,11 @@ import Navigator from './navigator';
 
 const AppNavigator = () => {
   const [routeName, setRouteName] = useState(null);
+  const [appTheme, setTheme] = useAppTheme('system');
   useEffect(() => {
     setRouteName(getActiveRoute()?.name);
   }, []);
+
   const onStateChange = (state?: NavigationState) => {
     const previousRouteName = routeName;
     const currentRouteName = getRoute(state)?.name;
@@ -23,11 +27,33 @@ const AppNavigator = () => {
       setRouteName(currentRouteName);
     }
   };
+
+  const changeTheme = React.useCallback(
+    (newTheme: ThemeProperty) => {
+      setTheme(newTheme);
+    },
+    [setTheme]
+  );
+
+  const ThemePreferences = React.useMemo(
+    () => ({
+      changeTheme,
+      appTheme
+    }),
+    [changeTheme, appTheme]
+  );
   return (
-    <NavigationContainer ref={navigationRef} onStateChange={onStateChange}>
-      <CustomStatusBar routeName={routeName} />
-      <Navigator />
-    </NavigationContainer>
+    <ThemeContext.Provider value={ThemePreferences}>
+      <PaperProvider theme={appTheme}>
+        <NavigationContainer
+          theme={appTheme}
+          ref={navigationRef}
+          onStateChange={onStateChange}>
+          <CustomStatusBar routeName={routeName} />
+          <Navigator />
+        </NavigationContainer>
+      </PaperProvider>
+    </ThemeContext.Provider>
   );
 };
 
