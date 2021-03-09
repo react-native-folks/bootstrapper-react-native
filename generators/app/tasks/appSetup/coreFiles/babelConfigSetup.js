@@ -3,6 +3,11 @@ module.exports = function babelConfigSetup() {
     `${this.projectName}/babel.config.js`
   );
   const babelContent = `presets: ['module:metro-react-native-babel-preset'],
+  env: {
+    production: {
+      plugins: ['react-native-paper/babel']
+    }
+  },
   plugins: [
     'import-glob',
     [

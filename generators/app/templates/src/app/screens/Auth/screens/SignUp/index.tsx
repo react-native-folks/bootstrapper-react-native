@@ -94,6 +94,7 @@ function SignUp({ navigation }: Navigation) {
               </CustomText>
             )}
             <CustomButton
+              primary
               testID="submit-signup-button"
               onPress={handleSubmit(onSubmit)}
               style={styles.formButton}

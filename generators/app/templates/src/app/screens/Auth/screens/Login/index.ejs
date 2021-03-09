@@ -1,3 +1,4 @@
+import { blue } from 'constants/colors';
 import React, { useCallback, useRef } from 'react';
 import {
   ActivityIndicator,
@@ -152,7 +153,7 @@ export function Login({ navigation }: Navigation) {
         </View>
         <CustomButton
           testID="submit-button"
-          green
+          primary
           radius={3}
           onPress={handleSubmit(handleLogin)}
           style={styles.formButton}
@@ -190,7 +191,7 @@ export function Login({ navigation }: Navigation) {
           style={styles.formButton}
           title={i18next.t('LOGIN:SIGN_UP')}
         />
-        <ActivityIndicator testID="activity-indicator-screen" animating={loading} color="gray" />
+        <ActivityIndicator testID="activity-indicator-screen" animating={loading} color={blue} />
       </View>
     </TouchableWithoutFeedback>
   );

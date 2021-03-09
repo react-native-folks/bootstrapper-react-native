@@ -12,8 +12,10 @@ export default StyleSheet.create({
     alignSelf: 'stretch'
   },
   formButton: {
+    alignSelf: 'stretch',
     padding: 10,
-    marginTop: 15
+    marginTop: 15,
+    marginHorizontal: 30
   },
   logo: {
     alignSelf: 'center',

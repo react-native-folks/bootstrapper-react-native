@@ -148,6 +148,7 @@ module.exports.FONTS_CONSTANTS = `${module.exports.CONSTANTS_PATH}/fonts.ts`;
 // HOOKS
 module.exports.REDUX_HOOKS = `${module.exports.HOOKS_PATH}/redux.ts`;
 module.exports.FETCH_HOOKS = `${module.exports.HOOKS_PATH}/useFetch.ts`;
+module.exports.THEME_HOOKS = `${module.exports.HOOKS_PATH}/theme.tsx`;
 
 // INTERFACES
 module.exports.AUTH_INTERFACES = `${module.exports.INTERFACES_PATH}/auth.ts`;
