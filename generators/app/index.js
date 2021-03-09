@@ -183,7 +183,7 @@ class ReactNativeBootstrap extends Generator {
               ],
               { cwd: `${process.cwd()}/${this.projectName}` }
             ],
-            loadingMessage: 'Unlinking Vector iOS from iOS platform',
+            loadingMessage: 'Unlinking Vector Icons from iOS platform',
             successMessage: 'Success Vector Icons unlink',
             failureMessage: 'Failed Vector Icons unlink',
             context: this.options
