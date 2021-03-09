@@ -11,6 +11,8 @@ import { CustomTextProps } from '../CustomText/model';
 
 // Add needed color for the proyect
 export const VARIANTS = [
+  'primary',
+  'secondary',
   'borderless',
   'radial',
   'black',
@@ -22,6 +24,8 @@ export const VARIANTS = [
 ];
 
 interface CustomButtonVariants {
+  primary?: boolean;
+  secondary?: boolean;
   borderless?: boolean;
   radial?: boolean;
   black?: boolean;

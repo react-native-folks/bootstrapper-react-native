@@ -5,7 +5,8 @@ import {
   black,
   green,
   gray,
-  white
+  white,
+  CustomThemeType
 } from 'constants/colors';
 
 import { StyleSheet } from 'react-native';
@@ -20,59 +21,73 @@ export const defaultAndroidRipple = {
   color: lightGray
 };
 
-export default StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 8,
-    backgroundColor: blue,
-    borderColor: gray
-  },
-  defaultPressed: {
-    opacity: 0.4
-  },
-  borderless: borderlessStyle,
-  radial: {
-    borderRadius: 100
-  },
-  black: {
-    backgroundColor: black
-  },
-  blackContent: {
-    color: white
-  },
-  white: {
-    backgroundColor: white
-  },
-  whiteContent: {
-    color: black
-  },
-  gray: {
-    backgroundColor: gray
-  },
-  grayContent: {
-    color: black
-  },
-  borderlessContent: {
-    color: gray
-  },
-  green: {
-    backgroundColor: green
-  },
-  greenContent: {
-    color: white
-  },
-  blue: {
-    backgroundColor: blue
-  },
-  blueContent: {
-    color: white
-  },
-  transparent: {
-    backgroundColor: transparent
-  },
-  transparentContent: {
-    color: black
-  }
-});
+export default (appTheme: CustomThemeType) =>
+  StyleSheet.create({
+    container: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 8,
+      backgroundColor: appTheme.colors.primary,
+      color: appTheme.colors.onPrimary,
+      borderColor: gray
+    },
+    defaultPressed: {
+      opacity: 0.4
+    },
+    borderless: borderlessStyle,
+    radial: {
+      borderRadius: 100
+    },
+    primary: {
+      backgroundColor: appTheme.colors.primary
+    },
+    primaryContent: {
+      color: appTheme.colors.onPrimary
+    },
+    secondary: {
+      backgroundColor: appTheme.colors.secondary
+    },
+    secondaryContent: {
+      color: appTheme.colors.onSecondary
+    },
+    black: {
+      backgroundColor: black
+    },
+    blackContent: {
+      color: white
+    },
+    white: {
+      backgroundColor: white
+    },
+    whiteContent: {
+      color: black
+    },
+    gray: {
+      backgroundColor: gray
+    },
+    grayContent: {
+      color: black
+    },
+    borderlessContent: {
+      color: appTheme.colors.accent
+    },
+    green: {
+      backgroundColor: green
+    },
+    greenContent: {
+      color: white
+    },
+    blue: {
+      backgroundColor: blue
+    },
+    blueContent: {
+      color: white
+    },
+    transparent: {
+      backgroundColor: transparent
+    },
+    transparentContent: {
+      color: black
+    }
+  });

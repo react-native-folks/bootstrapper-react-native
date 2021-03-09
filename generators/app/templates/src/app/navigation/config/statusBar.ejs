@@ -1,31 +1,42 @@
-import { blue, white } from 'constants/colors';
+import { blue, lightGray, black } from 'constants/colors';
 
 import Routes from '../routes';
 
-const statusBarConfig = {
-  transparentStatusBar: {
-    barStyle: 'dark-content',
-    translucent: true,
-    backgroundColor: 'rgba(255, 255, 255, 0.6)'
-  },
-  // BackgroundColor just apply on Android devices
-  // iOS is always translucent - keep in mind to set the barStyle
-  blueStatusBar: { barStyle: 'light-content', backgroundColor: blue },
-  whiteStatusBar: { barStyle: 'dark-content', backgroundColor: white }
-} as const;
+const statusBarConfig = (isDark: boolean) =>
+  ({
+    transparentStatusBar: {
+      barStyle: isDark ? 'dark-content' : 'light-content',
+      translucent: true,
+      backgroundColor: 'rgba(255, 255, 255, 0.0)'
+    },
+    // BackgroundColor just apply on Android devices
+    // iOS is always translucent - keep in mind to set the barStyle
+    blueStatusBar: {
+      barStyle: isDark ? 'dark-content' : 'light-content',
+      backgroundColor: blue
+    },
+    basicStatusBar: isDark
+      ? { barStyle: 'light-content', backgroundColor: black }
+      : { barStyle: 'dark-content', backgroundColor: lightGray }
+  } as const);
 
-export const statusBarStyles = {
+export const statusBarStyles = (isDarkTheme: boolean) => ({
   // TODO: Change these styles to customize the status bar
   <%_ if (features.loginandsignup) { _%>
-  [Routes.Login]: statusBarConfig.whiteStatusBar,
-  [Routes.SignUp]: statusBarConfig.blueStatusBar,
+  [Routes.Login]: statusBarConfig(isDarkTheme).basicStatusBar,
+  [Routes.SignUp]: statusBarConfig(isDarkTheme).blueStatusBar,
   <%_ } _%>
   <%_ if (features.tabs) { _%>
-  [Routes.Tab1]: statusBarConfig.blueStatusBar,
-  [Routes.Tab2]: statusBarConfig.blueStatusBar,
+  [Routes.Tab1]: statusBarConfig(isDarkTheme).blueStatusBar,
+  [Routes.Tab2]: statusBarConfig(isDarkTheme).blueStatusBar,
   <%_ } _%>
-  [Routes.Home]: statusBarConfig.blueStatusBar,
-  default: statusBarConfig.blueStatusBar
-};
+  [Routes.Home]: statusBarConfig(isDarkTheme).blueStatusBar,
+  <%_ if (features.onboarding) { _%>
+  [Routes.Onboarding]: isDarkTheme
+    ? statusBarConfig(isDarkTheme).basicStatusBar
+    : statusBarConfig(isDarkTheme).blueStatusBar,
+  <%_ } _%>
+  default: statusBarConfig(isDarkTheme).blueStatusBar
+});
 
 export default statusBarConfig;

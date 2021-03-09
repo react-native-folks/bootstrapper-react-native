@@ -1,11 +1,12 @@
 import React, { useCallback } from 'react';
 import { View, TextInput } from 'react-native';
 import { Controller } from 'react-hook-form';
+import { useTheme } from 'react-native-paper';
 import { getCustomStyles } from 'utils/style';
 import CustomText from '../CustomText';
 
 import { CustomTextInputProps, VARIANTS } from './model';
-import styles from './styles';
+import createStyle from './styles';
 
 const CustomTextInput = ({
   testID,
@@ -22,9 +23,11 @@ const CustomTextInput = ({
   inputProps,
   ...props
 }: CustomTextInputProps) => {
+  const theme = useTheme();
+  const styles = createStyle(theme);
   const customStyles = useCallback(
     () => getCustomStyles(VARIANTS, props, styles),
-    [props]
+    [props, styles]
   );
   return (
     <Controller
@@ -32,7 +35,7 @@ const CustomTextInput = ({
       render={({ onChange, onBlur, value }) => (
         <View style={styles.container}>
           {label !== '' && (
-            <CustomText testID={labelTestID} gray bold small {...labelProps}>
+            <CustomText testID={labelTestID} accent bold small {...labelProps}>
               {label}
             </CustomText>
           )}

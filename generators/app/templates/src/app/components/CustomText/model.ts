@@ -13,6 +13,11 @@ export const VARIANTS = [
   'center',
   'justify',
   'right',
+  'primary',
+  'secondary',
+  'onPrimary',
+  'onSecondary',
+  'accent',
   'blue',
   'gray',
   'green',
@@ -34,6 +39,11 @@ export interface VariantsInterface {
   center?: boolean;
   justify?: boolean;
   right?: boolean;
+  primary?: boolean;
+  secondary?: boolean;
+  onPrimary?: boolean;
+  onSecondary?: boolean;
+  accent?: boolean;
   blue?: boolean;
   gray?: boolean;
   green?: boolean;

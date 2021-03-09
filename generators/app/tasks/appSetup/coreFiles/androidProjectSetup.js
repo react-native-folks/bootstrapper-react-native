@@ -71,11 +71,16 @@ function addRNGestureHandlerConfig() {
   const mainActivityContent = this.fs.read(mainActivityContentPath);
   let updatedMainActivityContent = mainActivityContent.replace(
     'import com.facebook.react.ReactActivity;',
-    'import com.facebook.react.ReactActivity;\nimport com.facebook.react.ReactActivityDelegate;\nimport com.facebook.react.ReactRootView;\nimport com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;'
+    'import com.facebook.react.ReactActivity;\nimport com.facebook.react.ReactActivityDelegate;\nimport com.facebook.react.ReactRootView;\nimport com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;\nimport android.content.res.Configuration;'
   );
   updatedMainActivityContent = updatedMainActivityContent.replace(
     `return "${this.projectName}";\n\t}`,
     `return "${this.projectName}";\n\t}\n\n\t@Override\n\tprotected ReactActivityDelegate createReactActivityDelegate() {\n\t\treturn new ReactActivityDelegate(this, getMainComponentName()) {\n\t\t\t@Override\n\t\t\tprotected ReactRootView createRootView() {\n\t\t\t\treturn new RNGestureHandlerEnabledRootView(MainActivity.this);\n\t\t\t}\n\t\t};\n\t}`
+  );
+
+  updatedMainActivityContent = updatedMainActivityContent.replace(
+    'public class MainActivity extends ReactActivity {',
+    'public class MainActivity extends ReactActivity {\n\t@Override\n\tpublic void onConfigurationChanged(Configuration newConfig) {\n\t\tsuper.onConfigurationChanged(newConfig);\n\t\tgetReactInstanceManager().onConfigurationChanged(this, newConfig);\n\t}'
   );
   this.fs.write(mainActivityContentPath, updatedMainActivityContent);
 }

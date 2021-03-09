@@ -1,13 +1,17 @@
+import { white } from 'constants/colors';
+
 import { StyleSheet } from 'react-native';
-import { gray } from 'constants/colors';
 
 export default StyleSheet.create({
   buttonContainer: {
     padding: 10,
     borderWidth: 0.5,
     borderRadius: 5,
-    borderColor: gray,
+    borderColor: white,
     width: 100
+  },
+  buttonText: {
+    color: white
   },
   buttons: {
     flexDirection: 'row',

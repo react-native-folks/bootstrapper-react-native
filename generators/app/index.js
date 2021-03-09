@@ -15,6 +15,8 @@ const editBundleIdentifier = require('./tasks/installTasks/editBundleIdentifier'
 const lintFixProject = require('./tasks/installTasks/lintFixProject');
 const chmodFirebaseScript = require('./tasks/installTasks/chmodFirebaseScript');
 const gitInitialization = require('./tasks/installTasks/gitInitialization');
+const runCommand = require('./tasks/runCommand');
+
 // END
 const nextSteps = require('./tasks/nextSteps');
 const {
@@ -158,19 +160,43 @@ class ReactNativeBootstrap extends Generator {
   }
 
   install() {
-    return Promise.resolve()
-      .then(
-        () =>
-          !this.options.skipBundler &&
-          this.platforms.ios &&
-          bundleInstall.bind(this)()
-      )
-      .then(() => this.platforms.ios && configureIosProject.bind(this)())
-      .then(() => this.platforms.ios && installPods.bind(this)())
-      .then(() => linkAppAssets.bind(this)())
-      .then(() => lintFixProject.bind(this)())
-      .then(() => this.features.hasFirebase && chmodFirebaseScript.bind(this)())
-      .then(() => gitInitialization.bind(this)());
+    return (
+      Promise.resolve()
+        .then(
+          () =>
+            !this.options.skipBundler &&
+            this.platforms.ios &&
+            bundleInstall.bind(this)()
+        )
+        .then(() => linkAppAssets.bind(this)())
+        // TODO - remove when npx react-native link fix iOS Copy Bundle Resources Issue
+        .then(() =>
+          runCommand({
+            command: [
+              'npx',
+              [
+                'react-native',
+                'unlink',
+                'react-native-vector-icons',
+                '--platforms',
+                'ios'
+              ],
+              { cwd: `${process.cwd()}/${this.projectName}` }
+            ],
+            loadingMessage: 'Unlinking Vector Icons from iOS platform',
+            successMessage: 'Success Vector Icons unlink',
+            failureMessage: 'Failed Vector Icons unlink',
+            context: this.options
+          })
+        )
+        .then(() => this.platforms.ios && configureIosProject.bind(this)())
+        .then(() => this.platforms.ios && installPods.bind(this)())
+        .then(() => lintFixProject.bind(this)())
+        .then(
+          () => this.features.hasFirebase && chmodFirebaseScript.bind(this)()
+        )
+        .then(() => gitInitialization.bind(this)())
+    );
   }
 
   end() {
