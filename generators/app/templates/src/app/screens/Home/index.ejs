@@ -1,4 +1,4 @@
-import React, { <%_ if(features.loginandsignup && features.statemanagement.redux) { _%>useCallback, <%_ } _%> } from 'react';
+import React, { useState, useContext, <%_ if(features.loginandsignup && features.statemanagement.redux) { _%>useCallback, <%_ } _%> } from 'react';
 import { Alert, View } from 'react-native';
 import i18next from 'i18next';
 import { RadioButton, useTheme } from 'react-native-paper';
@@ -41,8 +41,8 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
   <%_ } _%>
   const theme = useTheme();
   const styles = createStyle(theme);
-  const [selectedTheme, setSelectedTheme] = React.useState('light');
-  const { changeTheme } = React.useContext(ThemeContext);
+  const [selectedTheme, setSelectedTheme] = useState('system');
+  const { changeTheme } = useContext(ThemeContext);
   const changeValue = (value: string) => {
     setSelectedTheme(value);
     changeTheme(value);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 <%_ if(features.firebase) { _%>
 import analytics from '@react-native-firebase/analytics';
 <%_ } _%>
@@ -28,14 +28,14 @@ const AppNavigator = () => {
     }
   };
 
-  const changeTheme = React.useCallback(
+  const changeTheme = useCallback(
     (newTheme: ThemeProperty) => {
       setTheme(newTheme);
     },
     [setTheme]
   );
 
-  const ThemePreferences = React.useMemo(
+  const ThemePreferences = useMemo(
     () => ({
       changeTheme,
       appTheme
