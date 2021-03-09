@@ -5,7 +5,8 @@ import {
   green,
   gray,
   transparent,
-  red
+  red,
+  CustomThemeType
 } from 'constants/colors';
 import { SIZES } from 'constants/fonts';
 
@@ -32,7 +33,7 @@ const getSizes = (sizesObj: NumberObject) =>
     {}
   );
 
-export default (appTheme: any) =>
+export default (appTheme: CustomThemeType) =>
   StyleSheet.create({
     base: {
       ...fonts.baseFont,

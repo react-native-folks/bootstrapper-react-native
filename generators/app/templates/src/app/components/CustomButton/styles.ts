@@ -5,7 +5,8 @@ import {
   black,
   green,
   gray,
-  white
+  white,
+  CustomThemeType
 } from 'constants/colors';
 
 import { StyleSheet } from 'react-native';
@@ -20,7 +21,7 @@ export const defaultAndroidRipple = {
   color: lightGray
 };
 
-export default (appTheme: any) =>
+export default (appTheme: CustomThemeType) =>
   StyleSheet.create({
     container: {
       flexDirection: 'row',

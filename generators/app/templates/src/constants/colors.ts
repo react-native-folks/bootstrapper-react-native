@@ -31,7 +31,6 @@ export const theme = {
     accent: gray,
     background: lightGray,
     input: black,
-    // disabled: darkGray,
     onPrimary: lightGray,
     onSecondary: blue
   },
@@ -41,7 +40,6 @@ export const theme = {
     accent: lightGray,
     background: black,
     input: white,
-    // disabled: lightGray,
     onPrimary: black,
     onSecondary: lightGray
   }
@@ -65,6 +63,8 @@ const darkTheme = {
     ...theme.dark
   }
 };
+
+export type CustomThemeType = typeof darkTheme | typeof defaultTheme;
 
 export const AppTheme = {
   defaultTheme,

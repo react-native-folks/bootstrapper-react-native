@@ -1,4 +1,10 @@
-import { black, blue, semiTransparent, white } from 'constants/colors';
+import {
+  black,
+  blue,
+  semiTransparent,
+  white,
+  CustomThemeType
+} from 'constants/colors';
 
 import { StyleSheet } from 'react-native';
 
@@ -6,7 +12,7 @@ const DOT_SIZE = 12;
 const ACTIVE_DOT_SIZE = 15;
 const BORDER_RADIUS = 10;
 
-const styles = (appTheme: any) =>
+const styles = (appTheme: CustomThemeType) =>
   StyleSheet.create({
     container: {
       flex: 1,

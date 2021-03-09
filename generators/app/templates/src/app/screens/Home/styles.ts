@@ -1,6 +1,8 @@
+import { CustomThemeType } from 'constants/colors';
+
 import { StyleSheet } from 'react-native';
 
-export default (appTheme: any) =>
+export default (appTheme: CustomThemeType) =>
   StyleSheet.create({
     container: {
       flex: 1,
