@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { Provider as PaperProvider } from 'react-native-paper';
 <%_ if(features.firebase) { _%>
 import analytics from '@react-native-firebase/analytics';
 <%_ } _%>
 import { NavigationContainer, NavigationState } from '@react-navigation/native';
 import { CustomStatusBar } from 'app/components';
+import theme from 'constants/colors';
 
 import { navigationRef, getActiveRoute, getRoute } from './utils';
 import Navigator from './navigator';
@@ -24,10 +26,12 @@ const AppNavigator = () => {
     }
   };
   return (
-    <NavigationContainer ref={navigationRef} onStateChange={onStateChange}>
-      <CustomStatusBar routeName={routeName} />
-      <Navigator />
-    </NavigationContainer>
+    <PaperProvider theme={theme}>
+      <NavigationContainer ref={navigationRef} onStateChange={onStateChange}>
+        <CustomStatusBar routeName={routeName} />
+        <Navigator />
+      </NavigationContainer>
+    </PaperProvider>
   );
 };
 
