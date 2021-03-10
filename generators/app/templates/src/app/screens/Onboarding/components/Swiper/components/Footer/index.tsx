@@ -14,7 +14,7 @@ function Footer(props: FooterProps) {
         <CustomButton
           testID="footer-left-action-button"
           {...firstButton}
-          white
+          transparent
           style={styles.buttonContainer}
           activeOpacity={0.7}
         />
@@ -23,8 +23,9 @@ function Footer(props: FooterProps) {
         <CustomButton
           testID="footer-right-action-button"
           {...secondButton}
-          white
+          transparent
           style={styles.buttonContainer}
+          textStyle={styles.buttonText}
           activeOpacity={0.7}
         />
       )}

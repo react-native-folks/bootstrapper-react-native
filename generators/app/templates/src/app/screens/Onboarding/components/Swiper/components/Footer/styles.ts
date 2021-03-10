@@ -7,8 +7,11 @@ export default StyleSheet.create({
     padding: 10,
     borderWidth: 0.5,
     borderRadius: 5,
-    borderColor: colors.gray,
+    borderColor: colors.white,
     width: 100
+  },
+  buttonText: {
+    color: colors.white
   },
   buttons: {
     flexDirection: 'row',
