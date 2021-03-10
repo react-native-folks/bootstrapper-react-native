@@ -16,6 +16,7 @@ function Footer(props: FooterProps) {
           {...firstButton}
           transparent
           style={styles.buttonContainer}
+          textStyle={styles.buttonText}
           activeOpacity={0.7}
         />
       )}
