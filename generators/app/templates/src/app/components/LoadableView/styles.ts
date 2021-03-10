@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { white } from 'constants/colors';
+import colors from 'constants/colors';
 
 export default StyleSheet.create({
   container: {
@@ -13,7 +13,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     opacity: 0.5,
-    backgroundColor: white,
+    backgroundColor: colors.white,
     position: 'absolute',
     zIndex: 3
   }

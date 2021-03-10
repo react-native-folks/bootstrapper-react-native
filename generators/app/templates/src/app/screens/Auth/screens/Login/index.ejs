@@ -1,4 +1,3 @@
-import { blue } from 'constants/colors';
 import React, { useCallback, useRef } from 'react';
 import {
   ActivityIndicator,
@@ -23,6 +22,7 @@ import authServices from 'services/auth';
 import { appScreensNavOptions } from 'app/navigation/config/screensOptions';
 import { createStackNavigator } from '@react-navigation/stack';
 import i18next from 'i18next';
+import { useTheme } from 'react-native-paper';
 import { 
   CustomButton,
   CustomText,
@@ -52,6 +52,7 @@ import './i18n';
 import styles from './styles';
 
 export function Login({ navigation }: Navigation) {
+  const theme = useTheme();
   const { control, handleSubmit, errors } = useForm();
   const passwordInputRef = useRef<NativeTextInput>(null);
   <%_ if(features.statemanagement.redux) { _%>
@@ -130,6 +131,7 @@ export function Login({ navigation }: Navigation) {
             returnKeyType="next"
             blurOnSubmit={false}
             onSubmitEditing={() => passwordInputRef!.current?.focus()}
+            autoCorrect={false}
           />
           <TextInput
             ref={passwordInputRef}
@@ -144,6 +146,7 @@ export function Login({ navigation }: Navigation) {
             secureTextEntry
             keyboardType={isAndroid ? 'visible-password' : 'ascii-capable'}
             returnKeyType="done"
+            autoCorrect={false}
           />
           {hasLoginError && (
             <CustomText testID="login-error-message" error center>
@@ -191,7 +194,11 @@ export function Login({ navigation }: Navigation) {
           style={styles.formButton}
           title={i18next.t('LOGIN:SIGN_UP')}
         />
-        <ActivityIndicator testID="activity-indicator-screen" animating={loading} color={blue} />
+        <ActivityIndicator
+          testID="activity-indicator-screen"
+          animating={loading}
+          color={theme.colors.accent}
+        />      
       </View>
     </TouchableWithoutFeedback>
   );

@@ -1,4 +1,4 @@
-import { transparent } from 'constants/colors';
+import colors from 'constants/colors';
 import { SIZES } from 'constants/fonts';
 
 import { StyleSheet } from 'react-native';
@@ -16,7 +16,7 @@ const getSizes = (sizesObj: NumberObject) =>
 
 export default StyleSheet.create({
   base: {
-    backgroundColor: transparent
+    backgroundColor: colors.transparent
   },
   center: {
     textAlign: 'center'

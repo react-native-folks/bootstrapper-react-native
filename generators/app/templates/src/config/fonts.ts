@@ -1,5 +1,6 @@
-import { black } from 'constants/colors';
+import colors from 'constants/colors';
 import { SEMIBOLD, BOLD, ITALIC, SIZES } from 'constants/fonts';
+
 import { fontMaker } from 'utils/font';
 
 const defaultFontConfig = {
@@ -26,16 +27,16 @@ export const fontConfig = {
 // Here you can make your custom fonts
 // I only recommend using family if you have more than one Font Family in the App.
 export default {
-  baseFont: fontMaker({ size: SIZES.MEDIUM, color: black }),
+  baseFont: fontMaker({ size: SIZES.MEDIUM, color: colors.black }),
   baseItalicFont: fontMaker({
     size: SIZES.MEDIUM,
-    color: black,
+    color: colors.black,
     style: ITALIC
   }),
   semiBoldFont: fontMaker({
     weight: SEMIBOLD,
     size: SIZES.MEDIUM,
-    color: black
+    color: colors.black
   }),
-  boldFont: fontMaker({ weight: BOLD, size: SIZES.MEDIUM, color: black })
+  boldFont: fontMaker({ weight: BOLD, size: SIZES.MEDIUM, color: colors.black })
 };

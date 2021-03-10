@@ -1,6 +1,5 @@
-import { CustomThemeType } from 'constants/colors';
-
 import { StyleSheet } from 'react-native';
+import { CustomThemeType } from 'config/theme';
 
 export default (appTheme: CustomThemeType) =>
   StyleSheet.create({

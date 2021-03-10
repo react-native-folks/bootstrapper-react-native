@@ -85,6 +85,7 @@ function SignUp({ navigation }: Navigation) {
                   onSubmitEditing={
                     !lastTextInput ? handleTextInputSubmit(i + 1) : undefined
                   }
+                  autoCorrect={false}
                 />
               );
             })}

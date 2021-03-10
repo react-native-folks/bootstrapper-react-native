@@ -139,6 +139,7 @@ module.exports.CONFIG = `${module.exports.CONFIG_PATH}/index.ts`;
 module.exports.REACTOTRON_CONFIG = `${module.exports.CONFIG_PATH}/reactotron.ts`;
 module.exports.I18N_CONFIG = `${module.exports.CONFIG_PATH}/i18n.ts`;
 module.exports.FONTS_CONFIG = `${module.exports.CONFIG_PATH}/fonts.ts`;
+module.exports.THEME_CONFIG = `${module.exports.CONFIG_PATH}/theme.ts`;
 
 // CONSTANTS
 module.exports.PLATFORM_CONSTANTS = `${module.exports.CONSTANTS_PATH}/platform.ts`;

@@ -1,7 +1,6 @@
-import { AppTheme } from 'constants/colors';
-
 import { createContext, useState } from 'react';
 import { useColorScheme } from 'react-native';
+import { AppTheme } from 'config/theme';
 
 export type ThemeProperty = 'light' | 'dark' | 'system' | string;
 

@@ -1,4 +1,4 @@
-import { blue, white } from 'constants/colors';
+import colors from 'constants/colors';
 import { Navigation } from 'interfaces/navigation';
 import i18next from 'i18next';
 import fonts from 'config/fonts';
@@ -11,16 +11,16 @@ const defaultNavOptions = ({ route }: Navigation) => ({
     headerTitle: i18next.t(`app:${route.name}`),
     // TODO: The following options are examples. Change them to your need
     headerStyle: {
-      backgroundColor: blue
+      backgroundColor: colors.blue
     },
     headerBackTitleStyle: {
-      color: white
+      color: colors.white
     },
     headerTitleStyle: {
       ...fonts.baseFont,
-      color: white
+      color: colors.white
     },
-    headerTintColor: white
+    headerTintColor: colors.white
 });
 
 export const appStackNavConfig = {
