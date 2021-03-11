@@ -4,44 +4,45 @@ import {element, by, waitFor, expect} from 'detox';
 const elements = require('./testingElements.js');
 
 async function typeNameSignup(firstName) {
-   await waitFor(element(by.id(elements.firstName))).toExist().withTimeout(10000);
-   await element(by.id(elements.firstName)).clearText();
-   await element(by.id(elements.firstName)).replaceText(`${firstName}`);
+   await waitFor(element(by.id(elements.firstName).withAncestor(by.id(elements.signUpContainer)))).toExist().withTimeout(10000);
+   await element(by.id(elements.firstName).withAncestor(by.id(elements.signUpContainer))).clearText();
+   await element(by.id(elements.firstName).withAncestor(by.id(elements.signUpContainer))).replaceText(`${firstName}`);
 }
 
 async function typeSurnameSignup(surName)  {
-   await waitFor(element(by.id(elements.surName))).toExist().withTimeout(10000);
-   await element(by.id(elements.surName)).clearText();
-   await element(by.id(elements.surName)).replaceText(`${surName}`);
+   await waitFor(element(by.id(elements.surName).withAncestor(by.id(elements.signUpContainer)))).toExist().withTimeout(10000);
+   await element(by.id(elements.surName).withAncestor(by.id(elements.signUpContainer))).clearText();
+   await element(by.id(elements.surName).withAncestor(by.id(elements.signUpContainer))).replaceText(`${surName}`);
 }
 
 async function typeBirthdaySignup(birthDate)  {
-   await waitFor(element(by.id(elements.birthDate))).toExist().withTimeout(10000);
-   await element(by.id(elements.birthDate)).clearText();
-   await element(by.id(elements.birthDate)).replaceText(`${birthDate}`);
+   await waitFor(element(by.id(elements.birthDate).withAncestor(by.id(elements.signUpContainer)))).toExist().withTimeout(10000);
+   await element(by.id(elements.birthDate).withAncestor(by.id(elements.signUpContainer))).clearText();
+   await element(by.id(elements.birthDate).withAncestor(by.id(elements.signUpContainer))).replaceText(`${birthDate}`);
 }
 
 async function typeEmailSignup(email)  {
-   await waitFor(element(by.id(elements.email)).atIndex(1)).toExist().withTimeout(10000);
-   await element(by.id(elements.email)).atIndex(1).clearText();
-   await element(by.id(elements.email)).atIndex(1).replaceText(`${email}`);
+   await waitFor(element(by.id(elements.email).withAncestor(by.id(elements.signUpContainer)))).toExist().withTimeout(10000);
+   await element(by.id(elements.email).withAncestor(by.id(elements.signUpContainer))).clearText();
+   await element(by.id(elements.email).withAncestor(by.id(elements.signUpContainer))).replaceText(`${email}`);
+   await element(by.id(elements.email).withAncestor(by.id(elements.signUpContainer))).tapReturnKey();
 }
 
 async function typePasswordSignup(password)  {
-   await waitFor(element(by.id(elements.password)).atIndex(1)).toExist().withTimeout(10000);
-   await element(by.id(elements.password)).atIndex(1).clearText();
-   await element(by.id(elements.password)).atIndex(1).replaceText(`${password}`);
+   await waitFor(element(by.id(elements.password).withAncestor(by.id(elements.signUpContainer)))).toExist().withTimeout(10000);
+   await element(by.id(elements.password).withAncestor(by.id(elements.signUpContainer))).clearText();
+   await element(by.id(elements.password).withAncestor(by.id(elements.signUpContainer))).replaceText(`${password}`);
 }
 
 async function typePhoneNumberSignup(phoneNumber)  {
-   await waitFor(element(by.id(elements.phoneNumber))).toExist().withTimeout(10000);
-   await element(by.id(elements.phoneNumber)).clearText();
-   await element(by.id(elements.phoneNumber)).replaceText(`${phoneNumber}`);
+   await waitFor(element(by.id(elements.phoneNumber).withAncestor(by.id(elements.signUpContainer)))).toExist().withTimeout(10000);
+   await element(by.id(elements.phoneNumber).withAncestor(by.id(elements.signUpContainer))).clearText();
+   await element(by.id(elements.phoneNumber).withAncestor(by.id(elements.signUpContainer))).replaceText(`${phoneNumber}`);
 }
 
-async function clickSubmitButton()  {
-   await waitFor(element(by.id(elements.signupSubmitButton))).toExist().withTimeout(10000);
-   await element(by.id(elements.signupSubmitButton)).tap();
+async function pressSubmitButton()  {
+   await waitFor(element(by.id(elements.signupSubmitButton).withAncestor(by.id(elements.signUpContainer)))).toExist().withTimeout(10000);
+   await element(by.id(elements.signupSubmitButton).withAncestor(by.id(elements.signUpContainer))).tap();
 }
 
 async function verifyErrorsNotVisible() {
@@ -60,6 +61,6 @@ module.exports = {
    typeSurnameSignup,
    typeBirthdaySignup,
    typePhoneNumberSignup,
-   clickSubmitButton,
+   pressSubmitButton,
    verifyErrorsNotVisible
 };

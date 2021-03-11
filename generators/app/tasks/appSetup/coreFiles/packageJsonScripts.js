@@ -32,10 +32,14 @@ module.exports = function packgeJsonScripts() {
   packageJson.scripts.clean =
     'rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/metro-* && rm -rf $TMPDIR/haste-map-* && watchman watch-del-all && yarn cache clean';
   packageJson.scripts.coverage = 'jest --coverage --passWithNoTests';
-  packageJson.scripts.detoxBuild =
+  packageJson.scripts['detoxBuild:android'] =
     'detox build --configuration android.emu.release --verbose';
-  packageJson.scripts.detoxTest =
+  packageJson.scripts['detoxTest:android'] =
     'detox test --configuration android.emu.release --verbose';
+  packageJson.scripts['detoxBuild:ios'] =
+    'detox build --configuration ios.sim.release --verbose';
+  packageJson.scripts['detoxTest:ios'] =
+    'detox test --configuration ios.sim.release --verbose';
   packageJson.scripts['detoxBuild:device'] =
     'detox build --configuration android.attached.release --verbose';
   packageJson.scripts['detoxTest:device'] =

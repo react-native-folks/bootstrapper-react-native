@@ -21,7 +21,7 @@ beforeEach(async () => {
   await device.reloadReactNative();
   await login.typeEmailLogin(testingData.email);
   await login.typePasswordLogin(testingData.password);
-  await login.clickLoginButton();
+  await login.pressLoginButton();
   <%_ } else { _%>
     await device.relaunchApp({ delete: true }); // reinstall app to avoid onboarding stored data.
   <%_ } _%>
@@ -29,7 +29,7 @@ beforeEach(async () => {
 
 <%_ if(features.loginandsignup) { _%>
 afterEach(async () => {
-  await home.clickLogoutButton();
+  await home.pressLogoutButton();
   await waitFor(element(by.id(testingElements.loginSubmitButton))).toBeVisible().withTimeout(10000);
   await waitFor(element(by.id(testingElements.logoutSubmitButton))).not.toBeVisible().withTimeout(10000);
 });
@@ -39,23 +39,23 @@ describe('Onboarding Navigation Test', () => {
 
   test('should skip onboarding and go to home', async () => {
     await waitFor(element(by.id(testingElements.footerLeftActionButton).withAncestor(by.id(testingElements.footerContainer)))).toBeVisible().withTimeout(10000);
-    await onboarding.clickLeftFooterButton();
+    await onboarding.pressLeftFooterButton();
     await waitFor(element(by.id(testingElements.onPressChangeButton))).toBeVisible().withTimeout(10000);
   });
 
-  test('should click next at onboarding, until finish and go to home', async () => {
+  test('should press next at onboarding, until finish and go to home', async () => {
     await waitFor(element(by.id(testingElements.footerRightActionButton).withAncestor(by.id(testingElements.footerContainer)))).toBeVisible().withTimeout(10000);
-    await onboarding.clickRightFooterButton();// first to second screen
-    await onboarding.clickRightFooterButton();// second to third screen
-    await onboarding.clickRightFooterButton(); // third to go Home
+    await onboarding.pressRightFooterButton();// first to second screen
+    await onboarding.pressRightFooterButton();// second to third screen
+    await onboarding.pressRightFooterButton(); // third to go Home
     await waitFor(element(by.id(testingElements.onPressChangeButton))).toBeVisible().withTimeout(10000);
    });
 
-   test('should click next at onboarding, then previous, skip and go to home', async () => {
+   test('should press next at onboarding, then previous, skip and go to home', async () => {
     await waitFor(element(by.id(testingElements.footerRightActionButton).withAncestor(by.id(testingElements.footerContainer)))).toBeVisible().withTimeout(10000);
-    await onboarding.clickRightFooterButton();// first to second screen
-    await onboarding.clickLeftFooterButton();// go to previous screen
-    await onboarding.clickLeftFooterButton(); // skip to go Home
+    await onboarding.pressRightFooterButton();// first to second screen
+    await onboarding.pressLeftFooterButton();// go to previous screen
+    await onboarding.pressLeftFooterButton(); // skip to go Home
     await waitFor(element(by.id(testingElements.onPressChangeButton))).toBeVisible().withTimeout(10000);
    });
 

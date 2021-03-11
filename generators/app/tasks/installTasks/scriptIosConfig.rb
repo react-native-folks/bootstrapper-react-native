@@ -69,12 +69,14 @@ release_build_settings = release_build_config.build_settings
 # Add new Build Configurations to Target
 debug_build_config = target.build_configurations.find { |each| each.name == 'Debug' }
 debug_build_config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = "#{bundle_id}.develop"
+debug_build_config.build_settings['EXCLUDED_ARCHS'] = "arm64"
 
 develop_build_config = target.add_build_configuration('Develop', :release)
 develop_build_config.build_settings.update(release_build_settings)
 develop_build_config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = "#{bundle_id}.develop"
 develop_build_config.build_settings['TARGETED_DEVICE_FAMILY'] = "1,2"
 develop_build_config.build_settings['ONLY_ACTIVE_ARCH'] = "YES"
+develop_build_config.build_settings['EXCLUDED_ARCHS'] = "arm64"
 
 staging_build_config = target.add_build_configuration('Staging', :release)
 staging_build_config.build_settings.update(release_build_settings)

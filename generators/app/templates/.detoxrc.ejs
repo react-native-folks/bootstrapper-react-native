@@ -37,6 +37,14 @@
           "device": {
               "avdName": "Pixel_2_API_30"
           }
+      },
+      "ios.sim.release": {
+        "binaryPath": "ios/build/Build/Products/Develop-iphonesimulator/<%= projectName %>.app",
+        "build": "xcodebuild -workspace ios/<%= projectName %>.xcworkspace -scheme develop -configuration Develop -sdk iphonesimulator -derivedDataPath ios/build",
+        "type": "ios.simulator",
+        "device": {
+            "type": "iPhone 11 Pro"
+         }
       }
   }
 }

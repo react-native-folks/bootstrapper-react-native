@@ -28,26 +28,26 @@ describe('Login feature test', () => {
   <%_ } _%>    
     await login.typeEmailLogin(testingData.email);
     await login.typePasswordLogin(testingData.password);
-    await login.clickLoginButton();
+    await login.pressLoginButton();
     <%_ if(features.onboarding) { _%>
     await waitFor(element(by.id(testingElements.footerLeftActionButton).withAncestor(by.id(testingElements.footerContainer)))).toBeVisible().withTimeout(10000);
-    await onboarding.clickSkipButton();
+    await onboarding.pressSkipButton();
     <%_ } _%>
     await waitFor(element(by.id(testingElements.logoutSubmitButton))).toBeVisible();
-    await home.clickLogoutButton();
+    await home.pressLogoutButton();
   });
 });
 
 describe('Signup feature test', () => {
   test('Should fill signup form and go to login view', async () => {
-    await login.clickSignUpButton();
+    await login.pressSignUpButton();
     await signup.typeNameSignup(testingData.firstName);
     await signup.typeSurnameSignup(testingData.surName);
     await signup.typeBirthdaySignup(testingData.birthDate);
     await signup.typeEmailSignup(testingData.email);
     await signup.typePasswordSignup(testingData.password);
     await signup.typePhoneNumberSignup(testingData.phoneNumber);
-    await signup.clickSubmitButton();
+    await signup.pressSubmitButton();
     await signup.verifyErrorsNotVisible();
     await waitFor(element(by.id(testingElements.loginSubmitButton)))
       .toBeVisible().withTimeout(10000);
@@ -58,11 +58,11 @@ describe('Login Errors Test', () => {
 
   test('should fill login form with wrong email and show error', async () => {
     await login.typeEmailLogin(testingData.invalidEmail);
-    await login.clickLoginButton();
+    await login.pressLoginButton();
     await waitFor(element(by.id(testingElements.errorEmail))).toBeVisible().withTimeout(10000);
   });
   test('should fill login form with empty password and show error', async () => {
-    await login.clickLoginButton();
+    await login.pressLoginButton();
     await waitFor(element(by.id(testingElements.errorPassword))).toBeVisible().withTimeout(10000);
   });
 
@@ -71,8 +71,8 @@ describe('Login Errors Test', () => {
 describe('Signup Errors Test', () => {
 
   test('Should show errors for required fields', async () => {
-  await login.clickSignUpButton();
-  await signup.clickSubmitButton();
+  await login.pressSignUpButton();
+  await signup.pressSubmitButton();
   await waitFor(element(by.id(testingElements.errorName))).toBeVisible().withTimeout(10000);
   await waitFor(element(by.id(testingElements.errorSurname))).toBeVisible().withTimeout(10000);
   await waitFor(element(by.id(testingElements.errorBirthdate))).toBeVisible().withTimeout(10000);
@@ -82,14 +82,14 @@ describe('Signup Errors Test', () => {
   });
 
   test('Should fill signup form with errors in all fields and show an error', async () => {
-  await login.clickSignUpButton();
+  await login.pressSignUpButton();
   await signup.typeNameSignup(testingData.invalidFirstName);
   await signup.typeSurnameSignup(testingData.invalidSurname);
   await signup.typeBirthdaySignup('');
   await signup.typeEmailSignup(testingData.invalidEmail);
   await signup.typePasswordSignup(testingData.invalidPassword);
   await signup.typePhoneNumberSignup(testingData.invalidPhone);
-  await signup.clickSubmitButton();
+  await signup.pressSubmitButton();
   await waitFor(element(by.id(testingElements.errorName))).toExist().withTimeout(10000);
   await waitFor(element(by.id(testingElements.errorSurname))).toExist().withTimeout(10000);
   await waitFor(element(by.id(testingElements.errorBirthdate))).toExist().withTimeout(10000);

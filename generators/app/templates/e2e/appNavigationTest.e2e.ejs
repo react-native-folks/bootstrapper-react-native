@@ -5,13 +5,13 @@ const testingElements = require('./utils/testingElements');
 <%_ if(features.loginandsignup) { _%>
 const testingData = require('./utils/testingData');
 const login = require('./utils/login');
-const signup = require('./utils/signup');
 <%_ } _%>
 <%_ if(features.onboarding) { _%>
 const onboarding = require('./utils/onboarding');
 <%_ } _%>
 <%_ if(features.loginandsignup || features.googlemaps) { _%>
 const home = require('./utils/homeNavigation');
+const navigation = require('./utils/navigation');
 <%_ } _%>
 
 
@@ -27,32 +27,33 @@ describe('App navigation between screens', () => {
   // LOGIN - ONBOARDING
   test('Should navigate for the app main flow', async () => {
     <%_ if(features.loginandsignup) { _%>
-    await login.clickSignUpButton();
+    await login.pressSignUpButton();
     await waitFor(element(by.id(testingElements.birthDate)))
       .toBeVisible().withTimeout(10000);
-    await device.pressBack();
+    await navigation.pressBackButton();
     await login.typeEmailLogin(testingData.email);
     await login.typePasswordLogin(testingData.password);
-    await login.clickLoginButton();
+    await login.pressLoginButton();
     <%_ } _%>
     <%_ if(features.onboarding) { _%>
     await waitFor(element(by.text('Skip')))
       .toBeVisible()
       .withTimeout(10000);
-    await onboarding.clickSkipButton();
+    await onboarding.pressSkipButton();
     <%_ } _%>
     await waitFor(element(by.id(testingElements.onPressChangeButton)))
       .toBeVisible()
       .withTimeout(10000);
     <%_ if(features.googlemaps) { _%>
-    await home.clickMapButton();
+    await home.pressMapButton();
+    await navigation.pressBackButton();
     await device.pressBack();
     await waitFor(element(by.id(testingElements.onPressChangeButton)))
       .toBeVisible()
       .withTimeout(10000);
     <%_ } _%>
     <%_ if(features.loginandsignup) { _%>
-    await home.clickLogoutButton();
+    await home.pressLogoutButton();
     await waitFor(element(by.id(testingElements.loginSubmitButton)))
       .toBeVisible()
       .withTimeout(10000);
