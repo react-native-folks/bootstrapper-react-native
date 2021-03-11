@@ -7,13 +7,13 @@ const CASES = [
       'onboarding',
       'tabs',
       'drawer',
-      /*'socialButtons',*/
+      /*'socialloginbuttons',*/
       'googlemaps',
       'firebase',
       'pushnotifications',
       'landscape'
     ],
-    // socialbuttons: ['facebook', 'apple', 'google', 'twitter'],
+    // socialButtons: ['facebook', 'apple', 'google', 'twitter'],
     stateManagement: 'redux'
   },
   {
@@ -22,98 +22,98 @@ const CASES = [
       'onboarding',
       'tabs',
       'drawer',
-      /*'socialButtons',*/
+      'socialloginbuttons',
       'googlemaps',
       'firebase',
       'pushnotifications',
       'landscape'
     ],
-    // socialbuttons: ['facebook', 'apple', 'google', 'twitter'],
+    socialButtons: ['facebook', 'twitter'],
     stateManagement: 'recoil'
   },
-  { features: [], socialbuttons: [], stateManagement: 'redux' },
-  { features: [], socialbuttons: [], stateManagement: 'recoil' },
-  { features: ['loginandsignup'], socialbuttons: [], stateManagement: 'redux' },
-  { features: ['onboarding'], socialbuttons: [], stateManagement: 'recoil' },
-  { features: ['tabs'], socialbuttons: [], stateManagement: 'redux' },
-  { features: ['drawer'], socialbuttons: [], stateManagement: 'recoil' },
+  { features: [], socialButtons: [], stateManagement: 'redux' },
+  { features: [], socialButtons: [], stateManagement: 'recoil' },
+  { features: ['loginandsignup'], socialButtons: [], stateManagement: 'redux' },
+  { features: ['onboarding'], socialButtons: [], stateManagement: 'recoil' },
+  { features: ['tabs'], socialButtons: [], stateManagement: 'redux' },
+  { features: ['drawer'], socialButtons: [], stateManagement: 'recoil' },
   {
-    features: [/*'socialButtons',*/ 'landscape'],
-    // socialbuttons: ['facebook', 'apple', 'google', 'twitter'],
+    features: [/*'socialloginbuttons',*/ 'landscape'],
+    // socialButtons: ['facebook', 'apple', 'google', 'twitter'],
     stateManagement: 'redux'
   },
-  { features: ['googlemaps'], socialbuttons: [], stateManagement: 'recoil' },
-  { features: ['firebase '], socialbuttons: [], stateManagement: 'redux' },
-  { features: ['firebase'], socialbuttons: [], stateManagement: 'recoil' },
+  { features: ['googlemaps'], socialButtons: [], stateManagement: 'recoil' },
+  { features: ['firebase '], socialButtons: [], stateManagement: 'redux' },
+  { features: ['firebase'], socialButtons: [], stateManagement: 'recoil' },
   {
     features: ['pushnotifications'],
-    socialbuttons: [],
+    socialButtons: [],
     stateManagement: 'recoil'
   },
   {
     features: [
       'loginandsignup',
-      /*'socialButtons',*/
+      /*'socialloginbuttons',*/
       'pushnotifications',
       'landscape'
     ],
-    // socialbuttons: ['facebook', 'google', 'twitter'],
+    // socialButtons: ['facebook', 'google', 'twitter'],
     stateManagement: 'redux'
   },
   {
     features: [
       'loginandsignup',
-      /*'socialButtons',*/
+      /*'socialloginbuttons',*/
       'pushnotifications',
       'landscape'
     ],
-    // socialbuttons: ['facebook', 'google', 'twitter'],
+    // socialButtons: ['facebook', 'google', 'twitter'],
     stateManagement: 'recoil'
   },
   {
     features: [
       'loginandsignup',
       'tabs',
-      /*'socialButtons',*/
+      /*'socialloginbuttons',*/
       'firebase',
       'pushnotifications'
     ],
-    // socialbuttons: ['apple', 'google'],
+    // socialButtons: ['apple', 'google'],
     stateManagement: 'redux'
   },
   {
     features: [
       'loginandsignup',
       'tabs',
-      /*'socialButtons',*/
+      /*'socialloginbuttons',*/
       'firebase',
       'pushnotifications'
     ],
-    // socialbuttons: ['apple', 'google'],
+    // socialButtons: ['apple', 'google'],
     stateManagement: 'recoil'
   },
   {
     features: [
       'tabs',
       'drawer',
-      /*'socialButtons',*/
+      /*'socialloginbuttons',*/
       'googlemaps',
       'firebase',
       'landscape'
     ],
-    // socialbuttons: ['facebook', 'apple', 'google', 'twitter'],
+    // socialButtons: ['facebook', 'apple', 'google', 'twitter'],
     stateManagement: 'redux'
   },
   {
     features: [
       'tabs',
       'drawer',
-      /*'socialButtons',*/
+      /*'socialloginbuttons',*/
       'googlemaps',
       'firebase',
       'landscape'
     ],
-    // socialbuttons: ['facebook', 'apple', 'google', 'twitter'],
+    // socialButtons: ['facebook', 'apple', 'google', 'twitter'],
     stateManagement: 'recoil'
   },
   {
@@ -125,7 +125,7 @@ const CASES = [
       'firebase',
       'pushnotifications'
     ],
-    socialbuttons: [],
+    socialButtons: [],
     stateManagement: 'redux'
   },
   {
@@ -137,31 +137,31 @@ const CASES = [
       'firebase',
       'pushnotifications'
     ],
-    socialbuttons: [],
+    socialButtons: [],
     stateManagement: 'recoil'
   },
   {
     features: [
       'loginandsignup',
       'onboarding',
-      /*'socialButtons',*/
+      /*'socialloginbuttons',*/
       'firebase',
       'pushnotifications',
       'landscape'
     ],
-    // socialbuttons: ['facebook', 'google', 'twitter'],
+    // socialButtons: ['facebook', 'google', 'twitter'],
     stateManagement: 'redux'
   },
   {
     features: [
       'loginandsignup',
       'onboarding',
-      /*'socialButtons',*/
+      /*'socialloginbuttons',*/
       'firebase',
       'pushnotifications',
       'landscape'
     ],
-    // socialbuttons: ['facebook', 'google', 'twitter'],
+    // socialButtons: ['facebook', 'google', 'twitter'],
     stateManagement: 'recoil'
   },
   {
@@ -169,12 +169,12 @@ const CASES = [
       'loginandsignup',
       'onboarding',
       'tabs',
-      /*'socialButtons',*/
+      /*'socialloginbuttons',*/
       'firebase',
       'pushnotifications',
       'landscape'
     ],
-    // socialbuttons: ['facebook', 'apple', 'google', 'twitter'],
+    // socialButtons: ['facebook', 'apple', 'google', 'twitter'],
     stateManagement: 'redux'
   },
   {
@@ -182,16 +182,24 @@ const CASES = [
       'loginandsignup',
       'onboarding',
       'tabs',
-      /*'socialButtons',*/
+      /*'socialloginbuttons',*/
       'firebase',
       'pushnotifications',
       'landscape'
     ],
-    // socialbuttons: ['facebook', 'apple', 'google', 'twitter'],
+    // socialButtons: ['facebook', 'apple', 'google', 'twitter'],
     stateManagement: 'recoil'
   }
 ].map((v, i) => {
-  v.features = v.features.reduce((p, c) => ({ ...p, [c]: true }), {});
+  const reduceToObject = array =>
+    array ? array.reduce((p, c) => ({ ...p, [c]: true }), {}) : undefined;
+
+  v.features = reduceToObject(v.features);
+  v.socialButtons =
+    v.features.socialloginbuttons === true
+      ? reduceToObject(v.socialButtons)
+      : undefined;
+
   return [i + 1, v];
 });
 
