@@ -28,7 +28,7 @@ describe('App navigation between screens', () => {
   test('Should navigate for the app main flow', async () => {
     <%_ if(features.loginandsignup) { _%>
     await login.pressSignUpButton();
-    await waitFor(element(by.id(testingElements.birthDate)))
+    await waitFor(element(by.id(testingElements.jobTitle)))
       .toBeVisible().withTimeout(10000);
     await navigation.pressBackButton();
     await login.typeEmailLogin(testingData.email);
@@ -47,7 +47,6 @@ describe('App navigation between screens', () => {
     <%_ if(features.googlemaps) { _%>
     await home.pressMapButton();
     await navigation.pressBackButton();
-    await device.pressBack();
     await waitFor(element(by.id(testingElements.onPressChangeButton)))
       .toBeVisible()
       .withTimeout(10000);
