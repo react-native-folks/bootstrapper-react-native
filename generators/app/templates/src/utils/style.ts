@@ -1,3 +1,4 @@
+// TODO: Define this types correctly
 export function getCustomStyles(
   variants: string[],
   props: any,

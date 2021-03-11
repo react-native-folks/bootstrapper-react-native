@@ -13,5 +13,7 @@ module.exports = function addFilesToGitIgnore() {
       '\n# Google Services files\nandroid/app/google-services/\ngoogle-services.json\nios/GoogleServices\nGoogleService-Info.plist\n'
     );
   }
+  updatedGitIgnoreFile = updatedGitIgnoreFile.concat('\n# Detox\nartifacts\n');
+
   this.fs.write(`${this.projectName}/.gitignore`, updatedGitIgnoreFile);
 };

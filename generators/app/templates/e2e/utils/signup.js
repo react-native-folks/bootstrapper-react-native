@@ -15,10 +15,10 @@ async function typeSurnameSignup(surName)  {
    await element(by.id(elements.surName).withAncestor(by.id(elements.signUpContainer))).replaceText(`${surName}`);
 }
 
-async function typeBirthdaySignup(birthDate)  {
-   await waitFor(element(by.id(elements.birthDate).withAncestor(by.id(elements.signUpContainer)))).toExist().withTimeout(10000);
-   await element(by.id(elements.birthDate).withAncestor(by.id(elements.signUpContainer))).clearText();
-   await element(by.id(elements.birthDate).withAncestor(by.id(elements.signUpContainer))).replaceText(`${birthDate}`);
+async function typeJobTitleSignup(jobTitle)  {
+   await waitFor(element(by.id(elements.jobTitle).withAncestor(by.id(elements.signUpContainer)))).toExist().withTimeout(10000);
+   await element(by.id(elements.jobTitle).withAncestor(by.id(elements.signUpContainer))).clearText();
+   await element(by.id(elements.jobTitle).withAncestor(by.id(elements.signUpContainer))).replaceText(`${jobTitle}`);
 }
 
 async function typeEmailSignup(email)  {
@@ -34,6 +34,12 @@ async function typePasswordSignup(password)  {
    await element(by.id(elements.password).withAncestor(by.id(elements.signUpContainer))).replaceText(`${password}`);
 }
 
+async function typePasswordAgainSignup(passwordAgain)  {
+   await waitFor(element(by.id(elements.passwordAgain).withAncestor(by.id(elements.signUpContainer)))).toExist().withTimeout(10000);
+   await element(by.id(elements.passwordAgain).withAncestor(by.id(elements.signUpContainer))).clearText();
+   await element(by.id(elements.passwordAgain).withAncestor(by.id(elements.signUpContainer))).replaceText(`${passwordAgain}`);
+}
+
 async function typePhoneNumberSignup(phoneNumber)  {
    await waitFor(element(by.id(elements.phoneNumber).withAncestor(by.id(elements.signUpContainer)))).toExist().withTimeout(10000);
    await element(by.id(elements.phoneNumber).withAncestor(by.id(elements.signUpContainer))).clearText();
@@ -46,21 +52,34 @@ async function pressSubmitButton()  {
 }
 
 async function verifyErrorsNotVisible() {
-   await expect(element(by.id(elements.errorName))).not.toBeVisible();
-   await expect(element(by.id(elements.errorSurname))).not.toBeVisible();
-   await expect(element(by.id(elements.errorBirthdate))).not.toBeVisible();
-   await expect(element(by.id(elements.errorEmail))).not.toBeVisible();
-   await expect(element(by.id(elements.errorPassword))).not.toBeVisible();
-   await expect(element(by.id(elements.errorPhone))).not.toBeVisible();
+   await expect(element(by.id(elements.errorEmail).withAncestor(by.id(elements.signUpContainer)))).toHaveText('');
+   await expect(element(by.id(elements.errorPassword).withAncestor(by.id(elements.signUpContainer)))).toHaveText('');
+   await expect(element(by.id(elements.errorPasswordAgain))).toHaveText('');
+   await expect(element(by.id(elements.errorName))).toHaveText('');
+   await expect(element(by.id(elements.errorSurname))).toHaveText('');
+   await expect(element(by.id(elements.errorJobTitle))).toHaveText('');
+   await expect(element(by.id(elements.errorPhoneNumber))).toHaveText('');
+}
+
+async function verifyErrorsVisible() {
+   await expect(element(by.id(elements.errorEmail).withAncestor(by.id(elements.signUpContainer)))).not.toHaveText('');
+   await expect(element(by.id(elements.errorPassword).withAncestor(by.id(elements.signUpContainer)))).not.toHaveText('');
+   await expect(element(by.id(elements.errorPasswordAgain))).not.toHaveText('');
+   await expect(element(by.id(elements.errorName))).not.toHaveText('');
+   await expect(element(by.id(elements.errorSurname))).not.toHaveText('');
+   await expect(element(by.id(elements.errorJobTitle))).not.toHaveText('');
+   // await expect(element(by.id(elements.errorPhoneNumber))).not.toHaveText('');; //pending validate type of input to show error
 }
 
 module.exports = {
    typeEmailSignup,
    typePasswordSignup,
+   typePasswordAgainSignup,
    typeNameSignup,
    typeSurnameSignup,
-   typeBirthdaySignup,
+   typeJobTitleSignup,
    typePhoneNumberSignup,
    pressSubmitButton,
-   verifyErrorsNotVisible
+   verifyErrorsNotVisible,
+   verifyErrorsVisible
 };

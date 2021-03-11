@@ -7,7 +7,7 @@ import {
   ViewStyle,
   ImageProps
 } from 'react-native';
-import { blue } from 'constants/colors';
+import { useTheme } from 'react-native-paper';
 
 import styles from './styles';
 
@@ -33,6 +33,8 @@ const LoadableImage = ({
   shouldLoad = false
 }: LoadableImageProps) => {
   const [loading, setLoading] = useState(false);
+  const theme = useTheme();
+
   const startLoading = () => setLoading(true);
   const endLoading = () => setLoading(false);
   const errorLoading = () => {
@@ -40,6 +42,7 @@ const LoadableImage = ({
     console.log('Error loading image from url');
     // TODO - Do something
   };
+
   return (
     <View>
       <Image
@@ -58,7 +61,7 @@ const LoadableImage = ({
           animating
           size={size}
           style={[styles.container, loaderStyle]}
-          color={blue}
+          color={theme.colors.accent}
         />
       )}
     </View>

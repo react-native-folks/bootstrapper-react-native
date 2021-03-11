@@ -1,24 +1,16 @@
-import {
-  transparent,
-  lightGray,
-  blue,
-  black,
-  green,
-  gray,
-  white,
-  CustomThemeType
-} from 'constants/colors';
+import colors from 'constants/colors';
 
+import { CustomThemeType } from 'config/theme';
 import { StyleSheet } from 'react-native';
 
 const borderlessStyle = {
   borderWidth: 0,
-  backgroundColor: transparent
+  backgroundColor: colors.transparent
 };
 
 export const defaultAndroidRipple = {
   borderless: false,
-  color: lightGray
+  color: colors.lightGray
 };
 
 export default (appTheme: CustomThemeType) =>
@@ -30,7 +22,7 @@ export default (appTheme: CustomThemeType) =>
       padding: 8,
       backgroundColor: appTheme.colors.primary,
       color: appTheme.colors.onPrimary,
-      borderColor: gray
+      borderColor: colors.gray
     },
     defaultPressed: {
       opacity: 0.4
@@ -52,42 +44,42 @@ export default (appTheme: CustomThemeType) =>
       color: appTheme.colors.onSecondary
     },
     black: {
-      backgroundColor: black
+      backgroundColor: colors.black
     },
     blackContent: {
-      color: white
+      color: colors.white
     },
     white: {
-      backgroundColor: white
+      backgroundColor: colors.white
     },
     whiteContent: {
-      color: black
+      color: colors.black
     },
     gray: {
-      backgroundColor: gray
+      backgroundColor: colors.gray
     },
     grayContent: {
-      color: black
+      color: colors.black
     },
     borderlessContent: {
       color: appTheme.colors.accent
     },
     green: {
-      backgroundColor: green
+      backgroundColor: colors.green
     },
     greenContent: {
-      color: white
+      color: colors.white
     },
     blue: {
-      backgroundColor: blue
+      backgroundColor: colors.blue
     },
     blueContent: {
-      color: white
+      color: colors.white
     },
     transparent: {
-      backgroundColor: transparent
+      backgroundColor: colors.transparent
     },
     transparentContent: {
-      color: black
+      color: colors.black
     }
   });
