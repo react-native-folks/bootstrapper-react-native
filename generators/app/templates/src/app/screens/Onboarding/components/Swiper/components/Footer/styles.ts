@@ -1,4 +1,4 @@
-import { white } from 'constants/colors';
+import colors from 'constants/colors';
 
 import { StyleSheet } from 'react-native';
 
@@ -7,11 +7,11 @@ export default StyleSheet.create({
     padding: 10,
     borderWidth: 0.5,
     borderRadius: 5,
-    borderColor: white,
+    borderColor: colors.white,
     width: 100
   },
   buttonText: {
-    color: white
+    color: colors.white
   },
   buttons: {
     flexDirection: 'row',

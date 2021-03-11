@@ -1,12 +1,11 @@
-import { blue } from 'constants/colors';
-
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import {
   ActivityIndicator,
   <%_ if(features.socialloginbuttons) { _%>
   Alert,
   <%_ } _%>
   Keyboard,
+  TextInput as NativeTextInput,
   TouchableWithoutFeedback,
   View
 } from 'react-native';
@@ -23,10 +22,11 @@ import authServices from 'services/auth';
 import { appScreensNavOptions } from 'app/navigation/config/screensOptions';
 import { createStackNavigator } from '@react-navigation/stack';
 import i18next from 'i18next';
+import { useTheme } from 'react-native-paper';
 import { 
   CustomButton,
   CustomText,
-  CustomTextInput,
+  TextInput,
   LoadableImage,
   <%_ if(features.socialButtons.facebook) { _%>FacebookButton,<%_ } _%>
   <%_ if(features.socialButtons.apple) { _%>AppleButton,<%_ } _%>
@@ -34,6 +34,7 @@ import {
   <%_ if(features.socialButtons.twitter) { _%>TwitterButton,<%_ } _%>
 } from 'app/components';
 import Routes from 'app/navigation/routes';
+import { isAndroid } from 'constants/platform';
 import { Navigation } from 'interfaces/navigation';
 <%_ if(features.statemanagement.redux) { _%>
 import { useSelector } from 'hooks/redux';
@@ -51,7 +52,9 @@ import './i18n';
 import styles from './styles';
 
 export function Login({ navigation }: Navigation) {
+  const theme = useTheme();
   const { control, handleSubmit, errors } = useForm();
+  const passwordInputRef = useRef<NativeTextInput>(null);
   <%_ if(features.statemanagement.redux) { _%>
   const dispatch = useDispatch();
   const loading = useSelector(state => state.auth.loading);
@@ -105,10 +108,12 @@ export function Login({ navigation }: Navigation) {
         <View testID="form-view-container" style={styles.form}>
           <LoadableImage
             testID="app-icon-image-loader"
-            url={'https://www.mahisoft.com/img/logo.png'}
+            url={
+              'https://upload.wikimedia.org/wikipedia/commons/9/9f/MahisoftLogo.png'
+            }            
             style={styles.logo}
           />
-          <CustomTextInput
+          <TextInput
             control={control}
             name={FIELDS.email}
             rules={{
@@ -116,25 +121,32 @@ export function Login({ navigation }: Navigation) {
             }}
             defaultValue={LOGIN_INITIAL_VALUES[FIELDS.email]}
             label={i18next.t('LOGIN:MAIL')}
-            inputProps={{
-              placeholder: i18next.t('LOGIN:MAIL_PLACEHOLDER'),
-              keyboardType: 'email-address'
-            }}
+            placeholder={i18next.t('LOGIN:MAIL_PLACEHOLDER')}
+            keyboardType={'email-address'}
+            autoCapitalize={'none'}
             error={errors[FIELDS.email]}
             errorMessage={errors[FIELDS.email]?.message}
             labelTestID="input-title-email"
             errorTestID="input-error-email"
+            returnKeyType="next"
+            blurOnSubmit={false}
+            onSubmitEditing={() => passwordInputRef!.current?.focus()}
+            autoCorrect={false}
           />
-          <CustomTextInput
+          <TextInput
+            ref={passwordInputRef}
             control={control}
             name={FIELDS.password}
             rules={{ validate: validateRequired }}
             defaultValue={LOGIN_INITIAL_VALUES[FIELDS.password]}
             label={i18next.t('LOGIN:PASSWORD')}
-            inputProps={{ secureTextEntry: true }}
             errorMessage={errors[FIELDS.password]?.message}
-            labelTestID="input-title-pass"
-            errorTestID="input-error-pass"
+            labelTestID="input-title-password"
+            errorTestID="input-error-password"
+            secureTextEntry
+            keyboardType={isAndroid ? 'visible-password' : 'ascii-capable'}
+            returnKeyType="done"
+            autoCorrect={false}
           />
           {hasLoginError && (
             <CustomText testID="login-error-message" error center>
@@ -182,7 +194,11 @@ export function Login({ navigation }: Navigation) {
           style={styles.formButton}
           title={i18next.t('LOGIN:SIGN_UP')}
         />
-        <ActivityIndicator testID="activity-indicator-screen" animating={loading} color={blue} />
+        <ActivityIndicator
+          testID="activity-indicator-screen"
+          animating={loading}
+          color={theme.colors.accent}
+        />      
       </View>
     </TouchableWithoutFeedback>
   );

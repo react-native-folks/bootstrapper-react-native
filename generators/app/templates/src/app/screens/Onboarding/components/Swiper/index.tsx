@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { SafeAreaView } from 'react-native';
-import { useTheme } from 'react-native-paper';
 import Swiper from 'react-native-swiper';
+import { useTheme } from 'react-native-paper';
 
 import Footer from './components/Footer';
 import screens from './screens';
@@ -21,10 +21,12 @@ function CustomStepSwipper({ onSkip }: Props) {
     scrollView.current!.scrollBy(1);
     setScrollIndex(scrollIndex + 1);
   }, [scrollIndex]);
+
   const handlePreviousScreen = useCallback(() => {
     scrollView.current!.scrollBy(-1);
     setScrollIndex(scrollIndex - 1);
   }, [scrollIndex]);
+
   return (
     <SafeAreaView
       testID="onboarding-swiper-area-container"

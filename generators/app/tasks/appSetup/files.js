@@ -86,8 +86,8 @@ module.exports.LOADABLE_IMAGE_PATH = `${module.exports.COMPONENTS_PATH}/Loadable
 module.exports.CUSTOM_STATUS_BAR = `${module.exports.COMPONENTS_PATH}/CustomStatusBar`;
 // APP COMPONENTS - CUSTOM TEXT
 module.exports.CUSTOM_TEXT_PATH = `${module.exports.COMPONENTS_PATH}/CustomText`;
-// APP COMPONENTS - CUSTOM TEXT
-module.exports.CUSTOM_TEXT_INPUT_PATH = `${module.exports.COMPONENTS_PATH}/CustomTextInput`;
+// APP COMPONENTS - TEXT INPUT
+module.exports.TEXT_INPUT_PATH = `${module.exports.COMPONENTS_PATH}/TextInput`;
 // APP COMPONENTS - SOCIAL BUTTONS
 module.exports.SOCIAL_APPLE_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButtons/AppleButton`;
 module.exports.SOCIAL_FACEBOOK_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButtons/FacebookButton`;
@@ -139,6 +139,7 @@ module.exports.CONFIG = `${module.exports.CONFIG_PATH}/index.ts`;
 module.exports.REACTOTRON_CONFIG = `${module.exports.CONFIG_PATH}/reactotron.ts`;
 module.exports.I18N_CONFIG = `${module.exports.CONFIG_PATH}/i18n.ts`;
 module.exports.FONTS_CONFIG = `${module.exports.CONFIG_PATH}/fonts.ts`;
+module.exports.THEME_CONFIG = `${module.exports.CONFIG_PATH}/theme.ts`;
 
 // CONSTANTS
 module.exports.PLATFORM_CONSTANTS = `${module.exports.CONSTANTS_PATH}/platform.ts`;

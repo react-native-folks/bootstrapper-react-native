@@ -1,4 +1,4 @@
-import { blue, lightGray, black } from 'constants/colors';
+import colors from 'constants/colors';
 
 import Routes from '../routes';
 
@@ -13,11 +13,11 @@ const statusBarConfig = (isDark: boolean) =>
     // iOS is always translucent - keep in mind to set the barStyle
     blueStatusBar: {
       barStyle: isDark ? 'dark-content' : 'light-content',
-      backgroundColor: blue
+      backgroundColor: colors.blue
     },
     basicStatusBar: isDark
-      ? { barStyle: 'light-content', backgroundColor: black }
-      : { barStyle: 'dark-content', backgroundColor: lightGray }
+      ? { barStyle: 'light-content', backgroundColor: colors.black }
+      : { barStyle: 'dark-content', backgroundColor: colors.lightGray }
   } as const);
 
 export const statusBarStyles = (isDarkTheme: boolean) => ({

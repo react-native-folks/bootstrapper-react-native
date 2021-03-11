@@ -1,24 +1,16 @@
-import {
-  black,
-  blue,
-  white,
-  green,
-  gray,
-  transparent,
-  red,
-  CustomThemeType
-} from 'constants/colors';
+import colors from 'constants/colors';
 import { SIZES } from 'constants/fonts';
 
 import { StyleSheet } from 'react-native';
 import fonts from 'config/fonts';
 import { moderateScale } from 'utils/scaling';
 import { StringObject, NumberObject } from 'interfaces/global';
+import { CustomThemeType } from 'config/theme';
 
 const getColors = (colorsObj: StringObject) =>
   Object.keys(colorsObj).reduce(
-    (colors, color) => ({
-      ...colors,
+    (colorsAcc, color) => ({
+      ...colorsAcc,
       ...{ [color]: { color: colorsObj[color] } }
     }),
     {}
@@ -37,7 +29,7 @@ export default (appTheme: CustomThemeType) =>
   StyleSheet.create({
     base: {
       ...fonts.baseFont,
-      backgroundColor: transparent
+      backgroundColor: colors.transparent
     },
     semiBold: fonts.semiBoldFont,
     bold: fonts.boldFont,
@@ -52,7 +44,7 @@ export default (appTheme: CustomThemeType) =>
       textAlign: 'right'
     },
     error: {
-      color: red
+      color: colors.red
     },
     // Colors
     primary: {
@@ -70,7 +62,13 @@ export default (appTheme: CustomThemeType) =>
     accent: {
       color: appTheme.colors.accent
     },
-    ...getColors({ blue, gray, green, white, black }),
+    ...getColors({
+      blue: colors.blue,
+      gray: colors.gray,
+      green: colors.green,
+      white: colors.white,
+      black: colors.black
+    }),
     // Sizes
     ...getSizes({
       xxsmall: SIZES.XXSMALL,
