@@ -15,22 +15,28 @@ async function typeSurnameSignup(surName)  {
    await element(by.id(elements.surName)).replaceText(`${surName}`);
 }
 
-async function typeBirthdaySignup(birthDate)  {
-   await waitFor(element(by.id(elements.birthDate))).toExist().withTimeout(10000);
-   await element(by.id(elements.birthDate)).clearText();
-   await element(by.id(elements.birthDate)).replaceText(`${birthDate}`);
+async function typeJobTitleSignup(jobTitle)  {
+   await waitFor(element(by.id(elements.jobTitle))).toExist().withTimeout(10000);
+   await element(by.id(elements.jobTitle)).clearText();
+   await element(by.id(elements.jobTitle)).replaceText(`${jobTitle}`);
 }
 
 async function typeEmailSignup(email)  {
-   await waitFor(element(by.id(elements.email)).atIndex(1)).toExist().withTimeout(10000);
-   await element(by.id(elements.email)).atIndex(1).clearText();
-   await element(by.id(elements.email)).atIndex(1).replaceText(`${email}`);
+   await waitFor(element(by.id(elements.email).withAncestor(by.id(elements.signUpContainer)))).toExist().withTimeout(10000);
+   await element(by.id(elements.email).withAncestor(by.id(elements.signUpContainer))).clearText();
+   await element(by.id(elements.email).withAncestor(by.id(elements.signUpContainer))).replaceText(`${email}`);
 }
 
 async function typePasswordSignup(password)  {
-   await waitFor(element(by.id(elements.password)).atIndex(1)).toExist().withTimeout(10000);
-   await element(by.id(elements.password)).atIndex(1).clearText();
-   await element(by.id(elements.password)).atIndex(1).replaceText(`${password}`);
+   await waitFor(element(by.id(elements.password).withAncestor(by.id(elements.signUpContainer)))).toExist().withTimeout(10000);
+   await element(by.id(elements.password).withAncestor(by.id(elements.signUpContainer))).clearText();
+   await element(by.id(elements.password).withAncestor(by.id(elements.signUpContainer))).replaceText(`${password}`);
+}
+
+async function typePasswordAgainSignup(passwordAgain)  {
+   await waitFor(element(by.id(elements.passwordAgain))).toExist().withTimeout(10000);
+   await element(by.id(elements.passwordAgain)).clearText();
+   await element(by.id(elements.passwordAgain)).replaceText(`${passwordAgain}`);
 }
 
 async function typePhoneNumberSignup(phoneNumber)  {
@@ -45,21 +51,34 @@ async function clickSubmitButton()  {
 }
 
 async function verifyErrorsNotVisible() {
-   await expect(element(by.id(elements.errorName))).not.toBeVisible();
-   await expect(element(by.id(elements.errorSurname))).not.toBeVisible();
-   await expect(element(by.id(elements.errorBirthdate))).not.toBeVisible();
-   await expect(element(by.id(elements.errorEmail))).not.toBeVisible();
-   await expect(element(by.id(elements.errorPassword))).not.toBeVisible();
-   await expect(element(by.id(elements.errorPhone))).not.toBeVisible();
+   await expect(element(by.id(elements.errorEmail).withAncestor(by.id(elements.signUpContainer)))).toHaveText('');
+   await expect(element(by.id(elements.errorPassword).withAncestor(by.id(elements.signUpContainer)))).toHaveText('');
+   await expect(element(by.id(elements.errorPasswordAgain))).toHaveText('');
+   await expect(element(by.id(elements.errorName))).toHaveText('');
+   await expect(element(by.id(elements.errorSurname))).toHaveText('');
+   await expect(element(by.id(elements.errorJobTitle))).toHaveText('');
+   await expect(element(by.id(elements.errorPhoneNumber))).toHaveText('');
+}
+
+async function verifyErrorsVisible() {
+   await expect(element(by.id(elements.errorEmail).withAncestor(by.id(elements.signUpContainer)))).not.toHaveText('');
+   await expect(element(by.id(elements.errorPassword).withAncestor(by.id(elements.signUpContainer)))).not.toHaveText('');
+   await expect(element(by.id(elements.errorPasswordAgain))).not.toHaveText('');
+   await expect(element(by.id(elements.errorName))).not.toHaveText('');
+   await expect(element(by.id(elements.errorSurname))).not.toHaveText('');
+   await expect(element(by.id(elements.errorJobTitle))).not.toHaveText('');
+   // await expect(element(by.id(elements.errorPhoneNumber))).not.toHaveText('');; //pending validate type of input to show error
 }
 
 module.exports = {
    typeEmailSignup,
    typePasswordSignup,
+   typePasswordAgainSignup,
    typeNameSignup,
    typeSurnameSignup,
-   typeBirthdaySignup,
+   typeJobTitleSignup,
    typePhoneNumberSignup,
    clickSubmitButton,
-   verifyErrorsNotVisible
+   verifyErrorsNotVisible,
+   verifyErrorsVisible
 };

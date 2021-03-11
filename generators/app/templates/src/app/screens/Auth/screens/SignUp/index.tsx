@@ -77,8 +77,8 @@ function SignUp({ navigation }: Navigation) {
                   defaultValue={SIGNUP_INITIAL_VALUES[name]}
                   error={errors[name]}
                   errorMessage={errors[FIELDS.name]?.message}
-                  labelTestID={`input-title-${name}`}
-                  errorTestID={`input-error-${name}`}
+                  labelTestID={`input-title-${name.toLowerCase()}`}
+                  errorTestID={`input-error-${name.toLowerCase()}`}
                   ref={refs.current[i]}
                   returnKeyType={lastTextInput ? 'done' : 'next'}
                   blurOnSubmit={lastTextInput}

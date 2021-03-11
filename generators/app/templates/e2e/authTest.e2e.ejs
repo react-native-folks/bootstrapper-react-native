@@ -41,11 +41,12 @@ describe('Login feature test', () => {
 describe('Signup feature test', () => {
   test('Should fill signup form and go to login view', async () => {
     await login.clickSignUpButton();
-    await signup.typeNameSignup(testingData.firstName);
-    await signup.typeSurnameSignup(testingData.surName);
-    await signup.typeBirthdaySignup(testingData.birthDate);
     await signup.typeEmailSignup(testingData.email);
     await signup.typePasswordSignup(testingData.password);
+    await signup.typePasswordAgainSignup(testingData.passwordAgain);
+    await signup.typeNameSignup(testingData.firstName);
+    await signup.typeSurnameSignup(testingData.surName);
+    await signup.typeJobTitleSignup(testingData.jobTitle);
     await signup.typePhoneNumberSignup(testingData.phoneNumber);
     await signup.clickSubmitButton();
     await signup.verifyErrorsNotVisible();
@@ -73,29 +74,21 @@ describe('Signup Errors Test', () => {
   test('Should show errors for required fields', async () => {
   await login.clickSignUpButton();
   await signup.clickSubmitButton();
-  await waitFor(element(by.id(testingElements.errorName))).toBeVisible().withTimeout(10000);
-  await waitFor(element(by.id(testingElements.errorSurname))).toBeVisible().withTimeout(10000);
-  await waitFor(element(by.id(testingElements.errorBirthdate))).toBeVisible().withTimeout(10000);
-  await waitFor(element(by.id(testingElements.errorEmail))).toBeVisible().withTimeout(10000);
-  await waitFor(element(by.id(testingElements.errorPassword))).toBeVisible().withTimeout(10000);
+  await signup.verifyErrorsVisible();
   await device.pressBack();
   });
 
   test('Should fill signup form with errors in all fields and show an error', async () => {
   await login.clickSignUpButton();
-  await signup.typeNameSignup(testingData.invalidFirstName);
-  await signup.typeSurnameSignup(testingData.invalidSurname);
-  await signup.typeBirthdaySignup('');
   await signup.typeEmailSignup(testingData.invalidEmail);
   await signup.typePasswordSignup(testingData.invalidPassword);
-  await signup.typePhoneNumberSignup(testingData.invalidPhone);
+  await signup.typePasswordAgainSignup(testingData.invalidPasswordAgain);
+  await signup.typeNameSignup(testingData.invalidFirstName);
+  await signup.typeSurnameSignup(testingData.invalidSurname);
+  await signup.typeJobTitleSignup(testingData.invalidJobTitle);
+  await signup.typePhoneNumberSignup(testingData.invalidPhoneNumber);
   await signup.clickSubmitButton();
-  await waitFor(element(by.id(testingElements.errorName))).toExist().withTimeout(10000);
-  await waitFor(element(by.id(testingElements.errorSurname))).toExist().withTimeout(10000);
-  await waitFor(element(by.id(testingElements.errorBirthdate))).toExist().withTimeout(10000);
-  await waitFor(element(by.id(testingElements.errorEmail))).toExist().withTimeout(10000);
-  await waitFor(element(by.id(testingElements.errorPassword))).toExist().withTimeout(10000);
-  //await waitFor(element(by.id(elements.errorPhone))).toBeVisible().withTimeout(10000);; //pending validate type of input to show error
+  await signup.verifyErrorsVisible();
   await device.pressBack();
 });
 

@@ -141,8 +141,8 @@ export function Login({ navigation }: Navigation) {
             defaultValue={LOGIN_INITIAL_VALUES[FIELDS.password]}
             label={i18next.t('LOGIN:PASSWORD')}
             errorMessage={errors[FIELDS.password]?.message}
-            labelTestID="input-title-pass"
-            errorTestID="input-error-pass"
+            labelTestID="input-title-password"
+            errorTestID="input-error-password"
             secureTextEntry
             keyboardType={isAndroid ? 'visible-password' : 'ascii-capable'}
             returnKeyType="done"
