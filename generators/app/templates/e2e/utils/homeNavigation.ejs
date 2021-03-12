@@ -3,43 +3,43 @@ import {element, by, waitFor} from 'detox';
 
 const elements = require('./testingElements.js');
 
-async function clickOnPressAlertButton()  {
+async function pressOnPressAlertButton()  {
     await waitFor(element(by.id(elements.onPressAlertButton))).toBeVisible().withTimeout(10000);
     await element(by.id(elements.onPressAlertButton)).tap();
 }
 
-async function clickOnLongPressAlertButton()  {
+async function pressOnLongPressAlertButton()  {
     await waitFor(element(by.id(elements.onLongPressAlertButton))).toBeVisible().withTimeout(10000);
     await element(by.id(elements.onLongPressAlertButton)).longPress();
  }
 
-async function clickOnPressChangeButton()  {
+async function pressOnPressChangeButton()  {
     await waitFor(element(by.id(elements.onPressChangeButton))).toBeVisible().withTimeout(10000);
     await element(by.id(elements.onPressChangeButton)).longPress();
 }
 <%_ if(features.googlemaps) { _%>
 
-async function clickMapButton()  {
+async function pressMapButton()  {
     await waitFor(element(by.id(elements.goToMapButton))).toBeVisible().withTimeout(10000);
     await element(by.id(elements.goToMapButton)).tap();
 }
 <%_ } _%>
 <%_ if(features.loginandsignup) { _%>
 
-async function clickLogoutButton()  {
+async function pressLogoutButton()  {
     await waitFor(element(by.id(elements.logoutSubmitButton))).toBeVisible().withTimeout(10000);
     await element(by.id(elements.logoutSubmitButton)).tap();
 }
 <%_ } _%>
 
 module.exports = {
-    clickOnPressAlertButton,
-    clickOnLongPressAlertButton,
-    clickOnPressChangeButton,
+    pressOnPressAlertButton,
+    pressOnLongPressAlertButton,
+    pressOnPressChangeButton,
     <%_ if(features.googlemaps) { _%>
-    clickMapButton,
+    pressMapButton,
     <%_ } _%>
     <%_ if(features.loginandsignup) { _%>
-    clickLogoutButton
+    pressLogoutButton
     <%_ } _%>
 };

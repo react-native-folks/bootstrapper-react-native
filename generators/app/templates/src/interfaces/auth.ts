@@ -15,11 +15,11 @@ export interface AuthData {
 }
 
 export interface SignUpData {
-  name: string;
-  surname: string;
-  birthDate: string;
-  sex: string;
   email: string;
   password: string;
+  passwordAgain: string;
+  name: string;
+  surname: string;
+  jobTitle: string;
   phoneNumber?: string;
 }

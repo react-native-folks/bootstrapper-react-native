@@ -25,29 +25,29 @@ beforeEach(async () => {
 
  describe('Home feature test', () => {
 
-  test('Should click all buttons at home view', async () => {
+  test('Should press all buttons at home view', async () => {
     <%_ if(features.loginandsignup) { _%>
     await login.typeEmailLogin(testingData.email);
     await login.typePasswordLogin(testingData.password);
-    await login.clickLoginButton();
+    await login.pressLoginButton();
     <%_ } _%>
 
     <%_ if(features.onboarding) { _%>
     await waitFor(element(by.text('Skip'))).toBeVisible().withTimeout(10000);
-    await onboarding.clickSkipButton();
+    await onboarding.pressSkipButton();
     <%_ } _%>
-    await home.clickOnPressAlertButton();
+    await home.pressOnPressAlertButton();
     await waitFor(element(by.text(okAlert))).toBeVisible().withTimeout(10000);
     await element(by.text(okAlert)).tap();
 
-    await home.clickOnLongPressAlertButton();
+    await home.pressOnLongPressAlertButton();
     await waitFor(element(by.text(okAlert))).toBeVisible().withTimeout(10000);
     await element(by.text(okAlert)).tap();
 
-    await home.clickOnPressChangeButton();
+    await home.pressOnPressChangeButton();
 
     <%_ if(features.loginandsignup) { _%>
-    await home.clickLogoutButton();
+    await home.pressLogoutButton();
     await waitFor(element(by.id(testingElements.loginSubmitButton))).toBeVisible().withTimeout(10000);
     await waitFor(element(by.id(testingElements.logoutSubmitButton))).not.toBeVisible().withTimeout(10000);
     <%_ } _%>

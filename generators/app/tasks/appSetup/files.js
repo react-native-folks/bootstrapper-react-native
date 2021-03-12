@@ -50,6 +50,7 @@ module.exports.E2E_UTILS_ONBOARDING = `${module.exports.E2E_UTILS}/onboarding.js
 module.exports.E2E_UTILS_SIGNUP = `${module.exports.E2E_UTILS}/signup.js`;
 module.exports.E2E_UTILS_TESTING_DATA = `${module.exports.E2E_UTILS}/testingData.js`;
 module.exports.E2E_UTILS_TESTING_ELEMENTS = `${module.exports.E2E_UTILS}/testingElements.js`;
+module.exports.E2E_UTILS_NAVIGATION = `${module.exports.E2E_UTILS}/navigation.js`;
 
 // TESTS - REDUX
 module.exports.TESTS_STORE = `${module.exports.TESTS_REDUX_PATH}/store.js`;
