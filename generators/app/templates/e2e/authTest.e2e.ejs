@@ -5,6 +5,7 @@ import {element, by, waitFor, device} from 'detox';
 const testingElements = require('./utils/testingElements');
 const testingData = require('./utils/testingData');
 const home = require('./utils/homeNavigation');
+const navigation = require('./utils/navigation');
 const login = require('./utils/login');
 const signup = require('./utils/signup');
 <%_ if(features.onboarding) { _%>
@@ -28,19 +29,19 @@ describe('Login feature test', () => {
   <%_ } _%>    
     await login.typeEmailLogin(testingData.email);
     await login.typePasswordLogin(testingData.password);
-    await login.clickLoginButton();
+    await login.pressLoginButton();
     <%_ if(features.onboarding) { _%>
     await waitFor(element(by.id(testingElements.footerLeftActionButton).withAncestor(by.id(testingElements.footerContainer)))).toBeVisible().withTimeout(10000);
-    await onboarding.clickSkipButton();
+    await onboarding.pressSkipButton();
     <%_ } _%>
     await waitFor(element(by.id(testingElements.logoutSubmitButton))).toBeVisible();
-    await home.clickLogoutButton();
+    await home.pressLogoutButton();
   });
 });
 
 describe('Signup feature test', () => {
   test('Should fill signup form and go to login view', async () => {
-    await login.clickSignUpButton();
+    await login.pressSignUpButton();
     await signup.typeEmailSignup(testingData.email);
     await signup.typePasswordSignup(testingData.password);
     await signup.typePasswordAgainSignup(testingData.passwordAgain);
@@ -48,7 +49,7 @@ describe('Signup feature test', () => {
     await signup.typeSurnameSignup(testingData.surName);
     await signup.typeJobTitleSignup(testingData.jobTitle);
     await signup.typePhoneNumberSignup(testingData.phoneNumber);
-    await signup.clickSubmitButton();
+    await signup.pressSubmitButton();
     await signup.verifyErrorsNotVisible();
     await waitFor(element(by.id(testingElements.loginSubmitButton)))
       .toBeVisible().withTimeout(10000);
@@ -59,11 +60,11 @@ describe('Login Errors Test', () => {
 
   test('should fill login form with wrong email and show error', async () => {
     await login.typeEmailLogin(testingData.invalidEmail);
-    await login.clickLoginButton();
+    await login.pressLoginButton();
     await waitFor(element(by.id(testingElements.errorEmail))).toBeVisible().withTimeout(10000);
   });
   test('should fill login form with empty password and show error', async () => {
-    await login.clickLoginButton();
+    await login.pressLoginButton();
     await waitFor(element(by.id(testingElements.errorPassword))).toBeVisible().withTimeout(10000);
   });
 
@@ -72,24 +73,24 @@ describe('Login Errors Test', () => {
 describe('Signup Errors Test', () => {
 
   test('Should show errors for required fields', async () => {
-  await login.clickSignUpButton();
-  await signup.clickSubmitButton();
-  await signup.verifyErrorsVisible();
-  await device.pressBack();
+    await login.pressSignUpButton();
+    await signup.pressSubmitButton();
+    await signup.verifyErrorsVisible();
+    await navigation.pressBackButton();
   });
 
   test('Should fill signup form with errors in all fields and show an error', async () => {
-  await login.clickSignUpButton();
-  await signup.typeEmailSignup(testingData.invalidEmail);
-  await signup.typePasswordSignup(testingData.invalidPassword);
-  await signup.typePasswordAgainSignup(testingData.invalidPasswordAgain);
-  await signup.typeNameSignup(testingData.invalidFirstName);
-  await signup.typeSurnameSignup(testingData.invalidSurname);
-  await signup.typeJobTitleSignup(testingData.invalidJobTitle);
-  await signup.typePhoneNumberSignup(testingData.invalidPhoneNumber);
-  await signup.clickSubmitButton();
-  await signup.verifyErrorsVisible();
-  await device.pressBack();
-});
+    await login.pressSignUpButton();
+    await signup.typeEmailSignup(testingData.invalidEmail);
+    await signup.typePasswordSignup(testingData.invalidPassword);
+    await signup.typePasswordAgainSignup(testingData.invalidPasswordAgain);
+    await signup.typeNameSignup(testingData.invalidFirstName);
+    await signup.typeSurnameSignup(testingData.invalidSurname);
+    await signup.typeJobTitleSignup(testingData.invalidJobTitle);
+    await signup.typePhoneNumberSignup(testingData.invalidPhoneNumber);
+    await signup.pressSubmitButton();
+    await signup.verifyErrorsVisible();
+    await navigation.pressBackButton();
+  });
 
 });

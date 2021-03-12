@@ -4,6 +4,7 @@
 // Elements at different views
 
 module.exports = {
+    backButton: 'header-back',
     <%_ if(features.loginandsignup) { _%>
     //Login && Signup
     loginSubmitButton: 'submit-button',
@@ -14,9 +15,10 @@ module.exports = {
     firstName: 'name',
     surName: 'surname',
     jobTitle: 'jobTitle',
-    birthDate: 'birthDate',
     phoneNumber: 'phoneNumber',
     signupSubmitButton: 'submit-signup-button',
+    signUpContainer: 'signup-screen-container-view',
+    signupScrollViewContainer: 'scrollview-form-container',
     <%_ } _%>
     //Home
     onPressAlertButton:'alert-message-button',
@@ -44,7 +46,6 @@ module.exports = {
     errorPassword:'input-error-password',
     errorPasswordAgain:'input-error-passwordagain',
     errorPhoneNumber:'input-error-phonenumber',
-    errorLogin: 'login-error-message',
-    signUpContainer: 'signup-screen-container-view'
+    errorLogin: 'login-error-message'
     <%_ } _%>
 };

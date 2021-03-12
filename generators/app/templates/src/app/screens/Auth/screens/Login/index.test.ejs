@@ -17,7 +17,7 @@ const SIGN_UP_BUTTON = 'signup-button';
 const ERROR_MESSAGE_ID = 'login-error-message';
 <%_ } _%>
 const INPUT_ERROR_EMAIL_ID = 'input-error-email';
-const INPUT_ERROR_PASS_ID = 'input-error-pass';
+const INPUT_ERROR_PASS_ID = 'input-error-password';
 const SUBMIT_BUTTON_ID = 'submit-button';
 
 const INVALID_EMAIL = 'hello';
@@ -89,13 +89,13 @@ describe('Login Screen', () => {
     const { getByTestId, queryByTestId } = render(loginComponent());
     const submitButton = getByTestId(SUBMIT_BUTTON_ID);
     // Sanity expectation
-    expect(queryByTestId(INPUT_ERROR_EMAIL_ID)).toBeNull();
-    expect(queryByTestId(INPUT_ERROR_PASS_ID)).toBeNull();
+    expect(queryByTestId(INPUT_ERROR_EMAIL_ID)?.children[0]).toBe('');
+    expect(queryByTestId(INPUT_ERROR_PASS_ID)?.children[0]).toBe('');
     await act(async () => {
       fireEvent.press(submitButton);
     });
-    expect(getByTestId(INPUT_ERROR_EMAIL_ID)).not.toBeNull();
-    expect(getByTestId(INPUT_ERROR_PASS_ID)).not.toBeNull();
+    expect(getByTestId(INPUT_ERROR_EMAIL_ID)?.children[0]).not.toBe('');
+    expect(getByTestId(INPUT_ERROR_PASS_ID)?.children[0]).not.toBe('');
   });
 
   test('Enter invalid email should display a error message on the email field', async () => {
@@ -108,9 +108,9 @@ describe('Login Screen', () => {
       fireEvent.changeText(passInput, VALID_PASSWORD);
       fireEvent.press(submitButton);
     });
-    expect(getByTestId(INPUT_ERROR_EMAIL_ID)).not.toBeNull();
+    expect(getByTestId(INPUT_ERROR_EMAIL_ID)?.children[0]).not.toBe('');
     // Sanity expectation
-    expect(queryByTestId(INPUT_ERROR_PASS_ID)).toBeNull();
+    expect(queryByTestId(INPUT_ERROR_PASS_ID)?.children[0]).toBe('');
   });
 
   test('After complete field with valid params, login should be called', async () => {

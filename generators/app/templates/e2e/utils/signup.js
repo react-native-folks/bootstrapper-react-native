@@ -4,49 +4,57 @@ import {element, by, waitFor, expect} from 'detox';
 const elements = require('./testingElements.js');
 
 async function typeNameSignup(firstName) {
-   await waitFor(element(by.id(elements.firstName))).toExist().withTimeout(10000);
-   await element(by.id(elements.firstName)).clearText();
-   await element(by.id(elements.firstName)).replaceText(`${firstName}`);
+   await waitFor(element(by.id(elements.firstName).withAncestor(by.id(elements.signUpContainer)))).toBeVisible().whileElement(by.id(elements.signupScrollViewContainer)).scroll(50, 'down');
+   await element(by.id(elements.firstName).withAncestor(by.id(elements.signUpContainer))).clearText();
+   await element(by.id(elements.firstName).withAncestor(by.id(elements.signUpContainer))).replaceText(`${firstName}`);
+   await element(by.id(elements.firstName).withAncestor(by.id(elements.signUpContainer))).tapReturnKey();
 }
 
 async function typeSurnameSignup(surName)  {
-   await waitFor(element(by.id(elements.surName))).toExist().withTimeout(10000);
-   await element(by.id(elements.surName)).clearText();
-   await element(by.id(elements.surName)).replaceText(`${surName}`);
+   await waitFor(element(by.id(elements.surName).withAncestor(by.id(elements.signUpContainer)))).toBeVisible().whileElement(by.id(elements.signupScrollViewContainer)).scroll(50, 'down');
+   await element(by.id(elements.surName).withAncestor(by.id(elements.signUpContainer))).clearText();
+   await element(by.id(elements.surName).withAncestor(by.id(elements.signUpContainer))).replaceText(`${surName}`);
+   await element(by.id(elements.surName).withAncestor(by.id(elements.signUpContainer))).tapReturnKey();
 }
 
 async function typeJobTitleSignup(jobTitle)  {
-   await waitFor(element(by.id(elements.jobTitle))).toExist().withTimeout(10000);
-   await element(by.id(elements.jobTitle)).clearText();
-   await element(by.id(elements.jobTitle)).replaceText(`${jobTitle}`);
+   await waitFor(element(by.id(elements.jobTitle).withAncestor(by.id(elements.signUpContainer)))).toBeVisible().whileElement(by.id(elements.signupScrollViewContainer)).scroll(50, 'down');
+   await element(by.id(elements.jobTitle).withAncestor(by.id(elements.signUpContainer))).clearText();
+   await element(by.id(elements.jobTitle).withAncestor(by.id(elements.signUpContainer))).replaceText(`${jobTitle}`);
+   await element(by.id(elements.jobTitle).withAncestor(by.id(elements.signUpContainer))).tapReturnKey();
 }
 
 async function typeEmailSignup(email)  {
    await waitFor(element(by.id(elements.email).withAncestor(by.id(elements.signUpContainer)))).toExist().withTimeout(10000);
    await element(by.id(elements.email).withAncestor(by.id(elements.signUpContainer))).clearText();
    await element(by.id(elements.email).withAncestor(by.id(elements.signUpContainer))).replaceText(`${email}`);
+   await element(by.id(elements.email).withAncestor(by.id(elements.signUpContainer))).tapReturnKey();
 }
 
 async function typePasswordSignup(password)  {
    await waitFor(element(by.id(elements.password).withAncestor(by.id(elements.signUpContainer)))).toExist().withTimeout(10000);
    await element(by.id(elements.password).withAncestor(by.id(elements.signUpContainer))).clearText();
    await element(by.id(elements.password).withAncestor(by.id(elements.signUpContainer))).replaceText(`${password}`);
+   await element(by.id(elements.password).withAncestor(by.id(elements.signUpContainer))).tapReturnKey();
 }
 
 async function typePasswordAgainSignup(passwordAgain)  {
-   await waitFor(element(by.id(elements.passwordAgain))).toExist().withTimeout(10000);
-   await element(by.id(elements.passwordAgain)).clearText();
-   await element(by.id(elements.passwordAgain)).replaceText(`${passwordAgain}`);
+   await waitFor(element(by.id(elements.passwordAgain).withAncestor(by.id(elements.signUpContainer)))).toExist().withTimeout(10000);
+   await element(by.id(elements.passwordAgain).withAncestor(by.id(elements.signUpContainer))).clearText();
+   await element(by.id(elements.passwordAgain).withAncestor(by.id(elements.signUpContainer))).replaceText(`${passwordAgain}`);
+   await element(by.id(elements.passwordAgain).withAncestor(by.id(elements.signUpContainer))).tapReturnKey();
 }
 
 async function typePhoneNumberSignup(phoneNumber)  {
-   await waitFor(element(by.id(elements.phoneNumber))).toExist().withTimeout(10000);
-   await element(by.id(elements.phoneNumber)).clearText();
-   await element(by.id(elements.phoneNumber)).replaceText(`${phoneNumber}`);
+   await waitFor(element(by.id(elements.phoneNumber).withAncestor(by.id(elements.signUpContainer)))).toBeVisible().whileElement(by.id(elements.signupScrollViewContainer)).scroll(50, 'down');
+   await element(by.id(elements.phoneNumber).withAncestor(by.id(elements.signUpContainer))).clearText();
+   await element(by.id(elements.phoneNumber).withAncestor(by.id(elements.signUpContainer))).replaceText(`${phoneNumber}`);
+   await element(by.id(elements.phoneNumber).withAncestor(by.id(elements.signUpContainer))).tapReturnKey();
 }
 
-async function clickSubmitButton()  {
-   await waitFor(element(by.id(elements.signupSubmitButton))).toExist().withTimeout(10000);
+async function pressSubmitButton()  {
+   await waitFor(element(by.id(elements.signupSubmitButton).withAncestor(by.id(elements.signUpContainer)))).toExist().withTimeout(10000);
+   await waitFor(element(by.id(elements.signupSubmitButton))).toBeVisible().whileElement(by.id(elements.signupScrollViewContainer)).scroll(50, 'down');
    await element(by.id(elements.signupSubmitButton)).tap();
 }
 
@@ -78,7 +86,7 @@ module.exports = {
    typeSurnameSignup,
    typeJobTitleSignup,
    typePhoneNumberSignup,
-   clickSubmitButton,
+   pressSubmitButton,
    verifyErrorsNotVisible,
    verifyErrorsVisible
 };
