@@ -2,6 +2,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import { SafeAreaView } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { useTheme } from 'react-native-paper';
+import { CustomThemeType } from 'config/theme';
 
 import Footer from './components/Footer';
 import screens from './screens';
@@ -14,7 +15,7 @@ interface Props {
 function CustomStepSwipper({ onSkip }: Props) {
   const [scrollIndex, setScrollIndex] = useState<number>(0);
   const scrollView = useRef<Swiper | null>(null);
-  const theme = useTheme();
+  const theme = useTheme() as CustomThemeType;
   const styles = createStyle(theme);
 
   const handleNextScreen = useCallback(() => {

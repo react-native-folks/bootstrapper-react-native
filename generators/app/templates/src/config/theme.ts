@@ -42,7 +42,8 @@ const defaultTheme = {
     ...PaperDefaultTheme.colors,
     ...NavigationDefaultTheme.colors,
     ...theme.light
-  }
+  },
+  type: 'light'
 };
 const darkTheme = {
   ...PaperDarkTheme,
@@ -52,7 +53,8 @@ const darkTheme = {
     ...PaperDarkTheme.colors,
     ...NavigationDarkTheme.colors,
     ...theme.dark
-  }
+  },
+  type: 'dark'
 };
 
 export type CustomThemeType = typeof darkTheme | typeof defaultTheme;

@@ -1,7 +1,7 @@
-import React, { useState, useContext, <%_ if(features.loginandsignup && features.statemanagement.redux) { _%>useCallback, <%_ } _%> } from 'react';
+import React, { <%_ if(features.loginandsignup && features.statemanagement.redux) { _%>useCallback, <%_ } _%> } from 'react';
 import { Alert, View } from 'react-native';
 import i18next from 'i18next';
-import { RadioButton, useTheme } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 import Routes from 'app/navigation/routes';
 <%_ if(features.tabs) { _%>
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -27,11 +27,12 @@ import authServices from 'services/auth';
 <%_ if(features.googlemaps) { _%>
 import { Navigation } from 'interfaces/navigation';
 <%_ } _%>
-import { ThemeContext } from 'hooks/theme';
 import { CustomShadowView, CustomText, CustomButton } from 'app/components';
+import { CustomThemeType } from 'config/theme';
 
-import './i18n';
+import ThemeSelector from './components/ThemeSelector';
 import createStyle from './styles';
+import './i18n';
 
 function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _%>) {
   <%_ if(features.loginandsignup) { _%>
@@ -39,14 +40,8 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
   const dispatch = useDispatch();
   const handleLogout = useCallback(() => dispatch(authActions.logout()), [dispatch]);
   <%_ } _%>
-  const theme = useTheme();
+  const theme = useTheme() as CustomThemeType;
   const styles = createStyle(theme);
-  const [selectedTheme, setSelectedTheme] = useState('system');
-  const { changeTheme } = useContext(ThemeContext);
-  const changeValue = (value: string) => {
-    setSelectedTheme(value);
-    changeTheme(value);
-  };
   <%_ if(features.statemanagement.recoil) { _%>
   const [, setCurrentUser] = useRecoilState(currentUserState);
   const [, , , logout] = useLazyFetch({
@@ -111,32 +106,7 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
       <CustomButton testID="logout-button" primary onPress={handleLogout} title={i18next.t('HOME:LOGOUT')} style={styles.logout} />
     <%_ } _%>
       </CustomShadowView>
-      <View style={styles.themeSelectorContainer}>
-        <CustomText testID="theme-sector-group-text" primary>
-          {i18next.t('HOME:THEME_GROUP_TEXT')}
-        </CustomText>
-        <RadioButton.Group
-          onValueChange={newValue => changeValue(newValue)}
-          value={selectedTheme}>
-          <View style={styles.themeSelectorGroup}>
-            <RadioButton.Item
-              label="Light"
-              value="light"
-              style={styles.selectorItem}
-            />
-            <RadioButton.Item
-              label="Dark"
-              value="dark"
-              style={styles.selectorItem}
-            />
-            <RadioButton.Item
-              label="System"
-              value="system"
-              style={styles.selectorItem}
-            />
-          </View>
-        </RadioButton.Group>
-      </View>
+      <ThemeSelector />
     </View>
   );
 }

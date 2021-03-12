@@ -6,6 +6,7 @@ import { NavigationContainer, NavigationState } from '@react-navigation/native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { useAppTheme, ThemeContext, ThemeProperty } from 'hooks/theme';
 import { CustomStatusBar } from 'app/components';
+import { setAppThemePreference } from 'services/preferences';
 
 import { navigationRef, getActiveRoute, getRoute } from './utils';
 import Navigator from './navigator';
@@ -31,6 +32,7 @@ const AppNavigator = () => {
   const changeTheme = useCallback(
     (newTheme: ThemeProperty) => {
       setTheme(newTheme);
+      setAppThemePreference(newTheme);
     },
     [setTheme]
   );

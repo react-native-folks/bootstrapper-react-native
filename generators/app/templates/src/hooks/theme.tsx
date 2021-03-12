@@ -1,6 +1,7 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { useColorScheme } from 'react-native';
 import { AppTheme } from 'config/theme';
+import { getAppThemePreference } from 'services/preferences';
 
 export type ThemeProperty = 'light' | 'dark' | 'system' | string;
 
@@ -13,6 +14,13 @@ export const useAppTheme = (
   initialStoredTheme: ThemeProperty
 ): [any, (theme: ThemeProperty) => void] => {
   const [selectedTheme, setTheme] = useState(initialStoredTheme);
+  useEffect(() => {
+    getAppThemePreference().then(storedTheme => {
+      if (storedTheme) {
+        setTheme(storedTheme);
+      }
+    });
+  }, []);
   const systemTheme = useColorScheme();
   let appTheme;
   if (selectedTheme === 'system') {
@@ -22,6 +30,7 @@ export const useAppTheme = (
     appTheme =
       selectedTheme === 'dark' ? AppTheme.darkTheme : AppTheme.defaultTheme;
   }
+  appTheme.type = selectedTheme;
   const setAppTheme = (theme: ThemeProperty) => setTheme(theme);
   return [appTheme, setAppTheme];
 };
