@@ -12,14 +12,13 @@ describe('Test Yeoman generator if can generate projects succesfully', () => {
 
   test.concurrent.each(CASES)(
     'Test case %p - Test if generator creates the project succesfully',
-    (id, { features, stateManagement }) =>
+    (id, propmts) =>
       helpers
         .run(path.join(__dirname, '../generators/app'))
         .setDir(TEMP_FOLDER)
         .withPrompts({
           title: getProjectName(id),
-          features,
-          stateManagement,
+          ...propmts,
           pushToRepo: false,
           platformsSkipped: 'ios'
         }),
