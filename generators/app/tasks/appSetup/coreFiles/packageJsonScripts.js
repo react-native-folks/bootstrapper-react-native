@@ -13,14 +13,6 @@ module.exports = function packgeJsonScripts() {
   packageJson.scripts['android:build.production'] =
     'yarn gradlew clean bundleProductionRelease';
   packageJson.scripts['android:clean'] = 'yarn gradlew clean';
-  packageJson.scripts['android:detox:build'] =
-    'detox build --configuration android.emu.release --verbose';
-  packageJson.scripts['android:detox:test'] =
-    'detox test --configuration android.emu.release --verbose';
-  packageJson.scripts['android:detox:build:device'] =
-    'detox build --configuration android.attached.release --verbose';
-  packageJson.scripts['android:detox:test:device'] =
-    'detox test --configuration android.attached.release --verbose';
   packageJson.scripts['android:distribute:develop'] =
     'yarn fastlane:android distribute environment:develop';
   packageJson.scripts['android:distribute:staging'] =
