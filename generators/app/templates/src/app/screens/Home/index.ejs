@@ -1,4 +1,4 @@
-import React, { <%_ if(features.loginandsignup && features.statemanagement.redux) { _%>useCallback, <%_ } _%> } from 'react';
+import React, { <%_ if(features.loginandsignup) { _%>useContext, <%_ } _%><%_ if(features.loginandsignup && features.statemanagement.redux) { _%>useCallback, <%_ } _%> } from 'react';
 import { Alert, View } from 'react-native';
 import i18next from 'i18next';
 import { useTheme } from 'react-native-paper';
@@ -13,6 +13,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 <%_ } _%>
 <%_ } _%>
 <%_ if(features.loginandsignup) { _%>
+  import { ThemeContext } from 'hooks/theme';
 <%_ if(features.statemanagement.redux) { _%>
 import { useDispatch } from 'react-redux';
 import { authActions } from 'redux/auth';
@@ -36,9 +37,13 @@ import './i18n';
 
 function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _%>) {
   <%_ if(features.loginandsignup) { _%>
+  const { changeTheme } = useContext(ThemeContext);
   <%_ if(features.statemanagement.redux) { _%>
   const dispatch = useDispatch();
-  const handleLogout = useCallback(() => dispatch(authActions.logout()), [dispatch]);
+  const handleLogout = useCallback(() => {
+    dispatch(authActions.logout());
+    changeTheme('system');
+  }, [dispatch, changeTheme]);
   <%_ } _%>
   const theme = useTheme() as CustomThemeType;
   const styles = createStyle(theme);
@@ -49,6 +54,7 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
     withSuccessSelector: () => {
       setCurrentUser(null);
       authServices.removeCurrentUser();
+      changeTheme('system');
     }
   });
   
