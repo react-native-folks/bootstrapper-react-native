@@ -1,6 +1,6 @@
 import React, { ReactElement, ReactNode } from 'react';
 import { ActivityIndicator, View, ViewStyle } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { useTheme } from 'hooks/theme';
 
 import styles from './styles';
 

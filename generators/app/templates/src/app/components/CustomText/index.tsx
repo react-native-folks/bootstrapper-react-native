@@ -1,6 +1,6 @@
 import React, { useCallback, memo } from 'react';
 import { Text } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { useTheme } from 'hooks/theme';
 import { getCustomStyles } from 'utils/style';
 
 import { VARIANTS, CustomTextProps } from './model';

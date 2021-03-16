@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { SafeAreaView } from 'react-native';
 import Swiper from 'react-native-swiper';
-import { useTheme } from 'react-native-paper';
+import { useTheme } from 'hooks/theme';
 
 import Footer from './components/Footer';
 import screens from './screens';
