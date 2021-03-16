@@ -2,9 +2,8 @@ import { isIos } from 'constants/platform';
 
 import React, { useCallback, memo } from 'react';
 import { Pressable } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { useTheme } from 'hooks/theme';
 import { getCustomStyles } from 'utils/style';
-import { CustomThemeType } from 'config/theme';
 
 import CustomText from '../CustomText';
 
@@ -12,7 +11,7 @@ import { VARIANTS, CustomButtonProps } from './model';
 import createStyle, { defaultAndroidRipple } from './styles';
 
 const CustomButton = (props: CustomButtonProps) => {
-  const theme = useTheme() as CustomThemeType;
+  const theme = useTheme();
   const styles = createStyle(theme);
   const customStyles = useCallback(
     () => getCustomStyles(VARIANTS, props, styles),

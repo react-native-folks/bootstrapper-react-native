@@ -10,6 +10,7 @@ import {
   DefaultTheme as PaperDefaultTheme
 } from 'react-native-paper';
 import { fontConfig } from 'config/fonts';
+import { ThemeProperty } from 'hooks/theme';
 
 // App themes related with light and dark mode
 export const theme = {
@@ -43,7 +44,7 @@ const defaultTheme = {
     ...NavigationDefaultTheme.colors,
     ...theme.light
   },
-  type: 'light'
+  type: ThemeProperty.LIGHT
 };
 const darkTheme = {
   ...PaperDarkTheme,
@@ -54,7 +55,7 @@ const darkTheme = {
     ...NavigationDarkTheme.colors,
     ...theme.dark
   },
-  type: 'dark'
+  type: ThemeProperty.DARK
 };
 
 export type CustomThemeType = typeof darkTheme | typeof defaultTheme;
