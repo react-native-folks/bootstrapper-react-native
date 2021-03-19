@@ -9,7 +9,6 @@ import {
   View
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useForm } from 'react-hook-form';
 import { CustomButton, CustomText, TextInput } from 'app/components';
@@ -62,8 +61,7 @@ function SignUp({ navigation }: Navigation) {
         keyboardOpeningTime={0}
         contentContainerStyle={styles.container}
         extraHeight={200}
-        style={styles.stretchAndFlex}
-        scrollEnabled={false}>
+        style={styles.stretchAndFlex}>
         <TouchableWithoutFeedback
           testID="dismiss-keyboard-touchable"
           onPress={Keyboard.dismiss}
@@ -108,7 +106,6 @@ function SignUp({ navigation }: Navigation) {
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAwareScrollView>
-      {isIos && <KeyboardSpacer />}
     </LoadingView>
   );
 }
