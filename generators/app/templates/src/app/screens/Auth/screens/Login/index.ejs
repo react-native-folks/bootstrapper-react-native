@@ -1,3 +1,5 @@
+import animations from 'constants/animations';
+import { isAndroid, isIos } from 'constants/platform';
 import React, { useCallback, useRef } from 'react';
 import {
   ActivityIndicator,
@@ -9,6 +11,11 @@ import {
   TouchableWithoutFeedback,
   View
 } from 'react-native';
+import Animated, {
+  useSharedValue,
+  withSpring,
+  useAnimatedStyle
+} from 'react-native-reanimated';
 import { useForm } from 'react-hook-form';
 <%_ if(features.statemanagement.redux) { _%>
 import { useDispatch } from 'react-redux';
@@ -55,6 +62,35 @@ export function Login({ navigation }: Navigation) {
   const theme = useTheme();
   const { control, handleSubmit, errors } = useForm();
   const passwordInputRef = useRef<NativeTextInput>(null);
+  const keyboardScale = useSharedValue(0);
+
+  const signUpAnimatedStyles = useAnimatedStyle(() => ({
+    opacity:
+      keyboardScale.value === 0
+        ? withSpring(1, animations.iosDefault)
+        : withSpring(0, animations.iosDefault)
+  }));
+
+    useEffect(() => {
+    const showAction = isIos ? 'keyboardWillShow' : 'keyboardDidShow';
+    const hideAction = isIos ? 'keyboardWillHide' : 'keyboardDidHide';
+
+    const showKeyboard = (e: KeyboardEvent) => {
+      keyboardScale.value = e.endCoordinates.height;
+    };
+    const hideKeyboard = () => {
+      keyboardScale.value = 0;
+    };
+
+    Keyboard.addListener(showAction, showKeyboard);
+    Keyboard.addListener(hideAction, hideKeyboard);
+
+    return () => {
+      Keyboard.removeListener(showAction, showKeyboard);
+      Keyboard.removeListener(hideAction, hideKeyboard);
+    };
+  }, [keyboardScale]);
+
   <%_ if(features.statemanagement.redux) { _%>
   const dispatch = useDispatch();
   const loading = useSelector(state => state.auth.loading);
@@ -100,107 +136,120 @@ export function Login({ navigation }: Navigation) {
   <%_ } _%>
 
   <%_ } _%>
-  const handleGoToSignUp = () => navigation.navigate(Routes.SignUp);
+  const handleGoToSignUp = () =>
+    keyboardScale.value === 0 ? navigation.navigate(Routes.SignUp) : undefined;
 
   return (
-    <TouchableWithoutFeedback testID="dismiss-keyboard-touchable" onPress={Keyboard.dismiss}>
-      <View testID="login-screen-container-view" style={styles.container}>
-        <View testID="form-view-container" style={styles.form}>
-          <LoadableImage
-            testID="app-icon-image-loader"
-            url={
-              'https://upload.wikimedia.org/wikipedia/commons/9/9f/MahisoftLogo.png'
-            }            
-            style={styles.logo}
-          />
-          <TextInput
-            control={control}
-            name={FIELDS.email}
-            rules={{
-              validate: validationsWrapper([validateRequired, validateEmail])
-            }}
-            defaultValue={LOGIN_INITIAL_VALUES[FIELDS.email]}
-            label={i18next.t('LOGIN:MAIL')}
-            placeholder={i18next.t('LOGIN:MAIL_PLACEHOLDER')}
-            keyboardType={'email-address'}
-            autoCapitalize={'none'}
-            error={errors[FIELDS.email]}
-            errorMessage={errors[FIELDS.email]?.message}
-            labelTestID="input-title-email"
-            errorTestID="input-error-email"
-            returnKeyType="next"
-            blurOnSubmit={false}
-            onSubmitEditing={() => passwordInputRef!.current?.focus()}
-            autoCorrect={false}
-          />
-          <TextInput
-            ref={passwordInputRef}
-            control={control}
-            name={FIELDS.password}
-            rules={{ validate: validateRequired }}
-            defaultValue={LOGIN_INITIAL_VALUES[FIELDS.password]}
-            label={i18next.t('LOGIN:PASSWORD')}
-            errorMessage={errors[FIELDS.password]?.message}
-            labelTestID="input-title-password"
-            errorTestID="input-error-password"
-            secureTextEntry
-            keyboardType={isAndroid ? 'visible-password' : 'ascii-capable'}
-            returnKeyType="done"
-            autoCorrect={false}
-          />
-          {hasLoginError && (
-            <CustomText testID="login-error-message" error center>
-              {i18next.t('LOGIN:LOGIN_FAILURE')}
-            </CustomText>
-          )}
+<KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}>
+      <TouchableWithoutFeedback
+        testID="dismiss-keyboard-touchable"
+        onPress={Keyboard.dismiss}>
+        <View testID="login-screen-container-view" style={styles.container}>
+          <View style={styles.logoContainer}>
+            <LoadableImage
+              testID="app-icon-image-loader"
+              url={
+                'https://upload.wikimedia.org/wikipedia/commons/9/9f/MahisoftLogo.png'
+              }
+              style={styles.logo}
+            />
+          </View>
+          <View testID="form-view-container" style={styles.form}>
+            <TextInput
+              autoCapitalize={'none'}
+              autoCorrect={false}
+              blurOnSubmit={false}
+              control={control}
+              defaultValue={LOGIN_INITIAL_VALUES[FIELDS.email]}
+              error={errors[FIELDS.email]}
+              errorMessage={errors[FIELDS.email]?.message}
+              errorTestID="input-error-email"
+              keyboardType={'email-address'}
+              label={i18next.t('LOGIN:MAIL')}
+              labelTestID="input-title-email"
+              name={FIELDS.email}
+              onSubmitEditing={() => passwordInputRef!.current?.focus()}
+              placeholder={i18next.t('LOGIN:MAIL_PLACEHOLDER')}
+              returnKeyType="next"
+              rules={{
+                validate: validationsWrapper([validateRequired, validateEmail])
+              }}
+            />
+            <TextInput
+              autoCorrect={false}
+              blurOnSubmit={false}
+              control={control}
+              defaultValue={LOGIN_INITIAL_VALUES[FIELDS.password]}
+              errorMessage={errors[FIELDS.password]?.message}
+              errorTestID="input-error-password"
+              keyboardType={isAndroid ? 'visible-password' : 'ascii-capable'}
+              label={i18next.t('LOGIN:PASSWORD')}
+              labelTestID="input-title-password"
+              name={FIELDS.password}
+              onSubmitEditing={handleSubmit(handleLogin)}
+              ref={passwordInputRef}
+              returnKeyType="go"
+              rules={{ validate: validateRequired }}
+              secureTextEntry
+            />
+            {hasLoginError && (
+              <CustomText testID="login-error-message" error center>
+                {i18next.t('LOGIN:LOGIN_FAILURE')}
+              </CustomText>
+            )}
+            <CustomButton
+              testID="submit-button"
+              primary
+              radius={3}
+              onPress={handleSubmit(handleLogin)}
+              style={styles.loginButton}
+              title={i18next.t('LOGIN:LOG_IN')}
+              disabled={hasLoginError}
+            />
+            <%_ if(features.socialButtons.facebook) { _%>
+            <FacebookButton
+              onSuccess={handleSocialLogin}
+              onError={error => Alert.alert('ERROR', error)}
+            />
+              <%_ } _%>
+              <%_ if(features.socialButtons.apple) { _%>
+            <AppleButton
+              onSuccess={handleSocialLogin}
+              onError={error => Alert.alert('ERROR', error)}
+            />
+            <%_ } _%>
+            <%_ if(features.socialButtons.google) { _%>
+            <GoogleButton
+              onSuccess={handleSocialLogin}
+              onError={error => Alert.alert('ERROR', error)}
+            />
+            <%_ } _%>
+            <%_ if(features.socialButtons.twitter) { _%>
+            <TwitterButton
+              onSuccess={handleSocialLogin}
+              onError={error => Alert.alert('ERROR', error)}
+            />
+            <%_ } _%>
+            <Animated.View style={signUpAnimatedStyles}>    
+              <CustomButton
+                testID="signup-button"
+                borderless
+                onPress={handleGoToSignUp}
+                style={styles.signUpButton}
+                title={i18next.t('LOGIN:SIGN_UP')}
+              />
+              <ActivityIndicator
+                testID="activity-indicator-screen"
+                animating={loading}
+                color={theme.colors.accent}
+              />
+            </Animated.View>
+          </View>
         </View>
-        <CustomButton
-          testID="submit-button"
-          primary
-          radius={3}
-          onPress={handleSubmit(handleLogin)}
-          style={styles.formButton}
-          title={i18next.t('LOGIN:LOG_IN')}
-          disabled={hasLoginError}
-        />
-          <%_ if(features.socialButtons.facebook) { _%>
-        <FacebookButton
-          onSuccess={handleSocialLogin}
-          onError={error => Alert.alert('ERROR', error)}
-        />
-          <%_ } _%>
-          <%_ if(features.socialButtons.apple) { _%>
-        <AppleButton
-          onSuccess={handleSocialLogin}
-          onError={error => Alert.alert('ERROR', error)}
-        />
-        <%_ } _%>
-        <%_ if(features.socialButtons.google) { _%>
-        <GoogleButton
-          onSuccess={handleSocialLogin}
-          onError={error => Alert.alert('ERROR', error)}
-        />
-        <%_ } _%>
-        <%_ if(features.socialButtons.twitter) { _%>
-        <TwitterButton
-          onSuccess={handleSocialLogin}
-          onError={error => Alert.alert('ERROR', error)}
-        />
-        <%_ } _%>
-        <CustomButton
-          testID="signup-button"
-          borderless
-          onPress={handleGoToSignUp}
-          style={styles.formButton}
-          title={i18next.t('LOGIN:SIGN_UP')}
-        />
-        <ActivityIndicator
-          testID="activity-indicator-screen"
-          animating={loading}
-          color={theme.colors.accent}
-        />      
-      </View>
-    </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 

@@ -4,11 +4,11 @@ import i18next from 'i18next';
 import React, { useRef, useState, createRef } from 'react';
 import {
   Keyboard,
-  ScrollView,
   TextInput as NativeTextInput,
   TouchableWithoutFeedback,
   View
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useForm } from 'react-hook-form';
@@ -54,13 +54,16 @@ function SignUp({ navigation }: Navigation) {
   const hasSignUpError = Object.keys(errors).length > 0 || !!signupError;
   return (
     <LoadingView testID="signup-screen-container-view" isLoading={loading}>
-      <ScrollView
+      <KeyboardAwareScrollView
         testID="scrollview-form-container"
         bounces={false}
         keyboardShouldPersistTaps="handled"
-        showsVerticalScrollIndicator={false}
+        enableOnAndroid
+        keyboardOpeningTime={0}
         contentContainerStyle={styles.container}
-        style={styles.stretchAndFlex}>
+        extraHeight={200}
+        style={styles.stretchAndFlex}
+        scrollEnabled={false}>
         <TouchableWithoutFeedback
           testID="dismiss-keyboard-touchable"
           onPress={Keyboard.dismiss}
@@ -104,7 +107,7 @@ function SignUp({ navigation }: Navigation) {
             />
           </View>
         </TouchableWithoutFeedback>
-      </ScrollView>
+      </KeyboardAwareScrollView>
       {isIos && <KeyboardSpacer />}
     </LoadingView>
   );

@@ -9,6 +9,7 @@ module.exports = function babelConfigSetup() {
     }
   },
   plugins: [
+    'react-native-reanimated/plugin',
     'import-glob',
     [
       'module-resolver',
