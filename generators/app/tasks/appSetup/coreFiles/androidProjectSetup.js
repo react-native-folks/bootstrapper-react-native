@@ -99,8 +99,8 @@ function addReanimatedConfig() {
     'import com.facebook.soloader.SoLoader;\nimport com.facebook.react.bridge.JSIModulePackage;\n    import com.swmansion.reanimated.ReanimatedJSIModulePackage;'
   );
   updatedmainApplicationContent = updatedmainApplicationContent.replace(
-    `return "index";\n\t}`,
-    `return "index";\n\t}\n\n\t@Override\n\tprotected JSIModulePackage getJSIModulePackage() {\n\t\treturn new ReanimatedJSIModulePackage();\n\t}`
+    `return "index";`,
+    `return "index";\n\t\t\t\t}\n\n\t\t\t\t@Override\n\t\t\t\tprotected JSIModulePackage getJSIModulePackage() {\n\t\t\t\t\treturn new ReanimatedJSIModulePackage();`
   );
 
   this.fs.write(mainApplicationContentPath, updatedmainApplicationContent);
