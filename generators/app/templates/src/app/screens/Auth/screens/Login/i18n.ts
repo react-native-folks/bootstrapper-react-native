@@ -16,6 +16,6 @@ i18next.addResources('en', 'LOGIN', {
   PASSWORD: 'Password',
   LOG_IN: 'Login',
   LOGIN_FAILURE: 'Incorrect email or password',
-  SIGN_UP: "Don't you have an account? sign up!",
+  SIGN_UP: "Don't you have an account? Sign Up!",
   SOCIAL_LOGIN: 'Or connect with'
 });

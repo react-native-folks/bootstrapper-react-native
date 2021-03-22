@@ -8,22 +8,33 @@ export default StyleSheet.create({
     width: '100%'
   },
   form: {
+    flex: 0.55,
     paddingHorizontal: 30,
     alignSelf: 'stretch'
   },
-  formButton: {
+  loginButton: {
     alignSelf: 'stretch',
     padding: 10,
-    marginTop: 15,
+    marginTop: 40,
     marginHorizontal: 30
   },
+  signUpButton: {
+    padding: 10,
+    marginVertical: 15
+  },
+  logoContainer: {
+    flex: 0.45,
+    paddingHorizontal: 30,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   logo: {
-    alignSelf: 'center',
-    width: 300,
-    height: 300
+    height: 300,
+    aspectRatio: 1
   },
   socialsLabel: {
-    marginVertical: 10
+    marginVertical: 10,
+    alignSelf: 'center'
   },
   socialButtonsContainer: {
     alignSelf: 'stretch',
