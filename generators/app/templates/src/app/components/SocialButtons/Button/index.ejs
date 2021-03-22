@@ -10,16 +10,16 @@ import styles from './styles';
 
 const icons = {
   <%_ if(features.socialButtons.facebook) { _%>
-  facebook: { icon: 'facebook', color: colors.facebook },
+  [socialNetworks.FACEBOOK]: { icon: 'facebook', color: colors.facebook },
   <%_ } _%>
   <%_ if(features.socialButtons.apple) { _%>
-  apple: { icon: 'apple', color: colors.apple },
+  [socialNetworks.APPLE]: { icon: 'apple', color: colors.apple },
   <%_ } _%>
   <%_ if(features.socialButtons.google) { _%>
-  google: { icon: 'google-plus', color: colors.google },
+  [socialNetworks.GOOGLE]: { icon: 'google-plus', color: colors.google },
   <%_ } _%>
   <%_ if(features.socialButtons.twitter) { _%>
-  twitter: { icon: 'twitter', color: colors.twitter },
+  [socialNetworks.TWITTER]: { icon: 'twitter', color: colors.twitter },
   <%_ } _%>
 };
 

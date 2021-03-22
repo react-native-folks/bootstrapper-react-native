@@ -158,8 +158,12 @@ function addSocialsToNativeProjects() {
   }
 }
 
-const FILES = [CUSTOM_SOCIAL_BUTTON_STYLE, SOCIAL_BUTTON, SOCIALS_INTERFACES];
-const TEMPLATE_FILES = [CUSTOM_SOCIAL_BUTTON_INDEX, SOCIAL_CONSTANTS];
+const FILES = [CUSTOM_SOCIAL_BUTTON_STYLE, SOCIAL_BUTTON];
+const TEMPLATE_FILES = [
+  CUSTOM_SOCIAL_BUTTON_INDEX,
+  SOCIAL_CONSTANTS,
+  SOCIALS_INTERFACES
+];
 
 function socialButtonsFeatureFiles() {
   const { facebook, apple, google, twitter } = this.features.socialButtons;
