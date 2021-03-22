@@ -1,4 +1,4 @@
-const anmimations = {
+const animations = {
   iosDefault: {
     damping: 500,
     stiffness: 1000,
@@ -6,4 +6,4 @@ const anmimations = {
   }
 };
 
-export default anmimations;
+export default animations;
