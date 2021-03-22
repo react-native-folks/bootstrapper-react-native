@@ -1,0 +1,31 @@
+import { socialNetworks } from 'interfaces/socials';
+
+<%_ if(features.socialButtons.facebook) { _%>
+import FacebookButton from './FacebookButton';
+<%_ } _%>
+<%_ if(features.socialButtons.apple) { _%>
+import AppleButton from './AppleButton';
+<%_ } _%>
+<%_ if(features.socialButtons.google) { _%>
+import GoogleButton from './GoogleButton';
+<%_ } _%>
+<%_ if(features.socialButtons.twitter) { _%>
+import TwitterButton from './TwitterButton';
+<%_ } _%>
+
+const SocialButtonComponents = {
+  <%_ if(features.socialButtons.facebook) { _%>
+  [socialNetworks.FACEBOOK]: { button: FacebookButton },
+  <%_ } _%>
+  <%_ if(features.socialButtons.apple) { _%>
+  [socialNetworks.APPLE]: { button: AppleButton },
+  <%_ } _%>
+  <%_ if(features.socialButtons.google) { _%>
+  [socialNetworks.GOOGLE]: { button: GoogleButton },
+  <%_ } _%>
+  <%_ if(features.socialButtons.twitter) { _%>
+  [socialNetworks.TWITTER]: { button: TwitterButton },
+  <%_ } _%>
+};
+
+export default SocialButtonComponents;

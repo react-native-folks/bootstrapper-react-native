@@ -12,7 +12,11 @@ const colors = {
   lightGray: '#F4F4F4',
   mediumGray: '#919191',
   darkShadow: 'rgba(0, 0, 0, 0.05)',
-  lightShadow: 'rgba(255, 255, 255, 0.05)'
+  lightShadow: 'rgba(255, 255, 255, 0.05)',
+  facebook: '#3B5998',
+  twitter: '#00ACEE',
+  google: '#DB4A39',
+  apple: '#919191'
 };
 
 export default colors;

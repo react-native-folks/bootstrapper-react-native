@@ -21,5 +21,15 @@ export default StyleSheet.create({
     alignSelf: 'center',
     width: 300,
     height: 300
+  },
+  socialsLabel: {
+    marginVertical: 10
+  },
+  socialButtonsContainer: {
+    alignSelf: 'stretch',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginHorizontal: 30,
+    justifyContent: 'space-between'
   }
 });

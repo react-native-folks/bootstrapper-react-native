@@ -1,10 +1,12 @@
-import React, { ReactElement, useEffect } from 'react';
-import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
+import React, { useEffect } from 'react';
 import {
   AppleButton,
   appleAuth,
   AppleRequestResponse
 } from '@invertase/react-native-apple-authentication';
+import { socialNetworks } from 'interfaces/socials';
+
+import Button from '../Button';
 
 import styles from './styles';
 
@@ -50,27 +52,26 @@ const AppleNativeButton = ({ onPress }: { onPress: () => void }) => {
 interface CustomAppleButtonProps {
   onSuccess: (token: any) => void;
   onError: (error: any) => void;
-  children?: ReactElement;
-  buttonProps?: TouchableOpacityProps;
+  useNativeButton?: boolean;
 }
 
 const CustomAppleButton = ({
   onSuccess,
   onError,
-  children,
-  buttonProps
+  useNativeButton
 }: CustomAppleButtonProps) => {
   const handleLogin = () => onAppleButtonPress(onSuccess, onError);
   useEffect(() => {
-    if (appleAuth.isSupported)
+    if (appleAuth.isSupported) {
       console.log('Apple sign in not supported on current device');
+    }
   }, []);
-  return children ? (
-    <TouchableOpacity {...buttonProps} onPress={handleLogin}>
-      {children}
-    </TouchableOpacity>
-  ) : appleAuth.isSupported ? (
-    <AppleNativeButton onPress={handleLogin} />
+  return appleAuth.isSupported ? (
+    !useNativeButton ? (
+      <Button onPress={handleLogin} social={socialNetworks.APPLE} />
+    ) : (
+      <AppleNativeButton onPress={handleLogin} />
+    )
   ) : null;
 };
 

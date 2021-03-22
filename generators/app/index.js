@@ -107,6 +107,7 @@ class ReactNativeBootstrap extends Generator {
           }
         ]);
         this.features = { ...this.features, socialButtons };
+        if (socialButtons.google) this.features.hasFirebase = true;
         if (
           (this.features.socialButtons.facebook ||
             this.features.socialButtons.twitter ||

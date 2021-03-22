@@ -94,6 +94,10 @@ module.exports.SOCIAL_APPLE_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialBu
 module.exports.SOCIAL_FACEBOOK_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButtons/FacebookButton`;
 module.exports.SOCIAL_GOOGLE_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButtons/GoogleButton`;
 module.exports.SOCIAL_TWITTER_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButtons/TwitterButton`;
+module.exports.CUSTOM_SOCIAL_BUTTON_STYLE = `${module.exports.COMPONENTS_PATH}/SocialButtons/Button/styles.ts`;
+module.exports.CUSTOM_SOCIAL_BUTTON_INDEX = `${module.exports.COMPONENTS_PATH}/SocialButtons/Button/index.tsx`;
+module.exports.SOCIAL_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButtons/index.tsx`;
+module.exports.SOCIAL_CONSTANTS = `${module.exports.COMPONENTS_PATH}/SocialButtons/constants.ts`;
 // APP COMPONENTS - GOOGLE MAPS
 module.exports.MAPS_COMPONENT_PATH = `${module.exports.COMPONENTS_PATH}/Maps`;
 // APP COMPONENTS - LOADABLE
@@ -159,6 +163,8 @@ module.exports.GLOBAL_INTERFACES = `${module.exports.INTERFACES_PATH}/global.ts`
 module.exports.NAVIGATION_INTERFACES = `${module.exports.INTERFACES_PATH}/navigation.ts`;
 module.exports.REACTOTRON_INTERFACES = `${module.exports.INTERFACES_PATH}/reactotron.ts`;
 module.exports.REDUX_INTERFACES = `${module.exports.INTERFACES_PATH}/redux.ts`;
+module.exports.THEME_INTERFACES = `${module.exports.INTERFACES_PATH}/theme.ts`;
+module.exports.SOCIALS_INTERFACES = `${module.exports.INTERFACES_PATH}/socials.ts`;
 
 // REDUX
 module.exports.REDUX_STORE = `${module.exports.REDUX_PATH}/store.ts`;

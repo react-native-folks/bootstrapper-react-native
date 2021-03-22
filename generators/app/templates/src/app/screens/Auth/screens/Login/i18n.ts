@@ -6,7 +6,8 @@ i18next.addResources('es', 'LOGIN', {
   PASSWORD: 'Contraseña',
   LOG_IN: 'Iniciar sesión',
   LOGIN_FAILURE: 'Email y/o contraseña incorrecto/s',
-  SIGN_UP: 'No tenes cuenta? Registrate!'
+  SIGN_UP: 'No tenes cuenta? Registrate!',
+  SOCIAL_LOGIN: 'O conectate con'
 });
 
 i18next.addResources('en', 'LOGIN', {
@@ -15,5 +16,6 @@ i18next.addResources('en', 'LOGIN', {
   PASSWORD: 'Password',
   LOG_IN: 'Login',
   LOGIN_FAILURE: 'Incorrect email or password',
-  SIGN_UP: "Don't you have an account? sign up!"
+  SIGN_UP: "Don't you have an account? sign up!",
+  SOCIAL_LOGIN: 'Or connect with'
 });
