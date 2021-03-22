@@ -20,9 +20,10 @@ const DEPENDENCIES = [
   'react-hook-form',
   'reactotron-apisauce',
   'reactotron-react-native',
-  'typescript',
   'react-native-paper',
-  'react-native-vector-icons'
+  'react-native-vector-icons',
+  'react-native-keyboard-aware-scroll-view',
+  'typescript'
 ];
 
 const DEV_DEPENDENCIES = [
@@ -65,9 +66,6 @@ function yarnInstall(projectName, deps, options, dev) {
 }
 
 module.exports = function installDependencies() {
-  if (this.features.loginandsignup) {
-    DEPENDENCIES.push('react-native-keyboard-spacer');
-  }
   if (this.features.tabs) {
     DEPENDENCIES.push('@react-navigation/bottom-tabs');
   }
