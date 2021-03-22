@@ -1,5 +1,3 @@
-import { isIos } from 'constants/platform';
-
 import i18next from 'i18next';
 import React, { useRef, useState, createRef } from 'react';
 import {

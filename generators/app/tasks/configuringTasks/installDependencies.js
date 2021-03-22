@@ -20,9 +20,10 @@ const DEPENDENCIES = [
   'react-hook-form',
   'reactotron-apisauce',
   'reactotron-react-native',
-  'typescript',
   'react-native-paper',
-  'react-native-vector-icons'
+  'react-native-vector-icons',
+  'react-native-keyboard-aware-scroll-view',
+  'typescript'
 ];
 
 const DEV_DEPENDENCIES = [

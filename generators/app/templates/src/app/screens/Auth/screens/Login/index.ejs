@@ -1,12 +1,13 @@
 import animations from 'constants/animations';
 import { isAndroid, isIos } from 'constants/platform';
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useEffect } from 'react';
 import {
   ActivityIndicator,
   <%_ if(features.socialloginbuttons) { _%>
   Alert,
   <%_ } _%>
   Keyboard,
+  KeyboardAvoidingView,
   TextInput as NativeTextInput,
   TouchableWithoutFeedback,
   View
@@ -41,7 +42,6 @@ import {
   <%_ if(features.socialButtons.twitter) { _%>TwitterButton,<%_ } _%>
 } from 'app/components';
 import Routes from 'app/navigation/routes';
-import { isAndroid } from 'constants/platform';
 import { Navigation } from 'interfaces/navigation';
 <%_ if(features.statemanagement.redux) { _%>
 import { useSelector } from 'hooks/redux';
@@ -140,8 +140,8 @@ export function Login({ navigation }: Navigation) {
     keyboardScale.value === 0 ? navigation.navigate(Routes.SignUp) : undefined;
 
   return (
-<KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    <KeyboardAvoidingView
+      behavior={isIos ? 'padding' : 'height'}
       style={styles.container}>
       <TouchableWithoutFeedback
         testID="dismiss-keyboard-touchable"
