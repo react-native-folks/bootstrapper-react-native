@@ -35,11 +35,10 @@ class ReactNativeBootstrap extends Generator {
       type: Boolean,
       default: false
     });
-    this.option('skipBundler', {
-      desc: 'Skips Bundler installation',
-      alias: 'sb',
-      type: Boolean,
-      default: false
+    this.option('rnversion', {
+      desc: 'Force use a React Native specific version',
+      alias: 'rnv',
+      type: String
     });
     this.conflicter.force = true;
   }
@@ -162,12 +161,7 @@ class ReactNativeBootstrap extends Generator {
   install() {
     return (
       Promise.resolve()
-        .then(
-          () =>
-            !this.options.skipBundler &&
-            this.platforms.ios &&
-            bundleInstall.bind(this)()
-        )
+        .then(() => this.platforms.ios && bundleInstall.bind(this)())
         .then(() => linkAppAssets.bind(this)())
         // TODO - remove when npx react-native link fix iOS Copy Bundle Resources Issue
         .then(() =>
