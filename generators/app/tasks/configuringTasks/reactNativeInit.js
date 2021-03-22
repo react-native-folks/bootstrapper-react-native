@@ -1,18 +1,20 @@
 const runCommand = require('../runCommand');
 
 module.exports = function reactNativeInit() {
+  const command = [
+    'npx',
+    [
+      'react-native',
+      'init',
+      this.projectName,
+      '--skip-install',
+      '--title',
+      this.title,
+      ...(this.options.rnversion ? ['--version', this.options.rnversion] : [])
+    ]
+  ];
   return runCommand({
-    command: [
-      'npx',
-      [
-        'react-native',
-        'init',
-        this.projectName,
-        '--skip-install',
-        '--title',
-        this.title
-      ]
-    ],
+    command,
     loadingMessage: 'Initializing react-native',
     context: this.options
   }).then(({ spinner }) =>
