@@ -8,7 +8,7 @@ function configureGoogleServices() {
   ['develop', 'stage', 'production'].forEach(env => {
     const isProd = env === 'production';
     this.fs.write(
-      `${this.projectName}/android/app/google-services/google-services-${env}.json`,
+      `${this.projectName}/android/app/src/${env}/google-services.json`,
       googleServicesAndroidContent
         .split('com.mahisoft')
         .join(`${this.bundleId}${isProd ? '' : `.${env}`}`)
