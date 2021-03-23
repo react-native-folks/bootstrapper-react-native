@@ -12,6 +12,7 @@ module.exports = {
   ],
   setupFilesAfterEnv: [
     '<rootDir>/__mocks__/setup.js',
+    '<rootDir>/__mocks__/reanimated.js',
     <%_ if(features.socialButtons.google) { _%>
     '<rootDir>/__mocks__/@react-native-community/google-signin.js',
     <%_ } _%>

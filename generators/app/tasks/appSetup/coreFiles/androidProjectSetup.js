@@ -85,13 +85,34 @@ function addRNGestureHandlerConfig() {
   this.fs.write(mainActivityContentPath, updatedMainActivityContent);
 }
 
+function addReanimatedConfig() {
+  const mainApplicationContentPath = this.destinationPath(
+    this.projectName,
+    'android/app/src/main/java',
+    this.bundleId.replace(/\./g, '/'),
+    'MainApplication.java'
+  );
+
+  const mainApplicationContent = this.fs.read(mainApplicationContentPath);
+  let updatedmainApplicationContent = mainApplicationContent.replace(
+    'import com.facebook.soloader.SoLoader;',
+    'import com.facebook.soloader.SoLoader;\nimport com.facebook.react.bridge.JSIModulePackage;\nimport com.swmansion.reanimated.ReanimatedJSIModulePackage;'
+  );
+  updatedmainApplicationContent = updatedmainApplicationContent.replace(
+    `return "index";`,
+    `return "index";\n\t\t\t\t}\n\n\t\t\t\t@Override\n\t\t\t\tprotected JSIModulePackage getJSIModulePackage() {\n\t\t\t\t\treturn new ReanimatedJSIModulePackage();`
+  );
+
+  this.fs.write(mainApplicationContentPath, updatedmainApplicationContent);
+}
+
 function updateAppProguardRules() {
   const proguardRulesContent = this.fs.read(
     `${this.projectName}/android/app/proguard-rules.pro`
   );
   const updatedProguardRulesContent = proguardRulesContent.replace(
     '# Add any project specific keep options here:',
-    `# Add any project specific keep options here:\n# Hermes\n-keep class com.facebook.hermes.unicode.** { *; }\n\n# react-native-config\n-keep class ${this.bundleId}.BuildConfig { *; }`
+    `# Add any project specific keep options here:\n# Hermes\n-keep class com.facebook.hermes.unicode.** { *; }\n\n# react-native-config\n-keep class ${this.bundleId}.BuildConfig { *; }\n\n# react-native-reanimated 2\n-keep class com.facebook.react.turbomodule.** { *; }`
   );
   this.fs.write(
     `${this.projectName}/android/app/proguard-rules.pro`,
@@ -123,4 +144,5 @@ module.exports = function androidProjectSetup() {
   addRNGestureHandlerConfig.bind(this)();
   updateAppProguardRules.bind(this)();
   updateGradleProperties.bind(this)();
+  addReanimatedConfig.bind(this)();
 };
