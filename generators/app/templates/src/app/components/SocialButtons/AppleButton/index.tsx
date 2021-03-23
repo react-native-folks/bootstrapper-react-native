@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {
-  AppleButton,
+  AppleButton as NativeAppleButton,
   appleAuth,
   AppleRequestResponse
 } from '@invertase/react-native-apple-authentication';
@@ -40,26 +40,26 @@ async function onAppleButtonPress(
 
 const AppleNativeButton = ({ onPress }: { onPress: () => void }) => {
   return (
-    <AppleButton
-      buttonStyle={AppleButton.Style.BLACK}
-      buttonType={AppleButton.Type.SIGN_IN}
+    <NativeAppleButton
+      buttonStyle={NativeAppleButton.Style.BLACK}
+      buttonType={NativeAppleButton.Type.SIGN_IN}
       style={styles.appleButton}
       onPress={onPress}
     />
   );
 };
 
-interface CustomAppleButtonProps {
+interface AppleButtonProps {
   onSuccess: (token: any) => void;
   onError: (error: any) => void;
   useNativeButton?: boolean;
 }
 
-const CustomAppleButton = ({
+const AppleButton = ({
   onSuccess,
   onError,
   useNativeButton
-}: CustomAppleButtonProps) => {
+}: AppleButtonProps) => {
   const handleLogin = () => onAppleButtonPress(onSuccess, onError);
   useEffect(() => {
     if (!appleAuth.isSupported) {
@@ -75,4 +75,4 @@ const CustomAppleButton = ({
   ) : null;
 };
 
-export default CustomAppleButton;
+export default AppleButton;
