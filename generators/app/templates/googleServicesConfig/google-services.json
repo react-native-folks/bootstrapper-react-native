@@ -1,38 +1,37 @@
 {
   "project_info": {
-    "project_number": "1048568404151",
-    "firebase_url": "https://kamino.firebaseio.com",
-    "project_id": "kamino",
-    "storage_bucket": "kamino.appspot.com"
+    "project_number": "711231873472",
+    "project_id": "mahisoft-kamino-react-native",
+    "storage_bucket": "mahisoft-kamino-react-native.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1048568404151:android:59c730a1cafc7acdcd5532",
+        "mobilesdk_app_id": "1:711231873472:android:2e409a5eb9597282ae2825",
         "android_client_info": {
           "package_name": "com.mahisoft"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1048568404151-9fln80in54jih46ip4uu8psdhlg8r7q1.apps.googleusercontent.com",
+          "client_id": "711231873472-6aq9rqou7gkpvqvtjbkerq3do1d3lo43.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCnFOLCB-o72Te7YclqFnQs_Y1hiwUMuGI"
+          "current_key": "AIzaSyDQ9IPqD8wnwLnI8OZAJ0uXCOK44kgHfUM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1048568404151-9fln80in54jih46ip4uu8psdhlg8r7q1.apps.googleusercontent.com",
+              "client_id": "711231873472-6aq9rqou7gkpvqvtjbkerq3do1d3lo43.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "1048568404151-camksnsehgk30fn2fckt1fu9iis8jc3m.apps.googleusercontent.com",
+              "client_id": "711231873472-f71c8kc56p0o7gsmnuojh0fvji3oav7p.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.mahisoft"
