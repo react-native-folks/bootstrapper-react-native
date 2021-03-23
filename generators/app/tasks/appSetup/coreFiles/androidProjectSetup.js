@@ -96,7 +96,7 @@ function addReanimatedConfig() {
   const mainApplicationContent = this.fs.read(mainApplicationContentPath);
   let updatedmainApplicationContent = mainApplicationContent.replace(
     'import com.facebook.soloader.SoLoader;',
-    'import com.facebook.soloader.SoLoader;\nimport com.facebook.react.bridge.JSIModulePackage;\n    import com.swmansion.reanimated.ReanimatedJSIModulePackage;'
+    'import com.facebook.soloader.SoLoader;\nimport com.facebook.react.bridge.JSIModulePackage;\nimport com.swmansion.reanimated.ReanimatedJSIModulePackage;'
   );
   updatedmainApplicationContent = updatedmainApplicationContent.replace(
     `return "index";`,
