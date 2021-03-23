@@ -15,8 +15,7 @@ export default StyleSheet.create({
   loginButton: {
     alignSelf: 'stretch',
     padding: 10,
-    marginTop: 40,
-    marginHorizontal: 30
+    marginTop: 40
   },
   signUpButton: {
     padding: 10,
@@ -40,7 +39,6 @@ export default StyleSheet.create({
     alignSelf: 'stretch',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginHorizontal: 30,
     justifyContent: 'space-between'
   }
 });
