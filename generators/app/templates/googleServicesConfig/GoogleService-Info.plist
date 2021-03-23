@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1048568404151-camksnsehgk30fn2fckt1fu9iis8jc3m.apps.googleusercontent.com</string>
+	<string>711231873472-f71c8kc56p0o7gsmnuojh0fvji3oav7p.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1048568404151-camksnsehgk30fn2fckt1fu9iis8jc3m</string>
+	<string>com.googleusercontent.apps.711231873472-f71c8kc56p0o7gsmnuojh0fvji3oav7p</string>
 	<key>API_KEY</key>
-	<string>AIzaSyB9gVWZZWAZUzT11CoAxDDrSxxMUfBjqVE</string>
+	<string>AIzaSyD6CgRlta0_AuGwR4AzygDctzuAazWhIgI</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1048568404151</string>
+	<string>711231873472</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.mahisoft</string>
 	<key>PROJECT_ID</key>
-	<string>kamino</string>
+	<string>mahisoft-kamino-react-native</string>
 	<key>STORAGE_BUCKET</key>
-	<string>kamino.appspot.com</string>
+	<string>mahisoft-kamino-react-native.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1048568404151:ios:47fdb4dc9eab1de0cd5532</string>
-	<key>DATABASE_URL</key>
-	<string>https://kamino.firebaseio.com</string>
+	<string>1:711231873472:ios:3567c8e5f4dff38aae2825</string>
 </dict>
 </plist>

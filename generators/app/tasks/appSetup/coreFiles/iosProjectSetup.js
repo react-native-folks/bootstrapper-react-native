@@ -5,7 +5,7 @@ module.exports = function fixBundleIndentifier() {
   const podfileContent = this.fs.read(`${this.projectName}/ios/Podfile`);
   const fixedPodfileContent = podfileContent.replace(
     'use_flipper!',
-    "use_flipper!({ 'Flipper' => '0.74.0' })"
+    "use_flipper!({ 'Flipper-Folly' => '~> 2.2.0' })"
   );
   this.fs.write(`${this.projectName}/ios/Podfile`, fixedPodfileContent);
   createSchemes.bind(this)();
