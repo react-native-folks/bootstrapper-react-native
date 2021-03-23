@@ -62,8 +62,8 @@ const CustomAppleButton = ({
 }: CustomAppleButtonProps) => {
   const handleLogin = () => onAppleButtonPress(onSuccess, onError);
   useEffect(() => {
-    if (appleAuth.isSupported) {
-      console.log('Apple sign in not supported on current device');
+    if (!appleAuth.isSupported) {
+      console.warn('Apple sign in not supported on current device');
     }
   }, []);
   return appleAuth.isSupported ? (
