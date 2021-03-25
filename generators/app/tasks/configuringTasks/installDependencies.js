@@ -34,6 +34,7 @@ const DEV_DEPENDENCIES = [
   '@types/react',
   '@types/react-native',
   '@types/react-test-renderer',
+  '@types/react-native-vector-icons',
   'babel-eslint',
   'babel-plugin-import-glob',
   'babel-plugin-module-resolver',

@@ -1,10 +1,15 @@
 const configureGoogleServicesFiles = require('./configureGoogleServicesFiles');
-const { copyFile } = require('../utils');
+const { copyFile, copyTemplateFile } = require('../utils');
 const {
   SOCIAL_FACEBOOK_BUTTON,
   SOCIAL_APPLE_BUTTON,
   SOCIAL_GOOGLE_BUTTON,
-  SOCIAL_TWITTER_BUTTON
+  SOCIAL_TWITTER_BUTTON,
+  CUSTOM_SOCIAL_BUTTON_STYLE,
+  CUSTOM_SOCIAL_BUTTON_INDEX,
+  SOCIAL_BUTTON,
+  SOCIAL_CONSTANTS,
+  SOCIALS_INTERFACES
 } = require('../files');
 
 function generateIosUrlScheme(scheme) {
@@ -153,7 +158,12 @@ function addSocialsToNativeProjects() {
   }
 }
 
-const FILES = [];
+const FILES = [CUSTOM_SOCIAL_BUTTON_STYLE, SOCIAL_BUTTON];
+const TEMPLATE_FILES = [
+  CUSTOM_SOCIAL_BUTTON_INDEX,
+  SOCIAL_CONSTANTS,
+  SOCIALS_INTERFACES
+];
 
 function socialButtonsFeatureFiles() {
   const { facebook, apple, google, twitter } = this.features.socialButtons;
@@ -162,6 +172,7 @@ function socialButtonsFeatureFiles() {
   if (apple) FILES.push(SOCIAL_APPLE_BUTTON);
   if (google) FILES.push(SOCIAL_GOOGLE_BUTTON);
   FILES.forEach(copyFile.bind(this));
+  TEMPLATE_FILES.forEach(copyTemplateFile.bind(this));
 }
 
 module.exports = function addSocialsToProject() {

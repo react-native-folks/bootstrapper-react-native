@@ -36,11 +36,11 @@ import {
   CustomText,
   TextInput,
   LoadableImage,
-  <%_ if(features.socialButtons.facebook) { _%>FacebookButton,<%_ } _%>
-  <%_ if(features.socialButtons.apple) { _%>AppleButton,<%_ } _%>
-  <%_ if(features.socialButtons.google) { _%>GoogleButton,<%_ } _%>
-  <%_ if(features.socialButtons.twitter) { _%>TwitterButton,<%_ } _%>
+  <%_ if(features.socialloginbuttons){ _%>SocialButton,<%_ } _%>
 } from 'app/components';
+<%_ if(features.socialloginbuttons){ _%>
+import { socialNetworks } from 'interfaces/socials';
+<%_ } _%>
 import Routes from 'app/navigation/routes';
 import { Navigation } from 'interfaces/navigation';
 <%_ if(features.statemanagement.redux) { _%>
@@ -208,29 +208,40 @@ export function Login({ navigation }: Navigation) {
               title={i18next.t('LOGIN:LOG_IN')}
               disabled={hasLoginError}
             />
-            <%_ if(features.socialButtons.facebook) { _%>
-            <FacebookButton
-              onSuccess={handleSocialLogin}
-              onError={error => Alert.alert('ERROR', error)}
-            />
+            <%_ if(features.socialloginbuttons) { _%>
+            <CustomText accent style={styles.socialsLabel}>
+              {i18next.t('LOGIN:SOCIAL_LOGIN')}
+            </CustomText>
+            <View style={styles.socialButtonsContainer}>
+              <%_ if(features.socialButtons.facebook) { _%>
+              <SocialButton
+                  socialNetwork={socialNetworks.FACEBOOK}
+                  onSuccess={handleSocialLogin}
+                  onError={error => Alert.alert('ERROR', error)}
+                />
+                <%_ } _%>
+                <%_ if(features.socialButtons.twitter) { _%>
+              <SocialButton
+                  socialNetwork={socialNetworks.TWITTER}
+                  onSuccess={handleSocialLogin}
+                  onError={error => Alert.alert('ERROR', error)}
+                />
+              <%_ } _%>
+              <%_ if(features.socialButtons.google) { _%>
+              <SocialButton
+                  socialNetwork={socialNetworks.GOOGLE}
+                  onSuccess={handleSocialLogin}
+                  onError={error => Alert.alert('ERROR', error)}
+                />
               <%_ } _%>
               <%_ if(features.socialButtons.apple) { _%>
-            <AppleButton
-              onSuccess={handleSocialLogin}
-              onError={error => Alert.alert('ERROR', error)}
-            />
-            <%_ } _%>
-            <%_ if(features.socialButtons.google) { _%>
-            <GoogleButton
-              onSuccess={handleSocialLogin}
-              onError={error => Alert.alert('ERROR', error)}
-            />
-            <%_ } _%>
-            <%_ if(features.socialButtons.twitter) { _%>
-            <TwitterButton
-              onSuccess={handleSocialLogin}
-              onError={error => Alert.alert('ERROR', error)}
-            />
+              <SocialButton
+                  socialNetwork={socialNetworks.APPLE}
+                  onSuccess={handleSocialLogin}
+                  onError={error => Alert.alert('ERROR', error)}
+                />
+              <%_ } _%>
+            </View>
             <%_ } _%>
             <Animated.View style={signUpAnimatedStyles}>    
               <CustomButton

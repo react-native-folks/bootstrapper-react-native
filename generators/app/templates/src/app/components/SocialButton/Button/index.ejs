@@ -1,0 +1,54 @@
+import colors from 'constants/colors';
+import { isAndroid } from 'constants/platform';
+
+import React from 'react';
+import { Pressable } from 'react-native';
+import Icon from 'react-native-vector-icons/Fontisto';
+import { socialNetworks } from 'interfaces/socials';
+
+import styles from './styles';
+
+const icons = {
+  <%_ if(features.socialButtons.facebook) { _%>
+  [socialNetworks.FACEBOOK]: { icon: 'facebook', color: colors.facebook },
+  <%_ } _%>
+  <%_ if(features.socialButtons.apple) { _%>
+  [socialNetworks.APPLE]: { icon: 'apple', color: colors.apple },
+  <%_ } _%>
+  <%_ if(features.socialButtons.google) { _%>
+  [socialNetworks.GOOGLE]: { icon: 'google-plus', color: colors.google },
+  <%_ } _%>
+  <%_ if(features.socialButtons.twitter) { _%>
+  [socialNetworks.TWITTER]: { icon: 'twitter', color: colors.twitter },
+  <%_ } _%>
+};
+
+const socialsCount = Object.keys(icons).length - Number(isAndroid);
+
+const socialButtonsSize =
+  socialsCount === 1 ? 'full' : socialsCount % 2 === 0 ? 'half' : 'third';
+
+interface ButtonProps {
+  onPress: () => void;
+  social: socialNetworks;
+  size?: 'full' | 'half' | 'third';
+}
+
+const Button = ({ onPress, social, size = socialButtonsSize }: ButtonProps) => {
+  const socialData = icons[social];
+  return (
+    <Pressable
+      style={({ pressed }) => [
+        styles.container,
+        styles[size],
+        { backgroundColor: socialData.color },
+        pressed ? styles.activeOpacity : undefined
+      ]}
+      onPress={onPress}>
+      <Icon name={socialData.icon} color={colors.white} size={20} />
+    </Pressable>
+  );
+};
+
+export default Button;
+

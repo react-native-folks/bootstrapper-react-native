@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ThemeProperty } from 'hooks/theme';
+import { ThemeProperty } from 'interfaces/theme';
 const THEME_KEY = '@Preferences:appTheme';
 
 export const setAppThemePreference = (value: ThemeProperty) =>

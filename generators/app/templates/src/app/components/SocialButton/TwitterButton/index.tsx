@@ -1,11 +1,10 @@
-import { CustomButton } from 'app/components';
-import React, { ReactElement } from 'react';
-import {
-  NativeModules,
-  TouchableOpacityProps,
-  TouchableOpacity
-} from 'react-native';
+import React from 'react';
+import { NativeModules, TouchableOpacityProps } from 'react-native';
 import Config from 'react-native-config';
+import CustomButton from 'app/components/CustomButton';
+import { socialNetworks } from 'interfaces/socials';
+
+import Button from '../Button';
 
 import styles from './styles';
 
@@ -60,7 +59,7 @@ const NativeTwitterButton = ({ onPress, ...buttonProps }: any) => {
 interface TwitterButtonProps {
   onSuccess: (token: string) => void;
   onError: (error: any) => void;
-  children?: ReactElement;
+  useNativeButton?: boolean;
   buttonProps?: TouchableOpacityProps;
 }
 
@@ -70,14 +69,12 @@ interface TwitterButtonProps {
 const TwitterButton = ({
   onSuccess,
   onError,
-  children,
+  useNativeButton,
   buttonProps
 }: TwitterButtonProps) => {
   const onPress = () => TwitterLoginManager(onSuccess, onError);
-  return children ? (
-    <TouchableOpacity {...buttonProps} onPress={onPress}>
-      {children}
-    </TouchableOpacity>
+  return !useNativeButton ? (
+    <Button onPress={onPress} social={socialNetworks.TWITTER} />
   ) : (
     <NativeTwitterButton onPress={onPress} {...buttonProps} />
   );

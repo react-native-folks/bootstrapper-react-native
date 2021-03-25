@@ -1,0 +1,14 @@
+export enum socialNetworks {
+  <%_ if(features.socialButtons.facebook) { _%>
+  FACEBOOK = 'facebook',
+  <%_ } _%>
+  <%_ if(features.socialButtons.apple) { _%>
+  APPLE = 'apple',
+  <%_ } _%>
+  <%_ if(features.socialButtons.google) { _%>
+  GOOGLE = 'google',
+  <%_ } _%>
+  <%_ if(features.socialButtons.twitter) { _%>
+  TWITTER = 'twitter'
+  <%_ } _%>
+}

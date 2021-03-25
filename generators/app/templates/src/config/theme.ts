@@ -10,7 +10,7 @@ import {
   DefaultTheme as PaperDefaultTheme
 } from 'react-native-paper';
 import { fontConfig } from 'config/fonts';
-import { ThemeProperty } from 'hooks/theme';
+import { ThemeProperty } from 'interfaces/theme';
 
 // App themes related with light and dark mode
 export const theme = {
