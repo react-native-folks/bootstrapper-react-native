@@ -4,12 +4,7 @@ import { AppTheme } from 'config/theme';
 import { getAppThemePreference } from 'services/preferences';
 import { useTheme as usePaperTheme } from 'react-native-paper';
 import { CustomThemeType } from 'config/theme';
-
-export enum ThemeProperty {
-  LIGHT = 'light',
-  DARK = 'dark',
-  SYSTEM = 'system'
-}
+import { ThemeProperty } from 'interfaces/theme';
 
 export const ThemeContext = createContext({
   changeTheme: (_newTheme: ThemeProperty) => {},

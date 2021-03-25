@@ -4,7 +4,8 @@ import analytics from '@react-native-firebase/analytics';
 <%_ } _%>
 import { NavigationContainer, NavigationState } from '@react-navigation/native';
 import { Provider as PaperProvider } from 'react-native-paper';
-import { useAppTheme, ThemeContext, ThemeProperty } from 'hooks/theme';
+import { useAppTheme, ThemeContext } from 'hooks/theme';
+import { ThemeProperty } from 'interfaces/theme';
 import { CustomStatusBar } from 'app/components';
 import { setAppThemePreference } from 'services/preferences';
 

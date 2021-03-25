@@ -1,11 +1,14 @@
-import React, { ReactElement } from 'react';
-import { View, TouchableOpacity, TouchableOpacityProps } from 'react-native';
+import React from 'react';
+import { View, ViewStyle } from 'react-native';
 import {
   LoginButton,
   AccessToken,
   LoginManager,
   LoginResult
 } from 'react-native-fbsdk';
+import { socialNetworks } from 'interfaces/socials';
+
+import Button from '../Button';
 
 import styles from './styles';
 
@@ -66,29 +69,26 @@ const NativeFacebookButton = ({
 interface FacebookButtonProps {
   onSuccess: (token: string) => void;
   onError: (error: any) => void;
-  children?: ReactElement;
-  buttonProps?: TouchableOpacityProps;
+  useNativeButton?: boolean;
+  style?: ViewStyle;
   isLoggedIn?: boolean; // for custom purposes
 }
 
 const FacebookButton = ({
   onSuccess,
   onError,
-  children,
-  buttonProps,
+  useNativeButton,
   isLoggedIn
 }: FacebookButtonProps) => {
   const onPress = () => {
-    if (children) {
+    if (!useNativeButton) {
       isLoggedIn
         ? FacebookLogout(onSuccess)
         : FacebookLoginManager(onSuccess, onError);
     }
   };
-  return children ? (
-    <TouchableOpacity {...buttonProps} onPress={onPress}>
-      {children}
-    </TouchableOpacity>
+  return !useNativeButton ? (
+    <Button onPress={onPress} social={socialNetworks.FACEBOOK} />
   ) : (
     <NativeFacebookButton onSuccess={onSuccess} onError={onError} />
   );

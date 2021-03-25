@@ -1,11 +1,14 @@
-import React, { ReactElement } from 'react';
-import { View, TouchableOpacity, TouchableOpacityProps } from 'react-native';
+import React from 'react';
+import { View, TouchableOpacityProps } from 'react-native';
 import {
   GoogleSignin,
   statusCodes,
   GoogleSigninButton,
   User
 } from '@react-native-community/google-signin';
+import { socialNetworks } from 'interfaces/socials';
+
+import Button from '../Button';
 
 import styles from './styles';
 
@@ -57,21 +60,19 @@ const NativeGoogleButton = ({ onPress, ...buttonProps }: any) => {
 interface GoogleButtonProps {
   onSuccess: (token: string) => void;
   onError: (error: any) => void;
-  children?: ReactElement;
+  useNativeButton?: boolean;
   buttonProps?: TouchableOpacityProps;
 }
 
 const GoogleButton = ({
   onSuccess,
   onError,
-  children,
+  useNativeButton,
   buttonProps
 }: GoogleButtonProps) => {
   const onPress = () => GoogleLoginManager(onSuccess, onError);
-  return children ? (
-    <TouchableOpacity {...buttonProps} onPress={onPress}>
-      {children}
-    </TouchableOpacity>
+  return !useNativeButton ? (
+    <Button onPress={onPress} social={socialNetworks.GOOGLE} />
   ) : (
     <NativeGoogleButton onPress={onPress} {...buttonProps} />
   );

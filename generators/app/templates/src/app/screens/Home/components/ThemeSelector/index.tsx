@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import { View } from 'react-native';
 import { RadioButton } from 'react-native-paper';
 import i18next from 'i18next';
-import { ThemeContext, ThemeProperty } from 'hooks/theme';
+import { ThemeProperty } from 'interfaces/theme';
+import { ThemeContext } from 'hooks/theme';
 import { CustomText } from 'app/components';
 
 import styles from './styles';
