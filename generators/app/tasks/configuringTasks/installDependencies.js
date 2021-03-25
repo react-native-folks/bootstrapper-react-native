@@ -1,21 +1,22 @@
 const runCommand = require('../runCommand');
+const fixedDependencies = require('./fixedDependencies');
 
 const DEPENDENCIES = [
   '@react-native-async-storage/async-storage',
-  '@react-native-community/masked-view',
-  '@react-navigation/native',
-  '@react-navigation/stack',
+  fixedDependencies.REACT_NATIVE_MASKED_VIEW,
+  fixedDependencies.REACT_NAVIGATION_NATIVE,
+  fixedDependencies.REACT_NATIVAGITION_STACK,
   '@reduxjs/toolkit',
   'apisauce',
   'cerealizr',
   'i18next',
-  'react-native-config',
+  fixedDependencies.REACT_NATIVE_CONFIG,
   'react-native-flipper',
-  'react-native-gesture-handler',
+  fixedDependencies.REACT_NATIVE_GESTURE_HANDLER,
   'react-native-localize',
-  'react-native-reanimated',
-  'react-native-safe-area-context',
-  'react-native-screens',
+  fixedDependencies.REACT_NATIVE_REANIMATED,
+  fixedDependencies.REACT_NATIVE_SAFE_AREA_CONTEXT,
+  fixedDependencies.REACT_NATIVE_SCREENS,
   'react-native-splash-screen',
   'react-hook-form',
   'reactotron-apisauce',
@@ -68,19 +69,19 @@ function yarnInstall(projectName, deps, options, dev) {
 
 module.exports = function installDependencies() {
   if (this.features.tabs) {
-    DEPENDENCIES.push('@react-navigation/bottom-tabs');
+    DEPENDENCIES.push(fixedDependencies.REACT_NAVIGATION_TABS);
   }
 
   if (this.features.hasFirebase) {
-    DEPENDENCIES.push('@react-native-firebase/app');
+    DEPENDENCIES.push(fixedDependencies.REACT_NATIVE_FIREBASE_APP);
     if (this.features.firebase) {
-      DEPENDENCIES.push('@react-native-firebase/crashlytics');
-      DEPENDENCIES.push('@react-native-firebase/analytics');
-      DEPENDENCIES.push('@react-native-firebase/perf');
+      DEPENDENCIES.push(fixedDependencies.REACT_NATIVE_FIREBASE_ANALYTICS);
+      DEPENDENCIES.push(fixedDependencies.REACT_NATIVE_FIREBASE_CRASHLYTICS);
+      DEPENDENCIES.push(fixedDependencies.REACT_NATIVE_FIREBASE_PERF);
     }
     if (this.features.pushnotifications) {
       DEPENDENCIES.push('react-native-push-notification');
-      DEPENDENCIES.push('@react-native-firebase/messaging');
+      DEPENDENCIES.push(fixedDependencies.REACT_NATIVE_FIREBASE_MESSAGING);
       DEPENDENCIES.push('@react-native-community/push-notification-ios');
       DEV_DEPENDENCIES.push('@types/react-native-push-notification');
     }
@@ -103,7 +104,7 @@ module.exports = function installDependencies() {
   }
 
   if (this.features.drawer) {
-    DEPENDENCIES.push('@react-navigation/drawer');
+    DEPENDENCIES.push(fixedDependencies.REACT_NAVIGATION_DRAWER);
   }
 
   if (this.features.onboarding) {
