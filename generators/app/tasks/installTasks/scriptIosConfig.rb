@@ -56,8 +56,8 @@ target = project.targets.find { |each| each.name == project_name }
 # Google Services Script
 if google_services && !target.shell_script_build_phases.find { |bp| bp.name == 'Google Services Script' }
    phase = target.new_shell_script_build_phase("Google Services Script")
-   phase.shell_script = "\"$SRCROOT/../firebaseFilesScript.sh\" \"${PRODUCT_BUNDLE_IDENTIFIER}\" \"ios\"\ncp $SRCROOT/GoogleService-Info.plist $\{BUILT_PRODUCTS_DIR}/$\{PRODUCT_NAME}.app/GoogleService-Info.plist"
-
+   # phase.shell_script = "\"$SRCROOT/../firebaseFilesScript.sh\" \"${PRODUCT_BUNDLE_IDENTIFIER}\" \"ios\"\ncp $SRCROOT/GoogleService-Info.plist $\{BUILT_PRODUCTS_DIR}/$\{PRODUCT_NAME}.app/GoogleService-Info.plist"
+   phase.shell_script = "if [[ $PRODUCT_BUNDLE_IDENTIFIER == *\"develop\"* ]];\nthen\n    cp -f \"$SRCROOT/GoogleServices/GoogleServiceDevelop-Info.plist\" \"$SRCROOT/GoogleService-Info.plist\"\nelif [[ $PRODUCT_BUNDLE_IDENTIFIER == *\"staging\"* ]]; then\n\tcp -f \"$SRCROOT/GoogleServices/GoogleServiceStaging-Info.plist\" \"$SRCROOT/GoogleService-Info.plist\"\nelse\n\tcp -f \"$SRCROOT/GoogleServices/GoogleServiceProduction-Info.plist\" \"$SRCROOT/GoogleService-Info.plist\"\nfi\n\ncp -f $SRCROOT/GoogleService-Info.plist ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\n"
    # Put the build phase at the beginning
    target.build_phases.insert(0, target.build_phases.delete(phase))
 end

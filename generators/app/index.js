@@ -13,7 +13,6 @@ const installPods = require('./tasks/installTasks/installPods');
 const linkAppAssets = require('./tasks/installTasks/linkAppAssets');
 const editBundleIdentifier = require('./tasks/installTasks/editBundleIdentifier');
 const lintFixProject = require('./tasks/installTasks/lintFixProject');
-const chmodFirebaseScript = require('./tasks/installTasks/chmodFirebaseScript');
 const gitInitialization = require('./tasks/installTasks/gitInitialization');
 const runCommand = require('./tasks/runCommand');
 
@@ -187,9 +186,6 @@ class ReactNativeBootstrap extends Generator {
         .then(() => this.platforms.ios && configureIosProject.bind(this)())
         .then(() => this.platforms.ios && installPods.bind(this)())
         .then(() => lintFixProject.bind(this)())
-        .then(
-          () => this.features.hasFirebase && chmodFirebaseScript.bind(this)()
-        )
         .then(() => gitInitialization.bind(this)())
     );
   }
