@@ -5,7 +5,7 @@ function configureGoogleServices() {
   const googleServiceIOSContent = this.fs.read(
     this.templatePath('googleServicesConfig', 'GoogleService-Info.plist')
   );
-  ['develop', 'stage', 'production'].forEach(env => {
+  ['develop', 'staging', 'production'].forEach(env => {
     const isProd = env === 'production';
     this.fs.write(
       `${this.projectName}/android/app/src/${env}/google-services.json`,
@@ -24,17 +24,6 @@ function configureGoogleServices() {
   });
 }
 
-function copyFirebaseFilesScript() {
-  const firebaseFilesScriptContent = this.fs.read(
-    this.templatePath('googleServicesConfig', 'firebaseFilesScript.sh')
-  );
-  this.fs.write(
-    `${this.projectName}/firebaseFilesScript.sh`,
-    firebaseFilesScriptContent.split('com.mahisoft').join(this.bundleId)
-  );
-}
-
 module.exports = function configureGoogleServicesFiles() {
   configureGoogleServices.bind(this)();
-  copyFirebaseFilesScript.bind(this)();
 };
