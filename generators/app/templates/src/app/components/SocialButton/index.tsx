@@ -19,7 +19,7 @@ const SocialButton = ({
 }: SocialButtonProps) => {
   const SocialButtonComponent = SocialButtonComponents[socialNetwork];
   return (
-    <SocialButtonComponent.button
+    <SocialButtonComponent.Button
       useNativeButton={useNativeButton}
       onSuccess={onSuccess}
       onError={onError}

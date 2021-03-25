@@ -90,14 +90,14 @@ module.exports.CUSTOM_TEXT_PATH = `${module.exports.COMPONENTS_PATH}/CustomText`
 // APP COMPONENTS - TEXT INPUT
 module.exports.TEXT_INPUT_PATH = `${module.exports.COMPONENTS_PATH}/TextInput`;
 // APP COMPONENTS - SOCIAL BUTTONS
-module.exports.SOCIAL_APPLE_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButtons/AppleButton`;
-module.exports.SOCIAL_FACEBOOK_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButtons/FacebookButton`;
-module.exports.SOCIAL_GOOGLE_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButtons/GoogleButton`;
-module.exports.SOCIAL_TWITTER_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButtons/TwitterButton`;
-module.exports.CUSTOM_SOCIAL_BUTTON_STYLE = `${module.exports.COMPONENTS_PATH}/SocialButtons/Button/styles.ts`;
-module.exports.CUSTOM_SOCIAL_BUTTON_INDEX = `${module.exports.COMPONENTS_PATH}/SocialButtons/Button/index.tsx`;
-module.exports.SOCIAL_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButtons/index.tsx`;
-module.exports.SOCIAL_CONSTANTS = `${module.exports.COMPONENTS_PATH}/SocialButtons/constants.ts`;
+module.exports.SOCIAL_APPLE_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButton/AppleButton`;
+module.exports.SOCIAL_FACEBOOK_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButton/FacebookButton`;
+module.exports.SOCIAL_GOOGLE_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButton/GoogleButton`;
+module.exports.SOCIAL_TWITTER_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButton/TwitterButton`;
+module.exports.CUSTOM_SOCIAL_BUTTON_STYLE = `${module.exports.COMPONENTS_PATH}/SocialButton/Button/styles.ts`;
+module.exports.CUSTOM_SOCIAL_BUTTON_INDEX = `${module.exports.COMPONENTS_PATH}/SocialButton/Button/index.tsx`;
+module.exports.SOCIAL_BUTTON = `${module.exports.COMPONENTS_PATH}/SocialButton/index.tsx`;
+module.exports.SOCIAL_CONSTANTS = `${module.exports.COMPONENTS_PATH}/SocialButton/constants.ts`;
 // APP COMPONENTS - GOOGLE MAPS
 module.exports.MAPS_COMPONENT_PATH = `${module.exports.COMPONENTS_PATH}/Maps`;
 // APP COMPONENTS - LOADABLE

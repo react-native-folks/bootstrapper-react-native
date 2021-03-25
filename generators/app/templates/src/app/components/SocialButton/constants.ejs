@@ -15,16 +15,16 @@ import TwitterButton from './TwitterButton';
 
 const SocialButtonComponents = {
   <%_ if(features.socialButtons.facebook) { _%>
-  [socialNetworks.FACEBOOK]: { button: FacebookButton },
+  [socialNetworks.FACEBOOK]: { Button: FacebookButton },
   <%_ } _%>
   <%_ if(features.socialButtons.apple) { _%>
-  [socialNetworks.APPLE]: { button: AppleButton },
+  [socialNetworks.APPLE]: { Button: AppleButton },
   <%_ } _%>
   <%_ if(features.socialButtons.google) { _%>
-  [socialNetworks.GOOGLE]: { button: GoogleButton },
+  [socialNetworks.GOOGLE]: { Button: GoogleButton },
   <%_ } _%>
   <%_ if(features.socialButtons.twitter) { _%>
-  [socialNetworks.TWITTER]: { button: TwitterButton },
+  [socialNetworks.TWITTER]: { Button: TwitterButton },
   <%_ } _%>
 };
 

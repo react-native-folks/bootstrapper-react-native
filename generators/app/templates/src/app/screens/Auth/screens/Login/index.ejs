@@ -36,7 +36,7 @@ import {
   CustomText,
   TextInput,
   LoadableImage,
-  <%_ if(features.socialloginbuttons){ _%>SocialButtons,<%_ } _%>
+  <%_ if(features.socialloginbuttons){ _%>SocialButton,<%_ } _%>
 } from 'app/components';
 <%_ if(features.socialloginbuttons){ _%>
 import { socialNetworks } from 'interfaces/socials';
@@ -214,28 +214,28 @@ export function Login({ navigation }: Navigation) {
             </CustomText>
             <View style={styles.socialButtonsContainer}>
               <%_ if(features.socialButtons.facebook) { _%>
-              <SocialButtons
+              <SocialButton
                   socialNetwork={socialNetworks.FACEBOOK}
                   onSuccess={handleSocialLogin}
                   onError={error => Alert.alert('ERROR', error)}
                 />
                 <%_ } _%>
                 <%_ if(features.socialButtons.twitter) { _%>
-              <SocialButtons
+              <SocialButton
                   socialNetwork={socialNetworks.TWITTER}
                   onSuccess={handleSocialLogin}
                   onError={error => Alert.alert('ERROR', error)}
                 />
               <%_ } _%>
               <%_ if(features.socialButtons.google) { _%>
-              <SocialButtons
+              <SocialButton
                   socialNetwork={socialNetworks.GOOGLE}
                   onSuccess={handleSocialLogin}
                   onError={error => Alert.alert('ERROR', error)}
                 />
               <%_ } _%>
               <%_ if(features.socialButtons.apple) { _%>
-              <SocialButtons
+              <SocialButton
                   socialNetwork={socialNetworks.APPLE}
                   onSuccess={handleSocialLogin}
                   onError={error => Alert.alert('ERROR', error)}
