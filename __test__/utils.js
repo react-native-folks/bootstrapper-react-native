@@ -22,6 +22,10 @@ function runExecCommand(command) {
   });
 }
 
+function buildIOSProject(projDir) {
+  return runExecCommand(`cd ${projDir} && yarn ios:detox:build`);
+}
+
 function buildAndroidProject(projDir) {
   return runExecCommand(`cd ${projDir} && yarn android:build.develop`);
 }
@@ -47,6 +51,7 @@ async function getCodeAndVersionNumber(projDir) {
 
 module.exports = {
   getProjectName,
+  buildIOSProject,
   buildAndroidProject,
   runTestsOnProject,
   getCodeAndVersionNumber

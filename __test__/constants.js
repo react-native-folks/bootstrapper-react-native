@@ -203,6 +203,8 @@ const CASES = [
   return [i + 1, v];
 });
 
+const PLATFORM_EXCLUDE_OPTIONS = ['android', 'ios', 'none'];
+const ARGS_SKIP_PLATFORM_PARAM = '-skip=';
 const TEMP_FOLDER = path.join(__dirname, '../../tmp');
 const PROJECT_NAME = 'kaminorn';
 const GENERATOR_TIMEOUT = 720000; // 12 min
@@ -211,5 +213,7 @@ module.exports = {
   CASES,
   GENERATOR_TIMEOUT,
   PROJECT_NAME,
-  TEMP_FOLDER
+  TEMP_FOLDER,
+  PLATFORM_EXCLUDE_OPTIONS,
+  ARGS_SKIP_PLATFORM_PARAM
 };
