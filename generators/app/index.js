@@ -39,6 +39,12 @@ class ReactNativeBootstrap extends Generator {
       alias: 'rnv',
       type: String
     });
+    this.option('latest', {
+      desc: 'Force use a React Native latest version',
+      alias: 'latest',
+      type: Boolean,
+      default: false
+    });
     this.conflicter.force = true;
   }
 

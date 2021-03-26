@@ -1,22 +1,14 @@
 const runCommand = require('../runCommand');
-const fixedDependencies = require('./fixedDependencies');
+const { getFixedDependencies } = require('./fixedDependencies');
 
 const DEPENDENCIES = [
   '@react-native-async-storage/async-storage',
-  fixedDependencies.REACT_NATIVE_MASKED_VIEW,
-  fixedDependencies.REACT_NAVIGATION_NATIVE,
-  fixedDependencies.REACT_NATIVAGITION_STACK,
   '@reduxjs/toolkit',
   'apisauce',
   'cerealizr',
   'i18next',
-  fixedDependencies.REACT_NATIVE_CONFIG,
   'react-native-flipper',
-  fixedDependencies.REACT_NATIVE_GESTURE_HANDLER,
   'react-native-localize',
-  fixedDependencies.REACT_NATIVE_REANIMATED,
-  fixedDependencies.REACT_NATIVE_SAFE_AREA_CONTEXT,
-  fixedDependencies.REACT_NATIVE_SCREENS,
   'react-native-splash-screen',
   'react-hook-form',
   'reactotron-apisauce',
@@ -68,6 +60,17 @@ function yarnInstall(projectName, deps, options, dev) {
 }
 
 module.exports = function installDependencies() {
+  const fixedDependencies = getFixedDependencies.bind(this)();
+  DEPENDENCIES.push(
+    fixedDependencies.REACT_NATIVE_MASKED_VIEW,
+    fixedDependencies.REACT_NAVIGATION_NATIVE,
+    fixedDependencies.REACT_NATIVAGITION_STACK,
+    fixedDependencies.REACT_NATIVE_CONFIG,
+    fixedDependencies.REACT_NATIVE_GESTURE_HANDLER,
+    fixedDependencies.REACT_NATIVE_REANIMATED,
+    fixedDependencies.REACT_NATIVE_SAFE_AREA_CONTEXT,
+    fixedDependencies.REACT_NATIVE_SCREENS
+  );
   if (this.features.tabs) {
     DEPENDENCIES.push(fixedDependencies.REACT_NAVIGATION_TABS);
   }
