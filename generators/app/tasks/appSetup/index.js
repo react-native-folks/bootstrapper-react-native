@@ -34,68 +34,72 @@ module.exports = function index() {
     text: 'Creating project boilerplate'
   }).start();
 
-  // --------------------    APP CORE FILES    ---------------------
-  createDotEnvFilesLocally.bind(this)();
-  packageJsonScripts.bind(this)();
-  baseFilesTemplate.bind(this)();
-  stateManagementFeatureFiles.bind(this)();
-  testingSetup.bind(this)();
-  navigationSetup.bind(this)();
-  appIcons.bind(this)();
-  babelConfigSetup.bind(this)();
-  prettierrcConfigSetup.bind(this)();
+  try {
+    // --------------------    APP CORE FILES    ---------------------
+    createDotEnvFilesLocally.bind(this)();
+    packageJsonScripts.bind(this)();
+    baseFilesTemplate.bind(this)();
+    stateManagementFeatureFiles.bind(this)();
+    testingSetup.bind(this)();
+    navigationSetup.bind(this)();
+    appIcons.bind(this)();
+    babelConfigSetup.bind(this)();
+    prettierrcConfigSetup.bind(this)();
 
-  // ----------------    Android project configurationn    ----------------
-  this.platforms.android && androidProjectSetup.bind(this)();
+    // ----------------    Android project configurationn    ----------------
+    this.platforms.android && androidProjectSetup.bind(this)();
 
-  // ----------------     iOS project configuration    ----------------
-  this.platforms.ios && iosProjectSetup.bind(this)();
-  this.platforms.ios && cleanTargetsFromPods.bind(this)();
+    // ----------------     iOS project configuration    ----------------
+    this.platforms.ios && iosProjectSetup.bind(this)();
+    this.platforms.ios && cleanTargetsFromPods.bind(this)();
 
-  // ----------------    Disable Landscape orientiation    ----------------
-  if (!this.features.landscape) {
-    disableLandscapeOrientation.bind(this)();
-  }
-
-  // ----------------    Splash Screen    ----------------
-  splashScreenSetup.bind(this)();
-
-  // ----------------    Features: Login and SignUp    ----------------
-  if (this.features.loginandsignup) {
-    loginAndSignUpFeatureFiles.bind(this)();
-  }
-
-  // ----------------    Features: Onboarding    ----------------
-  if (this.features.onboarding) {
-    onboardingFeatureFiles.bind(this)();
-  }
-
-  // ----------------    Features: Social Buttons    ----------------
-  if (this.features.socialloginbuttons) {
-    addSocialsToProject.bind(this)();
-  }
-
-  // ----------------    Features: Firebase    ----------------
-  if (this.features.hasFirebase) {
-    firebaseCoreFeatureFiles.bind(this)();
-    if (this.features.firebase) {
-      crashlyticsFeatureFiles.bind(this)();
-      firebaseAnalyticsFeatureFiles.bind(this)();
-      firebasePerformanceSetup.bind(this)();
+    // ----------------    Disable Landscape orientiation    ----------------
+    if (!this.features.landscape) {
+      disableLandscapeOrientation.bind(this)();
     }
-    if (this.features.pushnotifications) {
-      pushNotificationsFeatureFiles.bind(this)();
-      pushNotificationsSetup.bind(this)();
+
+    // ----------------    Splash Screen    ----------------
+    splashScreenSetup.bind(this)();
+
+    // ----------------    Features: Login and SignUp    ----------------
+    if (this.features.loginandsignup) {
+      loginAndSignUpFeatureFiles.bind(this)();
     }
+
+    // ----------------    Features: Onboarding    ----------------
+    if (this.features.onboarding) {
+      onboardingFeatureFiles.bind(this)();
+    }
+
+    // ----------------    Features: Social Buttons    ----------------
+    if (this.features.socialloginbuttons) {
+      addSocialsToProject.bind(this)();
+    }
+
+    // ----------------    Features: Firebase    ----------------
+    if (this.features.hasFirebase) {
+      firebaseCoreFeatureFiles.bind(this)();
+      if (this.features.firebase) {
+        crashlyticsFeatureFiles.bind(this)();
+        firebaseAnalyticsFeatureFiles.bind(this)();
+        firebasePerformanceSetup.bind(this)();
+      }
+      if (this.features.pushnotifications) {
+        pushNotificationsFeatureFiles.bind(this)();
+        pushNotificationsSetup.bind(this)();
+      }
+    }
+
+    // ----------------    Features: Google Maps    ----------------
+    if (this.features.googlemaps) {
+      addGoogleMapsToProject.bind(this)();
+    }
+
+    // ---------------    Enables fullscreen on iPad    ----------------------------
+    enableFullscreen.bind(this)();
+
+    spinner.succeed('Boilerplate ready!');
+  } catch (error) {
+    spinner.fail('Boilerplate error - Check stacktrace or turn verbose mode');
   }
-
-  // ----------------    Features: Google Maps    ----------------
-  if (this.features.googlemaps) {
-    addGoogleMapsToProject.bind(this)();
-  }
-
-  // ---------------    Enables fullscreen on iPad    ----------------------------
-  enableFullscreen.bind(this)();
-
-  spinner.succeed('Boilerplate ready!');
 };

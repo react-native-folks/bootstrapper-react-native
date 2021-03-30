@@ -11,5 +11,5 @@ module.exports = function lintFixProject() {
     successMessage: 'Linter problems fixed!',
     failureMessage: 'Error fixing some linter problems',
     context: this.options
-  });
+  }).catch(() => {});
 };

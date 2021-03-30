@@ -12,5 +12,5 @@ module.exports = function linkAppAssets() {
     failureMessage:
       'Linking app assets failed. Turn verbose mode on for detailed logging',
     context: this.options
-  });
+  }).catch(() => {});
 };

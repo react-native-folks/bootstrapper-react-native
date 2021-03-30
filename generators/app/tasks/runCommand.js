@@ -3,6 +3,7 @@ require('colors');
 const { spawn } = require('child_process');
 
 const ora = require('ora');
+const StackTrace = require('../StackTrace');
 
 /**
  * @param {obj} options Receives only one argument which is an object of options:
@@ -20,11 +21,15 @@ module.exports = function runCommand(options) {
     options.loadingMessage &&
     ora({ spinner: 'bouncingBall', text: options.loadingMessage }).start();
 
+  const errorTracker = StackTrace.createError(
+    options.loadingMessage,
+    options.command[0] + ' ' + options.command[1].join(' '),
+    options?.command[2]?.cwd || ''
+  );
   return new Promise((resolve, reject) => {
     const command = spawn(...options.command);
     const result = [];
 
-    // eslint-disable-next-line init-declarations
     let killTimeout;
     let processKilled = false;
 
@@ -58,6 +63,7 @@ module.exports = function runCommand(options) {
       if (options.timeout) {
         refreshKillTimeout();
       }
+      errorTracker.trace.push(data.toString());
       if (options.context && options.context.verbose && data) {
         const msg = data.toString();
         console.log(/warning/.test(msg) ? msg.yellow : msg.red);
@@ -77,6 +83,7 @@ module.exports = function runCommand(options) {
         if (spinner && options.failureMessage) {
           spinner.fail(options.failureMessage);
         }
+        StackTrace.addError(errorTracker);
         reject(spinner);
       }
     });

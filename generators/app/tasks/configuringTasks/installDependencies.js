@@ -122,7 +122,14 @@ module.exports = function installDependencies() {
     DEV_DEPENDENCIES.push('redux-mock-store');
   }
 
-  return yarnInstall(this.projectName, DEPENDENCIES, this.options).then(() =>
-    yarnInstall(this.projectName, DEV_DEPENDENCIES, this.options, true)
-  );
+  return yarnInstall(this.projectName, DEPENDENCIES, this.options)
+    .then(() =>
+      yarnInstall(
+        this.projectName,
+        DEV_DEPENDENCIES,
+        this.options,
+        true
+      ).catch(() => {})
+    )
+    .catch(() => {});
 };

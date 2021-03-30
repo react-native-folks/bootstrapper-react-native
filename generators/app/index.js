@@ -15,6 +15,7 @@ const editBundleIdentifier = require('./tasks/installTasks/editBundleIdentifier'
 const lintFixProject = require('./tasks/installTasks/lintFixProject');
 const gitInitialization = require('./tasks/installTasks/gitInitialization');
 const runCommand = require('./tasks/runCommand');
+const StackTrace = require('./StackTrace');
 
 // END
 const nextSteps = require('./tasks/nextSteps');
@@ -147,6 +148,7 @@ class ReactNativeBootstrap extends Generator {
   }
 
   configuring() {
+    StackTrace.createStackTrace();
     return Promise.resolve()
       .then(() => reactNativeInit.bind(this)())
       .then(() => editBundleIdentifier.bind(this)())
@@ -181,7 +183,7 @@ class ReactNativeBootstrap extends Generator {
             successMessage: 'Success Vector Icons unlink',
             failureMessage: 'Failed Vector Icons unlink',
             context: this.options
-          })
+          }).catch(() => {})
         )
         .then(() => this.platforms.ios && configureIosProject.bind(this)())
         .then(() => this.platforms.ios && installPods.bind(this)())
@@ -191,6 +193,7 @@ class ReactNativeBootstrap extends Generator {
   }
 
   end() {
+    console.log(StackTrace.getErrors() || 'Succesfull without errors');
     nextSteps.bind(this)();
   }
 }
