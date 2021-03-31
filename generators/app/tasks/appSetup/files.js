@@ -86,7 +86,7 @@ module.exports.LOADABLE_IMAGE_PATH = `${module.exports.COMPONENTS_PATH}/Loadable
 // APP COMPONENTS - CUSTOM STATUS BAR
 module.exports.CUSTOM_STATUS_BAR = `${module.exports.COMPONENTS_PATH}/CustomStatusBar`;
 // APP COMPONENTS - CUSTOM TEXT
-module.exports.CUSTOM_TEXT_PATH = `${module.exports.COMPONENTS_PATH}/CustomText`;
+module.exports.TEXT_PATH = `${module.exports.COMPONENTS_PATH}/Text`;
 // APP COMPONENTS - TEXT INPUT
 module.exports.TEXT_INPUT_PATH = `${module.exports.COMPONENTS_PATH}/TextInput`;
 // APP COMPONENTS - SOCIAL BUTTONS
