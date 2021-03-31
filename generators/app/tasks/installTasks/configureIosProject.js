@@ -18,5 +18,5 @@ module.exports = function configureIosProject() {
     successMessage: 'Ios project configured!',
     failureMessage: 'Ios project was not configured',
     context: this.options
-  });
+  }).catch(() => {});
 };

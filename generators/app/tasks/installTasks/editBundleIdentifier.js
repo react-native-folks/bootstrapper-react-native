@@ -11,5 +11,5 @@ module.exports = function editBundleIdentifier() {
     successMessage: 'Updating Bundle Identifier Success!',
     failureMessage: 'Updating Bundle Identifier Failure!',
     context: this.options
-  });
+  }).catch(() => {});
 };

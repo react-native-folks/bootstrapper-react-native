@@ -16,23 +16,24 @@ module.exports = function reactNativeInit() {
   return runCommand({
     command,
     loadingMessage: 'Initializing react-native',
-    context: this.options
-  }).then(({ spinner }) =>
-    runCommand({
-      command: [
-        'rm',
-        ['-rf', '__tests__'],
-        { cwd: `${process.cwd()}/${this.projectName}` }
-      ],
-      context: this.options
-    })
-      .then(() => {
-        spinner.succeed('react-native ready!');
+    context: this.options,
+    failureMessage: 'react-native init failed.'
+  })
+    .then(({ spinner }) =>
+      runCommand({
+        command: [
+          'rm',
+          ['-rf', '__tests__'],
+          { cwd: `${process.cwd()}/${this.projectName}` }
+        ],
+        context: this.options
       })
-      .catch(() => {
-        spinner.fail(
-          'react-native set up failed. Turn verbose mode on for detailed logging'
-        );
-      })
-  );
+        .then(() => {
+          spinner.succeed('react-native ready!');
+        })
+        .catch(() => {
+          spinner.fail('react-native remove tests folder failed.');
+        })
+    )
+    .catch(() => {});
 };

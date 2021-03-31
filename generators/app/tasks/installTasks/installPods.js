@@ -12,5 +12,5 @@ module.exports = function installPods() {
     failureMessage:
       'Pod install failed. Turn verbose mode on for detailed logging',
     context: this.options
-  });
+  }).catch(() => {});
 };

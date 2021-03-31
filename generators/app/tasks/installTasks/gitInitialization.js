@@ -1,4 +1,3 @@
-/* eslint-disable max-nested-callbacks */
 const runCommand = require('../runCommand');
 
 module.exports = function gitInitialization() {
@@ -37,7 +36,6 @@ module.exports = function gitInitialization() {
                 message:
                   'Do you want to initialize your git remote repository? (i.e. github, bitbucket, etc)'
               }
-              // eslint-disable-next-line consistent-return
             ]).then(({ pushToRepo }) => {
               if (pushToRepo) {
                 // ask for the repository url
