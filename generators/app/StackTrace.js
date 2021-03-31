@@ -1,6 +1,7 @@
 class StackTrace {
   static SINGLETON = null;
   errorTracer = [];
+  errorOrderCount = 0;
   constructor() {
     if (StackTrace.SINGLETON) {
       return StackTrace.SINGLETON;
@@ -13,12 +14,16 @@ class StackTrace {
   }
 
   static addError(errObject) {
-    StackTrace.SINGLETON?.errorTracer.push(errObject);
+    StackTrace.SINGLETON?.errorTracer.push({
+      ...errObject,
+      order: StackTrace.SINGLETON.errorOrderCount
+    });
+    StackTrace.SINGLETON.errorOrderCount++;
   }
 
   static getErrors() {
     return StackTrace.SINGLETON.errorTracer.length > 0
-      ? StackTrace.SINGLETON.errorTracer.reverse()
+      ? StackTrace.SINGLETON.errorTracer.slice().reverse()
       : null;
   }
 

@@ -192,9 +192,20 @@ class ReactNativeBootstrap extends Generator {
     );
   }
 
-  end() {
-    console.log(StackTrace.getErrors() || 'Succesfull without errors');
+  async end() {
     nextSteps.bind(this)();
+    if (StackTrace.getErrors()) {
+      const { showStackTrace } = await this.prompt([
+        {
+          type: 'confirm',
+          name: 'showStackTrace',
+          message:
+            'There are some errors tracked.\nDo you want to display stacktrace errors?',
+          default: false
+        }
+      ]);
+      if (showStackTrace) console.log(StackTrace.getErrors() || '');
+    }
   }
 }
 
