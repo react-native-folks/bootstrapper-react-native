@@ -2,10 +2,20 @@ const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 
-const { CASES, TEMP_FOLDER, GENERATOR_TIMEOUT } = require('./constants');
+const {
+  CASES,
+  TEMP_FOLDER,
+  GENERATOR_TIMEOUT,
+  PLATFORM_EXCLUDE_OPTIONS,
+  ARGS_SKIP_PLATFORM_PARAM
+} = require('./constants');
 const { getProjectName } = require('./utils');
 
 describe('Test Yeoman generator if can generate projects succesfully', () => {
+  const platformSkipArg = process.argv.filter(x =>
+    x.startsWith(ARGS_SKIP_PLATFORM_PARAM)
+  )[0];
+
   beforeAll(done => {
     helpers.testDirectory(TEMP_FOLDER, done);
   });
@@ -20,7 +30,9 @@ describe('Test Yeoman generator if can generate projects succesfully', () => {
           title: getProjectName(id),
           ...propmts,
           pushToRepo: false,
-          platformsSkipped: 'ios'
+          platformsSkipped: PLATFORM_EXCLUDE_OPTIONS.includes(platformSkipArg)
+            ? platformSkipArg
+            : 'ios'
         }),
     GENERATOR_TIMEOUT
   );
