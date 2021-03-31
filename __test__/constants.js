@@ -1,5 +1,50 @@
 const path = require('path');
 
+const FEATURES = [
+  'loginandsignup',
+  'onboarding',
+  'tabs',
+  'drawer',
+  'socialloginbuttons',
+  'googlemaps',
+  'firebase',
+  'pushnotifications',
+  'landscape'
+];
+const STATE_MANAGEMENTS = ['recoil', 'redux'];
+const SOCIAL_BUTTONS = ['facebook', 'twitter', 'apple', 'goole'];
+
+const generateRandomSelection = items => {
+  const itemsNumber = items.length;
+  const randomItemsCount = Math.floor(Math.random() * itemsNumber) + 1;
+  const randItems = [];
+  for (let n = 0; n < randomItemsCount; n++) {
+    let feat = items[Math.floor(Math.random() * itemsNumber)];
+    while (randItems.includes(feat)) {
+      feat = items[Math.floor(Math.random() * itemsNumber)];
+    }
+    randItems.push(feat);
+  }
+  return randItems;
+};
+
+const getRandomFeatures = () => {
+  // Get Features
+  const randFeatures = generateRandomSelection(FEATURES);
+  // Get State Management
+  const stateSelected =
+    STATE_MANAGEMENTS[Math.floor(Math.random() * STATE_MANAGEMENTS.length)];
+  // Get Social Buttons
+  const socialsSelected = randFeatures.includes('socialloginbuttons')
+    ? generateRandomSelection(SOCIAL_BUTTONS)
+    : [];
+  return {
+    features: randFeatures,
+    stateManagement: stateSelected,
+    socialButtons: socialsSelected
+  };
+};
+
 const CASES = [
   {
     features: [
@@ -189,7 +234,8 @@ const CASES = [
     ],
     // socialButtons: ['facebook', 'apple', 'google', 'twitter'],
     stateManagement: 'recoil'
-  }
+  },
+  getRandomFeatures() // provides a single random features set to test on each jest run
 ].map((v, i) => {
   const reduceToObject = array =>
     array ? array.reduce((p, c) => ({ ...p, [c]: true }), {}) : undefined;
