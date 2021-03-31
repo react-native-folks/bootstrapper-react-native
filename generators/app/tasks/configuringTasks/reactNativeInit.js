@@ -1,4 +1,5 @@
 const runCommand = require('../runCommand');
+const { FIXED_RN_VERSION } = require('./fixedDependencies');
 
 module.exports = function reactNativeInit() {
   const command = [
@@ -10,7 +11,11 @@ module.exports = function reactNativeInit() {
       '--skip-install',
       '--title',
       this.title,
-      ...(this.options.rnversion ? ['--version', this.options.rnversion] : [])
+      ...(this.options.rnversion
+        ? ['--version', this.options.rnversion]
+        : !this.options.latest
+        ? ['--version', FIXED_RN_VERSION]
+        : [])
     ]
   ];
   return runCommand({
