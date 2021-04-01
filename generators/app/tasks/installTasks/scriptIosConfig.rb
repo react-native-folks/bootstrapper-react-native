@@ -7,7 +7,7 @@ google_services = ARGV[4] == 'true'
 ios_folder = total_path + '/' + project_name + '/ios/'
 project_path = ios_folder + project_name + '.xcodeproj'
 project = Xcodeproj::Project.open(project_path)
-plist = Xcodeproj::Plist.read_from_path(ios_folder + project_name + '/../../Info.plist')
+plist = Xcodeproj::Plist.read_from_path(ios_folder + project_name + '/Info.plist')
 release_base_config_file = nil
 release_build_settings = nil
 
