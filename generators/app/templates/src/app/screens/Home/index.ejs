@@ -27,7 +27,7 @@ import authServices from 'services/auth';
 <%_ if(features.googlemaps) { _%>
 import { Navigation } from 'interfaces/navigation';
 <%_ } _%>
-import { CustomShadowView, CustomText, CustomButton } from 'app/components';
+import { CustomShadowView, Text, CustomButton } from 'app/components';
 import { ThemeProperty } from 'interfaces/theme';
 import { useTheme } from 'hooks/theme';
 
@@ -65,7 +65,7 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
   return (
     <View testID="screen-home-container-view" style={styles.container}>
       <CustomShadowView testID="buttons-shadow-container" strong style={styles.home}>
-        <CustomText testID="welcome-message-text" blue>{i18next.t('HOME:HI')}</CustomText>
+        <Text testID="welcome-message-text" blue>{i18next.t('HOME:HI')}</Text>
         <CustomButton
           testID="alert-message-button"
           secondary
@@ -97,7 +97,7 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
         />
         <CustomButton testID="smile-face-button" secondary onPress={() => {}}>
           {({ pressed }) => (
-            <CustomText testID="smile-face-text" onSecondary>{pressed ? ': O' : ': D'}</CustomText>
+            <Text testID="smile-face-text" onSecondary>{pressed ? ': O' : ': D'}</Text>
           )}
         </CustomButton>
         <%_ if(features.googlemaps) { _%>

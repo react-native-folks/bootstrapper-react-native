@@ -8,7 +8,7 @@ import MapView, {
   MapViewProps,
   PROVIDER_GOOGLE
 } from 'react-native-maps';
-import { CustomText } from 'app/components';
+import { Text } from 'app/components';
 
 import styles from './styles';
 
@@ -29,7 +29,7 @@ const Maps = (mapProps: MapViewProps) => {
       <Marker coordinate={{ ...defaultRegion }}>
         <Callout>
           <View style={styles.markerContainer}>
-            <CustomText big>HI!</CustomText>
+            <Text big>HI!</Text>
           </View>
         </Callout>
       </Marker>

@@ -1,12 +1,12 @@
 import React, { useCallback, memo } from 'react';
-import { Text } from 'react-native';
+import { Text as PaperText } from 'react-native-paper';
 import { useTheme } from 'hooks/theme';
 import { getCustomStyles } from 'utils/style';
 
-import { VARIANTS, CustomTextProps } from './model';
+import { VARIANTS, TextProps } from './model';
 import createStyle from './styles';
 
-const CustomText = (props: CustomTextProps) => {
+const Text = (props: TextProps) => {
   const theme = useTheme();
   const styles = createStyle(theme);
   const customStyles = useCallback(
@@ -15,17 +15,17 @@ const CustomText = (props: CustomTextProps) => {
   );
   const { textProps, style, testID, children } = props;
   return (
-    <Text
+    <PaperText
       testID={testID || children?.toString()}
       {...textProps}
       style={[styles.base, customStyles(), style]}>
       {children}
-    </Text>
+    </PaperText>
   );
 };
 
-CustomText.defaultProps = {
+Text.defaultProps = {
   textProps: {}
 };
 
-export default memo(CustomText);
+export default memo(Text);

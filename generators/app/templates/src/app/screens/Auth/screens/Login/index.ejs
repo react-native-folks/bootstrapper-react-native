@@ -8,6 +8,7 @@ import {
   <%_ } _%>
   Keyboard,
   KeyboardAvoidingView,
+  KeyboardEvent,
   TextInput as NativeTextInput,
   TouchableWithoutFeedback,
   View
@@ -33,9 +34,9 @@ import i18next from 'i18next';
 import { useTheme } from 'hooks/theme';
 import { 
   CustomButton,
-  CustomText,
-  TextInput,
   LoadableImage,
+  TextInput,
+  Text,
   <%_ if(features.socialloginbuttons){ _%>SocialButton,<%_ } _%>
 } from 'app/components';
 <%_ if(features.socialloginbuttons){ _%>
@@ -195,9 +196,9 @@ export function Login({ navigation }: Navigation) {
               secureTextEntry
             />
             {hasLoginError && (
-              <CustomText testID="login-error-message" error center>
+              <Text testID="login-error-message" error center>
                 {i18next.t('LOGIN:LOGIN_FAILURE')}
-              </CustomText>
+              </Text>
             )}
             <CustomButton
               testID="submit-button"
@@ -209,9 +210,9 @@ export function Login({ navigation }: Navigation) {
               disabled={hasLoginError}
             />
             <%_ if(features.socialloginbuttons) { _%>
-            <CustomText accent style={styles.socialsLabel}>
+            <Text accent style={styles.socialsLabel}>
               {i18next.t('LOGIN:SOCIAL_LOGIN')}
-            </CustomText>
+            </Text>
             <View style={styles.socialButtonsContainer}>
               <%_ if(features.socialButtons.facebook) { _%>
               <SocialButton

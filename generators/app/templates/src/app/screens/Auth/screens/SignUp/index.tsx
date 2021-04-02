@@ -9,7 +9,7 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useForm } from 'react-hook-form';
-import { CustomButton, CustomText, TextInput } from 'app/components';
+import { CustomButton, Text, TextInput } from 'app/components';
 import { Navigation } from 'interfaces/navigation';
 import {
   FIELDS,
@@ -89,9 +89,9 @@ function SignUp({ navigation }: Navigation) {
               );
             })}
             {!!signupError && (
-              <CustomText error center>
+              <Text error center>
                 {i18next.t('SIGNUP:SIGNUP_FAILURE')}
-              </CustomText>
+              </Text>
             )}
             <CustomButton
               primary
