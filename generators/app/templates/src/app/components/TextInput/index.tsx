@@ -32,7 +32,7 @@ const TextInput = React.forwardRef(
     return (
       <Controller
         control={control}
-        render={({ onChange, onBlur, value }) => (
+        render={({ field: { onChange, onBlur, value } }) => (
           <>
             <PaperTextInput
               testID={testID || name}
