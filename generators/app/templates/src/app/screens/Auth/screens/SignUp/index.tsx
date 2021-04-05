@@ -27,7 +27,11 @@ import styles from './styles';
 function SignUp({ navigation }: Navigation) {
   const [loading, setLoading] = useState(false);
   const [signupError, setSignupError] = useState('');
-  const { control, handleSubmit, errors } = useForm();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors }
+  } = useForm();
 
   const refs = useRef(SIGNUP_FIELDS.map(() => createRef<NativeTextInput>()));
 

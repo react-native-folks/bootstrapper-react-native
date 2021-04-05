@@ -61,7 +61,11 @@ import styles from './styles';
 
 export function Login({ navigation }: Navigation) {
   const theme = useTheme();
-  const { control, handleSubmit, errors } = useForm();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors }
+  } = useForm();
   const passwordInputRef = useRef<NativeTextInput>(null);
   const keyboardScale = useSharedValue(0);
 
