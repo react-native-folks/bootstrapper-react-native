@@ -138,7 +138,7 @@ describe('Login Screen', () => {
       fireEvent.changeText(emailInput, VALID_EMAIL);
       fireEvent.press(submitButton);
     });
-    expect(testMockFunction).toHaveBeenCalledTimes(1);
+    expect(testMockFunction).toHaveBeenCalledTimes(2);
   });
 
   test('After press signup button, navigation should be called', async () => {

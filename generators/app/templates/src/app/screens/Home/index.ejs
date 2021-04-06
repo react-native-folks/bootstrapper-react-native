@@ -27,16 +27,15 @@ import authServices from 'services/auth';
 <%_ if(features.googlemaps) { _%>
 import { Navigation } from 'interfaces/navigation';
 <%_ } _%>
-import { CustomShadowView, Text, CustomButton } from 'app/components';
+import { CustomShadowView, Text, Button } from 'app/components';
 import { ThemeProperty } from 'interfaces/theme';
-import { useTheme } from 'hooks/theme';
 
 import ThemeSelector from './components/ThemeSelector';
-import createStyle from './styles';
+import styles from './styles';
 import './i18n';
 
 function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _%>) {
-  <%_ if(features.loginandsignup) { _%>
+<%_ if(features.loginandsignup) { _%>
   const { changeTheme } = useContext(ThemeContext);
   <%_ if(features.statemanagement.redux) { _%>
   const dispatch = useDispatch();
@@ -45,8 +44,6 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
     changeTheme(ThemeProperty.SYSTEM);
   }, [dispatch, changeTheme]);
   <%_ } _%>
-  const theme = useTheme();
-  const styles = createStyle(theme);
   <%_ if(features.statemanagement.recoil) { _%>
   const [, setCurrentUser] = useRecoilState(currentUserState);
   const [, , , logout] = useLazyFetch({
@@ -60,26 +57,14 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
   
   const handleLogout = () => logout(null);
   <%_ } _%>
-  <%_ } _%>
+<%_ } _%>
 
   return (
     <View testID="screen-home-container-view" style={styles.container}>
       <CustomShadowView testID="buttons-shadow-container" strong style={styles.home}>
         <Text testID="welcome-message-text" blue>{i18next.t('HOME:HI')}</Text>
-        <CustomButton
-          testID="alert-message-button"
-          secondary
-          onPress={() =>
-            Alert.alert(
-              i18next.t('HOME:ALERT_TITLE'),
-              i18next.t('HOME:ALERT_MESSAGE')
-            )
-          }
-          title={i18next.t('HOME:BUTTON_TITLE')}
-        />
-        <CustomButton
+        <Button
           testID="alert-message-long-press-button"
-          secondary
           onPress={() =>
             Alert.alert(
               i18next.t('HOME:ALERT_TITLE'),
@@ -92,25 +77,28 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
               i18next.t('HOME:ALERT_MESSAGE_LONG')
             )
           }
-          onPressIn={() => console.warn('Press In Detection')}
           title={i18next.t('HOME:BUTTON_TITLE_LONG')}
+          style={styles.button}
         />
-        <CustomButton testID="smile-face-button" secondary onPress={() => {}}>
-          {({ pressed }) => (
-            <Text testID="smile-face-text" onSecondary>{pressed ? ': O' : ': D'}</Text>
-          )}
-        </CustomButton>
-        <%_ if(features.googlemaps) { _%>
-        <CustomButton
+      <%_ if(features.googlemaps) { _%>
+        <Button
           testID="goto-maps-view-button"
           primary
           onPress={() => navigation.navigate(Routes.MapView)}
           title={i18next.t('HOME:GO_TO_MAP')}
-          />
-        <%_ } _%>
-    <%_ if(features.loginandsignup) { _%>
-      <CustomButton testID="logout-button" primary onPress={handleLogout} title={i18next.t('HOME:LOGOUT')} style={styles.logout} />
-    <%_ } _%>
+          style={styles.button}
+        />
+      <%_ } _%>
+      <%_ if(features.loginandsignup) { _%>
+        <Button
+          testID="logout-button"
+          primary
+          onPress={handleLogout}
+          title={i18next.t('HOME:LOGOUT')}
+          style={styles.button}
+          contentStyle={styles.logoutButton}
+        />
+      <%_ } _%>
       </CustomShadowView>
       <ThemeSelector />
     </View>

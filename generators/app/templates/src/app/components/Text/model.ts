@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { TextProps as NativeTextProps } from 'react-native';
+import { Text as PaperText } from 'react-native-paper';
 
 /*
  ** TODO: You can add styles to Base like Family Font to be the Text styles base!
@@ -58,9 +58,7 @@ export interface VariantsInterface {
   error?: boolean;
 }
 
-export interface TextProps extends VariantsInterface {
-  testID?: string | undefined;
-  children: ReactNode;
-  textProps?: NativeTextProps;
-  style?: any;
-}
+export type TextProps = React.ComponentProps<typeof PaperText> &
+  VariantsInterface & {
+    children: ReactNode;
+  };

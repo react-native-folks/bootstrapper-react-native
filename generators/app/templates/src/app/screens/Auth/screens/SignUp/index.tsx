@@ -9,7 +9,7 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useForm } from 'react-hook-form';
-import { CustomButton, Text, TextInput } from 'app/components';
+import { Button, Text, TextInput } from 'app/components';
 import { Navigation } from 'interfaces/navigation';
 import {
   FIELDS,
@@ -97,13 +97,13 @@ function SignUp({ navigation }: Navigation) {
                 {i18next.t('SIGNUP:SIGNUP_FAILURE')}
               </Text>
             )}
-            <CustomButton
-              primary
+            <Button
               testID="submit-signup-button"
               onPress={handleSubmit(onSubmit)}
-              style={styles.formButton}
               title={i18next.t('SIGNUP:SIGN_UP')}
               disabled={hasSignUpError}
+              style={styles.formButton}
+              contentStyle={styles.formButtonContent}
             />
           </View>
         </TouchableWithoutFeedback>

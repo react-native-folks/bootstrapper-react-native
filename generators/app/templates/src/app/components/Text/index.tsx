@@ -6,19 +6,20 @@ import { getCustomStyles } from 'utils/style';
 import { VARIANTS, TextProps } from './model';
 import createStyle from './styles';
 
-const Text = (props: TextProps) => {
+const Text = ({ style, testID, children, ...props }: TextProps) => {
   const theme = useTheme();
   const styles = createStyle(theme);
+
   const customStyles = useCallback(
     () => getCustomStyles(VARIANTS, props, styles),
     [props, styles]
   );
-  const { textProps, style, testID, children } = props;
+
   return (
     <PaperText
       testID={testID || children?.toString()}
-      {...textProps}
-      style={[styles.base, customStyles(), style]}>
+      style={[styles.base, customStyles(), style]}
+      {...props}>
       {children}
     </PaperText>
   );
