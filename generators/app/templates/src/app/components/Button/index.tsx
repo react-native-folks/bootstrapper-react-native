@@ -1,12 +1,12 @@
 import React, { useCallback, memo } from 'react';
 import { getCustomStyles } from 'utils/style';
-import { Button } from 'react-native-paper';
+import { Button as PaperButton } from 'react-native-paper';
 import { useTheme } from 'hooks/theme';
 
 import { VARIANTS, ButtonProps } from './model';
 import createStyles from './styles';
 
-const PaperButton = ({
+const Button = ({
   children,
   labelStyle,
   mode = 'contained',
@@ -29,15 +29,15 @@ const PaperButton = ({
   );
 
   return (
-    <Button
+    <PaperButton
       testID={testID || title || children}
       mode={mode}
       style={[customStyles(), style]}
       labelStyle={[labelStyles(), labelStyle]}
       {...props}>
       {title || children}
-    </Button>
+    </PaperButton>
   );
 };
 
-export default memo(PaperButton);
+export default memo(Button);
