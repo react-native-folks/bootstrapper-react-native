@@ -7,7 +7,7 @@ const colors = {
   white: '#FFF',
   black: '#0b0b0b',
   lightBlack: '#1E1E1E',
-  gray: '#00000061', // '#rgba(0, 0, 0, 0.38)',
+  gray: '#555555', // '#rgba(0, 0, 0, 0.38)',
   darkGray: '#161717',
   lightGray: '#F4F4F4',
   mediumGray: '#919191',

@@ -14,8 +14,9 @@ export default StyleSheet.create({
     paddingHorizontal: 30
   },
   formButton: {
-    borderRadius: 3,
-    marginTop: 15,
-    padding: 10
+    marginTop: 15
+  },
+  formButtonContent: {
+    margin: 8
   }
 });

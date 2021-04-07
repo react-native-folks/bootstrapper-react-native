@@ -1,7 +1,7 @@
 import React from 'react';
 import { NativeModules, TouchableOpacityProps } from 'react-native';
 import Config from 'react-native-config';
-import CustomButton from 'app/components/CustomButton';
+import { Button as CustomButton } from 'app/components';
 import { socialNetworks } from 'interfaces/socials';
 
 import Button from '../Button';
@@ -44,11 +44,8 @@ const TwitterLoginManager = async (
 const NativeTwitterButton = ({ onPress, ...buttonProps }: any) => {
   return (
     <CustomButton
-      borderless
       blue
-      radius={0}
       style={styles.button}
-      textProps={{ small: true }}
       onPress={onPress}
       title="Login with Twitter"
       {...buttonProps}

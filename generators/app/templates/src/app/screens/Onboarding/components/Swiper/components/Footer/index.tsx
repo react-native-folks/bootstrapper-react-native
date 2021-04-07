@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { CustomButton } from 'app/components';
+import { Button } from 'app/components';
 
 import { FooterProps } from './interface';
 import { getScreensButtonsInfo } from './buttonsInfo';
@@ -11,23 +11,21 @@ function Footer(props: FooterProps) {
   return (
     <View testID="footer-buttons-container-view" style={styles.buttons}>
       {firstButton && (
-        <CustomButton
+        <Button
+          mode={'outlined'}
           testID="footer-left-action-button"
-          {...firstButton}
-          transparent
           style={styles.buttonContainer}
-          textStyle={styles.buttonText}
-          activeOpacity={0.7}
+          whiteLabel
+          {...firstButton}
         />
       )}
       {secondButton && (
-        <CustomButton
+        <Button
+          mode={'outlined'}
           testID="footer-right-action-button"
-          {...secondButton}
-          transparent
           style={styles.buttonContainer}
-          textStyle={styles.buttonText}
-          activeOpacity={0.7}
+          whiteLabel
+          {...secondButton}
         />
       )}
     </View>

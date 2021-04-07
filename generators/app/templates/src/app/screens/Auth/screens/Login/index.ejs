@@ -33,7 +33,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import i18next from 'i18next';
 import { useTheme } from 'hooks/theme';
 import { 
-  CustomButton,
+  Button,
   LoadableImage,
   TextInput,
   Text,
@@ -204,14 +204,13 @@ export function Login({ navigation }: Navigation) {
                 {i18next.t('LOGIN:LOGIN_FAILURE')}
               </Text>
             )}
-            <CustomButton
+            <Button
               testID="submit-button"
-              primary
-              radius={3}
               onPress={handleSubmit(handleLogin)}
-              style={styles.loginButton}
               title={i18next.t('LOGIN:LOG_IN')}
               disabled={hasLoginError}
+              style={styles.loginButton}
+              contentStyle={styles.loginButtonContent}
             />
             <%_ if(features.socialloginbuttons) { _%>
             <Text accent style={styles.socialsLabel}>
@@ -249,11 +248,13 @@ export function Login({ navigation }: Navigation) {
             </View>
             <%_ } _%>
             <Animated.View style={signUpAnimatedStyles}>    
-              <CustomButton
+              <Button
+                uppercase={false}
+                mode={'text'}
                 testID="signup-button"
-                borderless
                 onPress={handleGoToSignUp}
                 style={styles.signUpButton}
+                accentLabel
                 title={i18next.t('LOGIN:SIGN_UP')}
               />
               <ActivityIndicator

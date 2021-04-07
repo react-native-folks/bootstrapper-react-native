@@ -77,8 +77,8 @@ module.exports.NAVIGATION_CONFIG = `${module.exports.NAVIGATION_PATH}/config/scr
 module.exports.NAVIGATION_APP_STACK = `${module.exports.NAVIGATION_PATH}/stacks/AppStack.tsx`;
 module.exports.NAVIGATION_STACK_INDEX = `${module.exports.NAVIGATION_PATH}/stacks/index.ts`;
 
-// APP COMPONENTS - CUSTOM BUTTON
-module.exports.CUSTOM_BUTTON_PATH = `${module.exports.COMPONENTS_PATH}/CustomButton`;
+// APP COMPONENTS - BUTTON
+module.exports.BUTTON_PATH = `${module.exports.COMPONENTS_PATH}/Button`;
 // APP COMPONENTS - CUSTOM SHADOW VIEW
 module.exports.CUSTOM_SHADOW_VIEW_PATH = `${module.exports.COMPONENTS_PATH}/CustomShadowView`;
 // APP COMPONENTS - LOADABLE IMAGE

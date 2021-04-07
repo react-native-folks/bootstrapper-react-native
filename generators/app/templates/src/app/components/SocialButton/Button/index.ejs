@@ -2,11 +2,11 @@ import colors from 'constants/colors';
 import { isAndroid } from 'constants/platform';
 
 import React from 'react';
-import { Pressable } from 'react-native';
-import Icon from 'react-native-vector-icons/Fontisto';
 import { socialNetworks } from 'interfaces/socials';
+import { IconButton } from 'react-native-paper';
+import { useTheme } from 'hooks/theme';
 
-import styles from './styles';
+import createStyles from './styles';
 
 const icons = {
   <%_ if(features.socialButtons.facebook) { _%>
@@ -35,18 +35,21 @@ interface ButtonProps {
 }
 
 const Button = ({ onPress, social, size = socialButtonsSize }: ButtonProps) => {
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const socialData = icons[social];
   return (
-    <Pressable
-      style={({ pressed }) => [
+    <IconButton
+      style={[
         styles.container,
         styles[size],
-        { backgroundColor: socialData.color },
-        pressed ? styles.activeOpacity : undefined
+        { backgroundColor: socialData.color }
       ]}
-      onPress={onPress}>
-      <Icon name={socialData.icon} color={colors.white} size={20} />
-    </Pressable>
+      icon={socialData.icon}
+      size={20}
+      color={colors.white}
+      onPress={onPress}
+    />
   );
 };
 

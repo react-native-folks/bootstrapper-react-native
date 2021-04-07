@@ -13,12 +13,12 @@ export default StyleSheet.create({
     alignSelf: 'stretch'
   },
   loginButton: {
-    alignSelf: 'stretch',
-    padding: 10,
     marginTop: 40
   },
+  loginButtonContent: {
+    margin: 8
+  },
   signUpButton: {
-    padding: 10,
     marginVertical: 15
   },
   logoContainer: {
