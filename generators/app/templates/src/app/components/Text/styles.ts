@@ -1,39 +1,20 @@
 import colors from 'constants/colors';
-import { SIZES } from 'constants/fonts';
 
+import { sizes } from 'config/fonts';
 import { StyleSheet } from 'react-native';
-import fonts from 'config/fonts';
-import { moderateScale } from 'utils/scaling';
-import { StringObject, NumberObject } from 'interfaces/global';
 import { CustomThemeType } from 'config/theme';
+import { mapColorsStyles, mapSizesStyles } from 'utils/style';
 
-const getColors = (colorsObj: StringObject) =>
-  Object.keys(colorsObj).reduce(
-    (colorsAcc, color) => ({
-      ...colorsAcc,
-      ...{ [color]: { color: colorsObj[color] } }
-    }),
-    {}
-  );
-
-const getSizes = (sizesObj: NumberObject) =>
-  Object.keys(sizesObj).reduce(
-    (sizes, size) => ({
-      ...sizes,
-      ...{ [size]: { fontSize: moderateScale(sizesObj[size]) } }
-    }),
-    {}
-  );
-
-export default (appTheme: CustomThemeType) =>
+export default (theme: CustomThemeType) =>
   StyleSheet.create({
     base: {
-      ...fonts.baseFont,
-      backgroundColor: colors.transparent
+      fontSize: sizes.medium
     },
-    semiBold: fonts.semiBoldFont,
-    bold: fonts.boldFont,
-    italic: fonts.baseItalicFont,
+    light: theme.fonts.light,
+    semibold: theme.fonts.medium,
+    italic: {
+      fontStyle: 'italic'
+    },
     center: {
       textAlign: 'center'
     },
@@ -44,39 +25,24 @@ export default (appTheme: CustomThemeType) =>
       textAlign: 'right'
     },
     error: {
-      color: colors.red
+      color: theme.colors.error
     },
     // Colors
     primary: {
-      color: appTheme.colors.primary
+      color: theme.colors.primary
     },
     secondary: {
-      color: appTheme.colors.secondary
+      color: theme.colors.secondary
     },
     onPrimary: {
-      color: appTheme.colors.onPrimary
+      color: theme.colors.onPrimary
     },
     onSecondary: {
-      color: appTheme.colors.onSecondary
+      color: theme.colors.onSecondary
     },
     accent: {
-      color: appTheme.colors.accent
+      color: theme.colors.accent
     },
-    ...getColors({
-      blue: colors.blue,
-      gray: colors.gray,
-      green: colors.green,
-      white: colors.white,
-      black: colors.black
-    }),
-    // Sizes
-    ...getSizes({
-      xxsmall: SIZES.XXSMALL,
-      xsmall: SIZES.XSMALL,
-      small: SIZES.SMALL,
-      medium: SIZES.MEDIUM,
-      xmedium: SIZES.XMEDIUM,
-      big: SIZES.BIG,
-      xbig: SIZES.XBIG
-    })
+    ...mapColorsStyles(colors),
+    ...mapSizesStyles(sizes)
   });

@@ -7,29 +7,33 @@ import { TextInput as PaperTextInput } from 'react-native-paper';
  */
 
 export const VARIANTS = [
+  // Style
   'center',
   'justify',
   'right',
+  // Sizes
   'xxsmall',
   'xsmall',
   'small',
   'medium',
-  'xmedium',
-  'big',
-  'xbig'
+  'large',
+  'xlarge',
+  'xxlarge'
 ];
 
 export type VariantsType = {
+  // Style
   center?: boolean;
   justify?: boolean;
   right?: boolean;
+  // Sizes
   xxsmall?: boolean;
   xsmall?: boolean;
   small?: boolean;
   medium?: boolean;
-  xmedium?: boolean;
-  big?: boolean;
-  xbig?: boolean;
+  large?: boolean;
+  xlarge?: boolean;
+  xxlarge?: boolean;
 };
 
 export type TextInputProps = React.ComponentProps<typeof PaperTextInput> &
