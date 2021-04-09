@@ -150,7 +150,6 @@ module.exports.THEME_CONFIG = `${module.exports.CONFIG_PATH}/theme.ts`;
 // CONSTANTS
 module.exports.PLATFORM_CONSTANTS = `${module.exports.CONSTANTS_PATH}/platform.ts`;
 module.exports.COLORS_CONSTANTS = `${module.exports.CONSTANTS_PATH}/colors.ts`;
-module.exports.FONTS_CONSTANTS = `${module.exports.CONSTANTS_PATH}/fonts.ts`;
 module.exports.ANIMATIONS_CONSTANTS = `${module.exports.CONSTANTS_PATH}/animations.ts`;
 
 // HOOKS

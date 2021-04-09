@@ -62,7 +62,9 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
   return (
     <View testID="screen-home-container-view" style={styles.container}>
       <CustomShadowView testID="buttons-shadow-container" strong style={styles.home}>
-        <Text testID="welcome-message-text" blue>{i18next.t('HOME:HI')}</Text>
+        <Text testID="welcome-message-text" primary center large semibold>
+          {i18next.t('HOME:HI')}
+        </Text>
         <Button
           testID="alert-message-long-press-button"
           onPress={() =>
