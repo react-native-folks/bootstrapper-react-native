@@ -7,8 +7,14 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end'
   },
-  buttonsContainer: {
+  photoButtonsContainer: {
     marginBottom: 30,
+    alignSelf: 'stretch',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
+  buttonsContainer: {
     alignSelf: 'stretch',
     flexDirection: 'row',
     alignItems: 'center',

@@ -94,6 +94,7 @@ module.exports = function installDependencies() {
     DEPENDENCIES.push('@react-native-community/cameraroll');
     DEPENDENCIES.push('react-native-camera');
     DEPENDENCIES.push('react-native-video');
+    DEV_DEPENDENCIES.push('@types/react-native-video');
   }
 
   if (this.features.socialloginbuttons) {

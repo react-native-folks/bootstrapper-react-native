@@ -8,8 +8,7 @@ import { Navigation } from 'interfaces/navigation';
 import { saveCacheMediaFile } from 'services/mediaFile';
 
 import styles from './styles';
-import ImagePreview from './components/ImagePreview';
-import VideoPreview from './components/VideoPreview';
+import Preview from './components/Preview';
 
 type CameraPreviewScreenRouteProp = {
   params: {
@@ -33,11 +32,7 @@ function CameraPreview({ navigation }: Navigation) {
   };
   return (
     <View testID="screen-camera-preview-container" style={styles.container}>
-      {fileType === 'video' ? (
-        <VideoPreview path={filePath} saveCallback={saveCallback} />
-      ) : (
-        <ImagePreview path={filePath} saveCallback={saveCallback} />
-      )}
+      <Preview type={fileType} path={filePath} saveCallback={saveCallback} />
     </View>
   );
 }
