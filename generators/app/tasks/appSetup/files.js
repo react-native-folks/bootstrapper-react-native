@@ -124,6 +124,9 @@ module.exports.HOME_STYLES = `${module.exports.HOME_PATH}/styles.ts`;
 module.exports.HOME_TRANSLATIIONS = `${module.exports.HOME_PATH}/i18n.ts`;
 module.exports.HOME_THEME_SELECTOR_COMPONENT = `${module.exports.HOME_PATH}/components/ThemeSelector`;
 
+// APP SCREENS - CAMERA
+module.exports.CAMERA_FLOW_PATH = `${module.exports.SCREENS_PATH}/Camera`;
+
 // APP SCREENS - ONBOARDING
 module.exports.ONBOARDING_PATH = `${module.exports.SCREENS_PATH}/Onboarding`;
 module.exports.ONBOARDING_COMPONENTS_PATH = `${module.exports.SCREENS_PATH}/Onboarding/components`;
@@ -181,3 +184,4 @@ module.exports.ANALYTICS_MIDDLEWARE = `${module.exports.REDUX_PATH}/middlewares/
 module.exports.AUTH_SERVICE = `${module.exports.SERVICES_PATH}/auth.ts`;
 module.exports.ONBOARDING_SERVICE = `${module.exports.SERVICES_PATH}/onboarding.ts`;
 module.exports.PREFERENCES_SERVICE = `${module.exports.SERVICES_PATH}/preferences.ts`;
+module.exports.MEDIA_FILE_SERVICE = `${module.exports.SERVICES_PATH}/mediaFile.ts`;

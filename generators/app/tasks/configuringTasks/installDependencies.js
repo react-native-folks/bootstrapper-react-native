@@ -90,6 +90,12 @@ module.exports = function installDependencies() {
     }
   }
 
+  if (this.features.camera) {
+    DEPENDENCIES.push('@react-native-community/cameraroll');
+    DEPENDENCIES.push('react-native-camera');
+    DEPENDENCIES.push('react-native-video');
+  }
+
   if (this.features.socialloginbuttons) {
     const { google, facebook, apple, twitter } = this.features.socialButtons;
     if (google) DEPENDENCIES.push('@react-native-community/google-signin');

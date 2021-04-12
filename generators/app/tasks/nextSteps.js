@@ -87,5 +87,19 @@ module.exports = function nextSteps() {
     console.log('  Please check each one to finish the socials setup'.cyan);
     console.log('\n');
   }
+
+  if (this.features.camera) {
+    // Social networks login buttons
+    console.log(
+      '● CAMERA - Camera photo and video features has been added'.cyan
+    );
+    console.log('  Check and change iOS Info plist usage description'.cyan);
+    console.log(
+      "  Don't forget to update write Android permissions text from mediaFile Service"
+        .cyan
+    );
+    console.log('\n');
+  }
+
   console.log('\n\n');
 };

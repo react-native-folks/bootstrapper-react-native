@@ -28,6 +28,8 @@ const pushNotificationsFeatureFiles = require('./featuresFiles/pushNotifications
 const pushNotificationsSetup = require('./featuresFiles/pushNotificationsSetup');
 const addSocialsToProject = require('./featuresFiles/socialButtonsFeatureSetup');
 const addGoogleMapsToProject = require('./featuresFiles/googleMapsFeatureSetup');
+const cameraFeatureSetup = require('./featuresFiles/cameraFeatureSetup');
+
 module.exports = function index() {
   const spinner = ora({
     spinner: 'bouncingBall',
@@ -69,6 +71,11 @@ module.exports = function index() {
     // ----------------    Features: Onboarding    ----------------
     if (this.features.onboarding) {
       onboardingFeatureFiles.bind(this)();
+    }
+
+    // ----------------    Features: Camera    ----------------
+    if (this.features.camera) {
+      cameraFeatureSetup.bind(this)();
     }
 
     // ----------------    Features: Social Buttons    ----------------

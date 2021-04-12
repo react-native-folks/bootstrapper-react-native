@@ -2,6 +2,7 @@ import React, { <%_ if(features.loginandsignup) { _%>useContext, <%_ } _%><%_ if
 import { Alert, View } from 'react-native';
 import i18next from 'i18next';
 import Routes from 'app/navigation/routes';
+import { appScreensNavOptions } from 'app/navigation/config/screensOptions';
 <%_ if(features.tabs) { _%>
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 <%_ } else { _%>
@@ -28,7 +29,9 @@ import authServices from 'services/auth';
 import { Navigation } from 'interfaces/navigation';
 <%_ } _%>
 import { CustomShadowView, Text, Button } from 'app/components';
+<%_ if(features.loginandsignup) { _%>
 import { ThemeProperty } from 'interfaces/theme';
+<%_ } _%>
 
 import ThemeSelector from './components/ThemeSelector';
 import styles from './styles';
@@ -111,24 +114,24 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
 const Tab = createBottomTabNavigator();
 
 export const TabHomeOne = () => (
-  <Tab.Screen name={Routes.Tab1} component={Home} />
+  <Tab.Screen name={Routes.Tab1} component={Home} options={appScreensNavOptions[Routes.Home]} />
 );
 
 export const TabHomeTwo = () => (
-  <Tab.Screen name={Routes.Tab2} component={Home} />
+  <Tab.Screen name={Routes.Tab2} component={Home} options={appScreensNavOptions[Routes.Home]} />
 );
 <%_ } else { _%>
 <%_ if(features.drawer) { _%>
 const Drawer = createDrawerNavigator();
 
 const HomeScreen = () => (
-  <Drawer.Screen name={Routes.Home} component={Home} />
+  <Drawer.Screen name={Routes.Home} component={Home} options={appScreensNavOptions[Routes.Home]} />
 );
 <%_ } else { _%>
 const Stack = createStackNavigator();
 
 const HomeScreen = () => (
-  <Stack.Screen name={Routes.Home} component={Home} />
+  <Stack.Screen name={Routes.Home} component={Home} options={appScreensNavOptions[Routes.Home]} />
 );
 <%_ } _%>
 export default HomeScreen;
