@@ -78,6 +78,7 @@ export const appScreensNavOptions = {
     <%_ if(features.camera) { _%>
     headerRight: () => (
       <IconButton
+        testID="navigation-camera-button"
         icon="camera"
         onPress={() => navigation.navigate(Routes.Camera)}
         color="white"

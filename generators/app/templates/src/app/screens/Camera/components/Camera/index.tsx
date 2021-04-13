@@ -1,4 +1,4 @@
-import React, { forwardRef, RefObject } from 'react';
+import React, { forwardRef } from 'react';
 import { RNCamera, RNCameraProps } from 'react-native-camera';
 import Animated, {
   useSharedValue,
@@ -6,14 +6,14 @@ import Animated, {
   Easing,
   withTiming
 } from 'react-native-reanimated';
-// import i18next from 'i18next';
+import i18next from 'i18next';
 
 import styles from './styles';
 
-// import './i18n';
+import './i18n';
 
-// This feature includes take photo (back && front camera) and record a video.
-// The return the uri path with the created file.
+// This feature includes take photo (back && front camera) and video recording.
+// Finally user can see a preview dicard or save to camera roll.
 // If you want a more complex feature like barcodes, face recognition,
 // check this repo -> https://github.com/reime005/react-native-camera-hooks#readme
 
@@ -22,7 +22,7 @@ import styles from './styles';
 
 const AnimatedCamera = Animated.createAnimatedComponent(RNCamera);
 
-const Camera = forwardRef(
+const Camera = forwardRef<RNCamera, RNCameraProps>(
   (
     { type, flashMode, onRecordingStart, onRecordingEnd }: RNCameraProps,
     ref
@@ -48,7 +48,7 @@ const Camera = forwardRef(
     return (
       <AnimatedCamera
         testID="camera-component"
-        ref={ref as RefObject<RNCamera>}
+        ref={ref}
         style={[styles.camera, animatedStyles]}
         type={type}
         flashMode={flashMode}
@@ -56,16 +56,16 @@ const Camera = forwardRef(
         playSoundOnCapture
         playSoundOnRecord
         androidCameraPermissionOptions={{
-          title: 'Permission to use camera',
-          message: 'We need your permission to use your camera',
-          buttonPositive: 'Ok',
-          buttonNegative: 'Cancel'
+          title: i18next.t('CAMERA:ANDROID_CAMERA_PERMISSIONS_TITLE'),
+          message: i18next.t('CAMERA:ANDROID_CAMERA_PERMISSIONS_MESSAGE'),
+          buttonPositive: i18next.t('CAMERA:ACCEPT_BUTTON'),
+          buttonNegative: i18next.t('CAMERA:CANCEL_BUTTON')
         }}
         androidRecordAudioPermissionOptions={{
-          title: 'Permission to use audio recording',
-          message: 'We need your permission to use your audio',
-          buttonPositive: 'Ok',
-          buttonNegative: 'Cancel'
+          title: i18next.t('CAMERA:ANDROID_AUDIO_PERMISSIONS_TITLE'),
+          message: i18next.t('CAMERA:ANDROID_AUDIO_PERMISSIONS_MESSAGE'),
+          buttonPositive: i18next.t('CAMERA:ACCEPT_BUTTON'),
+          buttonNegative: i18next.t('CAMERA:CANCEL_BUTTON')
         }}
         onRecordingStart={onRecordingStart}
         onRecordingEnd={onRecordingEnd}

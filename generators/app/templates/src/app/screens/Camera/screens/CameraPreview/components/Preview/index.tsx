@@ -5,13 +5,13 @@ import Video from 'react-native-video';
 
 import styles from './styles';
 
-interface ImagePreviewProps {
+interface PreviewProps {
   path: string;
   type: 'photo' | 'video';
   saveCallback: (save: boolean) => void;
 }
 
-const ImagePreview = ({ path, type, saveCallback }: ImagePreviewProps) => {
+const Preview = ({ path, type, saveCallback }: PreviewProps) => {
   if (type !== 'photo' && type !== 'video') {
     type = 'photo';
   }
@@ -70,4 +70,4 @@ const ImagePreview = ({ path, type, saveCallback }: ImagePreviewProps) => {
   );
 };
 
-export default ImagePreview;
+export default Preview;

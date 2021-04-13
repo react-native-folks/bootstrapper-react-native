@@ -31,7 +31,7 @@ function setIOSPermissionsForCamera() {
   );
   iosInfoPlistContent = iosInfoPlistContent.replace(
     '<key>NSLocationWhenInUseUsageDescription</key>',
-    '<key>NSCameraUsageDescription</key>\n<string>Your message to user when the camera is accessed for the first time</string>\n<key>NSPhotoLibraryAddUsageDescription</key>\n<string>Your message to user when the photo library is accessed for the first time</string>\n<key>NSPhotoLibraryUsageDescription</key>\n<string>Your message to user when the photo library is accessed for the first time</string>\n<key>NSMicrophoneUsageDescription</key>\n<string>Your message to user when the microphone is accessed for the first time</string>\n<key>NSLocationWhenInUseUsageDescription</key>'
+    '<key>NSCameraUsageDescription</key>\n<string>We need permissions to use your camera</string>\n<key>NSPhotoLibraryAddUsageDescription</key>\n<string>We need permissions to acces to your photo library</string>\n<key>NSPhotoLibraryUsageDescription</key>\n<string>We need permissions to acces to your photo library</string>\n<key>NSMicrophoneUsageDescription</key>\n<string>We need permissions to use your microphone for a better experience</string>\n<key>NSLocationWhenInUseUsageDescription</key>'
   );
   this.fs.write(
     `${this.projectName}/ios/${this.projectName}/Info.plist`,
