@@ -42,6 +42,7 @@ module.exports.GOOGLE_SIGNIN_MOCK = `${module.exports.MOCKS}/@react-native-commu
 module.exports.E2E_NAVIGATION_TEST_PATH = `${module.exports.E2E_PATH}/appNavigationTest.e2e.js`;
 module.exports.E2E_AUTH_TEST_PATH = `${module.exports.E2E_PATH}/authTest.e2e.js`;
 module.exports.E2E_HOME_TEST_PATH = `${module.exports.E2E_PATH}/homeTest.e2e.js`;
+module.exports.E2E_CAMERA_TEST_PATH = `${module.exports.E2E_PATH}/cameraTest.e2e.js`;
 module.exports.E2E_MAPS_TEST_PATH = `${module.exports.E2E_PATH}/mapsTest.e2e.js`;
 module.exports.E2E_ONBOARDING_TEST_PATH = `${module.exports.E2E_PATH}/onboardingTest.e2e.js`;
 module.exports.E2E_UTILS_HOME_NAVIGATION = `${module.exports.E2E_UTILS}/homeNavigation.js`;

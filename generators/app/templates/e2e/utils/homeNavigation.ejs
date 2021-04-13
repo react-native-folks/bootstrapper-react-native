@@ -32,6 +32,13 @@ async function pressLogoutButton()  {
 }
 <%_ } _%>
 
+<%_ if(features.camera) { _%>
+async function pressCameraButton() {
+    await waitFor(element(by.id(elements.cameraButton))).toBeVisible().withTimeout(10000);
+    await element(by.id(elements.cameraButton)).tap();
+}
+<%_ } _%>
+
 module.exports = {
     pressOnPressAlertButton,
     pressOnLongPressAlertButton,
@@ -40,6 +47,9 @@ module.exports = {
     pressMapButton,
     <%_ } _%>
     <%_ if(features.loginandsignup) { _%>
-    pressLogoutButton
+    pressLogoutButton,
+    <%_ } _%>
+    <%_ if(features.camera) { _%>
+    pressCameraButton,
     <%_ } _%>
 };
