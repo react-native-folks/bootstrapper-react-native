@@ -3,20 +3,10 @@ import {element, by, waitFor} from 'detox';
 
 const elements = require('./testingElements.js');
 
-async function pressOnPressAlertButton()  {
-    await waitFor(element(by.id(elements.onPressAlertButton))).toBeVisible().withTimeout(10000);
-    await element(by.id(elements.onPressAlertButton)).tap();
-}
-
 async function pressOnLongPressAlertButton()  {
     await waitFor(element(by.id(elements.onLongPressAlertButton))).toBeVisible().withTimeout(10000);
     await element(by.id(elements.onLongPressAlertButton)).longPress();
  }
-
-async function pressOnPressChangeButton()  {
-    await waitFor(element(by.id(elements.onPressChangeButton))).toBeVisible().withTimeout(10000);
-    await element(by.id(elements.onPressChangeButton)).longPress();
-}
 <%_ if(features.googlemaps) { _%>
 
 async function pressMapButton()  {
@@ -40,9 +30,7 @@ async function pressCameraButton() {
 <%_ } _%>
 
 module.exports = {
-    pressOnPressAlertButton,
     pressOnLongPressAlertButton,
-    pressOnPressChangeButton,
     <%_ if(features.googlemaps) { _%>
     pressMapButton,
     <%_ } _%>
