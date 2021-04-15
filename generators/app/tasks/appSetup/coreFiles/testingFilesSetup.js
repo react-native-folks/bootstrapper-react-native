@@ -80,7 +80,7 @@ function setupAndroidFilesForDetox() {
   const minSdkReg = new RegExp(/minSdkVersion = \d\d/, 'g');
   updatedProjectGradle = updatedProjectGradle.replace(
     minSdkReg,
-    'minSdkVersion = 18'
+    'minSdkVersion = 21'
   );
 
   updatedProjectGradle = updatedProjectGradle.replace(

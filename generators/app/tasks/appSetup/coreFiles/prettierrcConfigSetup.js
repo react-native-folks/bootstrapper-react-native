@@ -11,8 +11,7 @@ module.exports = function babelConfigSetup() {
   const newContentPrettier = `bracketSpacing: true,
   jsxBracketSameLine: true,
   singleQuote: true,
-  trailingComma: 'none',
-  arrowParens: 'avoid'`;
+  trailingComma: 'none',`;
 
   const updatedPrettierConfig = contentPrettierConfig.replace(
     beforeContentPrettier,
