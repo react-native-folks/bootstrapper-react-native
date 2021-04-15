@@ -1,6 +1,4 @@
 import colors from 'constants/colors';
-import React from 'react';
-import { IconButton } from 'react-native-paper';
 import { Navigation } from 'interfaces/navigation';
 import i18next from 'i18next';
 
@@ -73,19 +71,9 @@ export const appScreensNavOptions = {
     headerShown: false
   },
   <%_ } _%>
-  [Routes.Home]: ({ navigation, route }: Navigation) => ({
-    headerTitle: i18next.t(`app:${route.name}`),
-    <%_ if(features.camera) { _%>
-    headerRight: () => (
-      <IconButton
-        testID="navigation-camera-button"
-        icon="camera"
-        onPress={() => navigation.navigate(Routes.Camera)}
-        color="white"
-      />
-    )
-    <%_ } _%>
-  }),
+  [Routes.Home]: {
+    headerTitle: i18next.t(`app:${Routes.Home}`),
+  },
   <%_ if(features.camera) { _%>
   [Routes.Camera]: {
     headerShown: false

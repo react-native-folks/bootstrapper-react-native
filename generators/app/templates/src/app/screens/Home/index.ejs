@@ -85,6 +85,15 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
           title={i18next.t('HOME:BUTTON_TITLE_LONG')}
           style={styles.button}
         />
+      <%_ if(features.camera) { _%>
+        <Button
+          testID="goto-camera-view-button"
+          primary
+          onPress={() => navigation.navigate(Routes.Camera)}
+          title={i18next.t('HOME:GO_TO_CAMERA')}
+          style={styles.button}
+        />
+      <%_ } _%>
       <%_ if(features.googlemaps) { _%>
         <Button
           testID="goto-maps-view-button"
