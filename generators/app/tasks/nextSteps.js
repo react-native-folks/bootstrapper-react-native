@@ -60,7 +60,7 @@ module.exports = function nextSteps() {
       '● PUSH NOTIFICATIONS - The push notification config has been added to the project but'
         .cyan
     );
-    console.log('  but you still need to manually link the ios library.'.cyan);
+    console.log('  but you still need to do extra steps.'.cyan);
     console.log(
       `  Further instructions can be found here: ${PUSH_NOTIFICATIONS_SETUP_LINK.underline}`
         .cyan

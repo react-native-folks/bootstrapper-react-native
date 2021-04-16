@@ -1,5 +1,5 @@
 module.exports.PUSH_NOTIFICATIONS_SETUP_LINK =
-  'https://github.com/react-native-community/react-native-push-notification-ios';
+  'https://rnfirebase.io/messaging/usage';
 
 module.exports.GENERATOR_FEATURES = [
   'Login and SignUp',
