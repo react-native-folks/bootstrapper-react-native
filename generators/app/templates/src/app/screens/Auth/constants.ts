@@ -1,6 +1,5 @@
 import { isAndroid, isIos } from 'constants/platform';
 
-import i18next from 'i18next';
 import {
   validationsWrapper,
   validateRequired,
@@ -9,6 +8,7 @@ import {
   validateOnlyText
 } from 'utils/validations';
 
+import { translations } from './screens/SignUp/i18n';
 import './screens/SignUp/i18n';
 
 export const FIELDS = {
@@ -42,16 +42,16 @@ export const SIGNUP_FIELDS = [
     rules: {
       validate: validationsWrapper([validateRequired, validateEmail])
     },
-    label: i18next.t('SIGNUP:MAIL'),
+    label: translations.MAIL(),
     keyboardType: 'email-address' as 'email-address',
-    placeholder: i18next.t('SIGNUP:MAIL_PLACEHOLDER')
+    placeholder: translations.MAIL_PLACEHOLDER()
   },
   {
     name: FIELDS.password,
     rules: {
       validate: validationsWrapper([validateRequired, validateMinLength(8)])
     },
-    label: i18next.t('SIGNUP:PASSWORD'),
+    label: translations.PASSWORD(),
     keyboardType: isAndroid
       ? ('visible-password' as 'visible-password')
       : ('ascii-capable' as 'ascii-capable'),
@@ -62,7 +62,7 @@ export const SIGNUP_FIELDS = [
     rules: {
       validate: validationsWrapper([validateRequired, validateMinLength(8)])
     },
-    label: i18next.t('SIGNUP:PASSWORD_AGAIN'),
+    label: translations.PASSWORD_AGAIN(),
     keyboardType: isAndroid
       ? ('visible-password' as 'visible-password')
       : ('ascii-capable' as 'ascii-capable'),
@@ -74,7 +74,7 @@ export const SIGNUP_FIELDS = [
       validate: validationsWrapper([validateRequired, validateOnlyText])
     },
     keyboardType: isIos ? ('ascii-capable' as 'ascii-capable') : undefined,
-    label: i18next.t('SIGNUP:NAME')
+    label: translations.NAME()
   },
   {
     name: FIELDS.surname,
@@ -82,7 +82,7 @@ export const SIGNUP_FIELDS = [
       validate: validationsWrapper([validateRequired, validateOnlyText])
     },
     keyboardType: isIos ? ('ascii-capable' as 'ascii-capable') : undefined,
-    label: i18next.t('SIGNUP:SURNAME')
+    label: translations.SURNAME()
   },
   {
     name: FIELDS.jobTitle,
@@ -90,14 +90,14 @@ export const SIGNUP_FIELDS = [
       validate: validateRequired
     },
     keyboardType: isIos ? ('ascii-capable' as 'ascii-capable') : undefined,
-    label: i18next.t('SIGNUP:JOB_TITLE'),
-    placeholder: i18next.t('SIGNUP:JOB_TITLE_PLACEHOLDER')
+    label: translations.JOB_TITLE(),
+    placeholder: translations.JOB_TITLE_PLACEHOLDER()
   },
   {
     name: FIELDS.phoneNumber,
-    label: i18next.t('SIGNUP:PHONE_NUMBER'),
+    label: translations.PHONE_NUMBER(),
     secureTextEntry: true,
     keyboardType: 'phone-pad' as 'phone-pad',
-    placeholder: i18next.t('SIGNUP:PHONE_NUMBER_PLACEHOLDER')
+    placeholder: translations.PHONE_NUMBER_PLACEHOLDER()
   }
 ];

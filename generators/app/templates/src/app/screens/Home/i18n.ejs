@@ -1,6 +1,24 @@
 import i18next from 'i18next';
+import getTranslation from 'utils/translations';
 
-i18next.addResources('es', 'HOME', {
+const NAMESPACE = 'HOME';
+
+export const translations = {
+  HI: () => getTranslation(`${NAMESPACE}:HI`),
+  ALERT_TITLE: () => getTranslation(`${NAMESPACE}:ALERT_TITLE`),
+  ALERT_MESSAGE: () => getTranslation(`${NAMESPACE}:ALERT_MESSAGE`),
+  ALERT_MESSAGE_LONG: () => getTranslation(`${NAMESPACE}:ALERT_MESSAGE_LONG`),
+  BUTTON_TITLE_LONG: () => getTranslation(`${NAMESPACE}:BUTTON_TITLE_LONG`),
+  <%_ if(features.loginandsignup) { _%>
+  LOGOUT: () => getTranslation(`${NAMESPACE}:LOGOUT`),
+  <%_ } _%>
+  <%_ if(features.googlemaps) { _%>
+  GO_TO_MAP: () => getTranslation(`${NAMESPACE}:GO_TO_MAP`),
+  <%_ } _%>
+  THEME_GROUP_TEXT: () => getTranslation(`${NAMESPACE}:THEME_GROUP_TEXT`)
+};
+
+i18next.addResources('es', NAMESPACE, {
   HI: 'Hola! Bienvenid@ a Kamino React Native',
   ALERT_TITLE: 'Botón personalizable',
   ALERT_MESSAGE: 'Presionaste en un botón personalizable. No es increible!!?',
@@ -15,7 +33,7 @@ i18next.addResources('es', 'HOME', {
   THEME_GROUP_TEXT: 'Seleccionar tema de la app'
 });
 
-i18next.addResources('en', 'HOME', {
+i18next.addResources('en', NAMESPACE, {
   HI: 'Hi! Welcome to Kamino React Native',
   ALERT_TITLE: 'Custom Button',
   ALERT_MESSAGE: 'You pressed on custom Button. Thats awesome!',
