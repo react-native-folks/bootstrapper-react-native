@@ -167,11 +167,15 @@ function updateMainActivityLocaleChanges() {
     'public class MainActivity extends ReactActivity {',
     'public class MainActivity extends ReactActivity {\n\tstatic private String currentLocale = "";'
   );
-  updatedMainActivityContent = mainActivityContent.replace(
+  updatedMainActivityContent = updatedMainActivityContent.replace(
+    'import com.facebook.react.ReactActivityDelegate;',
+    'import com.facebook.react.ReactActivityDelegate;\nimport com.facebook.react.ReactInstanceManager;'
+  );
+  updatedMainActivityContent = updatedMainActivityContent.replace(
     'super.onCreate(savedInstanceState);',
     'super.onCreate(savedInstanceState);\n\tMainActivity.currentLocale = getResources().getConfiguration().locale.toString();'
   );
-  updatedMainActivityContent = mainActivityContent.replace(
+  updatedMainActivityContent = updatedMainActivityContent.replace(
     'getReactInstanceManager().onConfigurationChanged(this, newConfig);',
     'getReactInstanceManager().onConfigurationChanged(this, newConfig);\n\t\tString locale = newConfig.locale.toString();\n\t\tif (!MainActivity.currentLocale.equals(locale)) {\n\t\t\tMainActivity.currentLocale = locale;\n\t\t\tfinal ReactInstanceManager instanceManager = getReactInstanceManager();\n\t\t\tinstanceManager.recreateReactContextInBackground();\n\t\t}'
   );
