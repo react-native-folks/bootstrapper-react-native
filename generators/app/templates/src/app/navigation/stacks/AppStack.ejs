@@ -23,6 +23,10 @@ import { TabHomeOne, TabHomeTwo } from 'app/screens/Home';
 <%_ } else { _%>
 import Home from 'app/screens/Home';
 <%_ } _%>
+<%_ if(features.camera) { _%>
+import Camera from 'app/screens/Camera';
+import CameraPreview from 'app/screens/Camera/screens/CameraPreview';
+<%_ } _%>
 <%_ if(features.googlemaps) { _%>
 import MapView from 'app/screens/MapView';
 <%_ } _%>
@@ -65,6 +69,10 @@ export default function AppStack() {
   return (
     <>
       <Stack.Screen name={Routes.Home} component={DrawerNavigator} />
+      <%_ if(features.camera) { _%>
+      {Camera()}
+      {CameraPreview()}
+      <%_ } _%>
       <%_ if(features.googlemaps) { _%>
       {MapView()}
       <%_ } _%>
@@ -80,6 +88,10 @@ export default function AppStack() {
       <Stack.Screen name={Routes.Home} component={HomeTabs} />
       <%_ } else { _%>
       {Home()}
+      <%_ } _%>
+      <%_ if(features.camera) { _%>
+      {Camera()}
+      {CameraPreview()}
       <%_ } _%>
       <%_ if(features.googlemaps) { _%>
       {MapView()}

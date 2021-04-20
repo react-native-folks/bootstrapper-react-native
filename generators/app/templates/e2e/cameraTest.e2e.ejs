@@ -1,0 +1,51 @@
+/* eslint-disable prettier/prettier */
+import { element, by, waitFor, device } from 'detox';
+
+const testingElements = require('./utils/testingElements');
+<%_ if(features.loginandsignup) { _%>
+const testingData = require('./utils/testingData');
+const login = require('./utils/login');
+const home = require('./utils/homeNavigation');
+<%_ } _%>
+<%_ if(features.onboarding) { _%>
+const onboarding = require('./utils/onboarding');
+<%_ } _%>
+
+beforeAll(async () => {
+  await device.launchApp({ newInstance: true });
+});
+
+beforeEach(async () => {
+  await device.reloadReactNative();
+});
+
+const gotoCameraFlow = async () => {
+  <%_ if(features.loginandsignup) { _%>
+  await login.typeEmailLogin(testingData.email);
+  await login.typePasswordLogin(testingData.password);
+  await login.pressLoginButton();
+  <%_ } _%>
+  <%_ if(features.onboarding) { _%>
+  await onboarding.pressSkipButton();
+  <%_ } _%>
+};
+
+describe('Camera feature Test', () => {
+  // LOGIN - ONBOARDING
+  test('Should open the camera screen', async () => {
+    await gotoCameraFlow();
+    await home.pressCameraButton();
+    await waitFor(element(by.id(testingElements.cameraScreenContainer)))
+      .toBeVisible()
+      .withTimeout(10000);
+    await waitFor(element(by.id(testingElements.cameraChangeType)))
+      .toBeVisible()
+      .withTimeout(10000);
+    await waitFor(element(by.id(testingElements.cameraChangeFlash)))
+      .toBeVisible()
+      .withTimeout(10000);
+    await waitFor(element(by.id(testingElements.cameraTakeActionButton)))
+      .toBeVisible()
+      .withTimeout(10000);
+  });
+});

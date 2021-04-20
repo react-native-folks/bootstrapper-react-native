@@ -18,6 +18,10 @@ const Routes: StringObject = {
   <%_ if(features.googlemaps) { _%>
   MapView: 'MapView',
   <%_ } _%>
+  <%_ if(features.camera) { _%>
+  Camera: 'Camera',
+  CameraPreview: 'CameraPreview'
+  <%_ } _%>
 };
 
 export default Routes;
