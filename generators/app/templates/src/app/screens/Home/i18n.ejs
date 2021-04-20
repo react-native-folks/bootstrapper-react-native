@@ -12,6 +12,9 @@ export const translations = {
   <%_ if(features.loginandsignup) { _%>
   LOGOUT: () => getTranslation(`${NAMESPACE}:LOGOUT`),
   <%_ } _%>
+  <%_ if(features.camera) { _%>
+    GO_TO_CAMERA: () => getTranslation(`${NAMESPACE}:GO_TO_CAMERA`),
+  <%_ } _%>
   <%_ if(features.googlemaps) { _%>
   GO_TO_MAP: () => getTranslation(`${NAMESPACE}:GO_TO_MAP`),
   <%_ } _%>

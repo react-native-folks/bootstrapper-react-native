@@ -89,7 +89,7 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
           testID="goto-camera-view-button"
           primary
           onPress={() => navigation.navigate(Routes.Camera)}
-          title={i18next.t('HOME:GO_TO_CAMERA')}
+          title={translations.GO_TO_CAMERA()}
           style={styles.button}
         />
       <%_ } _%>
