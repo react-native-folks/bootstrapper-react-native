@@ -1,6 +1,5 @@
 import React, { <%_ if(features.loginandsignup) { _%>useContext, <%_ } _%><%_ if(features.loginandsignup && features.statemanagement.redux) { _%>useCallback, <%_ } _%> } from 'react';
 import { Alert, View } from 'react-native';
-import i18next from 'i18next';
 import Routes from 'app/navigation/routes';
 import { appScreensNavOptions } from 'app/navigation/config/screensOptions';
 <%_ if(features.tabs) { _%>
@@ -35,7 +34,7 @@ import { ThemeProperty } from 'interfaces/theme';
 
 import ThemeSelector from './components/ThemeSelector';
 import styles from './styles';
-import './i18n';
+import { translations } from './i18n';
 
 function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _%>) {
 <%_ if(features.loginandsignup) { _%>
@@ -66,23 +65,23 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
     <View testID="screen-home-container-view" style={styles.container}>
       <CustomShadowView testID="buttons-shadow-container" strong style={styles.home}>
         <Text testID="welcome-message-text" primary center large semibold>
-          {i18next.t('HOME:HI')}
+          {translations.HI()}
         </Text>
         <Button
           testID="alert-message-long-press-button"
           onPress={() =>
             Alert.alert(
-              i18next.t('HOME:ALERT_TITLE'),
-              i18next.t('HOME:ALERT_MESSAGE')
+              translations.ALERT_TITLE(),
+              translations.ALERT_MESSAGE()
             )
           }
           onLongPress={() =>
             Alert.alert(
-              i18next.t('HOME:ALERT_TITLE'),
-              i18next.t('HOME:ALERT_MESSAGE_LONG')
+              translations.ALERT_TITLE(),
+              translations.ALERT_MESSAGE_LONG()
             )
           }
-          title={i18next.t('HOME:BUTTON_TITLE_LONG')}
+          title={translations.BUTTON_TITLE_LONG()}
           style={styles.button}
         />
       <%_ if(features.camera) { _%>
@@ -90,7 +89,7 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
           testID="goto-camera-view-button"
           primary
           onPress={() => navigation.navigate(Routes.Camera)}
-          title={i18next.t('HOME:GO_TO_CAMERA')}
+          title={translations.GO_TO_CAMERA()}
           style={styles.button}
         />
       <%_ } _%>
@@ -99,7 +98,7 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
           testID="goto-maps-view-button"
           primary
           onPress={() => navigation.navigate(Routes.MapView)}
-          title={i18next.t('HOME:GO_TO_MAP')}
+          title={translations.GO_TO_MAP()}
           style={styles.button}
         />
       <%_ } _%>
@@ -108,7 +107,7 @@ function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _
           testID="logout-button"
           primary
           onPress={handleLogout}
-          title={i18next.t('HOME:LOGOUT')}
+          title={translations.LOGOUT()}
           style={styles.button}
           contentStyle={styles.logoutButton}
         />

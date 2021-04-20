@@ -1,4 +1,4 @@
-import i18next from 'i18next';
+import { translations } from '../../../../i18n';
 
 import { FooterProps } from './interface';
 
@@ -12,31 +12,31 @@ export const getScreensButtonsInfo = ({
     {
       firstButton: {
         onPress: onSkip,
-        title: i18next.t('ONBOARDING:SKIP')
+        title: translations.SKIP()
       },
       secondButton: {
         onPress: onNextScreen,
-        title: i18next.t('ONBOARDING:NEXT')
+        title: translations.NEXT()
       }
     },
     {
       firstButton: {
         onPress: onPreviousScreen,
-        title: i18next.t('ONBOARDING:PREVIOUS')
+        title: translations.PREVIOUS()
       },
       secondButton: {
         onPress: onNextScreen,
-        title: i18next.t('ONBOARDING:NEXT')
+        title: translations.NEXT()
       }
     },
     {
       firstButton: {
         onPress: onPreviousScreen,
-        title: i18next.t('ONBOARDING:PREVIOUS')
+        title: translations.PREVIOUS()
       },
       secondButton: {
         onPress: onSkip,
-        title: i18next.t('ONBOARDING:FINISH')
+        title: translations.FINISH()
       }
     }
   ][screenIndex];

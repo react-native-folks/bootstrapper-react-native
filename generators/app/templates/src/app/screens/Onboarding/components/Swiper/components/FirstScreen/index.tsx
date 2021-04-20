@@ -1,7 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
-import i18next from 'i18next';
 import { Text, LoadableImage } from 'app/components';
+
+import { translations } from '../../../../i18n';
 
 import styles from './styles';
 
@@ -14,7 +15,7 @@ function FirstScreen() {
         url="https://www.mahisoft.com/img/logo.png"
       />
       <Text testID="first-screen-message-text" center white>
-        {i18next.t('ONBOARDING:FIRST_SCREEN')}
+        {translations.FIRST_SCREEN()}
       </Text>
     </View>
   );

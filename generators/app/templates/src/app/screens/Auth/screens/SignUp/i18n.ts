@@ -1,6 +1,26 @@
 import i18next from 'i18next';
+import getTranslation from 'utils/translations';
 
-i18next.addResources('es', 'SIGNUP', {
+const NAMESPACE = 'SIGNUP';
+
+export const translations = {
+  NAME: () => getTranslation(`${NAMESPACE}:NAME`),
+  SURNAME: () => getTranslation(`${NAMESPACE}:SURNAME`),
+  JOB_TITLE: () => getTranslation(`${NAMESPACE}:JOB_TITLE`),
+  JOB_TITLE_PLACEHOLDER: () =>
+    getTranslation(`${NAMESPACE}:JOB_TITLE_PLACEHOLDER`),
+  MAIL: () => getTranslation(`${NAMESPACE}:MAIL`),
+  MAIL_PLACEHOLDER: () => getTranslation(`${NAMESPACE}:MAIL_PLACEHOLDER`),
+  PASSWORD: () => getTranslation(`${NAMESPACE}:PASSWORD`),
+  PASSWORD_AGAIN: () => getTranslation(`${NAMESPACE}:PASSWORD_AGAIN`),
+  PHONE_NUMBER: () => getTranslation(`${NAMESPACE}:PHONE_NUMBER`),
+  PHONE_NUMBER_PLACEHOLDER: () =>
+    getTranslation(`${NAMESPACE}:PHONE_NUMBER_PLACEHOLDER`),
+  SIGN_UP: () => getTranslation(`${NAMESPACE}:SIGN_UP`),
+  SIGNUP_FAILURE: () => getTranslation(`${NAMESPACE}:SIGNUP_FAILURE`)
+};
+
+i18next.addResources('es', NAMESPACE, {
   NAME: 'Nombre/s',
   SURNAME: 'Apellido/s',
   JOB_TITLE: 'Título profesional',
@@ -15,7 +35,7 @@ i18next.addResources('es', 'SIGNUP', {
   SIGNUP_FAILURE: 'Ocurrió un error. Por favor inténtenlo nuevamente!'
 });
 
-i18next.addResources('en', 'SIGNUP', {
+i18next.addResources('en', NAMESPACE, {
   NAME: 'Name',
   SURNAME: 'Surname',
   JOB_TITLE: 'Job title',

@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { View } from 'react-native';
 import { RadioButton } from 'react-native-paper';
-import i18next from 'i18next';
 import { ThemeProperty } from 'interfaces/theme';
 import { ThemeContext } from 'hooks/theme';
 import { Text } from 'app/components';
+
+import { translations } from '../../i18n';
 
 import styles from './styles';
 
@@ -15,7 +16,7 @@ export default function ThemeSelector() {
   return (
     <View style={styles.themeSelectorContainer}>
       <Text testID="theme-sector-group-text" primary>
-        {i18next.t('HOME:THEME_GROUP_TEXT')}
+        {translations.THEME_GROUP_TEXT()}
       </Text>
       <RadioButton.Group
         onValueChange={newValue => changeValue(newValue as ThemeProperty)}
