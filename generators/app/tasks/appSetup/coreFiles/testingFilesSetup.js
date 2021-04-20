@@ -28,7 +28,8 @@ const {
   E2E_UTILS_SIGNUP,
   E2E_UTILS_TESTING_DATA,
   E2E_UTILS_TESTING_ELEMENTS,
-  E2E_UTILS_NAVIGATION
+  E2E_UTILS_NAVIGATION,
+  E2E_CAMERA_TEST_PATH
 } = require('../files');
 
 function setupAndroidFilesForDetox() {
@@ -165,6 +166,9 @@ module.exports = function baseFilesTemplate() {
   if (this.features.onboarding) {
     TEMPLATE_FILES.push(E2E_ONBOARDING_TEST_PATH);
     FILES.push(E2E_UTILS_ONBOARDING);
+  }
+  if (this.features.camera) {
+    TEMPLATE_FILES.push(E2E_CAMERA_TEST_PATH);
   }
 
   TEMPLATE_FILES.forEach(copyTemplateFile.bind(this));

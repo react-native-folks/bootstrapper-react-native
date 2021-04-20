@@ -72,6 +72,14 @@ export const appScreensNavOptions = {
   },
   <%_ } _%>
   [Routes.Home]: {
-    headerTitle: 'Home'
-  }
+    headerTitle: i18next.t(`app:${Routes.Home}`),
+  },
+  <%_ if(features.camera) { _%>
+  [Routes.Camera]: {
+    headerShown: false
+  },
+  [Routes.CameraPreview]: {
+    headerShown: false
+  },
+  <%_ } _%>
 };

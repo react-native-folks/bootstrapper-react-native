@@ -18,7 +18,7 @@ import SplashScreen from 'react-native-splash-screen';
 import AppNavigator from 'app/navigation/index';
 import { apiSetup } from 'config/api';
 <%_ if(features.pushnotifications) { _%>
-import { configPushNotifications } from 'config/pushNotifications';
+import { subscribeToMessagingService } from 'services/notifications';
 <%_ } _%>
 <%_ if(features.statemanagement.redux) { _%>
 import { authActions } from 'redux/auth';
@@ -41,7 +41,7 @@ const App = () => {
 
   useEffect(() => {
     <%_ if(features.pushnotifications) { _%>
-    configPushNotifications();
+    subscribeToMessagingService();
     <%_ } _%>
     apiSetup();
     <%_ if(features.statemanagement.recoil) { _%>

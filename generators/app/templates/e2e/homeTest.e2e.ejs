@@ -36,9 +36,6 @@ beforeEach(async () => {
     await waitFor(element(by.text('Skip'))).toBeVisible().withTimeout(10000);
     await onboarding.pressSkipButton();
     <%_ } _%>
-    await home.pressOnPressAlertButton();
-    await waitFor(element(by.text(okAlert))).toBeVisible().withTimeout(10000);
-    await element(by.text(okAlert)).tap();
 
     await home.pressOnLongPressAlertButton();
     await waitFor(element(by.text(okAlert))).toBeVisible().withTimeout(10000);

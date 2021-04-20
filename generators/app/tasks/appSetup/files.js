@@ -42,6 +42,7 @@ module.exports.GOOGLE_SIGNIN_MOCK = `${module.exports.MOCKS}/@react-native-commu
 module.exports.E2E_NAVIGATION_TEST_PATH = `${module.exports.E2E_PATH}/appNavigationTest.e2e.js`;
 module.exports.E2E_AUTH_TEST_PATH = `${module.exports.E2E_PATH}/authTest.e2e.js`;
 module.exports.E2E_HOME_TEST_PATH = `${module.exports.E2E_PATH}/homeTest.e2e.js`;
+module.exports.E2E_CAMERA_TEST_PATH = `${module.exports.E2E_PATH}/cameraTest.e2e.js`;
 module.exports.E2E_MAPS_TEST_PATH = `${module.exports.E2E_PATH}/mapsTest.e2e.js`;
 module.exports.E2E_ONBOARDING_TEST_PATH = `${module.exports.E2E_PATH}/onboardingTest.e2e.js`;
 module.exports.E2E_UTILS_HOME_NAVIGATION = `${module.exports.E2E_UTILS}/homeNavigation.js`;
@@ -124,6 +125,9 @@ module.exports.HOME_STYLES = `${module.exports.HOME_PATH}/styles.ts`;
 module.exports.HOME_TRANSLATIIONS = `${module.exports.HOME_PATH}/i18n.ts`;
 module.exports.HOME_THEME_SELECTOR_COMPONENT = `${module.exports.HOME_PATH}/components/ThemeSelector`;
 
+// APP SCREENS - CAMERA
+module.exports.CAMERA_FLOW_PATH = `${module.exports.SCREENS_PATH}/Camera`;
+
 // APP SCREENS - ONBOARDING
 module.exports.ONBOARDING_PATH = `${module.exports.SCREENS_PATH}/Onboarding`;
 module.exports.ONBOARDING_COMPONENTS_PATH = `${module.exports.SCREENS_PATH}/Onboarding/components`;
@@ -139,7 +143,6 @@ module.exports.RECOIL_AUTH_ATOMS_PATH = `${module.exports.RECOIL_PATH}/auth/atom
 module.exports.RECOIL_AUTH_SELECTORS_PATH = `${module.exports.RECOIL_PATH}/auth/selectors.ts`;
 
 // CONFIG
-module.exports.PUSH_NOTIFICATIONS_CONFIG = `${module.exports.CONFIG_PATH}/pushNotifications.ts`;
 module.exports.API_CONFIG = `${module.exports.CONFIG_PATH}/api.ts`;
 module.exports.CONFIG = `${module.exports.CONFIG_PATH}/index.ts`;
 module.exports.REACTOTRON_CONFIG = `${module.exports.CONFIG_PATH}/reactotron.ts`;
@@ -181,3 +184,5 @@ module.exports.ANALYTICS_MIDDLEWARE = `${module.exports.REDUX_PATH}/middlewares/
 module.exports.AUTH_SERVICE = `${module.exports.SERVICES_PATH}/auth.ts`;
 module.exports.ONBOARDING_SERVICE = `${module.exports.SERVICES_PATH}/onboarding.ts`;
 module.exports.PREFERENCES_SERVICE = `${module.exports.SERVICES_PATH}/preferences.ts`;
+module.exports.PUSH_NOTIFICATIONS_SERVICE = `${module.exports.SERVICES_PATH}/notifications.ts`;
+module.exports.MEDIA_FILE_SERVICE = `${module.exports.SERVICES_PATH}/mediaFile.ts`;

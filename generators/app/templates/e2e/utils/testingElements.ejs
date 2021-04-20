@@ -21,9 +21,16 @@ module.exports = {
     signupScrollViewContainer: 'scrollview-form-container',
     <%_ } _%>
     //Home
-    onPressAlertButton:'alert-message-button',
     onLongPressAlertButton:'alert-message-long-press-button',
-    onPressChangeButton: 'smile-face-button',
+    <%_ if(features.camera) { _%>
+    cameraButton: 'goto-camera-view-button',
+    // Camera
+    cameraScreenContainer: 'screen-camera-container-view',
+    cameraPreviewScreenContainer: 'screen-camera-preview-container',
+    cameraTakeActionButton: 'camera-button',
+    cameraChangeType: 'change-camera-button',
+    cameraChangeFlash: 'turn-flash-button',
+    <%_ } _%>
     <%_ if(features.googlemaps) { _%>
     goToMapButton:'goto-maps-view-button',
     <%_ } _%>
