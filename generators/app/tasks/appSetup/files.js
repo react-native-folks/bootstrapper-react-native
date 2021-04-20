@@ -143,7 +143,6 @@ module.exports.RECOIL_AUTH_ATOMS_PATH = `${module.exports.RECOIL_PATH}/auth/atom
 module.exports.RECOIL_AUTH_SELECTORS_PATH = `${module.exports.RECOIL_PATH}/auth/selectors.ts`;
 
 // CONFIG
-module.exports.PUSH_NOTIFICATIONS_CONFIG = `${module.exports.CONFIG_PATH}/pushNotifications.ts`;
 module.exports.API_CONFIG = `${module.exports.CONFIG_PATH}/api.ts`;
 module.exports.CONFIG = `${module.exports.CONFIG_PATH}/index.ts`;
 module.exports.REACTOTRON_CONFIG = `${module.exports.CONFIG_PATH}/reactotron.ts`;
@@ -185,4 +184,5 @@ module.exports.ANALYTICS_MIDDLEWARE = `${module.exports.REDUX_PATH}/middlewares/
 module.exports.AUTH_SERVICE = `${module.exports.SERVICES_PATH}/auth.ts`;
 module.exports.ONBOARDING_SERVICE = `${module.exports.SERVICES_PATH}/onboarding.ts`;
 module.exports.PREFERENCES_SERVICE = `${module.exports.SERVICES_PATH}/preferences.ts`;
+module.exports.PUSH_NOTIFICATIONS_SERVICE = `${module.exports.SERVICES_PATH}/notifications.ts`;
 module.exports.MEDIA_FILE_SERVICE = `${module.exports.SERVICES_PATH}/mediaFile.ts`;
