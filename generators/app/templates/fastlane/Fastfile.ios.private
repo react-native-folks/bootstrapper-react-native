@@ -252,11 +252,11 @@ platform :ios do
       build_setting_value: prov_profile
     )
 
-    # desc "Install pods"
-    # cocoapods(
-    #   try_repo_update_on_error: true,
-    #   podfile: project_dir
-    # )
+    desc "Install pods"
+    cocoapods(
+      try_repo_update_on_error: true,
+      podfile: project_dir
+    )
 
     desc "Build the app using the project, build configuration and scheme"
     params = {
