@@ -1,19 +1,28 @@
 module Fastlane
   module Actions
-    class GetMatchTypeAction < Action
+    class GetProfileTypeAction < Action
 
       # Given an environment
       # this script returns the match type associated to it.
 
       # Default match types by environment
       MATCH_TYPES = {
-        develop: "appstore",
-        staging: "appstore",
+        develop: "adhoc",
+        staging: "adhoc",
         production: "appstore"
       }.freeze
 
+      EXPORT_METHOD = {
+        develop: "ad-hoc",
+        staging: "ad-hoc",
+        production: "app-store"
+      }.freeze
+
       def self.run(params)
-        MATCH_TYPES[params[:environment]]
+        {
+          match_type: MATCH_TYPES[params[:environment]],
+          export_method: EXPORT_METHOD[params[:environment]]
+        }
       end
 
       # Fastlane Action class required functions.
