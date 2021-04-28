@@ -1,4 +1,3 @@
-import i18next from 'i18next';
 import React, { useRef, useState, createRef } from 'react';
 import {
   Keyboard,
@@ -21,7 +20,7 @@ import LoadingView from 'app/components/LoadableView';
 import Routes from 'app/navigation/routes';
 import { appScreensNavOptions } from 'app/navigation/config/screensOptions';
 
-import './i18n';
+import { translations } from './i18n';
 import styles from './styles';
 
 function SignUp({ navigation }: Navigation) {
@@ -94,13 +93,13 @@ function SignUp({ navigation }: Navigation) {
             })}
             {!!signupError && (
               <Text error center>
-                {i18next.t('SIGNUP:SIGNUP_FAILURE')}
+                {translations.SIGNUP_FAILURE()}
               </Text>
             )}
             <Button
               testID="submit-signup-button"
               onPress={handleSubmit(onSubmit)}
-              title={i18next.t('SIGNUP:SIGN_UP')}
+              title={translations.SIGN_UP()}
               disabled={hasSignUpError}
               style={styles.formButton}
               contentStyle={styles.formButtonContent}

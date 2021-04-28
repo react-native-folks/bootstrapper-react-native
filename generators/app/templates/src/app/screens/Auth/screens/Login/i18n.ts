@@ -1,6 +1,19 @@
 import i18next from 'i18next';
+import getTranslation from 'utils/translations';
 
-i18next.addResources('es', 'LOGIN', {
+const NAMESPACE = 'LOGIN';
+
+export const translations = {
+  MAIL: () => getTranslation(`${NAMESPACE}:MAIL`),
+  MAIL_PLACEHOLDER: () => getTranslation(`${NAMESPACE}:MAIL_PLACEHOLDER`),
+  PASSWORD: () => getTranslation(`${NAMESPACE}:PASSWORD`),
+  LOG_IN: () => getTranslation(`${NAMESPACE}:LOG_IN`),
+  LOGIN_FAILURE: () => getTranslation(`${NAMESPACE}:LOGIN_FAILURE`),
+  SIGN_UP: () => getTranslation(`${NAMESPACE}:SIGN_UP`),
+  SOCIAL_LOGIN: () => getTranslation(`${NAMESPACE}:SOCIAL_LOGIN`)
+};
+
+i18next.addResources('es', NAMESPACE, {
   MAIL: 'Email',
   MAIL_PLACEHOLDER: 'Ej: email@dominio.com',
   PASSWORD: 'Contraseña',
@@ -10,7 +23,7 @@ i18next.addResources('es', 'LOGIN', {
   SOCIAL_LOGIN: 'O conectate con'
 });
 
-i18next.addResources('en', 'LOGIN', {
+i18next.addResources('en', NAMESPACE, {
   MAIL: 'Email',
   MAIL_PLACEHOLDER: 'email@domain.com',
   PASSWORD: 'Password',

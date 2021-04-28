@@ -17,7 +17,8 @@ const statusBarConfig = (isDark: boolean) =>
     },
     basicStatusBar: isDark
       ? { barStyle: 'light-content', backgroundColor: colors.black }
-      : { barStyle: 'dark-content', backgroundColor: colors.lightGray }
+      : { barStyle: 'dark-content', backgroundColor: colors.lightGray },
+    blackStatusBar: { barStyle: 'light-content', backgroundColor: colors.black }
   } as const);
 
 export const statusBarStyles = (isDarkTheme: boolean) => ({
@@ -35,6 +36,10 @@ export const statusBarStyles = (isDarkTheme: boolean) => ({
   [Routes.Onboarding]: isDarkTheme
     ? statusBarConfig(isDarkTheme).basicStatusBar
     : statusBarConfig(isDarkTheme).blueStatusBar,
+  <%_ } _%>
+  <%_ if (features.camera) { _%>
+  [Routes.Camera]: statusBarConfig(isDarkTheme).blackStatusBar,
+  [Routes.CameraPreview]: statusBarConfig(isDarkTheme).blackStatusBar,
   <%_ } _%>
   default: statusBarConfig(isDarkTheme).blueStatusBar
 });

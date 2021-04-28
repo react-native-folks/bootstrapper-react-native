@@ -1,0 +1,47 @@
+import { isIos } from 'constants/platform';
+
+import { PermissionsAndroid } from 'react-native';
+import CameraRoll from '@react-native-community/cameraroll';
+
+const APP_FOLDER_PATH = '<%= projectName %>'; // APP NAME FOR MEDIA ALBUM
+
+export async function hasWritePermission() {
+  if (isIos) {
+    return true;
+  }
+  const permission = PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE;
+
+  const hasPermission = await PermissionsAndroid.check(permission);
+  if (hasPermission) {
+    return true;
+  }
+
+  const status = await PermissionsAndroid.request(permission);
+  return status === 'granted';
+}
+
+export const saveCacheMediaFile = async (
+  cacheFilePath: string,
+  type: 'photo' | 'video'
+) => {
+  cacheFilePath = cacheFilePath.startsWith('file://')
+    ? cacheFilePath.substr('file://'.length)
+    : cacheFilePath;
+  await saveToCameraRoll(type, cacheFilePath);
+};
+
+export async function saveToCameraRoll(
+  type: 'photo' | 'video' | undefined,
+  path: string
+) {
+  if (!(await hasWritePermission())) {
+    return;
+  }
+  return CameraRoll.save(path, { type, album: APP_FOLDER_PATH });
+}
+
+export default {
+  saveToCameraRoll,
+  hasWritePermission,
+  saveCacheMediaFile
+};

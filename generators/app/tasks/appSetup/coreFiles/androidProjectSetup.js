@@ -139,10 +139,55 @@ function updateGradleProperties() {
   );
 }
 
+function updateManifest() {
+  let androidManifestContent = this.fs.read(
+    `${this.projectName}/android/app/src/main/AndroidManifest.xml`
+  );
+
+  androidManifestContent = androidManifestContent.replace(
+    'android:configChanges="',
+    'android:configChanges="layoutDirection|locale|'
+  );
+
+  this.fs.write(
+    `${this.projectName}/android/app/src/main/AndroidManifest.xml`,
+    androidManifestContent
+  );
+}
+
+function updateMainActivityLocaleChanges() {
+  const mainActivityContentPath = this.destinationPath(
+    this.projectName,
+    'android/app/src/main/java',
+    this.bundleId.replace(/\./g, '/'),
+    'MainActivity.java'
+  );
+  const mainActivityContent = this.fs.read(mainActivityContentPath);
+  let updatedMainActivityContent = mainActivityContent.replace(
+    'public class MainActivity extends ReactActivity {',
+    'public class MainActivity extends ReactActivity {\n\tstatic private String currentLocale = "";'
+  );
+  updatedMainActivityContent = updatedMainActivityContent.replace(
+    'import com.facebook.react.ReactActivityDelegate;',
+    'import com.facebook.react.ReactActivityDelegate;\nimport com.facebook.react.ReactInstanceManager;'
+  );
+  updatedMainActivityContent = updatedMainActivityContent.replace(
+    'super.onCreate(savedInstanceState);',
+    'super.onCreate(savedInstanceState);\n\tMainActivity.currentLocale = getResources().getConfiguration().locale.toString();'
+  );
+  updatedMainActivityContent = updatedMainActivityContent.replace(
+    'getReactInstanceManager().onConfigurationChanged(this, newConfig);',
+    'getReactInstanceManager().onConfigurationChanged(this, newConfig);\n\t\tString locale = newConfig.locale.toString();\n\t\tif (!MainActivity.currentLocale.equals(locale)) {\n\t\t\tMainActivity.currentLocale = locale;\n\t\t\tfinal ReactInstanceManager instanceManager = getReactInstanceManager();\n\t\t\tinstanceManager.recreateReactContextInBackground();\n\t\t}'
+  );
+  this.fs.write(mainActivityContentPath, updatedMainActivityContent);
+}
+
 module.exports = function androidProjectSetup() {
   updateAppBuildGradle.bind(this)();
   addRNGestureHandlerConfig.bind(this)();
   updateAppProguardRules.bind(this)();
   updateGradleProperties.bind(this)();
   addReanimatedConfig.bind(this)();
+  updateManifest.bind(this)();
+  updateMainActivityLocaleChanges.bind(this)();
 };

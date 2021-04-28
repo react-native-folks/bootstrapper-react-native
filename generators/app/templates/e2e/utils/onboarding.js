@@ -14,23 +14,23 @@ async function pressLeftFooterButton()  {
 }
 
 async function pressSkipButton()  {
-    await waitFor(element(by.text('Skip'))).toBeVisible().withTimeout(10000);
-     await element(by.text('Skip')).tap();
+    await waitFor(element(by.text('SKIP'))).toBeVisible().withTimeout(10000);
+     await element(by.text('SKIP')).tap();
 }
 
 async function pressNextButton()  {
-    await waitFor(element(by.text('Next'))).toBeVisible().withTimeout(10000);
-    await element(by.text('Next')).tap();
+    await waitFor(element(by.text('NEXT'))).toBeVisible().withTimeout(10000);
+    await element(by.text('NEXT')).tap();
 }
 
 async function pressPreviousButton()  {
-    await waitFor(element(by.text('Previous'))).toBeVisible().withTimeout(10000);
-    await element(by.text('Previous')).tap();
+    await waitFor(element(by.text('PREVIOUS'))).toBeVisible().withTimeout(10000);
+    await element(by.text('PREVIOUS')).tap();
 }
 
 async function pressFinishButton()  {
-    await waitFor(element(by.text('Finish'))).toBeVisible().withTimeout(10000);
-    await element(by.text('Finish')).tap();
+    await waitFor(element(by.text('FINISH'))).toBeVisible().withTimeout(10000);
+    await element(by.text('FINISH')).tap();
 }
 
 module.exports = { pressLeftFooterButton, pressRightFooterButton, pressSkipButton, pressNextButton, pressPreviousButton, pressFinishButton };

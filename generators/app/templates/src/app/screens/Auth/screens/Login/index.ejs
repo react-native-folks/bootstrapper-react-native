@@ -30,7 +30,6 @@ import authServices from 'services/auth';
 <%_ } _%>
 import { appScreensNavOptions } from 'app/navigation/config/screensOptions';
 import { createStackNavigator } from '@react-navigation/stack';
-import i18next from 'i18next';
 import { useTheme } from 'hooks/theme';
 import { 
   Button,
@@ -55,7 +54,7 @@ import {
   validateEmail
 } from 'utils/validations';
 
-import './i18n';
+import { translations } from './i18n';
 
 import styles from './styles';
 
@@ -172,11 +171,11 @@ export function Login({ navigation }: Navigation) {
               errorMessage={errors[FIELDS.email]?.message}
               errorTestID="input-error-email"
               keyboardType={'email-address'}
-              label={i18next.t('LOGIN:MAIL')}
+              label={translations.MAIL()}
               labelTestID="input-title-email"
               name={FIELDS.email}
               onSubmitEditing={() => passwordInputRef!.current?.focus()}
-              placeholder={i18next.t('LOGIN:MAIL_PLACEHOLDER')}
+              placeholder={translations.MAIL_PLACEHOLDER()}
               returnKeyType="next"
               rules={{
                 validate: validationsWrapper([validateRequired, validateEmail])
@@ -190,7 +189,7 @@ export function Login({ navigation }: Navigation) {
               errorMessage={errors[FIELDS.password]?.message}
               errorTestID="input-error-password"
               keyboardType={isAndroid ? 'visible-password' : 'ascii-capable'}
-              label={i18next.t('LOGIN:PASSWORD')}
+              label={translations.PASSWORD()}
               labelTestID="input-title-password"
               name={FIELDS.password}
               onSubmitEditing={handleSubmit(handleLogin)}
@@ -201,20 +200,20 @@ export function Login({ navigation }: Navigation) {
             />
             {hasLoginError && (
               <Text testID="login-error-message" error center>
-                {i18next.t('LOGIN:LOGIN_FAILURE')}
+                {translations.LOGIN_FAILURE()}
               </Text>
             )}
             <Button
               testID="submit-button"
               onPress={handleSubmit(handleLogin)}
-              title={i18next.t('LOGIN:LOG_IN')}
+              title={translations.LOG_IN()}
               disabled={hasLoginError}
               style={styles.loginButton}
               contentStyle={styles.loginButtonContent}
             />
             <%_ if(features.socialloginbuttons) { _%>
             <Text accent style={styles.socialsLabel}>
-              {i18next.t('LOGIN:SOCIAL_LOGIN')}
+              {translations.SOCIAL_LOGIN()}
             </Text>
             <View style={styles.socialButtonsContainer}>
               <%_ if(features.socialButtons.facebook) { _%>
@@ -255,7 +254,7 @@ export function Login({ navigation }: Navigation) {
                 onPress={handleGoToSignUp}
                 style={styles.signUpButton}
                 accentLabel
-                title={i18next.t('LOGIN:SIGN_UP')}
+                title={translations.SIGN_UP()}
               />
               <ActivityIndicator
                 testID="activity-indicator-screen"
