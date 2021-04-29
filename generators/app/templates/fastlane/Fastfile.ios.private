@@ -192,10 +192,10 @@ platform :ios do
 
     environment = options[:environment]
     build_configuration = get_build_configuration(environment: environment)
-    match_type = get_match_type(environment: environment)
+    profile_type = get_profile_type(environment: environment)
     credentials = get_credentials(environment: environment)
 
-    is_development = match_type == Actions::GetMatchTypeAction::MATCH_TYPES[:dev]
+    is_development = profile_type == Actions::GetProfileTypeAction::MATCH_TYPES[:dev]
     output_path = "#{environment.to_s}_push_certificates"
 
     desc "Bundle identifier from xCode project"
@@ -235,7 +235,7 @@ platform :ios do
     project_file = Actions::ProjectNameAction.project_filename
     project_dir = get_project_dir(environment: environment)[:ios_dir]
     credentials = get_credentials(environment: environment)
-
+    profile_type = get_profile_type(environment: environment)
 
     desc "Download provisioning profile and certificates if not present."
     prov_profiles = refresh_certificates(
@@ -266,7 +266,8 @@ platform :ios do
       # bitcode is disabled for the dsym file to keep valid after app is uploaded to app store
       # http://krausefx.com/blog/download-dsym-symbolication-files-from-itunes-connect-for-bitcode-ios-apps
       include_bitcode: false,
-      installer_cert_name: credentials[:team]
+      installer_cert_name: credentials[:team],
+      export_method: profile_type[:export_method]
     }
 
     # TODO: Improve ProjectNameAction to get the xcworkspace or the xcodeproj file directly
@@ -287,7 +288,7 @@ platform :ios do
     environment = options[:environment]
     build_configuration = get_build_configuration(environment: environment)
     app_name = get_application_name(environment: environment)
-    match_type = get_match_type(environment: environment)
+    profile_type = get_profile_type(environment: environment)
     credentials = get_credentials(environment: environment)
     certificates_info = get_certificates_info(environment: environment)
 
@@ -305,7 +306,7 @@ platform :ios do
     UI.message "Attempting to create application for build configuration '#{build_configuration}'"
     UI.message "Creating application using name: '#{app_name}' and bundle ID: '#{bundle_identifier}'"
     UI.message "The application creation in iTunes Connect will be #{skip_itc ? 'skipped' : 'performed'}"
-    UI.message "Creating profile with match type '#{match_type}' and bundle ID: '#{bundle_identifier}'"
+    UI.message "Creating profile with match type '#{profile_type[:match_type]}' and bundle ID: '#{bundle_identifier}'"
 
     puts(credentials)
     puts(certificates_info)
@@ -326,7 +327,7 @@ platform :ios do
     desc "Generate provisioning profile if not present"
     match_result = match(
       app_identifier: bundle_identifier,
-      type: match_type,
+      type: profile_type[:match_type],
       readonly: false,
       clone_branch_directly: true,
       username: credentials[:account],
@@ -350,14 +351,14 @@ platform :ios do
   private_lane :refresh_certificates do |options|
 
     environment = options[:environment]
-    match_type = get_match_type(environment: environment)
+    profile_type = get_profile_type(environment: environment)
     credentials = get_credentials(environment: environment)
     certificates_info = get_certificates_info(environment: environment)
     bundle_identifier = infer_bundle_identifier(environment: environment)
     desc "Download provisioning profile and certificates if not present."
     match(
       app_identifier: bundle_identifier,
-      type: match_type,
+      type: profile_type[:match_type],
       readonly: !(options[:force] || false),
       force: options[:force] || false,
       clone_branch_directly: true,
@@ -389,7 +390,7 @@ platform :ios do
     credentials = get_credentials(environment: :dev)
     certificates_info = get_certificates_info(environment: :dev)
     build_configuration = get_build_configuration(build_configuration: :dev)
-    match_type = get_match_type(build_configuration: :dev)
+    profile_type = get_profile_type(build_configuration: :dev)
     bundle_id = infer_bundle_identifier(environment: :dev)
 
     desc "Ask the user for device name and device UDID"
@@ -407,7 +408,7 @@ platform :ios do
     match(
       force_for_new_devices: true,
       app_identifier: bundle_id,
-      type: match_type,
+      type: profile_type[:match_type],
       clone_branch_directly: true,
       username: credentials[:account],
       team_id: credentials[:team],

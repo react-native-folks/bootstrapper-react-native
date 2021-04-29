@@ -62,6 +62,15 @@ if google_services && !target.shell_script_build_phases.find { |bp| bp.name == '
    target.build_phases.insert(0, target.build_phases.delete(phase))
 end
 
+# Versioning Script
+if !target.shell_script_build_phases.find { |bp| bp.name == 'Use version from package.json' }
+   phase = target.new_shell_script_build_phase("Use version from package.json")
+   phase.shell_script = "CURRENT_VERSION=`awk -F'\"' '/\"version\": \".+\"/{ print $4; exit; }' $SRCROOT/../package.json`\nCOMMIT_COUNT=$(git rev-list HEAD --count --merges --first-parent)\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $CURRENT_VERSION\" \"$PRODUCT_SETTINGS_PATH\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $COMMIT_COUNT\" \"$PRODUCT_SETTINGS_PATH\"\n";
+
+   # Put the build phase at the beginning
+   target.build_phases.insert(0, target.build_phases.delete(phase))
+end
+
 # Copy Release Build Configuration and delete Release Build Configuration from Target
 release_build_config = target.build_configurations.find { |each| each.name == 'Release' }
 release_build_settings = release_build_config.build_settings
@@ -69,14 +78,14 @@ release_build_settings = release_build_config.build_settings
 # Add new Build Configurations to Target
 debug_build_config = target.build_configurations.find { |each| each.name == 'Debug' }
 debug_build_config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = "#{bundle_id}.develop"
-debug_build_config.build_settings['EXCLUDED_ARCHS'] = "arm64"
+debug_build_config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = "arm64"
 
 develop_build_config = target.add_build_configuration('Develop', :release)
 develop_build_config.build_settings.update(release_build_settings)
 develop_build_config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = "#{bundle_id}.develop"
 develop_build_config.build_settings['TARGETED_DEVICE_FAMILY'] = "1,2"
 develop_build_config.build_settings['ONLY_ACTIVE_ARCH'] = "YES"
-develop_build_config.build_settings['EXCLUDED_ARCHS'] = "arm64"
+develop_build_config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = "arm64"
 
 staging_build_config = target.add_build_configuration('Staging', :release)
 staging_build_config.build_settings.update(release_build_settings)
