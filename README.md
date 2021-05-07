@@ -1,13 +1,3 @@
-# DEPRECATED
-
-This repository was migrated to GitHub. Use this instead:
-
-https://github.com/mahisoft/kamino-react-native
-
----
-
----
-
 # Kamino: React Native
 
 ## Prerequisites
@@ -18,14 +8,6 @@ https://github.com/mahisoft/kamino-react-native
 - Ruby (for Fastlane): https://rvm.io/rvm/install
 - Yarn: https://classic.yarnpkg.com/en/docs/install/#alternatives-tab
 - Detox-cli: https://github.com/wix/Detox/blob/master/docs/Introduction.GettingStarted.md#install-detox-command-line-tools-detox-cli
-
-## TL;DR
-
-You don't need to clone this repository. Just run the following in your terminal:
-
-```bash
-bash <(curl -s git@bitbucket.org:mahisoft/kamino-react-native.git/run.sh)
-```
 
 ## Description
 
