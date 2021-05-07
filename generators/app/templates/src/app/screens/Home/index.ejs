@@ -36,7 +36,7 @@ import ThemeSelector from './components/ThemeSelector';
 import styles from './styles';
 import { translations } from './i18n';
 
-function Home(<%_ if(features.googlemaps) { _%>{ navigation }: Navigation<%_ } _%>) {
+function Home(<%_ if(features.googlemaps || features.camera) { _%>{ navigation }: Navigation<%_ } _%>) {
 <%_ if(features.loginandsignup) { _%>
   const { changeTheme } = useContext(ThemeContext);
   <%_ if(features.statemanagement.redux) { _%>

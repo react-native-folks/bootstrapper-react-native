@@ -9,14 +9,6 @@
 - Yarn: https://classic.yarnpkg.com/en/docs/install/#alternatives-tab
 - Detox-cli: https://github.com/wix/Detox/blob/master/docs/Introduction.GettingStarted.md#install-detox-command-line-tools-detox-cli
 
-## TL;DR
-
-You don't need to clone this repository. Just run the following in your terminal:
-
-```bash
-bash <(curl -s git@bitbucket.org:mahisoft/kamino-react-native.git/run.sh)
-```
-
 ## Description
 
 This codebase is meant to be used to kickoff react native projects.
@@ -131,6 +123,5 @@ yarn test -u -skip="android"
 
 Skip options: "android" | "ios" | "none"
 Where 'none' will no skip and generate/test on both platforms.
-
 
 For Detox execution, an existing simulator device is needed. By default, the name is `Pixel_2_API_30`. If you want to run Detox test you maybe need to edit your android emulator name, create one with the pointed name or modify the avdName param over `generators
