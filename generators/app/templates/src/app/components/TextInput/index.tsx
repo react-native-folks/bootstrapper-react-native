@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Controller } from 'react-hook-form';
+import { useController } from 'react-hook-form';
 import { getCustomStyles } from 'utils/style';
 import { TextInput as PaperTextInput, HelperText } from 'react-native-paper';
 import { TextInput as NativeTextInput } from 'react-native';
@@ -14,10 +14,9 @@ const TextInput = React.forwardRef(
       errorTestID,
       control,
       name,
-      defaultValue = '',
+      defaultValue,
       rules = {},
       style,
-      errorMessage = '',
       ...inputProps
     }: TextInputProps,
     ref: React.Ref<NativeTextInput>
@@ -27,32 +26,32 @@ const TextInput = React.forwardRef(
       [inputProps]
     );
 
-    const hasErrors = () => errorMessage !== '';
+    const {
+      field: { onChange, onBlur, value },
+      fieldState: { error }
+    } = useController({
+      name,
+      control,
+      rules,
+      defaultValue
+    });
 
     return (
-      <Controller
-        control={control}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <>
-            <PaperTextInput
-              testID={testID || name}
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              error={hasErrors()}
-              style={[styles.base, customStyles(), style]}
-              ref={ref}
-              {...inputProps}
-            />
-            <HelperText testID={errorTestID} type="error" visible={hasErrors()}>
-              {errorMessage}
-            </HelperText>
-          </>
-        )}
-        name={name}
-        rules={rules}
-        defaultValue={defaultValue}
-      />
+      <>
+        <PaperTextInput
+          testID={testID || name}
+          value={value}
+          onChangeText={onChange}
+          onBlur={onBlur}
+          error={!!error}
+          style={[styles.base, customStyles(), style]}
+          ref={ref}
+          {...inputProps}
+        />
+        <HelperText testID={errorTestID} type="error" visible={!!error}>
+          {error?.message}
+        </HelperText>
+      </>
     );
   }
 );

@@ -167,8 +167,6 @@ export function Login({ navigation }: Navigation) {
               blurOnSubmit={false}
               control={control}
               defaultValue={LOGIN_INITIAL_VALUES[FIELDS.email]}
-              error={errors[FIELDS.email]}
-              errorMessage={errors[FIELDS.email]?.message}
               errorTestID="input-error-email"
               keyboardType={'email-address'}
               label={translations.MAIL()}
@@ -186,7 +184,6 @@ export function Login({ navigation }: Navigation) {
               blurOnSubmit={false}
               control={control}
               defaultValue={LOGIN_INITIAL_VALUES[FIELDS.password]}
-              errorMessage={errors[FIELDS.password]?.message}
               errorTestID="input-error-password"
               keyboardType={isAndroid ? 'visible-password' : 'ascii-capable'}
               label={translations.PASSWORD()}

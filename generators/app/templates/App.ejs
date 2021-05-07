@@ -1,5 +1,6 @@
-import React from 'react';
+import 'proxy-polyfill';
 import 'react-native-gesture-handler';
+import React from 'react';
 <%_ if(features.statemanagement.redux) { _%>
 import { Provider as ReduxProvider } from 'react-redux';
 <%_ } _%>
