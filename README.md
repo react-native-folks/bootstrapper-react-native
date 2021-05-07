@@ -1,3 +1,13 @@
+# DEPRECATED
+
+This repository was migrated to GitHub. Use this instead:
+
+https://github.com/mahisoft/kamino-react-native
+
+---
+
+---
+
 # Kamino: React Native
 
 ## Prerequisites
@@ -131,6 +141,5 @@ yarn test -u -skip="android"
 
 Skip options: "android" | "ios" | "none"
 Where 'none' will no skip and generate/test on both platforms.
-
 
 For Detox execution, an existing simulator device is needed. By default, the name is `Pixel_2_API_30`. If you want to run Detox test you maybe need to edit your android emulator name, create one with the pointed name or modify the avdName param over `generators
