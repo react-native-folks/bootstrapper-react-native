@@ -1,4 +1,4 @@
-module.exports.FIXED_RN_VERSION = '0.64.0';
+module.exports.FIXED_RN_VERSION = '0.64.1';
 
 module.exports.getFixedDependencies = function getFixedDependencies() {
   const fixedDeps = {};
