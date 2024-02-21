@@ -12,7 +12,7 @@ function FirstScreen() {
       <LoadableImage
         testID="app-logo-loadable-image"
         size="small"
-        url="https://www.mahisoft.com/img/logo.png"
+        url="https://www.rnfolks.com/img/logo.png"
       />
       <Text testID="first-screen-message-text" center white>
         {translations.FIRST_SCREEN()}

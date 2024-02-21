@@ -10,14 +10,14 @@ function configureGoogleServices() {
     this.fs.write(
       `${this.projectName}/android/app/src/${env}/google-services.json`,
       googleServicesAndroidContent
-        .split('com.mahisoft')
+        .split('com.rnfolks')
         .join(`${this.bundleId}${isProd ? '' : `.${env}`}`)
     );
     const capitalizedEnv = env.charAt(0).toUpperCase() + env.substring(1);
     this.fs.write(
       `${this.projectName}/ios/GoogleServices/GoogleService${capitalizedEnv}-Info.plist`,
       googleServiceIOSContent.replace(
-        'com.mahisoft',
+        'com.rnfolks',
         `${this.bundleId}${isProd ? '' : `.${env}`}`
       )
     );

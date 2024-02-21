@@ -145,7 +145,7 @@ class ReactNativeBootstrap extends Generator {
           type: 'input',
           name: 'bundleId',
           message: 'Enter the bundle id for your app',
-          default: `com.mahisoft.${this.projectName}`
+          default: `com.rnfolks.${this.projectName}`
         }
       ]).then(answer => {
         this.bundleId = answer.bundleId;

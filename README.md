@@ -1,4 +1,4 @@
-# Kamino: React Native
+# bootstrapper: React Native
 
 ## Prerequisites
 
@@ -93,7 +93,7 @@ For kick off your own project using the template generator script you'll need to
 
 ## Testing
 
-Kamino React Native include test using jest tools.
+bootstrapper React Native include test using jest tools.
 
 To run the test just call `yarn jest` on root folder.
 
@@ -107,8 +107,8 @@ Test includes:
 
 ### Notes about testing
 
-Testing generator is really expensive so run all tests maybe can take a long time and consume CPU resources.  
-Some tests are defined to run concurrently at the same time in order to reduce the run time, for example, generate projects or run self-project tests. By default, jest use 5 nodes to run those test concurrently. If you are facing performance issues, you can set another lower value to set the nodes amount using the `--maxConcurrency=<num>` parameter.  
+Testing generator is really expensive so run all tests maybe can take a long time and consume CPU resources.
+Some tests are defined to run concurrently at the same time in order to reduce the run time, for example, generate projects or run self-project tests. By default, jest use 5 nodes to run those test concurrently. If you are facing performance issues, you can set another lower value to set the nodes amount using the `--maxConcurrency=<num>` parameter.
 Example:
 
 ```

@@ -1,5 +1,5 @@
 {
-  "name": "generator-kamino-react-native",
+  "name": "generator-bootstrapper-react-native",
   "version": "1.5.0",
   "description": "A project generator for react native applications with some boilerplates already configured and ready to use.",
   "files": [

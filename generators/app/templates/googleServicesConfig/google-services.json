@@ -1,15 +1,15 @@
 {
   "project_info": {
     "project_number": "711231873472",
-    "project_id": "mahisoft-kamino-react-native",
-    "storage_bucket": "mahisoft-kamino-react-native.appspot.com"
+    "project_id": "rnfolks-bootstrapper-react-native",
+    "storage_bucket": "rnfolks-bootstrapper-react-native.appspot.com"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:711231873472:android:2e409a5eb9597282ae2825",
         "android_client_info": {
-          "package_name": "com.mahisoft"
+          "package_name": "com.rnfolks"
         }
       },
       "oauth_client": [
@@ -34,7 +34,7 @@
               "client_id": "711231873472-f71c8kc56p0o7gsmnuojh0fvji3oav7p.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.mahisoft"
+                "bundle_id": "com.rnfolks"
               }
             }
           ]

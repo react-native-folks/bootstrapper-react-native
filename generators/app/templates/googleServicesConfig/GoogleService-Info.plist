@@ -13,11 +13,11 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.mahisoft</string>
+	<string>com.rnfolks</string>
 	<key>PROJECT_ID</key>
-	<string>mahisoft-kamino-react-native</string>
+	<string>rnfolks-bootstrapper-react-native</string>
 	<key>STORAGE_BUCKET</key>
-	<string>mahisoft-kamino-react-native.appspot.com</string>
+	<string>rnfolks-bootstrapper-react-native.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>

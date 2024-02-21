@@ -6,7 +6,7 @@ import Reactotron from 'reactotron-react-native';
 const snakeCaseSerializer = new SnakecaseSerializer();
 const camelCaseSerializer = new CamelcaseSerializer();
 
-const baseURL = Config.API_BASE_URL || 'http://mahisoft.com';
+const baseURL = Config.API_BASE_URL || 'http://rnfolks.com';
 
 const api = create({
   baseURL,
@@ -16,7 +16,7 @@ const api = create({
 api.addMonitor(((Reactotron as unknown) as { apisauce: any }).apisauce);
 
 export const apiSetup = () => {
-  if (baseURL === 'http://mahisoft.com') {
+  if (baseURL === 'http://rnfolks.com') {
     console.warn('API baseURL has not been properly initialized');
   }
   api.addResponseTransform(response => {
