@@ -1,4 +1,4 @@
-# bootstrapper: React Native
+# React Native Bootstrapper
 
 ## Prerequisites
 
@@ -93,7 +93,7 @@ For kick off your own project using the template generator script you'll need to
 
 ## Testing
 
-bootstrapper React Native include test using jest tools.
+React Native Bootstrapper include test using jest tools.
 
 To run the test just call `yarn jest` on root folder.
 
